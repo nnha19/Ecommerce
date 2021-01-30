@@ -9,41 +9,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-.product-detail__body {
-  padding: 2rem;
-}
-.product-detail__btn {
-  margin-left: 1rem;
-}
-.product-detail__quantity {
-  margin: 1rem;
-  text-align: center;
-}
-.product-detail__cart {
-  width: 60%;
-  margin: 0 auto;
-  margin: 1rem 0;
-}
-.cart {
-  background: green;
-  color: white;
-  border: none;
-}
-.checkout {
-  background: purple;
-  color: white;
-  border: none;
-}
-.cart:hover,
-.checkout:hover {
-  border: none;
-  transform: translateY(-3px);
-}
-.cart:active,
-.checkout:active {
-  border: none;
-  transform: translateY(0);
-}
+
 .product-detail__price {
   font-size: 1.8rem;
   color: green;
