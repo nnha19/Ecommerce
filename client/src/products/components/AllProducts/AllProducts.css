@@ -1,0 +1,32 @@
+.all-products {
+  padding: 4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 2rem;
+  text-align: center;
+  background: burlywood;
+  min-height: 100vh;
+}
+
+.product__detail-link {
+  text-decoration: none;
+}
+.product {
+  width: 100%;
+  box-shadow: 0 4px 4px black;
+  transition: all 0.2s;
+  height: 20rem;
+  background: whitesmoke;
+  line-height: 1.6;
+}
+.product:hover {
+  box-shadow: 0 8px 8px black;
+  transform: scale(1.009);
+}
+.product__img {
+  width: 100%;
+  height: 12rem;
+}
+.product__body {
+  padding: 1rem;
+}

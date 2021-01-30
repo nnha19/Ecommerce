@@ -1,0 +1,12 @@
+.btn {
+  display: inline-block;
+  width: 8rem;
+  height: 2rem;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid burlywood;
+  border-radius: 24rem;
+}
+.btn:hover {
+  border: 3px solid burlywood;
+}
