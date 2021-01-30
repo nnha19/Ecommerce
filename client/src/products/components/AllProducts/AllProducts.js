@@ -3,20 +3,25 @@ import React from "react";
 import "./AllProducts.css";
 import Button from "../../../share/components/button/button";
 
+import { Link, useHistory } from "react-router-dom";
+
 const AllProducts = (props) => {
   let allProductsOutput;
   if (props.allProducts.length > 0) {
     allProductsOutput = props.allProducts.map((product, i) => {
       return (
         <div key={i} className="product">
-          <a className="product__detail-link" href="#">
-            <img className="product__img" src={product.img} alt="img" />
+          <Link
+            to={`product/${product._id}`}
+            className="product__detail-link"
+            href="#"
+          >
+            <img className="product__img" src={product.image} alt="img" />
             <div className="product__body">
               <h3 className="product__brand">{product.brand}</h3>
               <p className="product__price">{product.price}</p>
-              <Button>Add To Cart</Button>
             </div>
-          </a>
+          </Link>
         </div>
       );
     });
