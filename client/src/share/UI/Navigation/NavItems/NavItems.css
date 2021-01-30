@@ -1,0 +1,65 @@
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav__logo {
+  width: 4rem;
+}
+.nav__name {
+  font-size: 1.2rem;
+  margin: 0 1rem;
+  color: black;
+}
+.nav__search {
+  flex-basis: 30%;
+  display: flex;
+  justify-content: center;
+}
+.nav__search-input {
+  border: 1px solid rgba(0, 128, 0, 0.356);
+  outline: none;
+  padding: 0.4rem 1rem;
+  width: 80%;
+  transition: all 0.2s;
+  margin-right: -1.8rem;
+  align-items: center;
+}
+
+.nav__search-input:focus {
+  width: 100%;
+  border: 1px solid green;
+  box-sizing: content-box;
+  box-shadow: 0 4px 4px rgba(128, 128, 128, 0.424);
+}
+.nav__icon {
+  cursor: pointer;
+  background: rgba(128, 128, 128, 0.589);
+
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  color: white;
+}
+.nav__icon:hover {
+  background: grey;
+}
+
+.nav__items {
+  display: flex;
+  justify-content: space-evenly;
+  flex-basis: 20%;
+}
+.nav__link {
+  text-decoration: none;
+}
+.nav__item {
+  text-transform: uppercase;
+  color: black;
+}
+.nav__item:hover {
+  color: green;
+}
+.shopping-cart {
+  font-size: 1.3rem;
+}

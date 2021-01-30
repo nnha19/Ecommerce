@@ -1,0 +1,9 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  height: 4rem;
+  padding: 2rem;
+  background: rgba(245, 245, 245, 0.568);
+}
