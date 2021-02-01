@@ -3,20 +3,19 @@
 import React, { useState, useEffect } from "react";
 
 import AllProducts from "../../components/AllProducts/AllProducts";
+import Spinner from "../../../share/UI/Spinner/Spinner";
+import { useHttp } from "../../../customHooks/useHttp";
 import axios from "axios";
 
 const AllProductsPage = (props) => {
-  const [allProducts, setAllProducts] = useState("");
+  const [allProducts, loading, error, fetchData] = useHttp([]);
 
   useEffect(() => {
-    (async () => {
-      const resp = await axios.get("http://localhost:5000/products");
-      setAllProducts(resp.data);
-    })();
+    fetchData("http://localhost:5000/products", "get");
   }, []);
-
   return (
     <>
+      <Spinner show={loading} />
       <AllProducts allProducts={allProducts} />{" "}
     </>
   );

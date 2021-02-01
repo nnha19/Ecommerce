@@ -9,6 +9,10 @@ const productSchema = new mongoose.Schema({
   },
   image: String,
   description: String,
+  gender: String,
+  inStock: Number,
+  cashOnDelivery: Boolean,
+  warranty: String,
 });
 
 module.exports = mongoose.model("Product", productSchema);

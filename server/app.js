@@ -9,7 +9,7 @@ app.use(cors());
 
 mongoose
   .connect(
-    "mongodb+srv://webtek:maymyopyin123@cluster0.yrg2a.mongodb.net/sunglasses-ecommerce?retryWrites=true&w=majority",
+    "mongodb://webtek:maymyopyin123@cluster0-shard-00-00.yrg2a.mongodb.net:27017,cluster0-shard-00-01.yrg2a.mongodb.net:27017,cluster0-shard-00-02.yrg2a.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-90vt8b-shard-0&authSource=admin&retryWrites=true&w=majority",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

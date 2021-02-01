@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useHttp } from "../../../customHooks/useHttp";
+import Spinner from "../../../share/UI/Spinner/Spinner";
 import axios from "axios";
 
 import ProductDetail from "../../components/ProductDetail/ProductDetail";
@@ -7,19 +9,15 @@ import ProductDetail from "../../components/ProductDetail/ProductDetail";
 const ProductDetailPage = (props) => {
   const productId = useParams().id;
 
-  const [productDetail, setProductDetail] = useState("");
+  const [productDetail, loading, error, fetchData] = useHttp();
 
   useEffect(() => {
-    (async () => {
-      const resp = await axios.get(
-        `http://localhost:5000/products/${productId}`
-      );
-      setProductDetail(resp.data);
-    })();
+    fetchData(`http://localhost:5000/products/${productId}`, "get");
   }, []);
 
   return (
     <>
+      <Spinner show={loading} />
       <ProductDetail productDetail={productDetail} />
     </>
   );
