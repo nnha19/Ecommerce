@@ -29,7 +29,12 @@ const AllProducts = (props) => {
     allProductsOutput = null;
   }
 
-  return <div className="all-products">{allProductsOutput}</div>;
+  return (
+    <>
+      <h4 className="all-products__heading">{props.title}</h4>
+      <div className="all-products">{allProductsOutput}</div>
+    </>
+  );
 };
 
 export default AllProducts;

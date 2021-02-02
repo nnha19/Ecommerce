@@ -1,0 +1,16 @@
+.cart__item-icons {
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.cart__item-heart {
+  color: green;
+}
+.cart__item-delete {
+  color: rgba(0, 0, 0, 0.4);
+}
+.cart__item-delete:hover {
+  color: red;
+}
+.cart__item-delete {
+  margin: 0 1rem;
+}

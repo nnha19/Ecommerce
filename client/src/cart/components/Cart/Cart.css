@@ -1,0 +1,27 @@
+.cart-container {
+  height: 100vh;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.15);
+}
+.cart__item {
+  background: rgba(255, 255, 255, 0.548);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cart__item-about {
+  display: flex;
+  align-items: center;
+}
+.cart__item-img {
+  width: 6rem;
+  margin-right: 1rem;
+}
+.cart__item-features {
+  line-height: 1.4;
+}
+.cart__item-price {
+  color: green;
+  font-size: 1.3rem;
+}

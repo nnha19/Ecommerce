@@ -7,6 +7,7 @@ import AllProducts from "./products/pages/AllProductsPage/AllProductsPage";
 import ProductDetailPage from "./products/pages/ProductDetailPage/ProductDetailPage";
 import Navigation from "./share/UI/Navigation/Navigation";
 import FilterProductPage from "./products/pages/FilterProductPage/FilterProductPage";
+import CartPage from "./cart/pages/CartPage/CartPage";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           path="/product/filter/:gender"
           component={FilterProductPage}
         />
+        <Route exact path="/cart" component={CartPage} />
       </Switch>
     </div>
   );

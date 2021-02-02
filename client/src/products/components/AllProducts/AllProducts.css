@@ -1,3 +1,7 @@
+.all-products__heading {
+  text-align: center;
+  margin: 1rem 0;
+}
 .all-products {
   padding: 4rem;
   display: grid;

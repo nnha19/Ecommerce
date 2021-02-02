@@ -24,8 +24,10 @@ const FilterProductPage = (props) => {
   return (
     <>
       <Spinner show={loading} />
-      <h4>Sunglasses for {capitalizedGender}</h4>
-      <AllProducts allProducts={filteredProduct} />
+      <AllProducts
+        title={`Sunglasses for ${capitalizedGender}`}
+        allProducts={filteredProduct}
+      />
     </>
   );
 };
