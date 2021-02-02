@@ -49,6 +49,20 @@ const createProduct = async (req, res, next) => {
   }
 };
 
+const getProductByGender = async (req, res, next) => {
+  try {
+    const { gender } = req.params;
+    const filteredProducts = await Product.find({
+      "features.gender": gender,
+    });
+    console.log(filteredProducts);
+    res.status(200).json(filteredProducts);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
 exports.getAllProducts = getAllProducts;
 exports.getProductById = getProductById;
 exports.createProduct = createProduct;
+exports.getProductByGender = getProductByGender;

@@ -7,12 +7,12 @@ import { Link, useHistory } from "react-router-dom";
 
 const AllProducts = (props) => {
   let allProductsOutput;
-  if (props.allProducts.length > 0) {
+  if (props.allProducts && props.allProducts.length > 0) {
     allProductsOutput = props.allProducts.map((product, i) => {
       return (
         <div key={i} className="product">
           <Link
-            to={`product/${product._id}`}
+            to={`/product/${product._id}`}
             className="product__detail-link"
             href="#"
           >

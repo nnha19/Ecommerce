@@ -21,6 +21,7 @@ const ProductDetailBody = (props) => {
         <div className="product-detail__quantity">
           <span className="quantity-text">Quantity</span>
           <button
+            disabled={itemQuantity === product.features.inStock}
             className="quantity-btn"
             onClick={() => updateQuantityHandler("add")}
           >

@@ -26,10 +26,10 @@ const NavItems = (props) => {
         <NavLink className="nav__link" to="/">
           <li className="nav__item">All</li>
         </NavLink>
-        <NavLink className="nav__link" to="/product/men">
+        <NavLink className="nav__link" to="/product/filter/male">
           <li className="nav__item">Men</li>
         </NavLink>
-        <NavLink className="nav__link" to="/product/women">
+        <NavLink className="nav__link" to="/product/filter/female">
           <li className="nav__item">Women</li>
         </NavLink>
         <NavLink className="nav__link" to="/cart">
