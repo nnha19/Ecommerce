@@ -9,7 +9,27 @@ import ProductDetail from "../../components/ProductDetail/ProductDetail";
 const ProductDetailPage = (props) => {
   const productId = useParams().id;
 
-  const [productDetail, loading, error, fetchData] = useHttp();
+  const [
+    productDetail,
+    loading,
+    error,
+    fetchData,
+    setProductDetail,
+  ] = useHttp();
+  const productColorChosenHandler = (e, id) => {
+    const productDetailColors = [...productDetail.colors];
+    const colors = productDetailColors.map((c) => {
+      console.log(id);
+      if (c._id === id) {
+        return (c.choosen = true);
+      } else {
+        return (c.choosen = false);
+      }
+    });
+    setProductDetail({ ...productDetail, colors: productDetailColors });
+  };
+
+  console.log(productDetail);
 
   useEffect(() => {
     fetchData(`http://localhost:5000/products/${productId}`, "get");
@@ -18,7 +38,10 @@ const ProductDetailPage = (props) => {
   return (
     <>
       <Spinner show={loading} />
-      <ProductDetail productDetail={productDetail} />
+      <ProductDetail
+        productColorChosen={(e, id) => productColorChosenHandler(e, id)}
+        productDetail={productDetail}
+      />
     </>
   );
 };

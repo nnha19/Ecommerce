@@ -13,6 +13,12 @@ const productSchema = new mongoose.Schema({
   inStock: Number,
   cashOnDelivery: Boolean,
   warranty: String,
+  colors: [
+    {
+      color: String,
+      choosen: Boolean,
+    },
+  ],
 });
 
 module.exports = mongoose.model("Product", productSchema);

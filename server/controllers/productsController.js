@@ -34,6 +34,7 @@ const createProduct = async (req, res, next) => {
       inStock,
       gender,
       warranty,
+      colors,
     } = req.body;
     const product = await Product.create({
       brand,
@@ -44,6 +45,7 @@ const createProduct = async (req, res, next) => {
       inStock,
       gender,
       warranty,
+      colors,
     });
     res.status(200).json(product);
   } catch (err) {
