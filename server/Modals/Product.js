@@ -9,16 +9,21 @@ const productSchema = new mongoose.Schema({
   },
   image: String,
   description: String,
-  gender: String,
-  inStock: Number,
-  cashOnDelivery: Boolean,
-  warranty: String,
   colors: [
     {
       color: String,
       choosen: Boolean,
     },
   ],
+  features: {
+    gender: String,
+    inStock: Number,
+    cashOnDelivery: String,
+    warranty: String,
+    size: Number,
+    brand: String,
+    return: String,
+  },
 });
 
 module.exports = mongoose.model("Product", productSchema);

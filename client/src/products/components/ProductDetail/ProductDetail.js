@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import "./ProductDetail.css";
 
 import ProductDetailBody from "./ProductDetailBody/ProductDetailBody";
+import ProductFeatures from "./ProductFeatures/ProductFeatures";
 
 const ProductDetail = (props) => {
   let colorOptions;
   const product = props.productDetail;
-
   if (product && product.colors && product.colors.length > 0) {
     colorOptions = product.colors.map((c) => {
       return (
@@ -31,6 +31,7 @@ const ProductDetail = (props) => {
           <div className="product-colors">{colorOptions}</div>
         </div>
         <ProductDetailBody product={product} />
+        <ProductFeatures productFeatures={product.features} />
       </div>
     </div>
   );

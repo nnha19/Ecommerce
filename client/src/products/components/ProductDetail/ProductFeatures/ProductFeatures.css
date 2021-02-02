@@ -1,0 +1,22 @@
+.product-features {
+  margin: 1rem;
+  margin-left: 1rem;
+  padding: 1rem;
+  box-shadow: 4px 0 4px 4px grey;
+  align-self: start;
+}
+.product-features__heading {
+  text-align: center;
+}
+
+.product-features__lists {
+  list-style: none;
+}
+.product-features__list {
+  padding: 0.4rem 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+.product-features__list:not(:last-child) {
+  border-bottom: 1px solid rgba(128, 0, 128, 0.253);
+}

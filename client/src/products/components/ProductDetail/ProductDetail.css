@@ -7,8 +7,7 @@
   background: white;
   margin: 2rem;
   display: grid;
-  grid-template-columns: 40% 1fr;
-  padding: 4rem 0;
+  grid-template-columns: 40% 1fr 1fr;
   gap: 1rem;
 }
 
