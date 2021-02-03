@@ -10,7 +10,7 @@ const AllProducts = (props) => {
   if (props.allProducts && props.allProducts.length > 0) {
     allProductsOutput = props.allProducts.map((product, i) => {
       return (
-        <div key={i} className="product">
+        <div key={product._id} className="product">
           <Link
             to={`/product/${product._id}`}
             className="product__detail-link"

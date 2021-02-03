@@ -33,7 +33,7 @@ const NavItems = (props) => {
           <li className="nav__item">Women</li>
         </NavLink>
         <NavLink className="nav__link" to="/cart">
-          <i class="shopping-cart fas fa-shopping-cart">
+          <i className="shopping-cart fas fa-shopping-cart">
             <span className="shopping-cart__item-qty">1</span>
           </i>
         </NavLink>

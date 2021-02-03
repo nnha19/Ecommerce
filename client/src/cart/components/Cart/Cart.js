@@ -18,6 +18,7 @@ const Cart = (props) => {
   const cartItemsOutput = props.cartItems.map((item) => {
     return (
       <div
+        key={item._id}
         onClick={(e) => viewDetailProductHandler(e, item._id)}
         className="cart__item"
       >

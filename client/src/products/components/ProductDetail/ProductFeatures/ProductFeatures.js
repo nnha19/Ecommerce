@@ -3,9 +3,9 @@ import React from "react";
 import "./ProductFeatures.css";
 
 const ProductFeatures = (props) => {
-  const keys = Object.keys(props.productFeatures).map((featuresKey) => {
+  const keys = Object.keys(props.productFeatures).map((featuresKey, i) => {
     return (
-      <li className="product-features__list">
+      <li className="product-features__list" key={featuresKey + i}>
         <span className="product-features__key">{featuresKey}</span>
         <span className="product-features__value">
           {props.productFeatures[featuresKey]}

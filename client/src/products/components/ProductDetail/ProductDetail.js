@@ -12,6 +12,7 @@ const ProductDetail = (props) => {
     colorOptions = product.colors.map((c) => {
       return (
         <button
+          key={c._id}
           onClick={(e) => props.productColorChosen(e, c._id)}
           className={`product-color ${c.choosen && "product-color-active"}`}
         >
