@@ -3,12 +3,20 @@
   padding: 2rem;
   background: rgba(0, 0, 0, 0.15);
 }
+.cart__item-link {
+  text-decoration: none;
+}
 .cart__item {
   background: rgba(255, 255, 255, 0.548);
   padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.cart__item:hover {
+  box-shadow: 0 2px 2px rgba(0, 128, 0, 0.1);
 }
 .cart__item-about {
   display: flex;

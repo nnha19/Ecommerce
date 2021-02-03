@@ -1,3 +1,6 @@
+.cart__item-update {
+  cursor: auto;
+}
 .cart__item-icons {
   font-size: 1.3rem;
   cursor: pointer;

@@ -5,6 +5,7 @@
   margin: 0.8rem;
 }
 .product-detail__quantity {
+  cursor: auto;
   margin: 1.5rem;
   text-align: center;
 }
