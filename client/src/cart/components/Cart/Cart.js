@@ -15,30 +15,34 @@ const Cart = (props) => {
       history.push(`/product/${id}`);
     }
   };
-  const cartItemsOutput = props.cartItems.map((item) => {
-    return (
-      <div
-        key={item._id}
-        onClick={(e) => viewDetailProductHandler(e, item._id)}
-        className="cart__item"
-      >
-        <div className="cart__item-about">
-          <img className="cart__item-img" src={item.image} />
-          <div className="cart__item-features">
-            <h4 className="cart__item-name">
-              {item.brand}/{item.features.gender}
-            </h4>
-            <p className="cart__item-price">{item.price} KS</p>
-            <p className="cart__item-instock">
-              {item.features.inStock} instock
-            </p>
+  let cartItemsOutput;
+  if (props.cartItems) {
+    cartItemsOutput = props.cartItems.map((item) => {
+      return (
+        <div
+          key={item._id}
+          onClick={(e) => viewDetailProductHandler(e, item._id)}
+          className="cart__item"
+        >
+          <div className="cart__item-about">
+            <img className="cart__item-img" src={item.image} />
+            <div className="cart__item-features">
+              <h4 className="cart__item-name">
+                {item.brand}/{item.features.gender}
+              </h4>
+              <p className="cart__item-price">{item.price} KS</p>
+              <p className="cart__item-instock">
+                {item.features.inStock} instock
+              </p>
+            </div>
           </div>
+          <ProductQuantity product={item} />
+          <CartItemUpdate />
         </div>
-        <ProductQuantity product={item} />
-        <CartItemUpdate />
-      </div>
-    );
-  });
+      );
+    });
+  }
+
   return (
     <div className="cart-container">
       <div className="cart">{cartItemsOutput}</div>

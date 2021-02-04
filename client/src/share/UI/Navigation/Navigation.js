@@ -4,7 +4,7 @@ import Desktop from "./Desktop/Desktop";
 const Navigation = (props) => {
   return (
     <div>
-      <Desktop />
+      <Desktop cartItemAmount={props.cartItemAmount} />
     </div>
   );
 };

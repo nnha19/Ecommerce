@@ -6,6 +6,7 @@ import Logo from "../../../../images/logo.png";
 import "./NavItems.css";
 
 const NavItems = (props) => {
+  console.log(props);
   return (
     <>
       <NavLink className="nav__link" to="/">
@@ -34,7 +35,11 @@ const NavItems = (props) => {
         </NavLink>
         <NavLink className="nav__link" to="/cart">
           <i className="shopping-cart fas fa-shopping-cart">
-            <span className="shopping-cart__item-qty">1</span>
+            {props.cartItemAmount ? (
+              <span className="shopping-cart__item-qty">
+                {props.cartItemAmount}
+              </span>
+            ) : null}
           </i>
         </NavLink>
       </div>

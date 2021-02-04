@@ -7,7 +7,6 @@ const ProductQuantity = (props) => {
 
   const [itemQuantity, setItemQuantity] = useState(props.product.pickedQty);
 
-  console.log(props.chosenAmount);
   const updateQuantityHandler = (type) => {
     type === "add"
       ? setItemQuantity((prev) => prev + 1)

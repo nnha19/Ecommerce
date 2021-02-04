@@ -6,7 +6,7 @@ import NavItems from "../NavItems/NavItems";
 const Desktop = (props) => {
   return (
     <ul className="nav">
-      <NavItems />
+      <NavItems cartItemAmount={props.cartItemAmount} />
     </ul>
   );
 };

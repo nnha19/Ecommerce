@@ -17,9 +17,8 @@ const createCartItem = async (req, res, next) => {
       brand,
       color,
       price,
-      gender,
       pickedQty,
-      inStock,
+      features,
       image,
     } = req.body;
 
@@ -28,9 +27,8 @@ const createCartItem = async (req, res, next) => {
       brand,
       color,
       price,
-      gender,
       pickedQty,
-      inStock,
+      features,
       image,
     });
     res.send(cartItem);

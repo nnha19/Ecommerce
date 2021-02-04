@@ -14,6 +14,7 @@
   align-items: center;
   cursor: pointer;
   transition: all 0.2s;
+  margin-bottom: 0.8rem;
 }
 .cart__item:hover {
   box-shadow: 0 2px 2px rgba(0, 128, 0, 0.1);

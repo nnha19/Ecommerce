@@ -4,10 +4,12 @@ const cartSchema = new mongoose.Schema({
   brand: String,
   image: String,
   price: String,
-  inStock: Number,
   pickedQty: Number,
+  features: {
+    gender: String,
+    inStock: String,
+  },
   color: String,
-  gender: String,
   productId: String,
 });
 
