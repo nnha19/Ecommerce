@@ -13,7 +13,7 @@ const getAllItemsFromCart = async (req, res, next) => {
 const createCartItem = async (req, res, next) => {
   try {
     const {
-      cartItemId,
+      productId,
       brand,
       color,
       price,
@@ -23,7 +23,7 @@ const createCartItem = async (req, res, next) => {
     } = req.body;
 
     const cartItem = await Cart.create({
-      cartItemId,
+      productId,
       brand,
       color,
       price,

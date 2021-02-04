@@ -18,10 +18,11 @@ const Cart = (props) => {
   let cartItemsOutput;
   if (props.cartItems) {
     cartItemsOutput = props.cartItems.map((item) => {
+      console.log(item);
       return (
         <div
           key={item._id}
-          onClick={(e) => viewDetailProductHandler(e, item._id)}
+          onClick={(e) => viewDetailProductHandler(e, item.productId)}
           className="cart__item"
         >
           <div className="cart__item-about">
