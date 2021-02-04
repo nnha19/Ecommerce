@@ -5,9 +5,7 @@ import "./ProductQuantity.css";
 const ProductQuantity = (props) => {
   const product = props.product;
 
-  const [itemQuantity, setItemQuantity] = useState(
-    props.product.pickedQty ? props.product.pickedQty : 1
-  );
+  const [itemQuantity, setItemQuantity] = useState(props.product.pickedQty);
 
   console.log(props.chosenAmount);
   const updateQuantityHandler = (type) => {
