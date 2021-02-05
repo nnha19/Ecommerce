@@ -37,5 +37,21 @@ const createCartItem = async (req, res, next) => {
   }
 };
 
+const updateCartItem = async (req, res, next) => {
+  try {
+    const { type } = req.body;
+    const { cartItemId } = req.params;
+    const cartItem = await Cart.findById(cartItemId);
+    cartItem.pickedQty =
+      type === "add" ? cartItem.pickedQty + 1 : cartItem.pickedQty - 1;
+    await cartItem.save();
+    const cartItems = await Cart.find({});
+    res.status(200).json(cartItems);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
 exports.getAllItemsFromCart = getAllItemsFromCart;
 exports.createCartItem = createCartItem;
+exports.updateCartItem = updateCartItem;

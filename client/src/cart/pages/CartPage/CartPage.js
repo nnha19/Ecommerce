@@ -9,12 +9,35 @@ const CartPage = (props) => {
   useEffect(() => {
     fetchData(`http://localhost:5000/cart`, "get");
   }, []);
+
+  const updateQuantityHandler = (type, cartItem) => {
+    const data = {
+      type,
+    };
+    if (
+      (type === "add" && cartItem.features.inStock > cartItem.pickedQty) ||
+      (type === "subtract" && cartItem.pickedQty > 1)
+    ) {
+      fetchData(
+        `http://localhost:5000/cart/update-cart-item/${cartItem._id}`,
+        "put",
+        data
+      );
+    }
+  };
+
   useEffect(() => {
     props.updateCartItemAmount(respData.length);
   }, [respData.length]);
+
   return (
     <>
-      <Cart cartItems={respData} />
+      <Cart
+        updateItemQuantity={(type, cartItem) =>
+          updateQuantityHandler(type, cartItem)
+        }
+        cartItems={respData}
+      />
     </>
   );
 };

@@ -3,10 +3,12 @@ import { Link, useHistory } from "react-router-dom";
 
 import ProductQuantity from "../../../products/components/ProductDetail/ProductDetailBody/ProductQuantity/ProductQuantity";
 import CartItemUpdate from "../Cart/CartItemUpdate/CartItemUpdate";
+import { useHttp } from "../../../customHooks/useHttp";
 
 import "./Cart.css";
 const Cart = (props) => {
   const history = useHistory();
+
   const viewDetailProductHandler = (e, id) => {
     if (
       !e.target.closest(".product-detail__quantity") &&
@@ -18,7 +20,6 @@ const Cart = (props) => {
   let cartItemsOutput;
   if (props.cartItems) {
     cartItemsOutput = props.cartItems.map((item) => {
-      console.log(item);
       return (
         <div
           key={item._id}
@@ -37,7 +38,10 @@ const Cart = (props) => {
               </p>
             </div>
           </div>
-          <ProductQuantity product={item} />
+          <ProductQuantity
+            updateItemQuantity={(type) => props.updateItemQuantity(type, item)}
+            product={item}
+          />
           <CartItemUpdate />
         </div>
       );

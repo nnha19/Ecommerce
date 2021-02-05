@@ -4,12 +4,17 @@ import "./ProductQuantity.css";
 
 const ProductQuantity = (props) => {
   const product = props.product;
+  const addDisableCart =
+    product.pickedQty === parseInt(product.features.inStock);
+  const subtractDisableCart = product.pickedQty === 1;
 
   return (
     <div className="product-detail__quantity">
       <span className="quantity-text">Quantity</span>
       <button
-        disabled={props.itemQuantity === product.features.inStock}
+        disabled={
+          props.itemQuantity === product.features.inStock || addDisableCart
+        }
         className="quantity-btn"
         onClick={() => props.updateItemQuantity("add")}
       >
@@ -20,7 +25,7 @@ const ProductQuantity = (props) => {
       </span>
       <button
         className="quantity-btn"
-        disabled={props.itemQuantity === 1}
+        disabled={props.itemQuantity === 1 || subtractDisableCart}
         onClick={() => props.updateItemQuantity("subtract")}
       >
         <i className="fas fa-minus subtract"></i>
