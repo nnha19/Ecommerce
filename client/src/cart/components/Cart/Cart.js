@@ -18,7 +18,7 @@ const Cart = (props) => {
     }
   };
   let cartItemsOutput;
-  if (props.cartItems) {
+  if (props.cartItems.length > 0) {
     cartItemsOutput = props.cartItems.map((item) => {
       return (
         <div

@@ -46,6 +46,7 @@ const ProductDetailBody = (props) => {
       <p>{product.description}</p>
       <div className="product-detail__cart">
         <ProductQuantity
+          type="body"
           itemQuantity={itemQuantity}
           updateItemQuantity={(type) => updateQuantityHandler(type)}
           product={product}
