@@ -1,0 +1,25 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: green;
+  line-height: 2;
+  display: none;
+}
+.modal__title {
+  padding: 1rem 2rem;
+  font-size: 1.4rem;
+  color: white;
+  background: purple;
+}
+.modal__body {
+  padding: 2rem;
+}
+.modal__paragraph {
+  font-size: 1.2rem;
+  color: white;
+}
+.modal-show {
+  display: inline-block;
+}

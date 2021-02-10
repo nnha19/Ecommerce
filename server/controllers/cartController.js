@@ -23,16 +23,21 @@ const createCartItem = async (req, res, next) => {
       image,
     } = req.body;
 
-    const cartItem = await Cart.create({
-      productId,
-      brand,
-      color,
-      price,
-      pickedQty,
-      features,
-      image,
-    });
-    res.send(cartItem);
+    const existingCartItem = await Cart.findOne({ productId });
+    if (existingCartItem) {
+      console.log("This item already exists in your cart.");
+    } else {
+      const cartItem = await Cart.create({
+        productId,
+        brand,
+        color,
+        price,
+        pickedQty,
+        features,
+        image,
+      });
+      res.send(cartItem);
+    }
   } catch (err) {
     res.status(500).json(err);
   }

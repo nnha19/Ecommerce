@@ -38,3 +38,14 @@
   background: green;
   transform: scale(1.009) translateY(-3px);
 }
+.modal__btn {
+  margin-top: 1rem;
+  color: purple;
+  transition: all 0.4s;
+  margin-right: 1rem;
+}
+.modal__btn:hover {
+  margin-top: 1rem;
+  background: purple;
+  color: white;
+}

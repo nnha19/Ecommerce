@@ -4,8 +4,16 @@ import "./ProductDetail.css";
 
 import ProductDetailBody from "./ProductDetailBody/ProductDetailBody";
 import ProductFeatures from "./ProductFeatures/ProductFeatures";
+import Modal from "../../../share/UI/Modal/Modal";
+import Button from "../../../share/components/button/button";
 
 const ProductDetail = (props) => {
+  const [showModal, setShowModal] = useState(true);
+
+  const hideModalHandler = () => {
+    setShowModal(false);
+  };
+
   let colorOptions;
   const product = props.productDetail;
   if (product && product.colors && product.colors.length > 0) {
@@ -25,16 +33,34 @@ const ProductDetail = (props) => {
     return null;
   }
   return (
-    <div className="product-detail-container">
-      <div className="product-detail">
-        <div className="product-detail__img-container">
-          <img className="product-detail__img" src={product.image} />
-          <div className="product-colors">{colorOptions}</div>
+    <>
+      <Modal
+        modalShow={showModal}
+        backDropShow={showModal}
+        title="Item already exists"
+        body={
+          <>
+            <p className="modal__paragraph">
+              This item already exists in the cart.Do you want to replace it?
+            </p>
+            <Button className="modal__btn">Replace</Button>
+            <Button clicked={hideModalHandler} className="modal__cancel">
+              Cancel
+            </Button>
+          </>
+        }
+      />
+      <div className="product-detail-container">
+        <div className="product-detail">
+          <div className="product-detail__img-container">
+            <img className="product-detail__img" src={product.image} />
+            <div className="product-colors">{colorOptions}</div>
+          </div>
+          <ProductDetailBody product={product} />
+          <ProductFeatures productFeatures={product.features} />
         </div>
-        <ProductDetailBody product={product} />
-        <ProductFeatures productFeatures={product.features} />
       </div>
-    </div>
+    </>
   );
 };
 
