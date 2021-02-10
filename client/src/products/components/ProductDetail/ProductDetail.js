@@ -8,7 +8,7 @@ import Modal from "../../../share/UI/Modal/Modal";
 import Button from "../../../share/components/button/button";
 
 const ProductDetail = (props) => {
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   const hideModalHandler = () => {
     setShowModal(false);
@@ -36,7 +36,6 @@ const ProductDetail = (props) => {
     <>
       <Modal
         modalShow={showModal}
-        backDropShow={showModal}
         title="Item already exists"
         body={
           <>

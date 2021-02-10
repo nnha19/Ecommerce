@@ -42,7 +42,10 @@ const Cart = (props) => {
             updateItemQuantity={(type) => props.updateItemQuantity(type, item)}
             product={item}
           />
-          <CartItemUpdate />
+          <CartItemUpdate
+            updateRespData={(data) => props.updateRespData(data)}
+            item={item}
+          />
         </div>
       );
     });

@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const useHttp = (initVal, url, method) => {
   const [respData, setRespData] = useState(initVal);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const fetchData = async (url, method, data) => {

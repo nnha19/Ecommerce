@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 const Cart = require("../Modals/Cart");
 const Product = require("../Modals/Product");
 
@@ -58,6 +60,18 @@ const updateCartItem = async (req, res, next) => {
   }
 };
 
+const deleteCartItem = async (req, res, next) => {
+  try {
+    const cartItemId = req.params.cartItemId;
+    await Cart.findByIdAndDelete(cartItemId);
+    const cartItemsAfterDeleted = await Cart.find({});
+    res.status(200).json(cartItemsAfterDeleted);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+};
 exports.getAllItemsFromCart = getAllItemsFromCart;
 exports.createCartItem = createCartItem;
 exports.updateCartItem = updateCartItem;
+exports.deleteCartItem = deleteCartItem;

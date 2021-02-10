@@ -27,6 +27,11 @@ const CartPage = (props) => {
     }
   };
 
+  const updateRespDataHandler = (data) => {
+    const updatedRespData = respData.filter((d) => d._id !== data._id);
+    setRespData(updatedRespData);
+  };
+
   useEffect(() => {
     props.updateCartItemAmount(respData.length);
   }, [respData.length]);
@@ -35,6 +40,7 @@ const CartPage = (props) => {
     <>
       <Spinner show={loading} />
       <Cart
+        updateRespData={(data) => updateRespDataHandler(data)}
         updateItemQuantity={(type, cartItem) =>
           updateQuantityHandler(type, cartItem)
         }

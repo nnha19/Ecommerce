@@ -6,7 +6,7 @@ import "./Modal.css";
 const Modal = (props) => {
   return (
     <>
-      <BackDrop backDropShow={props.backDropShow} />
+      <BackDrop backDropShow={props.modalShow} />
       <div
         className={`modal ${props.className} ${
           props.modalShow && "modal-show"

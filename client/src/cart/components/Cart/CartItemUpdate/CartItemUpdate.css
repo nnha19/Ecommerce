@@ -17,3 +17,13 @@
 .cart__item-delete {
   margin: 0 1rem;
 }
+
+.cart__item-remove {
+  background: red;
+  color: white;
+}
+.cart__item-cancel {
+  background: purple;
+  color: white;
+  margin-left: 1rem;
+}
