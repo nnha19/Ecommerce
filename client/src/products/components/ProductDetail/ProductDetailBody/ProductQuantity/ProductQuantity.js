@@ -6,7 +6,8 @@ const ProductQuantity = (props) => {
   const product = props.product;
   const addDisableCart =
     product.pickedQty === parseInt(product.features.inStock);
-  const subtractDisableCart = product.pickedQty === 1;
+  const subtractDisableCart =
+    props.type === "body" ? props.itemQuantity === 1 : product.pickedQty === 1;
 
   return (
     <div className="product-detail__quantity">

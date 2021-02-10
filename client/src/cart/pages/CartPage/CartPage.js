@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 
 import Cart from "../../components/Cart/Cart";
+import Spinner from "../../../share/UI/Spinner/Spinner";
 import { useHttp } from "../../../customHooks/useHttp";
 
 const CartPage = (props) => {
@@ -32,6 +33,7 @@ const CartPage = (props) => {
 
   return (
     <>
+      <Spinner show={loading} />
       <Cart
         updateItemQuantity={(type, cartItem) =>
           updateQuantityHandler(type, cartItem)

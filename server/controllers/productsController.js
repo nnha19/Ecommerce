@@ -27,7 +27,6 @@ const createProduct = async (req, res, next) => {
   try {
     const {
       brand,
-      pickedQty,
       price,
       onSale,
       description,
@@ -37,7 +36,6 @@ const createProduct = async (req, res, next) => {
     } = req.body;
     const product = await Product.create({
       brand,
-      pickedQty,
       price,
       onSale,
       description,
