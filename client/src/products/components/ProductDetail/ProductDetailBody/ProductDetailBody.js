@@ -4,12 +4,14 @@ import "./ProductDetailBody.css";
 import Button from "../../../../share/components/button/button";
 import ProductQuantity from "../ProductDetailBody/ProductQuantity/ProductQuantity";
 import { useHttp } from "../../../../customHooks/useHttp";
+import AddToCartDisplayMsg from "./AddToCartDisplayMsg/AddToCartDisplayMsg";
 
 const ProductDetailBody = (props) => {
   const [respData, loading, error, fetchData, setRespData] = useHttp();
   const product = props.product;
 
   const [itemQuantity, setItemQuantity] = useState(product.pickedQty);
+  const [addedToCart, setAddedToCart] = useState(false);
 
   const updateQuantityHandler = (type) => {
     type === "add"
@@ -38,28 +40,43 @@ const ProductDetailBody = (props) => {
       pickedQty: itemQuantity,
     };
     fetchData(`http://localhost:5000/cart`, "post", data);
+    setAddedToCart(true);
+  };
+
+  const hideModalHandler = () => {
+    setAddedToCart(false);
   };
 
   return (
-    <div className="product-detail__body">
-      <p className="product-detail__price">{product.price} KS</p>
-      <p>{product.description}</p>
-      <div className="product-detail__cart">
-        <ProductQuantity
-          type="body"
-          itemQuantity={itemQuantity}
-          updateItemQuantity={(type) => updateQuantityHandler(type)}
-          product={product}
+    <>
+      {addedToCart && (
+        <AddToCartDisplayMsg
+          hideModal={() => hideModalHandler()}
+          name={product.brand}
+          amount={itemQuantity}
+          addedToCart={addedToCart}
         />
-        <Button
-          clicked={() => addToCartHandler()}
-          className="product-detail__btn cart-btn"
-        >
-          Add To Cart
-        </Button>
-        <Button className="product-detail__btn checkout-btn">Checkout</Button>
+      )}
+      <div className="product-detail__body">
+        <p className="product-detail__price">{product.price} KS</p>
+        <p>{product.description}</p>
+        <div className="product-detail__cart">
+          <ProductQuantity
+            type="body"
+            itemQuantity={itemQuantity}
+            updateItemQuantity={(type) => updateQuantityHandler(type)}
+            product={product}
+          />
+          <Button
+            clicked={() => addToCartHandler()}
+            className="product-detail__btn cart-btn"
+          >
+            Add To Cart
+          </Button>
+          <Button className="product-detail__btn checkout-btn">Checkout</Button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

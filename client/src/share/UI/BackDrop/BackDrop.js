@@ -4,7 +4,10 @@ import "./BackDrop.css";
 
 const BackDrop = (props) => {
   return (
-    <div className={`backdrop ${props.backDropShow && "backdrop-show"}`}></div>
+    <div
+      onClick={props.clicked}
+      className={`backdrop ${props.backDropShow && "backdrop-show"}`}
+    ></div>
   );
 };
 

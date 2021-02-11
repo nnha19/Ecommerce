@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import BackDrop from "../../../share/UI/BackDrop/BackDrop";
 import "./Modal.css";
@@ -6,7 +6,7 @@ import "./Modal.css";
 const Modal = (props) => {
   return (
     <>
-      <BackDrop backDropShow={props.modalShow} />
+      <BackDrop clicked={props.hideModal} backDropShow={props.modalShow} />
       <div
         className={`modal ${props.className} ${
           props.modalShow && "modal-show"

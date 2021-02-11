@@ -71,7 +71,6 @@ const deleteCartItem = async (req, res, next) => {
     const cartItemsAfterDeleted = await Cart.find({});
     res.status(200).json(cartItemsAfterDeleted);
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 };

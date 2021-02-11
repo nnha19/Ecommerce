@@ -16,8 +16,6 @@ const App = () => {
     setCartItemAmount(amount);
   };
 
-  console.log(cartItemAmount);
-
   return (
     <div className="wrapper">
       <Navigation cartItemAmount={cartItemAmount} />
