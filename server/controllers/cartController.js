@@ -6,7 +6,11 @@ const Product = require("../Modals/Product");
 const getAllItemsFromCart = async (req, res, next) => {
   try {
     const cartItems = await Cart.find({});
-    res.status(200).json(cartItems);
+    if (cartItems.length === 0) {
+      res.status(400).json("No items in the cart.");
+    } else {
+      res.status(200).json(cartItems);
+    }
   } catch (err) {
     console.log(err);
     res.json(err);

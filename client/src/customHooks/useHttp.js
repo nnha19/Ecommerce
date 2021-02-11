@@ -15,11 +15,10 @@ export const useHttp = (initVal, url, method) => {
         method,
         data,
       });
-      console.log(resp);
       setRespData(resp.data);
       setLoading(false);
     } catch (err) {
-      setError(err);
+      setError(err.response.data);
       setLoading(false);
     }
   };

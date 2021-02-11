@@ -6,7 +6,7 @@ import Logo from "../../../../images/logo.png";
 import "./NavItems.css";
 
 const NavItems = (props) => {
-  console.log(props);
+
   return (
     <>
       <NavLink className="nav__link" to="/">

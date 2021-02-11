@@ -3,12 +3,14 @@ import React, { useEffect } from "react";
 import Cart from "../../components/Cart/Cart";
 import Spinner from "../../../share/UI/Spinner/Spinner";
 import { useHttp } from "../../../customHooks/useHttp";
+import ErrorMsg from "./ErrorMsg/ErrorMsg";
 
 const CartPage = (props) => {
   const [respData, loading, error, fetchData, setRespData] = useHttp([]);
 
   useEffect(() => {
     fetchData(`http://localhost:5000/cart`, "get");
+    console.log(respData);
   }, []);
 
   const updateQuantityHandler = (type, cartItem) => {
@@ -36,9 +38,10 @@ const CartPage = (props) => {
     props.updateCartItemAmount(respData.length);
   }, [respData.length]);
 
-  return (
-    <>
-      <Spinner show={loading} />
+  let content;
+
+  if (!error) {
+    content = (
       <Cart
         updateRespData={(data) => updateRespDataHandler(data)}
         updateItemQuantity={(type, cartItem) =>
@@ -46,6 +49,15 @@ const CartPage = (props) => {
         }
         cartItems={respData}
       />
+    );
+  } else {
+    content = <ErrorMsg link={"/"} errorMsg={error} action="Go shopping" />;
+  }
+
+  return (
+    <>
+      <Spinner show={loading} />
+      {content}
     </>
   );
 };
