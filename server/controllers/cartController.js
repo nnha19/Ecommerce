@@ -31,7 +31,7 @@ const createCartItem = async (req, res, next) => {
 
     const existingCartItem = await Cart.findOne({ productId });
     if (existingCartItem) {
-      console.log("This item already exists in your cart.");
+      res.status(400).json("This items already exists in the cart");
     } else {
       const cartItem = await Cart.create({
         productId,
