@@ -5,9 +5,17 @@ import Button from "../../../../share/components/button/button";
 import ProductQuantity from "../ProductDetailBody/ProductQuantity/ProductQuantity";
 import { useHttp } from "../../../../customHooks/useHttp";
 import AddToCartDisplayMsg from "./AddToCartDisplayMsg/AddToCartDisplayMsg";
+import ATCErrorMsg from "./ATCErrorMsg/ATCErrorMsg";
 
 const ProductDetailBody = (props) => {
-  const [respData, loading, error, fetchData, setRespData] = useHttp();
+  const [
+    respData,
+    loading,
+    error,
+    fetchData,
+    setRespData,
+    setError,
+  ] = useHttp();
   const product = props.product;
 
   const [itemQuantity, setItemQuantity] = useState(product.pickedQty);
@@ -40,11 +48,14 @@ const ProductDetailBody = (props) => {
       pickedQty: itemQuantity,
     };
     fetchData(`http://localhost:5000/cart`, "post", data);
-    setAddedToCart(true);
+    setTimeout(() => {
+      setAddedToCart(true);
+    }, 300);
   };
 
   const hideModalHandler = () => {
     setAddedToCart(false);
+    setError(false);
   };
 
   return (
@@ -55,7 +66,11 @@ const ProductDetailBody = (props) => {
           name={product.brand}
           amount={itemQuantity}
           addedToCart={addedToCart}
+          error={error}
         />
+      )}
+      {error && (
+        <ATCErrorMsg hideModal={() => hideModalHandler()} error={error} />
       )}
       <div className="product-detail__body">
         <p className="product-detail__price">{product.price} KS</p>

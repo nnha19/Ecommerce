@@ -22,5 +22,5 @@ export const useHttp = (initVal, url, method) => {
       setLoading(false);
     }
   };
-  return [respData, loading, error, fetchData, setRespData];
+  return [respData, loading, error, fetchData, setRespData, setError];
 };
