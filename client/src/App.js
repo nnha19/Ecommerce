@@ -8,6 +8,7 @@ import ProductDetailPage from "./products/pages/ProductDetailPage/ProductDetailP
 import Navigation from "./share/UI/Navigation/Navigation";
 import FilterProductPage from "./products/pages/FilterProductPage/FilterProductPage";
 import CartPage from "./cart/pages/CartPage/CartPage";
+import Context from "./contexts/context";
 
 const App = () => {
   const [cartItemAmount, setCartItemAmount] = useState("");
@@ -18,29 +19,31 @@ const App = () => {
 
   return (
     <div className="wrapper">
-      <Navigation cartItemAmount={cartItemAmount} />
-      <Switch>
-        <Route exact path="/products" component={AllProducts} />
-        <Route exact path="/" component={AllProducts} />
-        <Route exact path="/product/:id" component={ProductDetailPage} />
-        <Route
-          exact
-          path="/product/filter/:gender"
-          component={FilterProductPage}
-        />
-        <Route
-          exact
-          path="/cart"
-          render={(props) => (
-            <CartPage
-              {...props}
-              updateCartItemAmount={(amount) =>
-                updateCartItemAmountHandler(amount)
-              }
-            />
-          )}
-        />
-      </Switch>
+      <Context.Provider value={{ value: "context" }}>
+        <Navigation cartItemAmount={cartItemAmount} />
+        <Switch>
+          <Route exact path="/products" component={AllProducts} />
+          <Route exact path="/" component={AllProducts} />
+          <Route exact path="/product/:id" component={ProductDetailPage} />
+          <Route
+            exact
+            path="/product/filter/:gender"
+            component={FilterProductPage}
+          />
+          <Route
+            exact
+            path="/cart"
+            render={(props) => (
+              <CartPage
+                {...props}
+                updateCartItemAmount={(amount) =>
+                  updateCartItemAmountHandler(amount)
+                }
+              />
+            )}
+          />
+        </Switch>
+      </Context.Provider>
     </div>
   );
 };

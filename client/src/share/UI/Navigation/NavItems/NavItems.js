@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { NavLink } from "react-router-dom";
 import Logo from "../../../../images/logo.png";
-
+import "../../../../contexts/context";
+import Context from "../../../../contexts/context";
 import "./NavItems.css";
 
 const NavItems = (props) => {
+  const context = useContext(Context);
 
   return (
     <>
