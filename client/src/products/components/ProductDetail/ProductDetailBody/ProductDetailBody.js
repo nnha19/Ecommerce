@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import "./ProductDetailBody.css";
 import Button from "../../../../share/components/button/button";
@@ -6,8 +6,11 @@ import ProductQuantity from "../ProductDetailBody/ProductQuantity/ProductQuantit
 import { useHttp } from "../../../../customHooks/useHttp";
 import AddToCartDisplayMsg from "./AddToCartDisplayMsg/AddToCartDisplayMsg";
 import ATCErrorMsg from "./ATCErrorMsg/ATCErrorMsg";
+import context from "../../../../contexts/context";
 
 const ProductDetailBody = (props) => {
+  const updateCartItemAmount = useContext(context).updateCartItemAmount;
+
   const [
     respData,
     loading,
@@ -50,7 +53,8 @@ const ProductDetailBody = (props) => {
     fetchData(`http://localhost:5000/cart`, "post", data);
     setTimeout(() => {
       setAddedToCart(true);
-    }, 300);
+      updateCartItemAmount();
+    }, 500);
   };
 
   const hideModalHandler = () => {

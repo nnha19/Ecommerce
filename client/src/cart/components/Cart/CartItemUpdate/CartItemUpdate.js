@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import Modal from "../../../../share/UI/Modal/Modal";
 import "./CartItemUpdate.css";
 import Button from "../../../../share/components/button/button";
 import { useHttp } from "../../../../customHooks/useHttp";
 import Spinner from "../../../../share/UI/Spinner/Spinner";
+import context from "../../../../contexts/context";
 
 const CartItemUpdate = (props) => {
+  const updateCartItemAmount = useContext(context).updateCartItemAmount;
   const [cartItems, loading, error, fetchData, setCartItems] = useHttp();
   const [showDeleteWarning, setDeleteWarning] = useState(false);
 
@@ -21,6 +23,10 @@ const CartItemUpdate = (props) => {
   const cartItemRemoveHandler = () => {
     setDeleteWarning(false);
     fetchData(`http://localhost:5000/cart/${props.item._id}`, "delete");
+    setTimeout(() => {
+      updateCartItemAmount();
+    }, 500);
+
     if (!error) {
       props.updateRespData(props.item);
     }
@@ -30,7 +36,10 @@ const CartItemUpdate = (props) => {
     <>
       <Spinner show={loading} />
       <div className="cart__item-update">
-        <i className="far fa-heart cart__item-heart cart__item-icons"></i>
+        <i
+          title="Add to whilist"
+          className="far fa-heart cart__item-heart cart__item-icons"
+        ></i>
         <>
           <Modal
             modalShow={showDeleteWarning}
@@ -53,6 +62,7 @@ const CartItemUpdate = (props) => {
             }
           />
           <i
+            title="Remove from cart"
             onClick={deleteWarningHandler}
             className="fas fa-trash cart__item-delete cart__item-icons"
           ></i>

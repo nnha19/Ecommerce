@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { NavLink } from "react-router-dom";
 import Logo from "../../../../images/logo.png";
+import context from "../../../../contexts/context";
 
 import "./NavItems.css";
 
 const NavItems = (props) => {
+  const cartItemAmount = useContext(context).cartItemAmount;
 
   return (
     <>
@@ -35,10 +37,8 @@ const NavItems = (props) => {
         </NavLink>
         <NavLink className="nav__link" to="/cart">
           <i className="shopping-cart fas fa-shopping-cart">
-            {props.cartItemAmount ? (
-              <span className="shopping-cart__item-qty">
-                {props.cartItemAmount}
-              </span>
+            {cartItemAmount ? (
+              <span className="shopping-cart__item-qty">{cartItemAmount}</span>
             ) : null}
           </i>
         </NavLink>

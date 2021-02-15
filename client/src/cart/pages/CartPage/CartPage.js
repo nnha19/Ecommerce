@@ -1,16 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 
 import Cart from "../../components/Cart/Cart";
 import Spinner from "../../../share/UI/Spinner/Spinner";
 import { useHttp } from "../../../customHooks/useHttp";
 import ErrorMsg from "./ErrorMsg/ErrorMsg";
+import context from "../../../contexts/context";
 
 const CartPage = (props) => {
+  const updateCartItemAmount = useContext(context).updateCartItemAmount;
+  console.log("Cart page gets rednered");
   const [respData, loading, error, fetchData, setRespData] = useHttp([]);
 
   useEffect(() => {
     fetchData(`http://localhost:5000/cart`, "get");
-    console.log(respData);
   }, []);
 
   const updateQuantityHandler = (type, cartItem) => {
@@ -27,16 +29,15 @@ const CartPage = (props) => {
         data
       );
     }
+    setTimeout(() => {
+      updateCartItemAmount();
+    }, 500);
   };
 
   const updateRespDataHandler = (data) => {
     const updatedRespData = respData.filter((d) => d._id !== data._id);
     setRespData(updatedRespData);
   };
-
-  useEffect(() => {
-    props.updateCartItemAmount(respData.length);
-  }, [respData.length]);
 
   let content;
 
