@@ -17,3 +17,7 @@
   padding: 0.4rem 1rem;
   width: 100%;
 }
+.form__err-msg {
+  color: red;
+  margin: 0.4rem 0;
+}

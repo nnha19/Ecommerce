@@ -1,11 +1,11 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 
 import "./FormInput.css";
 
 const checkValidity = (val, valType) => {
   if (valType.type === "REQUIRE") {
     return val.length > 0;
-  } else if (valType.type === "MIN_Length") {
+  } else if (valType.type === "MIN_LENGTH") {
     return val.length >= valType.amount;
   }
 };
@@ -14,19 +14,33 @@ const inputReducer = (state, action) => {
   switch (action.type) {
     case "change":
       return {
+        ...state,
         value: action.value,
-        valid: (val) => checkValidity(val),
+        valid: action.checkValidity(),
+        isTouched: true,
       };
   }
 };
 
 const FormInput = (props) => {
   const [value, setValue] = useState("");
-  const [inputVal, dispatch] = useReducer(inputReducer, "");
+  const [inputVal, dispatch] = useReducer(inputReducer, {
+    value: "",
+    valid: false,
+    isTouched: false,
+  });
+
+  useEffect(() => {
+    props.changeLoginVal(inputVal, props.label);
+  }, [inputVal.value]);
 
   const inputChangeHandler = (e) => {
     const value = e.target.value;
-    dispatch({ type: "change", value });
+    dispatch({
+      type: "change",
+      value,
+      checkValidity: () => checkValidity(value, props.validRules),
+    });
   };
 
   let output;
@@ -35,21 +49,27 @@ const FormInput = (props) => {
       <div className="form__input-container">
         <label className={`form__label ${props.labelCls}`}>{props.label}</label>
         <input
-          value={value}
+          value={inputVal.value}
           onChange={inputChangeHandler}
           className={`form__input ${props.inputCls}`}
           type={props.type}
         />
+        {!inputVal.valid && inputVal.isTouched && (
+          <p className="form__err-msg">{props.errorMsg}</p>
+        )}
       </div>
     );
   } else if (props.elementType === "textarea") {
     <div className="form__input-container">
       <label className={`form__label ${props.labelCls}`}>{props.label}</label>
       <textarea
-        value={value}
+        value={inputVal.value}
         onChange={inputChangeHandler}
         className={`form__input ${props.inputCls}`}
       />
+      {!inputVal.valid && inputVal.isTouched && (
+        <p className="form__err-msg">{props.errorMsg}</p>
+      )}
     </div>;
   }
   return output ? output : null;
