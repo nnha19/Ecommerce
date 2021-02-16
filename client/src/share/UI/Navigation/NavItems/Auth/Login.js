@@ -62,6 +62,12 @@ const Login = (props) => {
         <Button disabled={!allValid} className="form__btn">
           Submit
         </Button>
+        <p className="change-mode">
+          Don't have an account?
+          <Button type="button" className="change-mode__btn">
+            Sign in
+          </Button>
+        </p>
       </form>
     </>
   );
