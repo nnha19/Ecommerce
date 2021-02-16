@@ -1,0 +1,19 @@
+.form__input-container {
+  margin-bottom: 1rem;
+
+  width: 70%;
+}
+
+.form__label {
+  display: block;
+  color: white;
+  font-size: 1.3rem;
+  text-transform: capitalize;
+  margin-bottom: 0.4rem;
+}
+.form__input {
+  border: none;
+  outline: none;
+  padding: 0.4rem 1rem;
+  width: 100%;
+}

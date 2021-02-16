@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import Logo from "../../../../images/logo.png";
 import context from "../../../../contexts/context";
+import Login from "./Auth/Login";
 
 import "./NavItems.css";
 
@@ -26,6 +27,7 @@ const NavItems = (props) => {
         <i className="fas fa-search nav__icon"></i>
       </form>
       <div className="nav__items">
+        <Login />
         <NavLink className="nav__link" to="/">
           <li className="nav__item">All</li>
         </NavLink>
