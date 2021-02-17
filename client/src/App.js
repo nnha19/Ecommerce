@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import "./App.css";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import axios from "axios";
 
 import AllProducts from "./products/pages/AllProductsPage/AllProductsPage";
@@ -13,6 +13,7 @@ import Context from "./contexts/context";
 import Auth from "./share/components/auth/auth";
 
 const App = () => {
+  const history = useHistory();
   const [cartItemAmount, setCartItemAmount] = useState();
   const [login, setLogin] = useState(false);
   const [curUser, setCurUser] = useState();
@@ -36,6 +37,10 @@ const App = () => {
     }
   };
 
+  useEffect(() => {
+    updateCartItemAmount();
+  }, []);
+
   const loginUserHandler = (customer, token) => {
     setCurUser(customer);
     setToken(token);
@@ -46,15 +51,12 @@ const App = () => {
     setCurUser(false);
     setToken("");
     setAuthenticated(false);
+    history.push("/");
   };
 
   const toggleLoginHandler = () => {
     setLogin(!login);
   };
-
-  useEffect(() => {
-    updateCartItemAmount();
-  }, []);
 
   return (
     <div className="wrapper">
