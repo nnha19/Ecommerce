@@ -4,11 +4,14 @@ import { NavLink } from "react-router-dom";
 import Logo from "../../../../images/logo.png";
 import context from "../../../../contexts/context";
 import Login from "./Auth/Login";
+import Logout from "./Auth/Logout/Logout";
 
 import "./NavItems.css";
 
 const NavItems = (props) => {
   const cartItemAmount = useContext(context).cartItemAmount;
+  const curUser = useContext(context).curUser;
+  const authenticated = useContext(context).authenticated;
 
   return (
     <>
@@ -27,7 +30,8 @@ const NavItems = (props) => {
         <i className="fas fa-search nav__icon"></i>
       </form>
       <div className="nav__items">
-        <Login />
+        {!authenticated && <Login />}
+        {authenticated && <Logout />}
         <NavLink className="nav__link" to="/">
           <li className="nav__item">All</li>
         </NavLink>

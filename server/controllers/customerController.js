@@ -20,7 +20,11 @@ const createCustomer = async (req, res, next) => {
         "Secret_Key",
         { expiresIn: "1h" }
       );
-      res.status(200).json({ message: "Account successfully created", token });
+      res.status(200).json({
+        message: "Account successfully created",
+        token,
+        user: { username: customer.username, userId: customer._id },
+      });
     }
   } catch (err) {
     console.log(err);
@@ -45,7 +49,11 @@ const loginCustomer = async (req, res, next) => {
           "Secret_Key",
           { expiresIn: "1h" }
         );
-        res.status(200).json({ message: "Logged you in", token });
+        res.status(200).json({
+          message: "Logged you in",
+          token,
+          user: { username: customer.username, userId: customer._id },
+        });
       } else {
         res.status(400).json("Incorrect password.");
       }

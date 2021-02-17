@@ -15,6 +15,9 @@ import Auth from "./share/components/auth/auth";
 const App = () => {
   const [cartItemAmount, setCartItemAmount] = useState();
   const [login, setLogin] = useState(false);
+  const [curUser, setCurUser] = useState();
+  const [token, setToken] = useState();
+  const [authenticated, setAuthenticated] = useState(false);
 
   const updateCartItemAmount = async () => {
     try {
@@ -33,6 +36,18 @@ const App = () => {
     }
   };
 
+  const loginUserHandler = (customer, token) => {
+    setCurUser(customer);
+    setToken(token);
+    setAuthenticated(!!token);
+  };
+
+  const logoutUserHandler = () => {
+    setCurUser(false);
+    setToken("");
+    setAuthenticated(false);
+  };
+
   const toggleLoginHandler = () => {
     setLogin(!login);
   };
@@ -43,9 +58,19 @@ const App = () => {
 
   return (
     <div className="wrapper">
-      <Auth toggleLogin={toggleLoginHandler} login={login} />
+      <Auth
+        loginUser={(customer, token) => loginUserHandler(customer, token)}
+        toggleLogin={toggleLoginHandler}
+        login={login}
+      />
       <Context.Provider
-        value={{ cartItemAmount, toggleLogin: () => toggleLoginHandler() }}
+        value={{
+          logout: logoutUserHandler,
+          cartItemAmount,
+          toggleLogin: () => toggleLoginHandler(),
+          curUser,
+          authenticated: !!authenticated,
+        }}
       >
         <Navigation />
       </Context.Provider>
