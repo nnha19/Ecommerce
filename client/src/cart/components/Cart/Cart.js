@@ -61,7 +61,7 @@ const Cart = (props) => {
     <div className="cart-container">
       <div className="cart">{cartItemsOutput}</div>
       <div className="order-summary">
-        <OrderSummary totalAmount={totalAmount} />
+        <OrderSummary action="proceed to checkout" totalAmount={totalAmount} />
       </div>
     </div>
   );
