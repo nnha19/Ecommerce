@@ -1,0 +1,28 @@
+.order-summary__header {
+  font-size: 1rem;
+  font-weight: 400;
+}
+.order-summary__lists {
+  list-style: none;
+}
+.order-summary__list {
+  margin: 1rem 0;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-summary__btn {
+  background: green;
+  text-transform: uppercase;
+  color: white;
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 0.9rem 1rem;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+.order-summary__btn:hover {
+  background: rgba(0, 128, 0, 0.726);
+}

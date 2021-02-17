@@ -2,6 +2,11 @@
   height: 100vh;
   padding: 2rem;
   background: rgba(0, 0, 0, 0.15);
+  display: grid;
+  grid-template-columns: 70% 1fr;
+  grid-template-rows: max-content;
+  gap: 1rem;
+  align-items: start;
 }
 .cart__item-link {
   text-decoration: none;
@@ -33,4 +38,9 @@
 .cart__item-price {
   color: green;
   font-size: 1.3rem;
+}
+.order-summary {
+  background: rgba(255, 255, 255, 0.548);
+  padding: 2rem;
+  line-height: 1.5;
 }

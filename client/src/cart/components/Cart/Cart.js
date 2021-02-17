@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import ProductQuantity from "../../../products/components/ProductDetail/ProductDetailBody/ProductQuantity/ProductQuantity";
 import CartItemUpdate from "../Cart/CartItemUpdate/CartItemUpdate";
 import { useHttp } from "../../../customHooks/useHttp";
+import OrderSummary from "./OrderSummary/OrderSummary";
 
 import "./Cart.css";
 const Cart = (props) => {
@@ -54,6 +55,9 @@ const Cart = (props) => {
   return (
     <div className="cart-container">
       <div className="cart">{cartItemsOutput}</div>
+      <div className="order-summary">
+        <OrderSummary />
+      </div>
     </div>
   );
 };
