@@ -95,8 +95,12 @@ const deleteCartItem = async (req, res, next) => {
     const { userId } = req.params;
     const customer = await Customer.findById(userId);
     const cartItemId = req.params.cartItemId;
-
-    const deleteCartItem = customer.cart.filter((c) => c._id !== cartItemId);
+    console.log(customer.cart);
+    const deleteCartItem = customer.cart.filter(
+      (c) => c._id.toString() !== cartItemId
+    );
+    console.log(customer.cart);
+    await Cart.findByIdAndDelete(cartItemId);
     customer.cart = deleteCartItem;
     await customer.save();
     res.status(200).json(deleteCartItem);
