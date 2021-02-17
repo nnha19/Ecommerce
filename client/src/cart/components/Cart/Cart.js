@@ -8,6 +8,7 @@ import OrderSummary from "./OrderSummary/OrderSummary";
 
 import "./Cart.css";
 const Cart = (props) => {
+  console.log(props.cartItems);
   const history = useHistory();
 
   const viewDetailProductHandler = (e, id) => {
@@ -51,12 +52,16 @@ const Cart = (props) => {
       );
     });
   }
+  let totalAmount = 0;
+  props.cartItems.forEach((cartItem) => {
+    totalAmount += cartItem.price * cartItem.pickedQty;
+  });
 
   return (
     <div className="cart-container">
       <div className="cart">{cartItemsOutput}</div>
       <div className="order-summary">
-        <OrderSummary />
+        <OrderSummary totalAmount={totalAmount} />
       </div>
     </div>
   );
