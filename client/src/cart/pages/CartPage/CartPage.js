@@ -23,7 +23,7 @@ const CartPage = (props) => {
       (type === "subtract" && cartItem.pickedQty > 1)
     ) {
       fetchData(
-        `http://localhost:5000/cart/update-cart-item/${cartItem._id}`,
+        `http://localhost:5000/cart/update-cart-item/${cartItem._id}/${context.curUser.userId}`,
         "put",
         data
       );
@@ -37,6 +37,7 @@ const CartPage = (props) => {
     const updatedRespData = respData.filter((d) => d._id !== data._id);
     setRespData(updatedRespData);
   };
+  console.log(respData);
 
   let content;
   console.log(respData);

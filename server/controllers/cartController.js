@@ -78,13 +78,21 @@ const createCartItem = async (req, res, next) => {
 const updateCartItem = async (req, res, next) => {
   try {
     const { type } = req.body;
-    const { cartItemId } = req.params;
+    const { cartItemId, userId } = req.params;
+
     const cartItem = await Cart.findById(cartItemId);
     cartItem.pickedQty =
       type === "add" ? cartItem.pickedQty + 1 : cartItem.pickedQty - 1;
     await cartItem.save();
-    const cartItems = await Cart.find({});
-    res.status(200).json(cartItems);
+    Customer.findById(userId)
+      .populate("cart")
+      .exec((err, customer) => {
+        if (err) {
+          res.status(400).json(err);
+        } else {
+          res.status(200).json(customer.cart);
+        }
+      });
   } catch (err) {
     res.status(500).json(err);
   }
