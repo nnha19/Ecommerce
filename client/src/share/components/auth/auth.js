@@ -59,7 +59,14 @@ const Auth = (props) => {
       });
     }
     props.toggleLogin();
+    for (let key in loginVals) {
+      loginVals[key].value = "";
+      loginVals[key].isTouched = false;
+      loginVals[key].valid = false;
+    }
   };
+
+  console.log(loginVals);
 
   useEffect(() => {
     customer && props.loginUser(customer.user, customer.token);

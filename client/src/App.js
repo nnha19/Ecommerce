@@ -97,7 +97,7 @@ const App = () => {
             toggleLogin: toggleLoginHandler,
           }}
         >
-          <Route path="/cart" exact component={CartPage} />
+          {authenticated && <Route path="/cart" exact component={CartPage} />}
           <Route exact path="/product/:id" component={ProductDetailPage} />
         </Context.Provider>
       </Switch>
