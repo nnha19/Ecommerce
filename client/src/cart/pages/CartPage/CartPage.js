@@ -4,15 +4,14 @@ import Cart from "../../components/Cart/Cart";
 import Spinner from "../../../share/UI/Spinner/Spinner";
 import { useHttp } from "../../../customHooks/useHttp";
 import ErrorMsg from "./ErrorMsg/ErrorMsg";
-import context from "../../../contexts/context";
+import Context from "../../../contexts/context";
 
 const CartPage = (props) => {
-  const updateCartItemAmount = useContext(context).updateCartItemAmount;
-  console.log("Cart page gets rednered");
+  const context = useContext(Context);
   const [respData, loading, error, fetchData, setRespData] = useHttp([]);
 
   useEffect(() => {
-    fetchData(`http://localhost:5000/cart`, "get");
+    fetchData(`http://localhost:5000/cart/${context.curUser.userId}`, "get");
   }, []);
 
   const updateQuantityHandler = (type, cartItem) => {
@@ -30,7 +29,7 @@ const CartPage = (props) => {
       );
     }
     setTimeout(() => {
-      updateCartItemAmount();
+      context.updateCartItemAmount();
     }, 500);
   };
 
@@ -40,7 +39,7 @@ const CartPage = (props) => {
   };
 
   let content;
-
+  console.log(respData);
   if (!error) {
     content = (
       <Cart

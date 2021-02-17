@@ -5,10 +5,10 @@ import "./CartItemUpdate.css";
 import Button from "../../../../share/components/button/button";
 import { useHttp } from "../../../../customHooks/useHttp";
 import Spinner from "../../../../share/UI/Spinner/Spinner";
-import context from "../../../../contexts/context";
+import Context from "../../../../contexts/context";
 
 const CartItemUpdate = (props) => {
-  const updateCartItemAmount = useContext(context).updateCartItemAmount;
+  const context = useContext(Context);
   const [cartItems, loading, error, fetchData, setCartItems] = useHttp();
   const [showDeleteWarning, setDeleteWarning] = useState(false);
 
@@ -22,9 +22,12 @@ const CartItemUpdate = (props) => {
 
   const cartItemRemoveHandler = () => {
     setDeleteWarning(false);
-    fetchData(`http://localhost:5000/cart/${props.item._id}`, "delete");
+    fetchData(
+      `http://localhost:5000/cart/${props.item._id}/${context.curUser.userId}`,
+      "delete"
+    );
     setTimeout(() => {
-      updateCartItemAmount();
+      context.updateCartItemAmount();
     }, 500);
 
     if (!error) {

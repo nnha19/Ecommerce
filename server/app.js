@@ -25,7 +25,7 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use("/products", productsRoute);
-app.use("/cart", cartRoute);
+app.use("/cart/", cartRoute);
 app.use("/customer", customerRoute);
 
 app.listen(5000, () => {

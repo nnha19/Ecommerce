@@ -6,10 +6,10 @@ import ProductQuantity from "../ProductDetailBody/ProductQuantity/ProductQuantit
 import { useHttp } from "../../../../customHooks/useHttp";
 import AddToCartDisplayMsg from "./AddToCartDisplayMsg/AddToCartDisplayMsg";
 import ATCErrorMsg from "./ATCErrorMsg/ATCErrorMsg";
-import context from "../../../../contexts/context";
+import Context from "../../../../contexts/context";
 
 const ProductDetailBody = (props) => {
-  const updateCartItemAmount = useContext(context).updateCartItemAmount;
+  const context = useContext(Context);
 
   const [
     respData,
@@ -31,6 +31,10 @@ const ProductDetailBody = (props) => {
   };
 
   const addToCartHandler = () => {
+    if (!context.authenticated) {
+      context.toggleLogin();
+      return;
+    }
     let chosenColor;
     product.colors.forEach((c) => {
       if (c.choosen) {
@@ -50,10 +54,14 @@ const ProductDetailBody = (props) => {
       image: product.image,
       pickedQty: itemQuantity,
     };
-    fetchData(`http://localhost:5000/cart`, "post", data);
+    fetchData(
+      `http://localhost:5000/cart/${context.curUser.userId}`,
+      "post",
+      data
+    );
     setTimeout(() => {
       setAddedToCart(true);
-      updateCartItemAmount();
+      context.updateCartItemAmount();
     }, 500);
   };
 
@@ -61,6 +69,8 @@ const ProductDetailBody = (props) => {
     setAddedToCart(false);
     setError(false);
   };
+
+  console.log(error);
 
   return (
     <>

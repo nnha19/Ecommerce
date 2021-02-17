@@ -1,15 +1,26 @@
 const mongoose = require("mongoose");
 
+const Customer = require("../Modals/Customer");
 const Cart = require("../Modals/Cart");
 const Product = require("../Modals/Product");
 
 const getAllItemsFromCart = async (req, res, next) => {
   try {
-    const cartItems = await Cart.find({});
-    if (cartItems.length === 0) {
+    const userId = req.params.id;
+    const customer = await Customer.findById(userId);
+    console.log(customer.cart);
+    if (customer.cart.length === 0) {
       res.status(400).json("No items in the cart.");
     } else {
-      res.status(200).json(cartItems);
+      Customer.findById(userId)
+        .populate("cart")
+        .exec((err, customer) => {
+          if (err) {
+            res.status(400).json(err);
+          } else {
+            res.status(200).json(customer.cart);
+          }
+        });
     }
   } catch (err) {
     console.log(err);
@@ -29,22 +40,37 @@ const createCartItem = async (req, res, next) => {
       image,
     } = req.body;
 
-    const existingCartItem = await Cart.findOne({ productId });
-    if (existingCartItem) {
-      res.status(400).json("This items already exists in the cart");
-    } else {
-      const cartItem = await Cart.create({
-        productId,
-        brand,
-        color,
-        price,
-        pickedQty,
-        features,
-        image,
+    const userId = req.params.id;
+    const customer = await Customer.findById(userId);
+    Customer.findById(userId)
+      .populate("cart")
+      .exec(async (err, customer) => {
+        if (err) {
+          console.log(err);
+        } else {
+          const existingCartItem = customer.cart.filter(
+            (c) => c.productId.toString() === productId
+          );
+          if (existingCartItem.length > 0) {
+            res.status(400).json("This items already exists in the cart");
+          } else {
+            const cartItem = await Cart.create({
+              productId,
+              brand,
+              color,
+              price,
+              pickedQty,
+              features,
+              image,
+            });
+            customer.cart.push(cartItem);
+            await customer.save();
+            res.status(200).json(cartItem);
+          }
+        }
       });
-      res.send(cartItem);
-    }
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 };
@@ -66,14 +92,19 @@ const updateCartItem = async (req, res, next) => {
 
 const deleteCartItem = async (req, res, next) => {
   try {
+    const { userId } = req.params;
+    const customer = await Customer.findById(userId);
     const cartItemId = req.params.cartItemId;
-    await Cart.findByIdAndDelete(cartItemId);
-    const cartItemsAfterDeleted = await Cart.find({});
-    res.status(200).json(cartItemsAfterDeleted);
+
+    const deleteCartItem = customer.cart.filter((c) => c._id !== cartItemId);
+    customer.cart = deleteCartItem;
+    await customer.save();
+    res.status(200).json(deleteCartItem);
   } catch (err) {
     res.status(500).json(err);
   }
 };
+
 exports.getAllItemsFromCart = getAllItemsFromCart;
 exports.createCartItem = createCartItem;
 exports.updateCartItem = updateCartItem;

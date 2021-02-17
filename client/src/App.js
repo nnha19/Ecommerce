@@ -22,7 +22,9 @@ const App = () => {
 
   const updateCartItemAmount = async () => {
     try {
-      const resp = await axios.get(`http://localhost:5000/cart`);
+      const resp = await axios.get(
+        `http://localhost:5000/cart/${curUser.userId}`
+      );
       const data = resp.data;
       const result = data
         .map((d) => {
@@ -85,7 +87,12 @@ const App = () => {
           component={FilterProductPage}
         />
         <Context.Provider
-          value={{ updateCartItemAmount: () => updateCartItemAmount() }}
+          value={{
+            updateCartItemAmount: () => updateCartItemAmount(),
+            curUser,
+            authenticated,
+            toggleLogin: toggleLoginHandler,
+          }}
         >
           <Route path="/cart" exact component={CartPage} />
           <Route exact path="/product/:id" component={ProductDetailPage} />
