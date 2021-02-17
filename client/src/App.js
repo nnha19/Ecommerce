@@ -33,15 +33,18 @@ const App = () => {
         .reduce((pre, cur) => {
           return pre + cur;
         }, 0);
+      console.log(result);
       setCartItemAmount(result);
     } catch (err) {
+      console.log(err);
       setCartItemAmount();
     }
   };
 
   useEffect(() => {
+    console.log(curUser);
     updateCartItemAmount();
-  }, []);
+  }, [curUser]);
 
   const loginUserHandler = (customer, token) => {
     setCurUser(customer);
