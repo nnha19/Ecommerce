@@ -20,6 +20,7 @@ const App = () => {
   const [curUser, setCurUser] = useState();
   const [token, setToken] = useState();
   const [authenticated, setAuthenticated] = useState(false);
+  const [totalAmount, setTotalAmount] = useState();
 
   const updateCartItemAmount = async () => {
     try {
@@ -27,6 +28,10 @@ const App = () => {
         `http://localhost:5000/cart/${curUser.userId}`
       );
       const data = resp.data;
+      let totalAmount = 0;
+      data.forEach((cartItem) => {
+        totalAmount += parseInt(cartItem.price) * cartItem.pickedQty;
+      });
       const result = data
         .map((d) => {
           return d.pickedQty;
@@ -34,8 +39,8 @@ const App = () => {
         .reduce((pre, cur) => {
           return pre + cur;
         }, 0);
-      console.log(result);
       setCartItemAmount(result);
+      setTotalAmount(totalAmount);
     } catch (err) {
       console.log(err);
       setCartItemAmount();
@@ -96,6 +101,8 @@ const App = () => {
             curUser,
             authenticated,
             toggleLogin: toggleLoginHandler,
+            totalAmount,
+            cartItemAmount,
           }}
         >
           {authenticated && <Route path="/cart" exact component={CartPage} />}

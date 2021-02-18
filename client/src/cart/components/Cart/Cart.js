@@ -1,9 +1,8 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import ProductQuantity from "../../../products/components/ProductDetail/ProductDetailBody/ProductQuantity/ProductQuantity";
 import CartItemUpdate from "../Cart/CartItemUpdate/CartItemUpdate";
-import { useHttp } from "../../../customHooks/useHttp";
 import OrderSummary from "./OrderSummary/OrderSummary";
 
 import "./Cart.css";
@@ -52,24 +51,12 @@ const Cart = (props) => {
       );
     });
   }
-  let totalAmount = 0;
-  props.cartItems.forEach((cartItem) => {
-    totalAmount += cartItem.price * cartItem.pickedQty;
-  });
-
-  const totalItem = props.cartItems.reduce((pre, cur) => {
-    return pre + cur.pickedQty;
-  }, 0);
 
   return (
     <div className="cart-container">
       <div className="cart">{cartItemsOutput}</div>
       <div className="order-summary">
-        <OrderSummary
-          totalItem={totalItem}
-          action="proceed to checkout"
-          totalAmount={totalAmount}
-        />
+        <OrderSummary action="proceed to checkout" />
       </div>
     </div>
   );

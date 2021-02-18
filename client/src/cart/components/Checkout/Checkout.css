@@ -1,0 +1,15 @@
+.checkout-container {
+  padding: 4rem;
+  background: rgba(0, 0, 0, 0.15);
+  min-height: 100vh;
+}
+.checkout {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 70% 1fr;
+  gap: 2rem;
+}
+.checkout__delivery-infos {
+  background: white;
+  padding: 2rem;
+}

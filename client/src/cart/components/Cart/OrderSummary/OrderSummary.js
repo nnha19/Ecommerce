@@ -1,12 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import "./OrderSummary.css";
+
+import Context from "../../../../contexts/context";
+
+import axios from "axios";
 
 import SecondaryBtn from "../../../../share/components/SecondaryBtn/SecondaryBtn";
 import { useHistory } from "react-router-dom";
 
 const OrderSummary = (props) => {
-  const [totalAmount, setTotalAmount] = useState(props.totalAmount);
+  const context = useContext(Context);
+  const totalAmount = context.totalAmount;
+
   const history = useHistory();
 
   const maniStr = (amount) => {
@@ -30,10 +36,6 @@ const OrderSummary = (props) => {
     }
   };
 
-  useEffect(() => {
-    setTotalAmount(props.totalAmount);
-  }, [props.totalAmount]);
-
   const clickedBtnHandler = () => {
     history.push("/checkout");
   };
@@ -46,7 +48,7 @@ const OrderSummary = (props) => {
       <ul className="order-summary__lists">
         <li className="order-summary__list">
           <span className="order-summary__text">
-            Subtotal({props.totalItem} items)
+            Subtotal({context.cartItemAmount} items)
           </span>
           <span className="order-summary__ks">{maniStr(totalAmount)}</span>
         </li>
@@ -62,9 +64,7 @@ const OrderSummary = (props) => {
           </span>
         </li>
       </ul>
-      <SecondaryBtn clicked={clickedBtnHandler}>
-        Proceed to checkout
-      </SecondaryBtn>
+      <SecondaryBtn clicked={clickedBtnHandler}>{props.action}</SecondaryBtn>
     </>
   );
 };
