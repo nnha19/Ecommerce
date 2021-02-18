@@ -1,0 +1,21 @@
+.coupon {
+  margin: 1rem 0;
+  display: grid;
+  grid-template-columns: 70% 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+.coupon__input {
+  border: none;
+  outline: none;
+  padding: 0.4rem 1rem;
+}
+
+.coupon__btn {
+  height: 100%;
+  background: purple;
+  padding: 0;
+}
+.coupon__btn:hover {
+  background: rgba(128, 0, 128, 0.568);
+}

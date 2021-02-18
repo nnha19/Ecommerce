@@ -12,7 +12,7 @@ const Checkout = (props) => {
           <h4>Delivery Information</h4>
         </div>
         <div className="order-summary">
-          <OrderSummary action="place order" />
+          <OrderSummary checkout={true} action="place order" />
         </div>
       </div>
     </div>

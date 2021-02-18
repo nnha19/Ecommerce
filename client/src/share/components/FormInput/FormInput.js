@@ -46,9 +46,14 @@ const FormInput = (props) => {
   let output;
   if (props.elementType === "input") {
     output = (
-      <div className="form__input-container">
-        <label className={`form__label ${props.labelCls}`}>{props.label}</label>
+      <div className={`form__input-container ${props.containerCls}`}>
+        {props.label && (
+          <label className={`form__label ${props.labelCls}`}>
+            {props.label}
+          </label>
+        )}
         <input
+          placeholder={props.placeholder}
           value={inputVal.value}
           onChange={inputChangeHandler}
           className={`form__input ${props.inputCls}`}

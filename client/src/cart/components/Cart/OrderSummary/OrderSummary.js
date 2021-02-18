@@ -3,11 +3,10 @@ import React, { useState, useEffect, useContext } from "react";
 import "./OrderSummary.css";
 
 import Context from "../../../../contexts/context";
-
-import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 import SecondaryBtn from "../../../../share/components/SecondaryBtn/SecondaryBtn";
-import { useHistory } from "react-router-dom";
+import Coupon from "./Coupon/Coupon";
 
 const OrderSummary = (props) => {
   const context = useContext(Context);
@@ -57,6 +56,7 @@ const OrderSummary = (props) => {
           <span className="order-summary__ks">{shippingFee}</span>
         </li>
         <hr />
+        {props.checkout && <Coupon />}
         <li className="order-summary__list total">
           <span className="order-summary__text">Total</span>
           <span className="order-summary__ks">
