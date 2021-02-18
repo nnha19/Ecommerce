@@ -6,23 +6,21 @@ const OrderSummary = (props) => {
   const [totalAmount, setTotalAmount] = useState(props.totalAmount);
 
   const maniStr = (amount) => {
+    amount = amount.toString();
+
     if (amount.length > 3) {
       let words = [];
       let w3 = "";
-      amount
-        .toString()
-        .split("")
-        .forEach((w, i) => {
-          if (w3.length < 3) {
-            w3 += w;
-            if (amount.length === i + 1) {
-              words.push(w3);
-            }
-          } else {
-            words.push(w3);
-            w3 = "";
-          }
-        });
+      amount.split("").forEach((w, i) => {
+        w3 += w;
+        if (w3.length === 3) {
+          words.push(w3);
+          w3 = "";
+        } else if (amount.length - 1 === i) {
+          words.push(w3);
+          w3 = "";
+        }
+      });
       console.log(words);
       return words.join(",");
     } else {
@@ -31,14 +29,10 @@ const OrderSummary = (props) => {
   };
 
   useEffect(() => {
-    const total = maniStr(props.totalAmount);
-
-    setTotalAmount(total);
+    setTotalAmount(props.totalAmount);
   }, [props.totalAmount]);
 
-  console.log(maniStr("99000"));
-
-  const shippingFee = maniStr("24700");
+  const shippingFee = maniStr("2470");
 
   return (
     <>
@@ -46,7 +40,7 @@ const OrderSummary = (props) => {
       <ul className="order-summary__lists">
         <li className="order-summary__list">
           <span className="order-summary__text">Subtotal(4 items)</span>
-          <span className="order-summary__ks">{totalAmount}</span>
+          <span className="order-summary__ks">{maniStr(totalAmount)}</span>
         </li>
         <li className="order-summary__list">
           <span className="order-summary__text">Shipping Fee</span>
@@ -56,7 +50,7 @@ const OrderSummary = (props) => {
         <li className="order-summary__list total">
           <span className="order-summary__text">Total</span>
           <span className="order-summary__ks">
-            {parseInt(totalAmount) + parseInt(shippingFee)}
+            {maniStr(parseInt(totalAmount) + parseInt(shippingFee))}
           </span>
         </li>
       </ul>
