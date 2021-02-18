@@ -5,6 +5,7 @@ import "./SecondaryBtn.css";
 const SecondaryBtn = (props) => {
   return (
     <button
+      disabled={props.disabled}
       onClick={props.clicked}
       style={props.style}
       className={`secondary-btn ${props.className}`}

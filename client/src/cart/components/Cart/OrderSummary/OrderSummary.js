@@ -49,22 +49,24 @@ const OrderSummary = (props) => {
           <span className="order-summary__text">
             Subtotal({context.cartItemAmount} items)
           </span>
-          <span className="order-summary__ks">{maniStr(totalAmount)}</span>
+          <span className="order-summary__ks">{maniStr(totalAmount)} KS</span>
         </li>
         <li className="order-summary__list">
           <span className="order-summary__text">Shipping Fee</span>
-          <span className="order-summary__ks">{shippingFee}</span>
+          <span className="order-summary__ks">{shippingFee} KS</span>
         </li>
         <hr />
         {props.checkout && <Coupon />}
         <li className="order-summary__list total">
           <span className="order-summary__text">Total</span>
           <span className="order-summary__ks">
-            {maniStr(parseInt(totalAmount) + parseInt(shippingFee))}
+            {maniStr(parseInt(totalAmount) + parseInt(shippingFee))} KS
           </span>
         </li>
       </ul>
-      <SecondaryBtn clicked={clickedBtnHandler}>{props.action}</SecondaryBtn>
+      <SecondaryBtn disabled={props.disabled} clicked={clickedBtnHandler}>
+        {props.action}
+      </SecondaryBtn>
     </>
   );
 };

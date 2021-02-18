@@ -9,7 +9,29 @@
   grid-template-columns: 70% 1fr;
   gap: 2rem;
 }
+.checkout__form {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+.person-infos {
+  flex-basis: 50%;
+}
+.address {
+  flex-basis: 50%;
+}
+.checkout__label {
+  color: black;
+  font-size: 0.8rem;
+}
 .checkout__delivery-infos {
-  background: white;
+  background: rgba(255, 255, 255, 0.815);
   padding: 2rem;
+}
+.checkout__input {
+  border: 1px solid grey;
+}
+
+.checkout-input-container {
+  width: 85%;
 }

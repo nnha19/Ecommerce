@@ -23,15 +23,14 @@ const inputReducer = (state, action) => {
 };
 
 const FormInput = (props) => {
-  const [value, setValue] = useState("");
   const [inputVal, dispatch] = useReducer(inputReducer, {
     value: "",
-    valid: false,
+    valid: props.id === "message" && true,
     isTouched: false,
   });
 
   useEffect(() => {
-    props.changeLoginVal(inputVal, props.label);
+    props.changeLoginVal(inputVal, props.id);
   }, [inputVal.value]);
 
   const inputChangeHandler = (e) => {
@@ -53,6 +52,7 @@ const FormInput = (props) => {
           </label>
         )}
         <input
+          disabled={props.disabled}
           placeholder={props.placeholder}
           value={inputVal.value}
           onChange={inputChangeHandler}
@@ -65,17 +65,26 @@ const FormInput = (props) => {
       </div>
     );
   } else if (props.elementType === "textarea") {
-    <div className="form__input-container">
-      <label className={`form__label ${props.labelCls}`}>{props.label}</label>
-      <textarea
-        value={inputVal.value}
-        onChange={inputChangeHandler}
-        className={`form__input ${props.inputCls}`}
-      />
-      {!inputVal.valid && inputVal.isTouched && (
-        <p className="form__err-msg">{props.errorMsg}</p>
-      )}
-    </div>;
+    output = (
+      <div className={`form__input-container ${props.containerCls}`}>
+        {props.label && (
+          <label className={`form__label ${props.labelCls}`}>
+            {props.label}
+          </label>
+        )}
+        <textarea
+          disabled={props.disabled}
+          value={inputVal.value}
+          onChange={inputChangeHandler}
+          className={`form__input ${props.inputCls}`}
+          rows={props.rows || "4"}
+          cols={props.cols || "50"}
+        ></textarea>
+        {!inputVal.valid && inputVal.isTouched && (
+          <p className="form__err-msg">{props.errorMsg}</p>
+        )}
+      </div>
+    );
   }
   return output ? output : null;
 };

@@ -8,9 +8,9 @@ import BackDrop from "../../UI/BackDrop/BackDrop";
 import { useHttp } from "../../../customHooks/useHttp";
 import Spinner from "../../../share/UI/Spinner/Spinner";
 import Modal from "../../../share/UI/Modal/Modal";
+import useCheckOverAllValid from "../../../customHooks/useCheckOverAllValid";
 
 const Auth = (props) => {
-  const [allValid, setAllValid] = useState(false);
   const [signUp, setSignUp] = useState(false);
   const [customer, loading, error, fetchData, , setError] = useHttp();
 
@@ -19,13 +19,7 @@ const Auth = (props) => {
     password: "",
   });
 
-  useEffect(() => {
-    const valids = [];
-    for (let key in loginVals) {
-      valids.push(loginVals[key].valid);
-    }
-    valids.every((v) => v) ? setAllValid(true) : setAllValid(false);
-  }, [loginVals]);
+  const [allValid] = useCheckOverAllValid(loginVals);
 
   const changeLoginValHandler = (val, objKey) => {
     setLoginVals({
@@ -96,6 +90,7 @@ const Auth = (props) => {
       >
         {signUp && (
           <FormInput
+            id="username"
             label="username"
             errorMsg="This field can't be empty"
             type="text"
@@ -105,6 +100,7 @@ const Auth = (props) => {
           />
         )}
         <FormInput
+          id="email"
           changeLoginVal={(e, objKey) => changeLoginValHandler(e, objKey)}
           validRules={{ type: "REQUIRE" }}
           elementType="input"
@@ -113,6 +109,7 @@ const Auth = (props) => {
           errorMsg="This field can't be empty"
         />
         <FormInput
+          id="password"
           changeLoginVal={(e, objKey) => changeLoginValHandler(e, objKey)}
           validRules={{ type: "MIN_LENGTH", amount: 5 }}
           elementType="input"

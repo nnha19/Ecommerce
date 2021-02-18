@@ -12,3 +12,8 @@
 .secondary-btn:hover {
   background: rgba(0, 128, 0, 0.726);
 }
+.secondary-btn:disabled {
+  background: black;
+  cursor: not-allowed;
+  color: rgba(255, 255, 255, 0.527);
+}
