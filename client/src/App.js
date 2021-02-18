@@ -11,6 +11,7 @@ import FilterProductPage from "./products/pages/FilterProductPage/FilterProductP
 import CartPage from "./cart/pages/CartPage/CartPage";
 import Context from "./contexts/context";
 import Auth from "./share/components/auth/auth";
+import CheckoutPage from "./cart/pages/CheckoutPage/CheckoutPage";
 
 const App = () => {
   const history = useHistory();
@@ -98,6 +99,7 @@ const App = () => {
           }}
         >
           {authenticated && <Route path="/cart" exact component={CartPage} />}
+          <Route exact path="/checkout" component={CheckoutPage} />
           <Route exact path="/product/:id" component={ProductDetailPage} />
         </Context.Provider>
       </Switch>

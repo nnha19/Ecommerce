@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 
 import "./OrderSummary.css";
 
+import SecondaryBtn from "../../../../share/components/SecondaryBtn/SecondaryBtn";
+import { useHistory } from "react-router-dom";
+
 const OrderSummary = (props) => {
   const [totalAmount, setTotalAmount] = useState(props.totalAmount);
+  const history = useHistory();
 
   const maniStr = (amount) => {
     amount = amount.toString();
-
     if (amount.length > 3) {
       let words = [];
       let w3 = "";
@@ -21,7 +24,6 @@ const OrderSummary = (props) => {
           w3 = "";
         }
       });
-      console.log(words);
       return words.join(",");
     } else {
       return amount;
@@ -31,6 +33,10 @@ const OrderSummary = (props) => {
   useEffect(() => {
     setTotalAmount(props.totalAmount);
   }, [props.totalAmount]);
+
+  const clickedBtnHandler = () => {
+    history.push("/checkout");
+  };
 
   const shippingFee = maniStr("2470");
 
@@ -56,7 +62,9 @@ const OrderSummary = (props) => {
           </span>
         </li>
       </ul>
-      <button className="order-summary__btn">{props.action}</button>
+      <SecondaryBtn clicked={clickedBtnHandler}>
+        Proceed to checkout
+      </SecondaryBtn>
     </>
   );
 };

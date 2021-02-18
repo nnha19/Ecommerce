@@ -1,0 +1,14 @@
+.secondary-btn {
+  background: green;
+  text-transform: uppercase;
+  color: white;
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 0.9rem 1rem;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+.secondary-btn:hover {
+  background: rgba(0, 128, 0, 0.726);
+}
