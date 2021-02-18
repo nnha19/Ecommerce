@@ -57,11 +57,19 @@ const Cart = (props) => {
     totalAmount += cartItem.price * cartItem.pickedQty;
   });
 
+  const totalItem = props.cartItems.reduce((pre, cur) => {
+    return pre + cur.pickedQty;
+  }, 0);
+
   return (
     <div className="cart-container">
       <div className="cart">{cartItemsOutput}</div>
       <div className="order-summary">
-        <OrderSummary action="proceed to checkout" totalAmount={totalAmount} />
+        <OrderSummary
+          totalItem={totalItem}
+          action="proceed to checkout"
+          totalAmount={totalAmount}
+        />
       </div>
     </div>
   );
