@@ -27,7 +27,8 @@ const RemoveItemFromCart = (props) => {
       "delete"
     );
     if (!error) {
-      props.updateRespData(props.item);
+      context.cartItemData.setCartItem(props.item);
+      // props.updateRespData(props.item);
     }
   };
 

@@ -28,18 +28,10 @@ const CartPage = (props) => {
     context.updateCartItemAmount();
   };
 
-  const updateRespDataHandler = (data) => {
-    const updatedRespData = cartItemData.cartItem.filter(
-      (d) => d._id !== data._id
-    );
-    cartItemData.setCartItem(updatedRespData);
-  };
-
   let content;
   if (!cartItemData.error) {
     content = (
       <Cart
-        updateRespData={(data) => updateRespDataHandler(data)}
         updateItemQuantity={(type, cartItem) =>
           updateQuantityHandler(type, cartItem)
         }

@@ -39,7 +39,7 @@ const OrderSummary = (props) => {
     history.push("/checkout");
   };
 
-  const shippingFee = maniStr("2470");
+  const shippingFee = "2470";
 
   return (
     <>

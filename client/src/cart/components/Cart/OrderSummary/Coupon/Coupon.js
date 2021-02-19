@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import "./Coupon.css";
 
-import FormInput from "../../../../../share/components/FormInput/FormInput";
 import SecondaryBtn from "../../../../../share/components/SecondaryBtn/SecondaryBtn";
 
 const Coupon = (props) => {

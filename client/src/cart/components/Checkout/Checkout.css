@@ -35,3 +35,8 @@
 .checkout-input-container {
   width: 85%;
 }
+.checkout__item-summary {
+  display: block;
+  padding: 0;
+  margin-top: 2rem;
+}

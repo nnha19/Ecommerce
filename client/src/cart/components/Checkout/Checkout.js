@@ -151,7 +151,7 @@ const Checkout = (props) => {
           />
         </div>
       </div>
-      <Cart />
+      <Cart className="checkout__item-summary" checkout={true} />
     </div>
   );
 };

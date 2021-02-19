@@ -21,6 +21,14 @@ const Cart = (props) => {
       history.push(`/product/${id}`);
     }
   };
+
+  const removeItemFromCartHandler = (data) => {
+    const updatedRespData = context.cartItemData.cartItem.filter(
+      (d) => d._id !== data._id
+    );
+    context.cartItemData.setCartItem(updatedRespData);
+  };
+
   let cartItemsOutput;
   if (cartItems && cartItems.length > 0) {
     cartItemsOutput = cartItems.map((item) => {
@@ -48,10 +56,7 @@ const Cart = (props) => {
           />
           <div className="cart__item-update">
             <AddToWhilist />
-            <RemoveItemFromCart
-              updateRespData={(data) => props.updateRespData(data)}
-              item={item}
-            />
+            <RemoveItemFromCart item={item} />
           </div>
         </div>
       );
@@ -59,7 +64,7 @@ const Cart = (props) => {
   }
 
   return (
-    <div className="cart-container">
+    <div className={`cart-container ${props.className}`}>
       <div className="cart">{cartItemsOutput}</div>
       {!props.checkout && (
         <div className="order-summary">

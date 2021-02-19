@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 import "./App.css";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
-import axios from "axios";
 
 import AllProducts from "./products/pages/AllProductsPage/AllProductsPage";
 import ProductDetailPage from "./products/pages/ProductDetailPage/ProductDetailPage";
@@ -24,6 +23,7 @@ const App = () => {
     setCartItem,
     setError,
   ] = useHttp();
+
   const [cartItemAmount, setCartItemAmount] = useState();
   const [login, setLogin] = useState(false);
   const [curUser, setCurUser] = useState();
@@ -31,34 +31,25 @@ const App = () => {
   const [authenticated, setAuthenticated] = useState(false);
   const [totalAmount, setTotalAmount] = useState();
 
-  const updateCartItemAmount = async () => {
-    try {
-      let totalAmount = 0;
+  const updateCartItemAmount = () => {
+    let totalAmount = 0;
+    cartItem &&
+      cartItem.forEach((cartItem) => {
+        totalAmount += parseInt(cartItem.price) * cartItem.pickedQty;
+      });
+
+    const result =
       cartItem &&
-        cartItem.forEach((cartItem) => {
-          totalAmount += parseInt(cartItem.price) * cartItem.pickedQty;
-        });
-
-      const result =
-        cartItem &&
-        cartItem
-          .map((d) => {
-            return d.pickedQty;
-          })
-          .reduce((pre, cur) => {
-            return pre + cur;
-          }, 0);
-      setCartItemAmount(result);
-      setTotalAmount(totalAmount);
-    } catch (err) {
-      console.log(err);
-      setCartItemAmount();
-    }
+      cartItem
+        .map((d) => {
+          return d.pickedQty;
+        })
+        .reduce((pre, cur) => {
+          return pre + cur;
+        }, 0);
+    setCartItemAmount(result);
+    setTotalAmount(totalAmount);
   };
-
-  // if (cartItem && cartItem.length === 0) {
-  //   setError("No items in the cart.");
-  // }
 
   useEffect(() => {
     if (curUser) {
@@ -88,8 +79,6 @@ const App = () => {
   const toggleLoginHandler = () => {
     setLogin(!login);
   };
-
-  console.log(cartItem);
 
   return (
     <div className="wrapper">
