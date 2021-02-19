@@ -8,7 +8,6 @@ const getAllItemsFromCart = async (req, res, next) => {
   try {
     const userId = req.params.id;
     const customer = await Customer.findById(userId);
-    console.log(customer.cart);
     if (customer.cart.length === 0) {
       res.status(400).json("No items in the cart.");
     } else {
@@ -41,7 +40,6 @@ const createCartItem = async (req, res, next) => {
     } = req.body;
 
     const userId = req.params.id;
-    const customer = await Customer.findById(userId);
     Customer.findById(userId)
       .populate("cart")
       .exec(async (err, customer) => {

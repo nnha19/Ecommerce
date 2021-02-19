@@ -8,12 +8,14 @@ import FormInput from "../../../share/components/FormInput/FormInput";
 import useCheckOverAllValid from "../../../customHooks/useCheckOverAllValid";
 import Context from "../../../contexts/context";
 import Cart from "../Cart/Cart";
+import { useHttp } from "../../../customHooks/useHttp";
 
 const Checkout = (props) => {
+  const [order, loading, error, fetchData, setError] = useHttp();
+
   const history = useHistory();
   const context = useContext(Context);
   const { cartItem } = context.cartItemData;
-  console.log(cartItem);
   useEffect(() => {
     if ((cartItem && cartItem.length === 0) || !cartItem) {
       history.push("/");
@@ -62,13 +64,18 @@ const Checkout = (props) => {
   const placeOrderHandler = () => {
     const order = {
       customerInfos: {},
-      item: cartItem,
     };
     for (let key in orderInfos) {
       order.customerInfos[key] = orderInfos[key].value;
     }
-    console.log(order);
+    fetchData(
+      `http://localhost:5000/order/${context.curUser.userId}`,
+      "post",
+      order
+    );
   };
+
+  console.log(order);
 
   return (
     <div className="checkout-container">
