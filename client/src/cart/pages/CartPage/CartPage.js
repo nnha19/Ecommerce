@@ -10,31 +10,30 @@ const CartPage = (props) => {
   const context = useContext(Context);
   const cartItemData = context.cartItemData;
 
-  const updateQuantityHandler = (type, cartItem) => {
-    const data = {
-      type,
-    };
-    if (
-      (type === "add" && cartItem.features.inStock > cartItem.pickedQty) ||
-      (type === "subtract" && cartItem.pickedQty > 1)
-    ) {
-      context.cartItemData.fetchData(
-        `http://localhost:5000/cart/update-cart-item/${cartItem._id}/${context.curUser.userId}`,
-        "put",
-        data
-      );
-    }
-
-    context.updateCartItemAmount();
-  };
+  // const updateQuantityHandler = (type, cartItem) => {
+  //   const data = {
+  //     type,
+  //   };
+  //   if (
+  //     (type === "add" && cartItem.features.inStock > cartItem.pickedQty) ||
+  //     (type === "subtract" && cartItem.pickedQty > 1)
+  //   ) {
+  //     context.cartItemData.fetchData(
+  //       `http://localhost:5000/cart/update-cart-item/${cartItem._id}/${context.curUser.userId}`,
+  //       "put",
+  //       data
+  //     );
+  //   }
+  //   context.updateCartItemAmount();
+  // };
 
   let content;
   if (!cartItemData.error) {
     content = (
       <Cart
-        updateItemQuantity={(type, cartItem) =>
-          updateQuantityHandler(type, cartItem)
-        }
+      // updateItemQuantity={(type, cartItem) =>
+      //   updateQuantityHandler(type, cartItem)
+      // }
       />
     );
   } else {

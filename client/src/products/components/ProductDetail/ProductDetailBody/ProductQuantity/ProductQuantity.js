@@ -2,12 +2,32 @@ import React, { useContext } from "react";
 
 import "./ProductQuantity.css";
 
+import Context from "../../../../../contexts/context";
+
 const ProductQuantity = (props) => {
+  const context = useContext(Context);
   const product = props.product;
   const addDisableCart =
     product.pickedQty === parseInt(product.features.inStock);
   const subtractDisableCart =
     props.type === "body" ? props.itemQuantity === 1 : product.pickedQty === 1;
+
+  const updateItemQuantity = (type, cartItem) => {
+    const data = {
+      type,
+    };
+    if (
+      (type === "add" && cartItem.features.inStock > cartItem.pickedQty) ||
+      (type === "subtract" && cartItem.pickedQty > 1)
+    ) {
+      context.cartItemData.fetchData(
+        `http://localhost:5000/cart/update-cart-item/${cartItem._id}/${context.curUser.userId}`,
+        "put",
+        data
+      );
+    }
+    context.updateCartItemAmount();
+  };
 
   return (
     <div className="product-detail__quantity">
@@ -17,7 +37,11 @@ const ProductQuantity = (props) => {
           props.itemQuantity === product.features.inStock || addDisableCart
         }
         className="quantity-btn"
-        onClick={() => props.updateItemQuantity("add")}
+        onClick={() =>
+          props.updateItemQuantity
+            ? props.updateItemQuantity("add")
+            : updateItemQuantity("add", props.product)
+        }
       >
         <i className="fas fa-plus add"></i>
       </button>
@@ -27,7 +51,11 @@ const ProductQuantity = (props) => {
       <button
         className="quantity-btn"
         disabled={props.itemQuantity === 1 || subtractDisableCart}
-        onClick={() => props.updateItemQuantity("subtract")}
+        onClick={() =>
+          props.updateItemQuantity
+            ? props.updateItemQuantity("subtract")
+            : updateItemQuantity("subtract", props.product)
+        }
       >
         <i className="fas fa-minus subtract"></i>
       </button>

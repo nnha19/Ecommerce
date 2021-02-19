@@ -11,7 +11,6 @@ import Coupon from "./Coupon/Coupon";
 const OrderSummary = (props) => {
   const context = useContext(Context);
   const totalAmount = context.totalAmount;
-  console.log(totalAmount);
   const history = useHistory();
 
   const maniStr = (amount) => {

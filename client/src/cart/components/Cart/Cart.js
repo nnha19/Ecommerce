@@ -22,11 +22,12 @@ const Cart = (props) => {
     }
   };
 
-  const removeItemFromCartHandler = (data) => {
-    const updatedRespData = context.cartItemData.cartItem.filter(
-      (d) => d._id !== data._id
-    );
-    context.cartItemData.setCartItem(updatedRespData);
+  const updateItemQuantity = (item) => {
+    if (props.updateItemQuantity) {
+      return (type) => props.updateItemQuantity(type, item);
+    } else {
+      return null;
+    }
   };
 
   let cartItemsOutput;
@@ -51,7 +52,7 @@ const Cart = (props) => {
             </div>
           </div>
           <ProductQuantity
-            updateItemQuantity={(type) => props.updateItemQuantity(type, item)}
+            updateItemQuantity={updateItemQuantity(item)}
             product={item}
           />
           <div className="cart__item-update">
