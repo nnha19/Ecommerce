@@ -10,6 +10,7 @@ app.use(cors());
 const productsRoute = require("./routes/productsRoute");
 const cartRoute = require("./routes/cartRoute");
 const customerRoute = require("./routes/customerRoute");
+const orderRoute = require("./routes/orderRoute");
 
 mongoose
   .connect(
@@ -27,6 +28,7 @@ mongoose
 app.use("/products", productsRoute);
 app.use("/cart/", cartRoute);
 app.use("/customer", customerRoute);
+app.use("/order/:uid", orderRoute);
 
 app.listen(5000, () => {
   console.log("Server has started.");
