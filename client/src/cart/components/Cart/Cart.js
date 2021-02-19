@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 import ProductQuantity from "../../../products/components/ProductDetail/ProductDetailBody/ProductQuantity/ProductQuantity";
-import CartItemUpdate from "../Cart/CartItemUpdate/CartItemUpdate";
+import RemoveItemFromCart from "./RemoveItemFromCart/RemoveItemFromCart";
 import OrderSummary from "./OrderSummary/OrderSummary";
+import AddToWhilist from "./AddToWhilist/AddToWhilist";
+import Context from "../../../contexts/context";
 
 import "./Cart.css";
 const Cart = (props) => {
-  console.log(props.cartItems);
   const history = useHistory();
+  const context = useContext(Context);
+  const cartItems = context.cartItemData.cartItem;
 
   const viewDetailProductHandler = (e, id) => {
     if (
@@ -19,8 +22,8 @@ const Cart = (props) => {
     }
   };
   let cartItemsOutput;
-  if (props.cartItems.length > 0) {
-    cartItemsOutput = props.cartItems.map((item) => {
+  if (cartItems && cartItems.length > 0) {
+    cartItemsOutput = cartItems.map((item) => {
       return (
         <div
           key={item._id}
@@ -43,10 +46,13 @@ const Cart = (props) => {
             updateItemQuantity={(type) => props.updateItemQuantity(type, item)}
             product={item}
           />
-          <CartItemUpdate
-            updateRespData={(data) => props.updateRespData(data)}
-            item={item}
-          />
+          <div className="cart__item-update">
+            <AddToWhilist />
+            <RemoveItemFromCart
+              updateRespData={(data) => props.updateRespData(data)}
+              item={item}
+            />
+          </div>
         </div>
       );
     });
@@ -55,9 +61,11 @@ const Cart = (props) => {
   return (
     <div className="cart-container">
       <div className="cart">{cartItemsOutput}</div>
-      <div className="order-summary">
-        <OrderSummary action="proceed to checkout" />
-      </div>
+      {!props.checkout && (
+        <div className="order-summary">
+          <OrderSummary action="proceed to checkout" />
+        </div>
+      )}
     </div>
   );
 };

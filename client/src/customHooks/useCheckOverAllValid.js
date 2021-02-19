@@ -6,7 +6,6 @@ const useCheckOverAllValid = (obj) => {
     for (let key in obj) {
       overallValid.push(obj[key].valid);
     }
-    console.log(obj);
     setAllValid(overallValid.every((valid) => valid));
   }, [obj]);
   return [allValid];

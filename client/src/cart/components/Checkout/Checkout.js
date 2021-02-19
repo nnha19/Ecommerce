@@ -5,6 +5,7 @@ import "./Checkout.css";
 import OrderSummary from "../Cart/OrderSummary/OrderSummary";
 import FormInput from "../../../share/components/FormInput/FormInput";
 import useCheckOverAllValid from "../../../customHooks/useCheckOverAllValid";
+import Cart from "../Cart/Cart";
 
 const Checkout = (props) => {
   const [orderInfos, setOrderInfos] = useState({
@@ -150,6 +151,7 @@ const Checkout = (props) => {
           />
         </div>
       </div>
+      <Cart />
     </div>
   );
 };

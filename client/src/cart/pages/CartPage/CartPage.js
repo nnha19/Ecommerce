@@ -8,11 +8,7 @@ import Context from "../../../contexts/context";
 
 const CartPage = (props) => {
   const context = useContext(Context);
-  const [respData, loading, error, fetchData, setRespData] = useHttp([]);
-
-  useEffect(() => {
-    fetchData(`http://localhost:5000/cart/${context.curUser.userId}`, "get");
-  }, []);
+  const cartItemData = context.cartItemData;
 
   const updateQuantityHandler = (type, cartItem) => {
     const data = {
@@ -22,42 +18,42 @@ const CartPage = (props) => {
       (type === "add" && cartItem.features.inStock > cartItem.pickedQty) ||
       (type === "subtract" && cartItem.pickedQty > 1)
     ) {
-      fetchData(
+      context.cartItemData.fetchData(
         `http://localhost:5000/cart/update-cart-item/${cartItem._id}/${context.curUser.userId}`,
         "put",
         data
       );
     }
-    setTimeout(() => {
-      context.updateCartItemAmount();
-    }, 500);
+
+    context.updateCartItemAmount();
   };
 
   const updateRespDataHandler = (data) => {
-    const updatedRespData = respData.filter((d) => d._id !== data._id);
-    setRespData(updatedRespData);
+    const updatedRespData = cartItemData.cartItem.filter(
+      (d) => d._id !== data._id
+    );
+    cartItemData.setCartItem(updatedRespData);
   };
-  console.log(respData);
 
   let content;
-  console.log(respData);
-  if (!error) {
+  if (!cartItemData.error) {
     content = (
       <Cart
         updateRespData={(data) => updateRespDataHandler(data)}
         updateItemQuantity={(type, cartItem) =>
           updateQuantityHandler(type, cartItem)
         }
-        cartItems={respData}
       />
     );
   } else {
-    content = <ErrorMsg link={"/"} errorMsg={error} action="Go shopping" />;
+    content = (
+      <ErrorMsg link={"/"} errorMsg={cartItemData.error} action="Go shopping" />
+    );
   }
 
   return (
     <>
-      <Spinner show={loading} />
+      <Spinner show={cartItemData.loading} />
       {content}
     </>
   );

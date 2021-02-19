@@ -3,22 +3,17 @@ import React, { useState, useContext } from "react";
 import "./ProductDetailBody.css";
 import Button from "../../../../share/components/button/button";
 import ProductQuantity from "../ProductDetailBody/ProductQuantity/ProductQuantity";
-import { useHttp } from "../../../../customHooks/useHttp";
 import AddToCartDisplayMsg from "./AddToCartDisplayMsg/AddToCartDisplayMsg";
 import ATCErrorMsg from "./ATCErrorMsg/ATCErrorMsg";
 import Context from "../../../../contexts/context";
 
 const ProductDetailBody = (props) => {
   const context = useContext(Context);
+  const error =
+    context.cartItemData.error === "This item already exists in the cart"
+      ? context.cartItemData.error
+      : null;
 
-  const [
-    respData,
-    loading,
-    error,
-    fetchData,
-    setRespData,
-    setError,
-  ] = useHttp();
   const product = props.product;
 
   const [itemQuantity, setItemQuantity] = useState(product.pickedQty);
@@ -54,23 +49,23 @@ const ProductDetailBody = (props) => {
       image: product.image,
       pickedQty: itemQuantity,
     };
-    fetchData(
+    context.cartItemData.fetchData(
       `http://localhost:5000/cart/${context.curUser.userId}`,
       "post",
       data
     );
     setTimeout(() => {
       setAddedToCart(true);
-      context.updateCartItemAmount();
+      // context.updateCartItemAmount();
     }, 500);
   };
 
   const hideModalHandler = () => {
     setAddedToCart(false);
-    setError(false);
+    context.cartItemData.setError(false);
   };
 
-  console.log(error);
+  console.log(context);
 
   return (
     <>

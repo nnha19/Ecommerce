@@ -12,9 +12,18 @@ import CartPage from "./cart/pages/CartPage/CartPage";
 import Context from "./contexts/context";
 import Auth from "./share/components/auth/auth";
 import CheckoutPage from "./cart/pages/CheckoutPage/CheckoutPage";
+import { useHttp } from "./customHooks/useHttp";
 
 const App = () => {
   const history = useHistory();
+  const [
+    cartItem,
+    loading,
+    error,
+    fetchData,
+    setCartItem,
+    setError,
+  ] = useHttp();
   const [cartItemAmount, setCartItemAmount] = useState();
   const [login, setLogin] = useState(false);
   const [curUser, setCurUser] = useState();
@@ -24,21 +33,21 @@ const App = () => {
 
   const updateCartItemAmount = async () => {
     try {
-      const resp = await axios.get(
-        `http://localhost:5000/cart/${curUser.userId}`
-      );
-      const data = resp.data;
       let totalAmount = 0;
-      data.forEach((cartItem) => {
-        totalAmount += parseInt(cartItem.price) * cartItem.pickedQty;
-      });
-      const result = data
-        .map((d) => {
-          return d.pickedQty;
-        })
-        .reduce((pre, cur) => {
-          return pre + cur;
-        }, 0);
+      cartItem &&
+        cartItem.forEach((cartItem) => {
+          totalAmount += parseInt(cartItem.price) * cartItem.pickedQty;
+        });
+
+      const result =
+        cartItem &&
+        cartItem
+          .map((d) => {
+            return d.pickedQty;
+          })
+          .reduce((pre, cur) => {
+            return pre + cur;
+          }, 0);
       setCartItemAmount(result);
       setTotalAmount(totalAmount);
     } catch (err) {
@@ -47,10 +56,21 @@ const App = () => {
     }
   };
 
+  // if (cartItem && cartItem.length === 0) {
+  //   setError("No items in the cart.");
+  // }
+
   useEffect(() => {
-    console.log(curUser);
-    updateCartItemAmount();
+    if (curUser) {
+      fetchData(`http://localhost:5000/cart/${curUser.userId}`, "get");
+    } else {
+      setCartItem([]);
+    }
   }, [curUser]);
+
+  useEffect(() => {
+    updateCartItemAmount();
+  }, [curUser, cartItem]);
 
   const loginUserHandler = (customer, token) => {
     setCurUser(customer);
@@ -68,6 +88,8 @@ const App = () => {
   const toggleLoginHandler = () => {
     setLogin(!login);
   };
+
+  console.log(cartItem);
 
   return (
     <div className="wrapper">
@@ -103,6 +125,14 @@ const App = () => {
             toggleLogin: toggleLoginHandler,
             totalAmount,
             cartItemAmount,
+            cartItemData: {
+              cartItem,
+              loading,
+              error,
+              setCartItem: () => setCartItem(),
+              fetchData: (url, method, data) => fetchData(url, method, data),
+              setError: (boolean) => setError(boolean),
+            },
           }}
         >
           {authenticated && <Route path="/cart" exact component={CartPage} />}

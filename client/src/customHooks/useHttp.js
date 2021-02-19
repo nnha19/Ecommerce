@@ -15,6 +15,11 @@ export const useHttp = (initVal, url, method) => {
         method,
         data,
       });
+      if (resp.data.length === 0) {
+        setError("No items in the cart.");
+        setLoading(false);
+        return;
+      }
       setRespData(resp.data);
       setLoading(false);
     } catch (err) {
