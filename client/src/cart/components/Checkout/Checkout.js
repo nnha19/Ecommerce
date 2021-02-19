@@ -1,13 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import "./Checkout.css";
 
 import OrderSummary from "../Cart/OrderSummary/OrderSummary";
 import FormInput from "../../../share/components/FormInput/FormInput";
 import useCheckOverAllValid from "../../../customHooks/useCheckOverAllValid";
+import Context from "../../../contexts/context";
 import Cart from "../Cart/Cart";
 
 const Checkout = (props) => {
+  const history = useHistory();
+  const context = useContext(Context);
+  const { cartItem } = context.cartItemData;
+  console.log(cartItem);
+  useEffect(() => {
+    if ((cartItem && cartItem.length === 0) || !cartItem) {
+      history.push("/");
+    }
+  }, [cartItem]);
+
   const [orderInfos, setOrderInfos] = useState({
     name: {
       val: "",
@@ -47,7 +59,16 @@ const Checkout = (props) => {
     setOrderInfos(updateOrderInfos);
   };
 
-  console.log(orderInfos);
+  const placeOrderHandler = () => {
+    const order = {
+      customerInfos: {},
+      item: cartItem,
+    };
+    for (let key in orderInfos) {
+      order.customerInfos[key] = orderInfos[key].value;
+    }
+    console.log(order);
+  };
 
   return (
     <div className="checkout-container">
@@ -148,6 +169,7 @@ const Checkout = (props) => {
             disabled={!allValid}
             checkout={true}
             action="place order"
+            clicked={() => placeOrderHandler()}
           />
         </div>
       </div>

@@ -63,7 +63,10 @@ const OrderSummary = (props) => {
           </span>
         </li>
       </ul>
-      <SecondaryBtn disabled={props.disabled} clicked={clickedBtnHandler}>
+      <SecondaryBtn
+        disabled={props.disabled}
+        clicked={props.clicked || clickedBtnHandler}
+      >
         {props.action}
       </SecondaryBtn>
     </>
