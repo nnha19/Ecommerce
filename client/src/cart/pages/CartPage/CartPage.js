@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import Cart from "../../components/Cart/Cart";
 import Spinner from "../../../share/UI/Spinner/Spinner";
@@ -7,38 +7,28 @@ import ErrorMsg from "./ErrorMsg/ErrorMsg";
 import Context from "../../../contexts/context";
 
 const CartPage = (props) => {
+  const [cartItemError, setCartItemError] = useState(false);
   const context = useContext(Context);
   const cartItemData = context.cartItemData;
 
-  // const updateQuantityHandler = (type, cartItem) => {
-  //   const data = {
-  //     type,
-  //   };
-  //   if (
-  //     (type === "add" && cartItem.features.inStock > cartItem.pickedQty) ||
-  //     (type === "subtract" && cartItem.pickedQty > 1)
-  //   ) {
-  //     context.cartItemData.fetchData(
-  //       `http://localhost:5000/cart/update-cart-item/${cartItem._id}/${context.curUser.userId}`,
-  //       "put",
-  //       data
-  //     );
-  //   }
-  //   context.updateCartItemAmount();
-  // };
+  useEffect(() => {
+    console.log(cartItemData.cartItem);
+    if (
+      cartItemData.cartItem.length === 0 ||
+      !Array.isArray(cartItemData.cartItem)
+    ) {
+      setCartItemError("No items in the cart.");
+    }
+  }, [cartItemData.cartItem]);
+
+  console.log(cartItemError);
 
   let content;
-  if (!cartItemData.error) {
-    content = (
-      <Cart
-      // updateItemQuantity={(type, cartItem) =>
-      //   updateQuantityHandler(type, cartItem)
-      // }
-      />
-    );
+  if (!cartItemError) {
+    content = <Cart />;
   } else {
     content = (
-      <ErrorMsg link={"/"} errorMsg={cartItemData.error} action="Go shopping" />
+      <ErrorMsg link={"/"} errorMsg={cartItemError} action="Go shopping" />
     );
   }
 
