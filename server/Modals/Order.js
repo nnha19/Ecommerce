@@ -8,6 +8,7 @@ const orderSchema = new mongoose.Schema({
       region: String,
       city: String,
       houseNumber: String,
+      userId: String,
     },
     item: [{ type: mongoose.Schema.Types.ObjectId, ref: "Cart" }],
   },
