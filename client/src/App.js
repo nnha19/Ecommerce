@@ -33,13 +33,16 @@ const App = () => {
 
   const updateCartItemAmount = () => {
     let totalAmount = 0;
+    console.log(cartItem);
     cartItem &&
+      Array.isArray(cartItem) &&
       cartItem.forEach((cartItem) => {
         totalAmount += parseInt(cartItem.price) * cartItem.pickedQty;
       });
 
     const result =
       cartItem &&
+      Array.isArray(cartItem) &&
       cartItem
         .map((d) => {
           return d.pickedQty;
@@ -80,6 +83,8 @@ const App = () => {
     setLogin(!login);
   };
 
+  console.log(cartItem);
+
   return (
     <div className="wrapper">
       <Auth
@@ -118,7 +123,7 @@ const App = () => {
               cartItem,
               loading,
               error,
-              setCartItem: () => setCartItem(),
+              setCartItem: (cartItem) => setCartItem(cartItem),
               fetchData: (url, method, data) => fetchData(url, method, data),
               setError: (boolean) => setError(boolean),
             },

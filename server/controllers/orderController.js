@@ -34,9 +34,10 @@ const placeOrder = async (req, res, next) => {
     });
     newOrder.order.item = customerCart;
     await newOrder.save();
-    customer.order.push(newOrder);
+
+    customer.cart = [];
     await customer.save();
-    res.status(200).json(customer);
+    res.status(200).json(newOrder);
   } catch (err) {
     console.log(err);
     res.status(400).json(err);
