@@ -65,8 +65,6 @@ const ProductDetailBody = (props) => {
     context.cartItemData.setError(false);
   };
 
-  console.log(context);
-
   return (
     <>
       {addedToCart && (

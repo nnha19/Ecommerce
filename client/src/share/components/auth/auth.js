@@ -60,8 +60,6 @@ const Auth = (props) => {
     }
   };
 
-  console.log(loginVals);
-
   useEffect(() => {
     customer && props.loginUser(customer.user, customer.token);
   }, [customer]);

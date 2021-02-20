@@ -29,8 +29,6 @@ const ProductDetailPage = (props) => {
     setProductDetail({ ...productDetail, colors: productDetailColors });
   };
 
-  console.log(productDetail);
-
   useEffect(() => {
     fetchData(`http://localhost:5000/products/${productId}`, "get");
   }, []);

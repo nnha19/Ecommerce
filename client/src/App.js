@@ -80,8 +80,6 @@ const App = () => {
     setLogin(!login);
   };
 
-  console.log(curUser);
-
   return (
     <div className="wrapper">
       <Auth
