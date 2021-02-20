@@ -23,7 +23,7 @@ const createCustomer = async (req, res, next) => {
       res.status(200).json({
         message: "Account successfully created",
         token,
-        user: { username: customer.username, userId: customer._id },
+        user: { username: newCustomer.username, userId: newCustomer._id },
       });
     }
   } catch (err) {
