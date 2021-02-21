@@ -26,10 +26,11 @@ const RemoveItemFromCart = (props) => {
       `http://localhost:5000/cart/${props.item._id}/${context.curUser.userId}`,
       "delete"
     );
-    if (!error) {
-      context.cartItemData.setCartItem(props.item);
-      // props.updateRespData(props.item);
-    }
+    console.log(error);
+    // if (!error) {
+    //   context.cartItemData.setCartItem(props.item);
+    // props.updateRespData(props.item);
+    // }
   };
 
   return (

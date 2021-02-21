@@ -33,7 +33,6 @@ const App = () => {
 
   const updateCartItemAmount = () => {
     let totalAmount = 0;
-    console.log(cartItem);
     cartItem &&
       Array.isArray(cartItem) &&
       cartItem.forEach((cartItem) => {
@@ -82,8 +81,6 @@ const App = () => {
   const toggleLoginHandler = () => {
     setLogin(!login);
   };
-
-  console.log(cartItem);
 
   return (
     <div className="wrapper">

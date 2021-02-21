@@ -12,17 +12,16 @@ const CartPage = (props) => {
   const cartItemData = context.cartItemData;
 
   useEffect(() => {
-    console.log(cartItemData.cartItem);
+    console.log(Array.isArray(cartItemData.cartItem));
     if (
       !cartItemData.cartItem ||
       cartItemData.cartItem.length === 0 ||
       !Array.isArray(cartItemData.cartItem)
     ) {
+      console.log("nonsense");
       setCartItemError("No items in the cart.");
     }
   }, [cartItemData.cartItem]);
-
-  console.log(cartItemError);
 
   let content;
   if (!cartItemError) {

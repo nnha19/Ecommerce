@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 import "./ProductDetailBody.css";
 import Button from "../../../../share/components/button/button";
@@ -8,6 +9,7 @@ import ATCErrorMsg from "./ATCErrorMsg/ATCErrorMsg";
 import Context from "../../../../contexts/context";
 
 const ProductDetailBody = (props) => {
+  const history = useHistory();
   const context = useContext(Context);
   const error =
     context.cartItemData.error === "This item already exists in the cart"
@@ -25,7 +27,7 @@ const ProductDetailBody = (props) => {
       : setItemQuantity((prev) => prev - 1);
   };
 
-  const addToCartHandler = () => {
+  const addToCartHandler = (type) => {
     if (!context.authenticated) {
       context.toggleLogin();
       return;
@@ -54,10 +56,12 @@ const ProductDetailBody = (props) => {
       "post",
       data
     );
-    setTimeout(() => {
-      setAddedToCart(true);
-      // context.updateCartItemAmount();
-    }, 500);
+
+    setAddedToCart(true);
+    if (type === "buy") {
+      console.log("Hello");
+      history.push("/checkout");
+    }
   };
 
   const hideModalHandler = () => {
@@ -95,7 +99,12 @@ const ProductDetailBody = (props) => {
           >
             Add To Cart
           </Button>
-          <Button className="product-detail__btn checkout-btn">Checkout</Button>
+          <Button
+            clicked={() => addToCartHandler("buy")}
+            className="product-detail__btn checkout-btn"
+          >
+            Buy Now
+          </Button>
         </div>
       </div>
     </>
