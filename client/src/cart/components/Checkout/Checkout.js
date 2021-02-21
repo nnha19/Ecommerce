@@ -21,6 +21,15 @@ const Checkout = (props) => {
 
   const { cartItem } = context.cartItemData;
 
+  useEffect(() => {
+    if (
+      (!cartItem || cartItem.length === 0 || !Array.isArray(cartItem)) &&
+      !placedOrder
+    ) {
+      history.push("/");
+    }
+  }, [cartItem]);
+
   const [orderInfos, setOrderInfos] = useState({
     name: {
       val: "",
