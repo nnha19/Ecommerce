@@ -10,6 +10,7 @@ import Context from "../../../contexts/context";
 import Cart from "../Cart/Cart";
 import { useHttp } from "../../../customHooks/useHttp";
 import Spinner from "../../../share/UI/Spinner/Spinner";
+import CheckoutModal from "./CheckoutModal/CheckoutModal";
 
 const Checkout = (props) => {
   const [newOrder, loading, error, fetchData, setNewOrder] = useHttp();
@@ -19,15 +20,6 @@ const Checkout = (props) => {
   const context = useContext(Context);
 
   const { cartItem } = context.cartItemData;
-  useEffect(() => {
-    if (
-      (cartItem && cartItem.length === 0) ||
-      !cartItem ||
-      !Array.isArray(cartItem)
-    ) {
-      history.push("/");
-    }
-  }, [cartItem]);
 
   const [orderInfos, setOrderInfos] = useState({
     name: {
@@ -68,8 +60,6 @@ const Checkout = (props) => {
     setOrderInfos(updateOrderInfos);
   };
 
-  console.log(newOrder);
-
   const placeOrderHandler = () => {
     const order = {
       customerInfos: {},
@@ -89,10 +79,9 @@ const Checkout = (props) => {
     newOrder && setPlacedOrder(newOrder.message);
   }, [newOrder]);
 
-  console.log(placedOrder);
-
   return (
     <>
+      <CheckoutModal curUser={context.curUser} placedOrder={placedOrder} />
       <Spinner show={loading} />
       <div className="checkout-container">
         <div className="checkout">
