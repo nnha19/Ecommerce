@@ -13,6 +13,7 @@ import Spinner from "../../../share/UI/Spinner/Spinner";
 
 const Checkout = (props) => {
   const [newOrder, loading, error, fetchData, setNewOrder] = useHttp();
+  const [placedOrder, setPlacedOrder] = useState(false);
 
   const history = useHistory();
   const context = useContext(Context);
@@ -67,6 +68,8 @@ const Checkout = (props) => {
     setOrderInfos(updateOrderInfos);
   };
 
+  console.log(newOrder);
+
   const placeOrderHandler = () => {
     const order = {
       customerInfos: {},
@@ -83,9 +86,10 @@ const Checkout = (props) => {
 
   useEffect(() => {
     newOrder && context.cartItemData.setCartItem();
+    newOrder && setPlacedOrder(newOrder.message);
   }, [newOrder]);
 
-  console.log(newOrder);
+  console.log(placedOrder);
 
   return (
     <>

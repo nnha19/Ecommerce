@@ -37,7 +37,10 @@ const placeOrder = async (req, res, next) => {
 
     customer.cart = [];
     await customer.save();
-    res.status(200).json(newOrder);
+    res.status(200).json({
+      message: "Your order has been submitted successfully.",
+      newOrder,
+    });
   } catch (err) {
     console.log(err);
     res.status(400).json(err);

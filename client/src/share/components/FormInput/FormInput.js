@@ -3,7 +3,9 @@ import React, { useState, useReducer, useEffect } from "react";
 import "./FormInput.css";
 
 const checkValidity = (val, valType) => {
-  if (valType.type === "REQUIRE") {
+  if (!valType) {
+    return true;
+  } else if (valType.type === "REQUIRE") {
     return val.length > 0;
   } else if (valType.type === "MIN_LENGTH") {
     return val.length >= valType.amount;

@@ -14,6 +14,7 @@ const CartPage = (props) => {
   useEffect(() => {
     console.log(cartItemData.cartItem);
     if (
+      !cartItemData.cartItem ||
       cartItemData.cartItem.length === 0 ||
       !Array.isArray(cartItemData.cartItem)
     ) {
