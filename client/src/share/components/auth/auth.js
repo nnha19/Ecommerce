@@ -19,7 +19,7 @@ const Auth = (props) => {
     password: "",
   });
 
-  const [allValid] = useCheckOverAllValid(loginVals);
+  const [allValid] = useCheckOverAllValid(loginVals, signUp);
 
   const changeLoginValHandler = (val, objKey) => {
     setLoginVals({
