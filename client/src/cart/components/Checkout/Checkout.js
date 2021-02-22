@@ -92,7 +92,7 @@ const Checkout = (props) => {
   return (
     <>
       <CheckoutModal curUser={context.curUser} placedOrder={placedOrder} />
-      <Spinner show={loading || cartItem.loading} />
+      <Spinner show={loading || context.cartItemData.loading} />
       <div className="checkout-container">
         <div className="checkout">
           <div className="checkout__delivery-infos">

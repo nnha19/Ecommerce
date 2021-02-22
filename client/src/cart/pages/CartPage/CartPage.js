@@ -16,7 +16,6 @@ const CartPage = (props) => {
       cartItemData.cartItem.length === 0 ||
       !Array.isArray(cartItemData.cartItem)
     ) {
-      console.log("nonsense");
       setCartItemError("No items in the cart.");
     }
   }, [cartItemData.cartItem]);
