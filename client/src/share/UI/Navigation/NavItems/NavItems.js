@@ -5,6 +5,8 @@ import Logo from "../../../../images/logo.png";
 import Context from "../../../../contexts/context";
 import Login from "./Auth/Login";
 import Logout from "./Auth/Logout/Logout";
+import Customer from "./Customer/Customer";
+import Category from "./Category/Category";
 
 import "./NavItems.css";
 
@@ -37,18 +39,8 @@ const NavItems = (props) => {
         <i className="fas fa-search nav__icon"></i>
       </form>
       <div className="nav__items">
-        {!context.authenticated && <Login />}
-        {context.authenticated && <Logout />}
-        <NavLink className="nav__link" to="/">
-          <li className="nav__item">All</li>
-        </NavLink>
-        <NavLink className="nav__link" to="/product/filter/male">
-          <li className="nav__item">Men</li>
-        </NavLink>
-        <NavLink className="nav__link" to="/product/filter/female">
-          <li className="nav__item">Women</li>
-        </NavLink>
-
+        {!context.authenticated ? <Login /> : <Logout />}
+        <Category />
         <i
           onClick={goToCartHandler}
           className="shopping-cart fas fa-shopping-cart"
@@ -59,6 +51,7 @@ const NavItems = (props) => {
             </span>
           ) : null}
         </i>
+        <Customer />
       </div>
     </>
   );

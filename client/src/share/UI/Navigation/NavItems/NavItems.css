@@ -35,7 +35,6 @@
 .nav__icon {
   cursor: pointer;
   background: rgba(128, 128, 128, 0.589);
-
   display: flex;
   align-items: center;
   padding: 6px;
@@ -48,7 +47,7 @@
 .nav__items {
   display: flex;
   justify-content: space-evenly;
-  flex-basis: 20%;
+  flex-basis: 25%;
 }
 .nav__link {
   text-decoration: none;
