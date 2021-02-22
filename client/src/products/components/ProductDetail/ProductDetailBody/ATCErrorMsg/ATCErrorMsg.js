@@ -9,6 +9,7 @@ const ATCErrorMsg = (props) => {
   const history = useHistory();
   const continueShoppingHandler = () => {
     history.push("/");
+    props.setError(false);
   };
   return (
     <Modal

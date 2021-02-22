@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import "./ProductDetailBody.css";
@@ -11,10 +11,7 @@ import Context from "../../../../contexts/context";
 const ProductDetailBody = (props) => {
   const history = useHistory();
   const context = useContext(Context);
-  const error =
-    context.cartItemData.error === "This item already exists in the cart"
-      ? context.cartItemData.error
-      : null;
+  const error = context.cartItemData;
 
   const product = props.product;
 
@@ -56,12 +53,17 @@ const ProductDetailBody = (props) => {
       "post",
       data
     );
-
-    setAddedToCart(true);
     if (type === "buy") {
-      console.log("Hello");
-      history.push("/checkout");
+      error.error = null;
+      setTimeout(() => {
+        error.setError(false);
+        history.push("/checkout");
+      }, 500);
+      return;
     }
+    setTimeout(() => {
+      setAddedToCart(true);
+    }, 500);
   };
 
   const hideModalHandler = () => {
@@ -81,7 +83,11 @@ const ProductDetailBody = (props) => {
         />
       )}
       {error && (
-        <ATCErrorMsg hideModal={() => hideModalHandler()} error={error} />
+        <ATCErrorMsg
+          hideModal={() => hideModalHandler()}
+          error={error.error}
+          setError={error.setError}
+        />
       )}
       <div className="product-detail__body">
         <p className="product-detail__price">{product.price} KS</p>

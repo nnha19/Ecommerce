@@ -11,7 +11,7 @@ const AddToCartDisplayMsg = (props) => {
   };
 
   return (
-    !props.error && (
+    !props.error.error && (
       <Modal
         hideModal={props.hideModal}
         title={`${props.amount} ${props.name} added to cart`}

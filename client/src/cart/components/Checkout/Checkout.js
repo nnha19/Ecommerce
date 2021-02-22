@@ -11,6 +11,7 @@ import Cart from "../Cart/Cart";
 import { useHttp } from "../../../customHooks/useHttp";
 import Spinner from "../../../share/UI/Spinner/Spinner";
 import CheckoutModal from "./CheckoutModal/CheckoutModal";
+import CheckoutForm from "./CheckoutForm/CheckoutForm";
 
 const Checkout = (props) => {
   const [newOrder, loading, error, fetchData, setNewOrder] = useHttp();
@@ -91,13 +92,14 @@ const Checkout = (props) => {
   return (
     <>
       <CheckoutModal curUser={context.curUser} placedOrder={placedOrder} />
-      <Spinner show={loading} />
+      <Spinner show={loading || cartItem.loading} />
       <div className="checkout-container">
         <div className="checkout">
           <div className="checkout__delivery-infos">
             <h4>Delivery Information</h4>
             <form className="checkout__form">
               <div className="person-infos">
+                <CheckoutForm />
                 <FormInput
                   id="name"
                   validRules={{ type: "REQUIRE" }}
