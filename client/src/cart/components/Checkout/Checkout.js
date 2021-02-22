@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import "./Checkout.css";
 
 import OrderSummary from "../Cart/OrderSummary/OrderSummary";
-import FormInput from "../../../share/components/FormInput/FormInput";
 import useCheckOverAllValid from "../../../customHooks/useCheckOverAllValid";
 import Context from "../../../contexts/context";
 import Cart from "../Cart/Cart";
@@ -97,95 +96,9 @@ const Checkout = (props) => {
         <div className="checkout">
           <div className="checkout__delivery-infos">
             <h4>Delivery Information</h4>
-            <form className="checkout__form">
-              <div className="person-infos">
-                <CheckoutForm />
-                <FormInput
-                  id="name"
-                  validRules={{ type: "REQUIRE" }}
-                  errorMsg="This field can't be empty"
-                  inputCls="checkout__input"
-                  changeLoginVal={(val, label) =>
-                    changeLoginValHandler(val, label)
-                  }
-                  elementType="input"
-                  label="Name"
-                  type="text"
-                  labelCls="checkout__label"
-                  containerCls="checkout-input-container"
-                />
-                <FormInput
-                  id="phNumber"
-                  validRules={{ type: "REQUIRE" }}
-                  errorMsg="This field can't be empty"
-                  containerCls="checkout-input-container"
-                  inputCls="checkout__input"
-                  changeLoginVal={(val, label) =>
-                    changeLoginValHandler(val, label)
-                  }
-                  elementType="input"
-                  label="Ph Number"
-                  type="number"
-                  labelCls="checkout__label"
-                />
-              </div>
-              <div className="address">
-                <FormInput
-                  id="region"
-                  validRules={{ type: "REQUIRE" }}
-                  errorMsg="This field can't be empty"
-                  containerCls="checkout-input-container"
-                  inputCls="checkout__input"
-                  changeLoginVal={(val, label) =>
-                    changeLoginValHandler(val, label)
-                  }
-                  elementType="input"
-                  label="Region"
-                  type="text"
-                  labelCls="checkout__label"
-                />
-                <FormInput
-                  id="city"
-                  validRules={{ type: "REQUIRE" }}
-                  errorMsg="This field can't be empty"
-                  containerCls="checkout-input-container"
-                  inputCls="checkout__input"
-                  changeLoginVal={(val, label) =>
-                    changeLoginValHandler(val, label)
-                  }
-                  elementType="input"
-                  label="City"
-                  type="text"
-                  labelCls="checkout__label"
-                />
-                <FormInput
-                  id="houseNumber"
-                  validRules={{ type: "REQUIRE" }}
-                  errorMsg="This field can't be empty"
-                  containerCls="checkout-input-container"
-                  inputCls="checkout__input"
-                  changeLoginVal={(val, label) =>
-                    changeLoginValHandler(val, label)
-                  }
-                  elementType="input"
-                  label="House Number"
-                  type="text"
-                  labelCls="checkout__label"
-                />
-                <FormInput
-                  id="message"
-                  containerCls="checkout-input-container"
-                  inputCls="checkout__input"
-                  changeLoginVal={(val, label) =>
-                    changeLoginValHandler(val, label)
-                  }
-                  elementType="textarea"
-                  label="Message(Optional)"
-                  type="text"
-                  labelCls="checkout__label"
-                />
-              </div>
-            </form>
+            <CheckoutForm
+              changeLoginVal={(val, label) => changeLoginValHandler(val, label)}
+            />
           </div>
           <div className="order-summary">
             <OrderSummary
