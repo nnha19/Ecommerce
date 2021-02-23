@@ -16,21 +16,24 @@ const CustomerOrderPage = (props) => {
     setError,
   ] = useHttp([]);
 
-  //   useEffect(() => {
-  //     fetchData(`http://localhost:5000/order/${context.curUser.userId}`);
-  //   }, []);
+  useEffect(() => {
+    fetchData(`http://localhost:5000/order/${context.curUser.userId}`);
+  }, []);
+
   useEffect(() => {
     if (customerOrder.length === 0) {
       setError("You haven't ordered anything yet.");
-      return;
+    } else {
+      setError(null);
     }
   }, [customerOrder]);
-  console.log(error);
+
+  console.log(customerOrder);
 
   return (
     <>
       <Spinner show={loading} />
-      <CustomerOrder error={error} />
+      <CustomerOrder order={customerOrder} error={error} />
     </>
   );
 };
