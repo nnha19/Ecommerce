@@ -10,6 +10,10 @@ const AddToCartDisplayMsg = (props) => {
     history.push("/");
   };
 
+  const goToCheckoutHandler = () => {
+    history.push("/checkout");
+  };
+
   return (
     !props.error.error && (
       <Modal
@@ -18,7 +22,12 @@ const AddToCartDisplayMsg = (props) => {
         modalShow={props.addedToCart}
         body={
           <>
-            <Button style={{ marginRight: "1rem" }}>Checkout</Button>
+            <Button
+              clicked={goToCheckoutHandler}
+              style={{ marginRight: "1rem" }}
+            >
+              Checkout
+            </Button>
             <Button clicked={continueShoppingHandler}>Continue Shopping</Button>
           </>
         }

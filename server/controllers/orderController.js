@@ -2,6 +2,18 @@ const Customer = require("../Modals/Customer");
 const Cart = require("../Modals/Cart");
 const Order = require("../Modals/Order");
 
+const getAllOrders = async (req, res, next) => {
+  Order.find({})
+    .populate("order.item")
+    .exec((err, order) => {
+      if (err) {
+        res.status(400).json(err);
+      } else {
+        res.status(200).json(order);
+      }
+    });
+};
+
 const getAllOrdersByUserId = async (req, res, next) => {
   try {
     const { uid } = req.params;
@@ -47,5 +59,6 @@ const placeOrder = async (req, res, next) => {
   }
 };
 
+exports.getAllOrders = getAllOrders;
 exports.getAllOrdersByUserId = getAllOrdersByUserId;
 exports.placeOrder = placeOrder;
