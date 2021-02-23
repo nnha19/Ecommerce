@@ -37,3 +37,6 @@
   text-align: center;
   margin-bottom: 1rem;
 }
+.order__item-price {
+  margin: 0.4rem 0;
+}

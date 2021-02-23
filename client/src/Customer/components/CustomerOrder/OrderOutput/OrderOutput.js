@@ -10,16 +10,18 @@ const OrderOutput = (props) => {
           <img className="cart__item-img" src={order.image} />
           <div className="order__body">
             <h4>{order.brand}</h4>
-            <p>{order.price}</p>
+            <p className="cart__item-price order__item-price">
+              {order.price} KS
+            </p>
             <span>Qty :{order.pickedQty}</span>
           </div>
         </div>
       );
     });
     const objKeys = Object.keys(order.order.personInfos);
-    const list = objKeys.map((objKey) => {
+    const list = objKeys.map((objKey, i) => {
       return (
-        <li className="order__list-item">
+        <li key={i} className="order__list-item">
           <span className="order__list-key">{objKey}</span>
           <span className="order__list-value">
             {order.order.personInfos[objKey]}
@@ -28,7 +30,7 @@ const OrderOutput = (props) => {
       );
     });
     return (
-      <div className="order">
+      <div key={order._id} className="order">
         <div className="order__item">
           <h3 className="order__title">Order Items</h3>
           {orderItems}
