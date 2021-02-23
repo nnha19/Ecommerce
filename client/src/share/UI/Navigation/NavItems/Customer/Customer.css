@@ -1,0 +1,42 @@
+.customer {
+  cursor: pointer;
+  position: relative;
+}
+.customer__username {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  background: purple;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  color: white;
+  text-transform: uppercase;
+}
+.customer__modal {
+  box-shadow: 2px 2px 2px 2px black;
+  margin-top: 1rem;
+  position: absolute;
+  left: -10rem;
+  background: white;
+  width: 14rem;
+}
+.customer__lists {
+  list-style: none;
+  font-size: 1rem;
+}
+.customer__list {
+  margin-bottom: 0.4rem;
+  padding: 1rem;
+}
+.customer__list:hover {
+  background: rgba(128, 128, 128, 0.37);
+}
+.account {
+  margin-bottom: 0;
+}
+.account:hover {
+  cursor: auto;
+  background: none;
+}
