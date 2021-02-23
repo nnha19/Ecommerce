@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import "./Category.css";
 
 const Category = (props) => {
-  const [showCategory, setShowCategory] = useState(true);
+  const [showCategory, setShowCategory] = useState(false);
 
   const showCategoryHandler = () => {
     setShowCategory(!showCategory);

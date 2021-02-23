@@ -51,9 +51,7 @@ const NavItems = (props) => {
             </span>
           ) : null}
         </i>
-        {context.authenticated && (
-          <Customer username={context.curUser.username} />
-        )}
+        {context.authenticated && <Customer curUser={context.curUser} />}
       </div>
     </>
   );

@@ -12,6 +12,7 @@ import Context from "./contexts/context";
 import Auth from "./share/components/auth/auth";
 import CheckoutPage from "./cart/pages/CheckoutPage/CheckoutPage";
 import { useHttp } from "./customHooks/useHttp";
+import CustomerOrder from "./Customer/pages/CustomerOrderPage";
 
 const App = () => {
   const history = useHistory();
@@ -129,6 +130,7 @@ const App = () => {
           {authenticated && <Route path="/cart" exact component={CartPage} />}
           <Route exact path="/checkout" component={CheckoutPage} />
           <Route exact path="/product/:id" component={ProductDetailPage} />
+          <Route exact path="/order/:uid" component={CustomerOrder} />
         </Context.Provider>
       </Switch>
     </div>
