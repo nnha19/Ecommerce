@@ -6,12 +6,24 @@ import ProductDetailBody from "./ProductDetailBody/ProductDetailBody";
 import ProductFeatures from "./ProductFeatures/ProductFeatures";
 import Modal from "../../../share/UI/Modal/Modal";
 import Button from "../../../share/components/button/button";
+import ManiProduct from "./ManiProduct/ManiProduct";
 
 const ProductDetail = (props) => {
   const [showModal, setShowModal] = useState(false);
+  const [showDropDown, setShowDropDown] = useState(false);
 
   const hideModalHandler = () => {
     setShowModal(false);
+  };
+
+  const showDropDownHandler = (e) => {
+    setShowDropDown(true);
+  };
+
+  const hideDropDownHandler = (e) => {
+    if (!e.target.closest(".mani-product-container")) {
+      setShowDropDown(false);
+    }
   };
 
   let colorOptions;
@@ -50,10 +62,16 @@ const ProductDetail = (props) => {
         }
       />
       <div className="product-detail-container">
-        <div className="product-detail">
+        <div onClick={hideDropDownHandler} className="product-detail">
           <div className="product-detail__img-container">
             <img className="product-detail__img" src={product.image} />
-            <div className="product-colors">{colorOptions}</div>
+            <div className="product-detail__edit">
+              <div className="product-colors">{colorOptions}</div>
+              <ManiProduct
+                showDropDown={showDropDown}
+                showDropDownHandler={showDropDownHandler}
+              />
+            </div>
           </div>
           <ProductDetailBody product={product} />
           <ProductFeatures productFeatures={product.features} />

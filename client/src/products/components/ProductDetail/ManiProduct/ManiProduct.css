@@ -1,0 +1,72 @@
+.mani-product-container {
+  position: relative;
+}
+.mani-product {
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+.mani-product:hover {
+  background: grey;
+}
+.mani-product__btn {
+  display: inline-block;
+  height: 4px;
+  width: 4px;
+  background: black;
+  position: relative;
+  opacity: 0.7;
+  border-radius: 50%;
+}
+.mani-product__btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.4rem;
+  background: black;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+.mani-product__btn::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0.4rem;
+  background: black;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+
+.drop-down {
+  position: absolute;
+  right: -8rem;
+  top: 0.4rem;
+  background: white;
+  box-shadow: 0 4px 4px grey;
+  width: 8rem;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 99;
+}
+.drop-down__items {
+  padding: 0.4rem;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+.drop-down__items:hover {
+  background: green;
+  color: white;
+}
+.show-dropdown {
+  opacity: 1;
+  visibility: visible;
+}

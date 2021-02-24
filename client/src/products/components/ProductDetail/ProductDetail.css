@@ -16,6 +16,12 @@
   height: 80%;
 }
 
+.product-detail__edit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .product-detail__price {
   font-size: 1.8rem;
   color: green;
