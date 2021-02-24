@@ -15,7 +15,8 @@ import { useHttp } from "./customHooks/useHttp";
 import CustomerOrder from "./Customer/pages/CustomerOrderPage";
 import AdminNavBar from "./admin/components/NavBar/NavBar";
 import AllOrdersPage from "./admin/pages/AllOrdersPage";
-import CreateProduct from "./admin/pages/CreateProductPage";
+import CreateProductPage from "./admin/pages/CreateProductPage";
+import EditProductPage from "./admin/pages/EditProductPage";
 
 const App = () => {
   const history = useHistory();
@@ -138,10 +139,20 @@ const App = () => {
           <Route exact path="/product/:id" component={ProductDetailPage} />
           <Route exact path="/order/:uid" component={CustomerOrder} />
           <Route exact path="/admin/order/:uid" component={AllOrdersPage} />
-          {
-           curUser && curUser.admin &&
-           <Route exact path="/admin/product/:uid" component={CreateProduct} />
-          }
+          {curUser && curUser.admin && (
+            <Route
+              exact
+              path="/admin/product/create"
+              component={CreateProductPage}
+            />
+          )}
+          {curUser && curUser.admin && (
+            <Route
+              exact
+              path="/admin/product/edit"
+              component={EditProductPage}
+            />
+          )}
         </Context.Provider>
       </Switch>
     </div>

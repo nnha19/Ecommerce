@@ -6,6 +6,7 @@
   background: green;
   line-height: 2;
   display: none;
+  z-index: 999;
 }
 .modal__title {
   padding: 1rem 2rem;

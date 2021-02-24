@@ -26,10 +26,12 @@ const inputReducer = (state, action) => {
 
 const FormInput = (props) => {
   const [inputVal, dispatch] = useReducer(inputReducer, {
-    value: "",
+    value: props.value ? props.value : "",
     valid: props.id === "message" && true,
     isTouched: false,
   });
+
+  console.log(inputVal.value);
 
   useEffect(() => {
     props.changeLoginVal(inputVal, props.id);
