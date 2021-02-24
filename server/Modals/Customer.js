@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const customerSchema = new mongoose.Schema({
   username: { type: String, required: true },
+  admin: Boolean,
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   cart: [{ type: mongoose.Schema.Types.ObjectId, ref: "Cart" }],

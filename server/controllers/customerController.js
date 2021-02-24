@@ -45,6 +45,7 @@ const loginCustomer = async (req, res, next) => {
           {
             userId: customer._id,
             username: customer.username,
+            admin: customer.admin,
           },
           "Secret_Key",
           { expiresIn: "1h" }
@@ -52,7 +53,11 @@ const loginCustomer = async (req, res, next) => {
         res.status(200).json({
           message: "Logged you in",
           token,
-          user: { username: customer.username, userId: customer._id },
+          user: {
+            username: customer.username,
+            userId: customer._id,
+            admin: customer.admin,
+          },
         });
       } else {
         res.status(400).json("Incorrect password.");

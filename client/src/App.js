@@ -13,6 +13,8 @@ import Auth from "./share/components/auth/auth";
 import CheckoutPage from "./cart/pages/CheckoutPage/CheckoutPage";
 import { useHttp } from "./customHooks/useHttp";
 import CustomerOrder from "./Customer/pages/CustomerOrderPage";
+import AdminNavBar from "./admin/components/NavBar/NavBar";
+import AllOrdersPage from "./admin/pages/AllOrdersPage";
 
 const App = () => {
   const history = useHistory();
@@ -83,6 +85,8 @@ const App = () => {
     setLogin(!login);
   };
 
+  console.log(curUser);
+
   return (
     <div className="wrapper">
       <Auth
@@ -100,6 +104,7 @@ const App = () => {
         }}
       >
         <Navigation />
+        {curUser && curUser.admin && <AdminNavBar curUser={curUser} />}
       </Context.Provider>
       <Switch>
         <Route exact path="/products" component={AllProducts} />
@@ -131,6 +136,7 @@ const App = () => {
           <Route exact path="/checkout" component={CheckoutPage} />
           <Route exact path="/product/:id" component={ProductDetailPage} />
           <Route exact path="/order/:uid" component={CustomerOrder} />
+          <Route exact path="/admin/order/:uid" component={AllOrdersPage} />
         </Context.Provider>
       </Switch>
     </div>

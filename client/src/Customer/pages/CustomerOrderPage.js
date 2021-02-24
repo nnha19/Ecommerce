@@ -28,8 +28,6 @@ const CustomerOrderPage = (props) => {
     }
   }, [customerOrder]);
 
-  console.log(customerOrder);
-
   return (
     <>
       <Spinner show={loading} />
