@@ -2,8 +2,6 @@ import React, { useState } from "react";
 
 import "./CreateProduct.css";
 
-import FormInput from "../../../share/components/FormInput/FormInput";
-import SecondaryBtn from "../../../share/components/SecondaryBtn/SecondaryBtn";
 import useCheckOverAllValid from "../../../customHooks/useCheckOverAllValid";
 import ProductForm from "./ProductForm/ProductForm";
 

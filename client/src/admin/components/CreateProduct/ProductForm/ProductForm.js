@@ -9,7 +9,7 @@ const ProductForm = (props) => {
       <div className="admin-form__inputs">
         <div className="admin-form__product">
           <FormInput
-            value={props.value}
+            value={props.brand}
             inputCls="checkout__input"
             errorMsg="This field is required"
             elementType="input"
@@ -20,6 +20,7 @@ const ProductForm = (props) => {
             changeLoginVal={(type, label) => props.changeLoginVal(type, label)}
           />
           <FormInput
+            value={props.price}
             inputCls="checkout__input"
             errorMsg="This field is required"
             elementType="input"
@@ -30,6 +31,7 @@ const ProductForm = (props) => {
             changeLoginVal={(type, label) => props.changeLoginVal(type, label)}
           />
           <FormInput
+            value={props.image}
             inputCls="checkout__input"
             errorMsg="This field is required"
             elementType="input"
@@ -40,6 +42,7 @@ const ProductForm = (props) => {
             changeLoginVal={(type, label) => props.changeLoginVal(type, label)}
           />
           <FormInput
+            value={props.description}
             inputCls="checkout__input"
             errorMsg="This field is required"
             elementType="textarea"
@@ -52,6 +55,7 @@ const ProductForm = (props) => {
         </div>
         <div className="admin-form__features">
           <FormInput
+            value={props.gender}
             inputCls="checkout__input"
             errorMsg="This field is required"
             elementType="input"
@@ -62,6 +66,7 @@ const ProductForm = (props) => {
             changeLoginVal={(type, label) => props.changeLoginVal(type, label)}
           />
           <FormInput
+            value={props.inStock}
             inputCls="checkout__input"
             errorMsg="This field is required"
             elementType="input"
@@ -72,6 +77,7 @@ const ProductForm = (props) => {
             changeLoginVal={(type, label) => props.changeLoginVal(type, label)}
           />
           <FormInput
+            value={props.cashOnDelivery}
             inputCls="checkout__input"
             errorMsg="This field is required"
             elementType="input"
@@ -82,6 +88,7 @@ const ProductForm = (props) => {
             changeLoginVal={(type, label) => props.changeLoginVal(type, label)}
           />
           <FormInput
+            value={props.warranty}
             inputCls="checkout__input"
             errorMsg="This field is required"
             elementType="input"
@@ -92,6 +99,7 @@ const ProductForm = (props) => {
             changeLoginVal={(type, label) => props.changeLoginVal(type, label)}
           />
           <FormInput
+            value={props.size}
             inputCls="checkout__input"
             errorMsg="This field is required"
             elementType="input"
@@ -102,6 +110,7 @@ const ProductForm = (props) => {
             changeLoginVal={(type, label) => props.changeLoginVal(type, label)}
           />
           <FormInput
+            value={props.return}
             inputCls="checkout__input"
             errorMsg="This field is required"
             elementType="input"

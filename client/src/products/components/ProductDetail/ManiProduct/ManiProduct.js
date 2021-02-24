@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 import "./ManiProduct.css";
 
+import Context from "../../../../contexts/context";
+
 const ManiProduct = (props) => {
+  const context = useContext(Context);
+
   const history = useHistory();
   const editProductHandler = () => {
-    history.push(`/admin/product/edit`);
+    history.push(`/admin/product/edit/${props.productId}`);
   };
 
   const deleteWarningHandler = () => {};

@@ -31,8 +31,6 @@ const FormInput = (props) => {
     isTouched: false,
   });
 
-  console.log(inputVal.value);
-
   useEffect(() => {
     props.changeLoginVal(inputVal, props.id);
   }, [inputVal.value]);

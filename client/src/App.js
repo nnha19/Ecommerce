@@ -149,7 +149,7 @@ const App = () => {
           {curUser && curUser.admin && (
             <Route
               exact
-              path="/admin/product/edit"
+              path="/admin/product/edit/:productId"
               component={EditProductPage}
             />
           )}

@@ -68,6 +68,7 @@ const ProductDetail = (props) => {
             <div className="product-detail__edit">
               <div className="product-colors">{colorOptions}</div>
               <ManiProduct
+                productId={product._id}
                 showDropDown={showDropDown}
                 showDropDownHandler={showDropDownHandler}
               />
