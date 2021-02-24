@@ -14,7 +14,10 @@ const NavBar = (props) => {
         >
           <li className="admin-nav__item">All Orders</li>
         </NavLink>
-        <NavLink className="nav__link" to={`/admin/product`}>
+        <NavLink
+          className="nav__link"
+          to={`/admin/product/${props.curUser.userId}`}
+        >
           <li className="admin-nav__item">Create Item</li>
         </NavLink>
       </ul>

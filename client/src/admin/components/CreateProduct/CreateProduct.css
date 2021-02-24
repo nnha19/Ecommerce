@@ -1,0 +1,13 @@
+.admin-form {
+  background: white;
+  padding: 2rem;
+}
+.admin-form__features {
+  flex: 1;
+}
+.admin-form__product {
+  flex: 1;
+}
+.admin-form__inputs {
+  display: flex;
+}

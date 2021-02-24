@@ -1,7 +1,5 @@
 const Product = require("../Modals/Product");
 
-const ErrorHandler = require("../handleError/handleError");
-
 const getAllProducts = async (req, res, next) => {
   try {
     const products = await Product.find({});
@@ -25,15 +23,18 @@ const getProductById = async (req, res, next) => {
 const createProduct = async (req, res, next) => {
   //Create Product
   try {
-    const {
-      brand,
-      price,
-      onSale,
-      description,
-      image,
-      colors,
-      features,
-    } = req.body;
+    const colors = [
+      { color: "blue", choosen: true },
+      {
+        color: "black",
+        choosen: false,
+      },
+      {
+        color: "green",
+        choosen: false,
+      },
+    ];
+    const { brand, price, onSale, description, image, features } = req.body;
     const product = await Product.create({
       brand,
       price,
@@ -41,6 +42,7 @@ const createProduct = async (req, res, next) => {
       description,
       image,
       colors,
+      pickedQty: 1,
       features,
     });
     res.status(200).json(product);
