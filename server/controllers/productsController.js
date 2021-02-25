@@ -64,7 +64,36 @@ const getProductByGender = async (req, res, next) => {
   }
 };
 
+const updateProduct = async (req, res, next) => {
+  try {
+    const productId = req.params.id;
+    const { brand, price, onSale, description, image, features } = req.body;
+    const updateProduct = await Product.findByIdAndUpdate(productId, {
+      brand,
+      price,
+      description,
+      image,
+      features,
+    });
+    res.status(200).json(updateProduct);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+
+const deleteProduct = async (req, res, next) => {
+  try {
+    const productId = req.params.id;
+    const deletedProduct = await Product.findByIdAndRemove(productId);
+    res.status(200).json(deletedProduct);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+
 exports.getAllProducts = getAllProducts;
 exports.getProductById = getProductById;
 exports.createProduct = createProduct;
 exports.getProductByGender = getProductByGender;
+exports.updateProduct = updateProduct;
+exports.deleteProduct = deleteProduct;
