@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import "./ProductDetail.css";
 
@@ -7,10 +7,13 @@ import ProductFeatures from "./ProductFeatures/ProductFeatures";
 import Modal from "../../../share/UI/Modal/Modal";
 import Button from "../../../share/components/button/button";
 import ManiProduct from "./ManiProduct/ManiProduct";
+import Context from "../../../contexts/context";
 
 const ProductDetail = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [showDropDown, setShowDropDown] = useState(false);
+
+  const context = useContext(Context);
 
   const hideModalHandler = () => {
     setShowModal(false);
@@ -70,11 +73,13 @@ const ProductDetail = (props) => {
             <img className="product-detail__img" src={product.image} />
             <div className="product-detail__edit">
               <div className="product-colors">{colorOptions}</div>
-              <ManiProduct
-                productId={product._id}
-                showDropDown={showDropDown}
-                showDropDownHandler={showDropDownHandler}
-              />
+              {context.curUser && context.curUser.admin && (
+                <ManiProduct
+                  productId={product._id}
+                  showDropDown={showDropDown}
+                  showDropDownHandler={showDropDownHandler}
+                />
+              )}
             </div>
           </div>
           <ProductDetailBody product={product} />

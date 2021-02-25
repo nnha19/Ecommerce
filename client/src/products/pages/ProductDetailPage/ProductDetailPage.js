@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useHttp } from "../../../customHooks/useHttp";
-import Spinner from "../../../share/UI/Spinner/Spinner";
-import axios from "axios";
 
 import ProductDetail from "../../components/ProductDetail/ProductDetail";
+import { useHttp } from "../../../customHooks/useHttp";
+import Spinner from "../../../share/UI/Spinner/Spinner";
 
 const ProductDetailPage = (props) => {
   const productId = useParams().id;
