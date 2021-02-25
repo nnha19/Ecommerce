@@ -21,7 +21,10 @@ const ProductDetail = (props) => {
   };
 
   const hideDropDownHandler = (e) => {
-    if (!e.target.closest(".mani-product-container")) {
+    if (
+      !e.target.closest(".mani-product-container") ||
+      e.target.closest(".delete")
+    ) {
       setShowDropDown(false);
     }
   };
