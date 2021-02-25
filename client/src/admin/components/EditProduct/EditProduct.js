@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import ProductForm from "../CreateProduct/ProductForm/ProductForm";
 import Spinner from "../../../share/UI/Spinner/Spinner";
@@ -7,6 +7,8 @@ import { useHttp } from "../../../customHooks/useHttp";
 import useCheckOverAllValid from "../../../customHooks/useCheckOverAllValid";
 
 const EditProduct = (props) => {
+  const history = useHistory();
+
   const [editProductVal, loading, error, fetchData] = useHttp();
   const [editedProduct, editIsLoading, editError, editData] = useHttp();
   const productId = useParams().productId;
@@ -83,8 +85,26 @@ const EditProduct = (props) => {
     setProductVal({ ...productVal, [label]: val });
   };
 
-  const editProductHandler = () => {
-    //send http request to edit
+  const editProductHandler = (e) => {
+    e.preventDefault();
+    const features = {
+      gender: productVal.gender.value,
+      inStock: productVal.inStock.value,
+      cashOnDelivery: productVal.cashOnDelivery.value,
+      warranty: productVal.warranty.value,
+      size: productVal.size.value,
+      brand: productVal.brand.value,
+      return: productVal.return.value,
+    };
+    const data = {
+      brand: productVal.brand.value,
+      price: productVal.price.value,
+      image: productVal.image.value,
+      description: productVal.description.value,
+      features,
+    };
+    editData(`http://localhost:5000/products/${productId}`, "put", data);
+    history.push(`/product/${productId}`);
   };
 
   return editProductVal ? (

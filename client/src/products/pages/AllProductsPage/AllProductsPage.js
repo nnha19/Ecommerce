@@ -8,7 +8,14 @@ import { useHttp } from "../../../customHooks/useHttp";
 import axios from "axios";
 
 const AllProductsPage = (props) => {
-  const [allProducts, loading, error, fetchData] = useHttp([]);
+  const [allProducts, loading, error, fetchData, setAllProducts] = useHttp([]);
+
+  const deleteProduct = (productId) => {
+    const remainProducts = allProducts.filter(
+      (product) => product._id !== productId
+    );
+    setAllProducts(remainProducts);
+  };
 
   useEffect(() => {
     fetchData("http://localhost:5000/products", "get");
