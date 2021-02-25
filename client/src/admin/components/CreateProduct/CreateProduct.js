@@ -51,7 +51,7 @@ const CreateProduct = (props) => {
       <div className="checkout-container">
         <h1>Create Product</h1>
         <ProductForm
-          creatingProduct={() => creatingProductHandler()}
+          creatingProduct={(e) => creatingProductHandler(e)}
           allValid={allValid}
           changeLoginVal={(val, label) => changeLoginValHandler(val, label)}
         />

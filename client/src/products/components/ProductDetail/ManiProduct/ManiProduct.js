@@ -3,11 +3,13 @@ import { useHistory } from "react-router-dom";
 
 import "./ManiProduct.css";
 
-import Context from "../../../../contexts/context";
 import DeleteWarning from "../../../../cart/components/Cart/RemoveItemFromCart/DeleteWarning/DeleteWarning";
+import { useHttp } from "../../../../customHooks/useHttp";
+import Spinner from "../../../../share/UI/Spinner/Spinner";
 
 const ManiProduct = (props) => {
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
+  const [deletedItem, loading, error, fetchData] = useHttp();
 
   const history = useHistory();
   const editProductHandler = () => {
@@ -21,10 +23,18 @@ const ManiProduct = (props) => {
   const cancelDeleteWarningHandler = () => {
     setShowDeleteWarning(false);
   };
-  const deleteProductHandler = () => {};
+
+  const deleteProductHandler = () => {
+    fetchData(`http://localhost:5000/products/${props.productId}`, "delete");
+    setShowDeleteWarning(false);
+    setTimeout(() => {
+      history.push("/");
+    }, 500);
+  };
 
   return (
     <>
+      <Spinner show={loading} />
       <DeleteWarning
         cartItemRemove={deleteProductHandler}
         deleteWarningCancel={cancelDeleteWarningHandler}
