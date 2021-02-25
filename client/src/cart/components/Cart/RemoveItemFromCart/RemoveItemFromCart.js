@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 
-import Modal from "../../../../share/UI/Modal/Modal";
 import "./RemoveItemFromCart.css";
-import Button from "../../../../share/components/button/button";
+
 import { useHttp } from "../../../../customHooks/useHttp";
 import Spinner from "../../../../share/UI/Spinner/Spinner";
 import Context from "../../../../contexts/context";
+import DeleteWarning from "./DeleteWarning/DeleteWarning";
 
 const RemoveItemFromCart = (props) => {
   const context = useContext(Context);
@@ -32,25 +32,10 @@ const RemoveItemFromCart = (props) => {
     <>
       <Spinner show={loading} />
       <>
-        <Modal
-          modalShow={showDeleteWarning}
-          title="Are you sure you want to remove this item?"
-          body={
-            <>
-              <Button
-                clicked={cartItemRemoveHandler}
-                className="cart__item-remove"
-              >
-                Sure
-              </Button>
-              <Button
-                clicked={deleteWarningCancelHandler}
-                className="cart__item-cancel"
-              >
-                Cancel
-              </Button>
-            </>
-          }
+        <DeleteWarning
+          cartItemRemove={cartItemRemoveHandler}
+          deleteWarningCancel={deleteWarningCancelHandler}
+          showDeleteWarning={showDeleteWarning}
         />
         <i
           title="Remove from cart"

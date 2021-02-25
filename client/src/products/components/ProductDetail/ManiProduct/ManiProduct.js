@@ -1,38 +1,59 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import "./ManiProduct.css";
 
 import Context from "../../../../contexts/context";
+import DeleteWarning from "../../../../cart/components/Cart/RemoveItemFromCart/DeleteWarning/DeleteWarning";
 
 const ManiProduct = (props) => {
-  const context = useContext(Context);
+  const [showDeleteWarning, setShowDeleteWarning] = useState(false);
 
   const history = useHistory();
   const editProductHandler = () => {
     history.push(`/admin/product/edit/${props.productId}`);
   };
 
-  const deleteWarningHandler = () => {};
+  const deleteWarningHandler = () => {
+    setShowDeleteWarning(true);
+  };
+
+  const cancelDeleteWarningHandler = () => {
+    setShowDeleteWarning(false);
+  };
+  const deleteProductHandler = () => {};
 
   return (
-    <div onClick={props.showDropDownHandler} className="mani-product-container">
-      <div className="mani-product">
-        <span className="mani-product__btn"></span>
-      </div>
+    <>
+      <DeleteWarning
+        cartItemRemove={deleteProductHandler}
+        deleteWarningCancel={cancelDeleteWarningHandler}
+        showDeleteWarning={showDeleteWarning}
+      />
       <div
-        className={`${
-          props.showDropDown ? "drop-down show-dropdown" : "drop-down"
-        }`}
+        onClick={props.showDropDownHandler}
+        className="mani-product-container"
       >
-        <div onClick={editProductHandler} className="drop-down__items edit">
-          Edit
+        <div className="mani-product">
+          <span className="mani-product__btn"></span>
         </div>
-        <div onClick={deleteWarningHandler} className="drop-down__items delete">
-          Delete
+        <div
+          className={`${
+            props.showDropDown ? "drop-down show-dropdown" : "drop-down"
+          }`}
+        >
+          <div onClick={editProductHandler} className="drop-down__items edit">
+            Edit
+          </div>
+          <div
+            onClick={deleteWarningHandler}
+            className="drop-down__items delete"
+          >
+            Delete
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

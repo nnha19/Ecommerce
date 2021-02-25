@@ -11,6 +11,7 @@ const EditProduct = (props) => {
 
   const [editProductVal, loading, error, fetchData] = useHttp();
   const [editedProduct, editIsLoading, editError, editData] = useHttp();
+
   const productId = useParams().productId;
 
   useEffect(() => {
@@ -104,12 +105,14 @@ const EditProduct = (props) => {
       features,
     };
     editData(`http://localhost:5000/products/${productId}`, "put", data);
-    history.push(`/product/${productId}`);
+    setTimeout(() => {
+      history.push(`/product/${productId}`);
+    }, 500);
   };
 
   return editProductVal ? (
     <>
-      <Spinner show={loading} />
+      <Spinner show={loading || editIsLoading} />
       <h1>Edit your product</h1>
       <ProductForm
         creatingProduct={editProductHandler}
