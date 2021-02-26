@@ -6,20 +6,23 @@ const getAllOrders = async (req, res, next) => {
   const { uid } = req.params;
 
   const user = await Customer.findById(uid);
-  console.log(user);
   if (!user.admin) {
     res.status(400).json("You don't have access to that route");
   } else {
-    Order.find({})
-      .populate("order.item")
-      .exec((err, order) => {
-        if (err) {
-          res.status(400).json(err);
-        } else {
-          console.log(order);
-          res.status(200).json(order);
-        }
-      });
+    if (req.admin) {
+      Order.find({})
+        .populate("order.item")
+        .exec((err, order) => {
+          if (err) {
+            res.status(400).json(err);
+          } else {
+            console.log(order);
+            res.status(200).json(order);
+          }
+        });
+    } else {
+      res.status(400).json("You are not authorized.");
+    }
   }
 };
 

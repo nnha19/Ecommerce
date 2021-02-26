@@ -1,11 +1,10 @@
 const jwt = require("jsonwebtoken");
 
 const authMiddleWare = (req, res, next) => {
+  console.log("auth middleware.");
   try {
     const token = req.headers.authorization;
-    console.log(`token is ${token}`);
     if (!token) {
-      console.log("Hello");
       res.status(400).json("You are not authorized");
     }
     checkToken = jwt.verify(token, "Secret_Key");

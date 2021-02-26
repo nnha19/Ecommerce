@@ -7,7 +7,6 @@ import Context from "../../contexts/context";
 
 const AllOrdersPage = (props) => {
   const context = useContext(Context);
-  console.log(context);
   const [
     allOrders,
     loading,
@@ -20,7 +19,9 @@ const AllOrdersPage = (props) => {
   useEffect(() => {
     fetchData(
       `http://localhost:5000/order/${context.curUser.userId}/admin`,
-      "get"
+      "get",
+      "",
+      context.token
     );
   }, []);
 
