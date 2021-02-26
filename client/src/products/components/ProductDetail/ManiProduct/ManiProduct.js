@@ -6,8 +6,11 @@ import "./ManiProduct.css";
 import DeleteWarning from "../../../../cart/components/Cart/RemoveItemFromCart/DeleteWarning/DeleteWarning";
 import { useHttp } from "../../../../customHooks/useHttp";
 import Spinner from "../../../../share/UI/Spinner/Spinner";
+import Context from "../../../../contexts/context";
 
 const ManiProduct = (props) => {
+  const context = useContext(Context);
+
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
   const [deletedItem, loading, error, fetchData] = useHttp();
 
@@ -25,7 +28,12 @@ const ManiProduct = (props) => {
   };
 
   const deleteProductHandler = () => {
-    fetchData(`http://localhost:5000/products/${props.productId}`, "delete");
+    fetchData(
+      `http://localhost:5000/products/${props.productId}`,
+      "delete",
+      "",
+      context.token
+    );
     setShowDeleteWarning(false);
     setTimeout(() => {
       history.push("/");

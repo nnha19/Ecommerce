@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams, useHistory } from "react-router-dom";
 
 import ProductForm from "../CreateProduct/ProductForm/ProductForm";
 import Spinner from "../../../share/UI/Spinner/Spinner";
 import { useHttp } from "../../../customHooks/useHttp";
 import useCheckOverAllValid from "../../../customHooks/useCheckOverAllValid";
+import Context from "../../../contexts/context";
 
 const EditProduct = (props) => {
+  const context = useContext(Context);
   const history = useHistory();
 
   const [editProductVal, loading, error, fetchData] = useHttp();
@@ -104,7 +106,12 @@ const EditProduct = (props) => {
       description: productVal.description.value,
       features,
     };
-    editData(`http://localhost:5000/products/${productId}`, "put", data);
+    editData(
+      `http://localhost:5000/products/${productId}`,
+      "put",
+      data,
+      context.token
+    );
     setTimeout(() => {
       history.push(`/product/${productId}`);
     }, 500);

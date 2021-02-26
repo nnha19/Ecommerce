@@ -9,6 +9,7 @@
   display: grid;
   grid-template-columns: 40% 1fr 1fr;
   gap: 1rem;
+  min-height:100vh;
 }
 
 .product-detail__img {

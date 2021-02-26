@@ -116,6 +116,7 @@ const App = () => {
         />
         <Context.Provider
           value={{
+            token,
             updateCartItemAmount: () => updateCartItemAmount(),
             curUser,
             authenticated,
