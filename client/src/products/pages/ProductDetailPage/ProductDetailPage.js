@@ -29,7 +29,10 @@ const ProductDetailPage = (props) => {
   };
 
   useEffect(() => {
-    fetchData(`http://localhost:5000/products/${productId}`, "get");
+    fetchData(
+      `${process.env.REACT_APP_BACKEND_URL}/products/${productId}`,
+      "get"
+    );
   }, []);
 
   return (

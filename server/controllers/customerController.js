@@ -17,7 +17,7 @@ const createCustomer = async (req, res, next) => {
       });
       const token = await jwt.sign(
         { userId: newCustomer._id, username },
-        "Secret_Key",
+        process.env.JWT_KEY,
         { expiresIn: "1h" }
       );
       res.status(200).json({
@@ -47,7 +47,7 @@ const loginCustomer = async (req, res, next) => {
             username: customer.username,
             admin: customer.admin,
           },
-          "Secret_Key",
+          process.env.JWT_KEY,
           { expiresIn: "1h" }
         );
         res.status(200).json({

@@ -18,7 +18,7 @@ const AllProductsPage = (props) => {
   };
 
   useEffect(() => {
-    fetchData("http://localhost:5000/products", "get");
+    fetchData(`${process.env.REACT_APP_BACKEND_URL}/products`, "get");
   }, []);
   return (
     <>

@@ -17,7 +17,7 @@ const EditProduct = (props) => {
   const productId = useParams().productId;
 
   useEffect(() => {
-    fetchData(`http://localhost:5000/products/${productId}`);
+    fetchData(`${process.env.REACT_APP_BACKEND_URL}/products/${productId}`);
   }, []);
 
   const [productVal, setProductVal] = useState({
@@ -107,7 +107,7 @@ const EditProduct = (props) => {
       features,
     };
     editData(
-      `http://localhost:5000/products/${productId}`,
+      `${process.env.REACT_APP_BACKEND_URL}/products/${productId}`,
       "put",
       data,
       context.token

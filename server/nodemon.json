@@ -1,0 +1,8 @@
+{
+  "env": {
+    "DB_USER": "webtek",
+    "DB_PASSWORD": "maymyopyin123",
+    "DB_NAME": "<dbname>",
+    "JWT_KEY": "Secret_Key"
+  }
+}

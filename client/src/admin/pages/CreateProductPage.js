@@ -20,7 +20,12 @@ const CreateProductPage = (props) => {
   ] = useHttp();
 
   const createProductHandler = (value) => {
-    fetchData(`http://localhost:5000/products`, "post", value, context.token);
+    fetchData(
+      `${process.env.REACT_APP_BACKEND_URL}/products`,
+      "post",
+      value,
+      context.token
+    );
     history.push("/");
   };
 

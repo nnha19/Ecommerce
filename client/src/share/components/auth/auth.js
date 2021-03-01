@@ -41,13 +41,13 @@ const Auth = (props) => {
     }
     const { username, email, password } = newObj;
     if (signUp) {
-      fetchData(`http://localhost:5000/customer`, "post", {
+      fetchData(`${process.env.REACT_APP_BACKEND_URL}/customer`, "post", {
         username,
         password,
         email,
       });
     } else {
-      fetchData(`http://localhost:5000/customer/login`, "post", {
+      fetchData(`${process.env.REACT_APP_BACKEND_URL}/customer/login`, "post", {
         email,
         password,
       });

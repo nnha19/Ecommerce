@@ -29,7 +29,7 @@ const ManiProduct = (props) => {
 
   const deleteProductHandler = () => {
     fetchData(
-      `http://localhost:5000/products/${props.productId}`,
+      `${process.env.REACT_APP_BACKEND_URL}/products/${props.productId}`,
       "delete",
       "",
       context.token

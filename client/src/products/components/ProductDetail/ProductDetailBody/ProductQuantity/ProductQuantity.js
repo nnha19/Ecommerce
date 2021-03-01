@@ -21,7 +21,7 @@ const ProductQuantity = (props) => {
       (type === "subtract" && cartItem.pickedQty > 1)
     ) {
       context.cartItemData.fetchData(
-        `http://localhost:5000/cart/update-cart-item/${cartItem._id}/${context.curUser.userId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/cart/update-cart-item/${cartItem._id}/${context.curUser.userId}`,
         "put",
         data
       );

@@ -17,7 +17,9 @@ const CustomerOrderPage = (props) => {
   ] = useHttp([]);
 
   useEffect(() => {
-    fetchData(`http://localhost:5000/order/${context.curUser.userId}`);
+    fetchData(
+      `${process.env.REACT_APP_BACKEND_URL}/order/${context.curUser.userId}`
+    );
   }, []);
 
   useEffect(() => {

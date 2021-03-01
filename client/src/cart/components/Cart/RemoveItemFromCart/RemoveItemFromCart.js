@@ -23,7 +23,7 @@ const RemoveItemFromCart = (props) => {
   const cartItemRemoveHandler = () => {
     setDeleteWarning(false);
     context.cartItemData.fetchData(
-      `http://localhost:5000/cart/${props.item._id}/${context.curUser.userId}`,
+      `${process.env.REACT_APP_BACKEND_URL}/cart/${props.item._id}/${context.curUser.userId}`,
       "delete"
     );
   };

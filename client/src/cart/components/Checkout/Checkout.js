@@ -77,7 +77,7 @@ const Checkout = (props) => {
       order.customerInfos[key] = orderInfos[key].value;
     }
     fetchData(
-      `http://localhost:5000/order/${context.curUser.userId}`,
+      `${process.env.REACT_APP_BACKEND_URL}/order/${context.curUser.userId}`,
       "post",
       order
     );

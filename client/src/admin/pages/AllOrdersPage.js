@@ -18,7 +18,7 @@ const AllOrdersPage = (props) => {
 
   useEffect(() => {
     fetchData(
-      `http://localhost:5000/order/${context.curUser.userId}/admin`,
+      `${process.env.REACT_APP_BACKEND_URL}/order/${context.curUser.userId}/admin`,
       "get",
       "",
       context.token

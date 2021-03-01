@@ -49,7 +49,7 @@ const ProductDetailBody = (props) => {
       pickedQty: itemQuantity,
     };
     context.cartItemData.fetchData(
-      `http://localhost:5000/cart/${context.curUser.userId}`,
+      `${process.env.REACT_APP_BACKEND_URL}/cart/${context.curUser.userId}`,
       "post",
       data
     );

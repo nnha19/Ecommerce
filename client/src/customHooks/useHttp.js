@@ -13,6 +13,7 @@ export const useHttp = (initVal, url, method) => {
   const [error, setError] = useState(null);
 
   const fetchData = async (url, method, data, token) => {
+    console.log(url);
     try {
       setLoading(true);
       const resp = await axios({

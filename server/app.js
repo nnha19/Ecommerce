@@ -7,12 +7,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const corsOptions = {
-  origin: true,
-  credentials: true,
-};
-app.options("*", cors(corsOptions));
-
 const productsRoute = require("./routes/productsRoute");
 const cartRoute = require("./routes/cartRoute");
 const customerRoute = require("./routes/customerRoute");
@@ -20,7 +14,7 @@ const orderRoute = require("./routes/orderRoute");
 
 mongoose
   .connect(
-    "mongodb://webtek:maymyopyin123@cluster0-shard-00-00.yrg2a.mongodb.net:27017,cluster0-shard-00-01.yrg2a.mongodb.net:27017,cluster0-shard-00-02.yrg2a.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-90vt8b-shard-0&authSource=admin&retryWrites=true&w=majority",
+    `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0-shard-00-00.yrg2a.mongodb.net:27017,cluster0-shard-00-01.yrg2a.mongodb.net:27017,cluster0-shard-00-02.yrg2a.mongodb.net:27017/${process.env.DB_NAME}?ssl=true&replicaSet=atlas-90vt8b-shard-0&authSource=admin&retryWrites=true&w=majority`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

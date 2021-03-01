@@ -16,7 +16,10 @@ const FilterProductPage = (props) => {
 
   useEffect(() => {
     console.log(gender);
-    fetchData(`http://localhost:5000/products/filter/${gender}`, "get");
+    fetchData(
+      `${process.env.REACT_APP_BACKEND_URL}/products/filter/${gender}`,
+      "get"
+    );
   }, [gender]);
   console.log(filteredProduct);
   const capitalizedGender =
