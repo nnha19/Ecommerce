@@ -62,8 +62,8 @@ const ProductDetailBody = (props) => {
       return;
     }
     setTimeout(() => {
-      setAddedToCart(true);
-    }, 500);
+      !error.error && setAddedToCart(true);
+    }, 1500);
   };
 
   const hideModalHandler = () => {
