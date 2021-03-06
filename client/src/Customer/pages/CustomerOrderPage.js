@@ -17,10 +17,11 @@ const CustomerOrderPage = (props) => {
   ] = useHttp([]);
 
   useEffect(() => {
-    fetchData(
-      `${process.env.REACT_APP_BACKEND_URL}/order/${context.curUser.userId}`
-    );
-  }, []);
+    context.curUser &&
+      fetchData(
+        `${process.env.REACT_APP_BACKEND_URL}/order/${context.curUser.userId}`
+      );
+  }, [context.curUser]);
 
   useEffect(() => {
     if (customerOrder.length === 0) {

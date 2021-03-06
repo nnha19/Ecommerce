@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./OrderOutput.css";
+import "./Orderoutput.css";
 
 const OrderOutput = (props) => {
   const orderOutput = props.order.map((order) => {

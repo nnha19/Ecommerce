@@ -60,6 +60,7 @@ const App = () => {
 
   useEffect(() => {
     if (curUser) {
+      updateCartItemAmount();
       fetchData(
         `${process.env.REACT_APP_BACKEND_URL}/cart/${curUser.userId}`,
         "get"
@@ -70,6 +71,16 @@ const App = () => {
   }, [curUser]);
 
   useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const customer = JSON.parse(localStorage.getItem("customer"));
+    if (token && customer) {
+      setToken(token);
+      setCurUser(customer);
+      setAuthenticated(!!token);
+    }
+  }, []);
+
+  useEffect(() => {
     updateCartItemAmount();
   }, [curUser, cartItem]);
 
@@ -77,6 +88,8 @@ const App = () => {
     setCurUser(customer);
     setToken(token);
     setAuthenticated(!!token);
+    localStorage.setItem("token", JSON.stringify(token));
+    localStorage.setItem("customer", JSON.stringify(customer));
   };
 
   const logoutUserHandler = () => {
@@ -84,6 +97,10 @@ const App = () => {
     setToken("");
     setAuthenticated(false);
     history.push("/");
+    localStorage.clear();
+    setToken("");
+    setCurUser("");
+    setAuthenticated(false);
   };
 
   const toggleLoginHandler = () => {

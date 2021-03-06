@@ -17,8 +17,10 @@ const CartPage = (props) => {
       !Array.isArray(cartItemData.cartItem)
     ) {
       setCartItemError("No items in the cart.");
+    } else {
+      setCartItemError(null);
     }
-  }, [cartItemData.cartItem]);
+  }, [cartItemData.cartItem, context.curUser]);
 
   let content;
   if (!cartItemError) {

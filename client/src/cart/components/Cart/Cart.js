@@ -8,6 +8,7 @@ import AddToWhilist from "./AddToWhilist/AddToWhilist";
 import Context from "../../../contexts/context";
 
 import "./Cart.css";
+
 const Cart = (props) => {
   const history = useHistory();
   const context = useContext(Context);
