@@ -109,7 +109,9 @@ const App = () => {
   };
 
   const hideDropDownHandler = (e) => {
-    !e.target.closest(".customer") && setShowDropDown(false);
+    if (!e.target.closest(".customer")) {
+      setShowDropDown(false);
+    }
   };
 
   console.log(showDropDown);
@@ -129,7 +131,7 @@ const App = () => {
           curUser,
           authenticated: !!authenticated,
           showDropDown,
-          setShowDropDown: () => setShowDropDown(true),
+          setShowDropDown: (boolean) => setShowDropDown(boolean),
         }}
       >
         <Navigation />

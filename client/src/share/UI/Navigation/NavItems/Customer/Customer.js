@@ -10,10 +10,14 @@ const Customer = (props) => {
   const history = useHistory();
   const context = useContext(Context);
 
-  console.log(context);
+  const showDropDownHandler = (e) => {
+    !e.target.classList.contains("customer__list") &&
+      context.setShowDropDown(true);
+  };
 
-  const showDropDownHandler = () => {
-    context.setShowDropDown();
+  const hideDropDownHandler = () => {
+    console.log("Me get executed.");
+    context.setShowDropDown(false);
   };
 
   const goToOrderPageHandler = () => {
@@ -25,7 +29,7 @@ const Customer = (props) => {
       <span className="customer__username">{props.curUser.username[0]}</span>
       {context.showDropDown && (
         <div className="customer__modal">
-          <ul className="customer__lists">
+          <ul onClick={hideDropDownHandler} className="customer__lists">
             <li onClick={goToOrderPageHandler} className="customer__list">
               Your orders
             </li>
