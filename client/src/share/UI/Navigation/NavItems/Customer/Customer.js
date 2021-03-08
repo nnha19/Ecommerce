@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 
 import "./Customer.css";
 
+import Logout from "../Auth/Logout/Logout";
+
 const Customer = (props) => {
   const history = useHistory();
   const [showDropDown, setShowDropDown] = useState(false);
@@ -15,8 +17,6 @@ const Customer = (props) => {
     history.push(`/order/${props.curUser.userId}`);
   };
 
-  console.log(props.curUser);
-
   return (
     <li onClick={showDropDownHandler} className="customer">
       <span className="customer__username">{props.curUser.username[0]}</span>
@@ -26,6 +26,7 @@ const Customer = (props) => {
             <li onClick={goToOrderPageHandler} className="customer__list">
               Your orders
             </li>
+            <Logout />
             <li className="customer__list account">
               Sign in as <strong>{props.curUser.username}</strong>
             </li>

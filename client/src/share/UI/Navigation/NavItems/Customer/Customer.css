@@ -1,6 +1,7 @@
 .customer {
   cursor: pointer;
   position: relative;
+  z-index: 10;
 }
 .customer__username {
   display: flex;

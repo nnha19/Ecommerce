@@ -39,7 +39,7 @@ const NavItems = (props) => {
         <i className="fas fa-search nav__icon"></i>
       </form>
       <div className="nav__items">
-        {!context.authenticated ? <Login /> : <Logout />}
+        {!context.authenticated ? <Login /> : null}
         <Category />
         <i
           onClick={goToCartHandler}

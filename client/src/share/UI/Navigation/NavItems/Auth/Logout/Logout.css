@@ -1,0 +1,7 @@
+.logout__btn {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
