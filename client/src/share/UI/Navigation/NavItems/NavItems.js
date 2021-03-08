@@ -6,6 +6,7 @@ import Context from "../../../../contexts/context";
 import Login from "./Auth/Login";
 import Customer from "./Customer/Customer";
 import Category from "./Category/Category";
+import NavItemSearch from "./NavItemSearch/NavItemSearch";
 
 import "./NavItems.css";
 
@@ -30,16 +31,7 @@ const NavItems = (props) => {
         </li>
       </NavLink>
       <div className="nav__side">
-        <form
-          className={`nav__search ${context.showSearch ? "show-search" : ""}`}
-        >
-          <input
-            className="nav__search-input"
-            type="text"
-            placeholder="Search Sunglasses"
-          />
-          <i className="fas fa-search nav__icon"></i>
-        </form>
+        <NavItemSearch showSearch={context.showSearch} />
         <div
           className={`nav__items ${
             context.showSearch ? "nav__items-hide" : ""
