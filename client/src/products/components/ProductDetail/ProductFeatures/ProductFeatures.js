@@ -3,6 +3,7 @@ import React from "react";
 import "./ProductFeatures.css";
 
 const ProductFeatures = (props) => {
+  console.log(props.showFeatures);
   const keys = Object.keys(props.productFeatures).map((featuresKey, i) => {
     return (
       <li className="product-features__list" key={featuresKey + i}>
@@ -15,7 +16,11 @@ const ProductFeatures = (props) => {
   });
 
   return (
-    <div className="product-features">
+    <div
+      className={`product-features ${
+        props.showFeatures ? "show-features" : ""
+      }`}
+    >
       <h4 className="product-features__heading">Features</h4>
       <ul className="product-features__lists">{keys}</ul>
     </div>

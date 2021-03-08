@@ -8,10 +8,12 @@ import Modal from "../../../share/UI/Modal/Modal";
 import Button from "../../../share/components/button/button";
 import ManiProduct from "./ManiProduct/ManiProduct";
 import Context from "../../../contexts/context";
+import BackDrop from "../../../share/UI/BackDrop/BackDrop";
 
 const ProductDetail = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [showDropDown, setShowDropDown] = useState(false);
+  const [showFeatures, setShowFeatures] = useState(false);
 
   const context = useContext(Context);
 
@@ -30,6 +32,14 @@ const ProductDetail = (props) => {
     ) {
       setShowDropDown(false);
     }
+  };
+
+  const showFeaturesHandler = () => {
+    setShowFeatures(true);
+  };
+
+  const hideShowFeaturesHandler = () => {
+    setShowFeatures(false);
   };
 
   let colorOptions;
@@ -52,6 +62,7 @@ const ProductDetail = (props) => {
   }
   return (
     <>
+      <BackDrop clicked={hideShowFeaturesHandler} backDropShow={showFeatures} />
       <Modal
         modalShow={showModal}
         title="Item already exists"
@@ -82,8 +93,14 @@ const ProductDetail = (props) => {
               )}
             </div>
           </div>
-          <ProductDetailBody product={product} />
-          <ProductFeatures productFeatures={product.features} />
+          <ProductDetailBody
+            showFeatures={showFeaturesHandler}
+            product={product}
+          />
+          <ProductFeatures
+            showFeatures={showFeatures}
+            productFeatures={product.features}
+          />
         </div>
       </div>
     </>

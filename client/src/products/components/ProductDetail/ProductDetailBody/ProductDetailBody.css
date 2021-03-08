@@ -1,5 +1,5 @@
 .product-detail__body {
-  padding: 2rem;
+  padding: 1rem;
 }
 .product-detail__btn {
   margin-left: 1rem;
@@ -9,10 +9,14 @@
   margin: 0 auto;
   margin: 1rem 0;
 }
+.btns {
+  text-align: center;
+}
 .cart-btn {
   background: green;
   color: white;
   border: none;
+  margin-bottom: 1rem;
 }
 
 .checkout-btn {
@@ -31,4 +35,20 @@
 .checkout-btn:active {
   border: none;
   transform: translateY(0);
+}
+.features-btn-container {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+@media (max-width: 1200px) {
+  .product-detail {
+    margin: 1rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  .features-btn {
+    display: none;
+  }
 }

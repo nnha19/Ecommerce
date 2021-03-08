@@ -7,6 +7,8 @@ import ProductQuantity from "../ProductDetailBody/ProductQuantity/ProductQuantit
 import AddToCartDisplayMsg from "./AddToCartDisplayMsg/AddToCartDisplayMsg";
 import ATCErrorMsg from "./ATCErrorMsg/ATCErrorMsg";
 import Context from "../../../../contexts/context";
+import ProductFeatures from "../ProductFeatures/ProductFeatures";
+import BackDrop from "../../../../share/UI/BackDrop/BackDrop";
 
 const ProductDetailBody = (props) => {
   const history = useHistory();
@@ -99,18 +101,25 @@ const ProductDetailBody = (props) => {
             updateItemQuantity={(type) => updateQuantityHandler(type)}
             product={product}
           />
-          <Button
-            clicked={() => addToCartHandler()}
-            className="product-detail__btn cart-btn"
-          >
-            Add To Cart
-          </Button>
-          <Button
-            clicked={() => addToCartHandler("buy")}
-            className="product-detail__btn checkout-btn"
-          >
-            Buy Now
-          </Button>
+          <div className="btns">
+            <Button
+              clicked={() => addToCartHandler()}
+              className="product-detail__btn cart-btn"
+            >
+              Add To Cart
+            </Button>
+            <Button
+              clicked={() => addToCartHandler("buy")}
+              className="product-detail__btn checkout-btn"
+            >
+              Buy Now
+            </Button>
+          </div>
+          <div className="features-btn-container">
+            <Button clicked={props.showFeatures} className="features-btn">
+              Features
+            </Button>
+          </div>
         </div>
       </div>
     </>
