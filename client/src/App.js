@@ -36,6 +36,7 @@ const App = () => {
   const [authenticated, setAuthenticated] = useState(false);
   const [totalAmount, setTotalAmount] = useState();
   const [showDropDown, setShowDropDown] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
 
   const updateCartItemAmount = () => {
     let totalAmount = 0;
@@ -112,9 +113,10 @@ const App = () => {
     if (!e.target.closest(".customer")) {
       setShowDropDown(false);
     }
+    if (showSearch && !e.target.closest(".nav__search")) {
+      setShowSearch(false);
+    }
   };
-
-  console.log(showDropDown);
 
   return (
     <div onClick={hideDropDownHandler} className="wrapper">
@@ -132,6 +134,8 @@ const App = () => {
           authenticated: !!authenticated,
           showDropDown,
           setShowDropDown: (boolean) => setShowDropDown(boolean),
+          showSearch,
+          showSearchHandler: () => setShowSearch(true),
         }}
       >
         <Navigation />

@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import { NavLink, useHistory } from "react-router-dom";
 import Logo from "../../../../images/logo.png";
 import Context from "../../../../contexts/context";
 import Login from "./Auth/Login";
-import Logout from "./Auth/Logout/Logout";
 import Customer from "./Customer/Customer";
 import Category from "./Category/Category";
 
@@ -30,28 +29,40 @@ const NavItems = (props) => {
           <h1 className="nav__name">Ever Vision</h1>
         </li>
       </NavLink>
-      <form className="nav__search">
-        <input
-          className="nav__search-input"
-          type="text"
-          placeholder="Search Sunglasses"
-        />
-        <i className="fas fa-search nav__icon"></i>
-      </form>
-      <div className="nav__items">
-        {!context.authenticated ? <Login /> : null}
-        <Category />
-        <i
-          onClick={goToCartHandler}
-          className="shopping-cart fas fa-shopping-cart"
+      <div className="nav__side">
+        <form
+          className={`nav__search ${context.showSearch ? "show-search" : ""}`}
         >
-          {context.cartItemAmount ? (
-            <span className="shopping-cart__item-qty">
-              {context.cartItemAmount}
-            </span>
-          ) : null}
-        </i>
-        {context.authenticated && <Customer curUser={context.curUser} />}
+          <input
+            className="nav__search-input"
+            type="text"
+            placeholder="Search Sunglasses"
+          />
+          <i className="fas fa-search nav__icon"></i>
+        </form>
+        <div
+          className={`nav__items ${
+            context.showSearch ? "nav__items-hide" : ""
+          }`}
+        >
+          <i
+            onClick={context.showSearchHandler}
+            className="fas fa-search search-icon"
+          ></i>
+          {!context.authenticated ? <Login /> : null}
+          <Category />
+          <i
+            onClick={goToCartHandler}
+            className="shopping-cart fas fa-shopping-cart"
+          >
+            {context.cartItemAmount ? (
+              <span className="shopping-cart__item-qty">
+                {context.cartItemAmount}
+              </span>
+            ) : null}
+          </i>
+          {context.authenticated && <Customer curUser={context.curUser} />}
+        </div>
       </div>
     </>
   );
