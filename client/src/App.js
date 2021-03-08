@@ -35,6 +35,7 @@ const App = () => {
   const [token, setToken] = useState();
   const [authenticated, setAuthenticated] = useState(false);
   const [totalAmount, setTotalAmount] = useState();
+  const [showDropDown, setShowDropDown] = useState(false);
 
   const updateCartItemAmount = () => {
     let totalAmount = 0;
@@ -107,8 +108,14 @@ const App = () => {
     setLogin(!login);
   };
 
+  const hideDropDownHandler = (e) => {
+    !e.target.closest(".customer") && setShowDropDown(false);
+  };
+
+  console.log(showDropDown);
+
   return (
-    <div className="wrapper">
+    <div onClick={hideDropDownHandler} className="wrapper">
       <Auth
         loginUser={(customer, token) => loginUserHandler(customer, token)}
         toggleLogin={toggleLoginHandler}
@@ -121,6 +128,8 @@ const App = () => {
           toggleLogin: () => toggleLoginHandler(),
           curUser,
           authenticated: !!authenticated,
+          showDropDown,
+          setShowDropDown: () => setShowDropDown(true),
         }}
       >
         <Navigation />

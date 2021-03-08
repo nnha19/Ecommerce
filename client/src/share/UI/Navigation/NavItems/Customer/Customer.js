@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 import "./Customer.css";
 
 import Logout from "../Auth/Logout/Logout";
+import Context from "../../../../../contexts/context";
 
 const Customer = (props) => {
   const history = useHistory();
-  const [showDropDown, setShowDropDown] = useState(false);
+  const context = useContext(Context);
+
+  console.log(context);
 
   const showDropDownHandler = () => {
-    setShowDropDown(!showDropDown);
+    context.setShowDropDown();
   };
 
   const goToOrderPageHandler = () => {
@@ -20,7 +23,7 @@ const Customer = (props) => {
   return (
     <li onClick={showDropDownHandler} className="customer">
       <span className="customer__username">{props.curUser.username[0]}</span>
-      {showDropDown && (
+      {context.showDropDown && (
         <div className="customer__modal">
           <ul className="customer__lists">
             <li onClick={goToOrderPageHandler} className="customer__list">
