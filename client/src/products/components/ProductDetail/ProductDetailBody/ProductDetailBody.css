@@ -1,6 +1,18 @@
 .product-detail__body {
   padding: 1rem;
 }
+
+.product-detail__brand {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-detail__brand h4 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
 .product-detail__btn {
   margin-left: 1rem;
 }

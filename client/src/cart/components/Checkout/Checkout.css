@@ -40,3 +40,34 @@
   padding: 0;
   margin-top: 2rem;
 }
+
+@media (max-width: 1200px) {
+  .checkout {
+    grid-template-columns: 100%;
+    grid-template-rows: max-content max-content;
+  }
+}
+
+@media (max-width: 600px) {
+  .checkout-container {
+    padding: 1rem;
+  }
+}
+@media (max-width: 500px) {
+  .checkout__delivery-infos h4 {
+    text-align: center;
+  }
+  .checkout__form {
+    flex-direction: column;
+  }
+  .person-infos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .address {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

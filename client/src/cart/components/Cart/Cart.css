@@ -71,3 +71,9 @@
     display: none;
   }
 }
+
+@media (max-width: 700px) {
+  .cart-container {
+    padding: 0.5rem;
+  }
+}

@@ -7,8 +7,7 @@ import ProductQuantity from "../ProductDetailBody/ProductQuantity/ProductQuantit
 import AddToCartDisplayMsg from "./AddToCartDisplayMsg/AddToCartDisplayMsg";
 import ATCErrorMsg from "./ATCErrorMsg/ATCErrorMsg";
 import Context from "../../../../contexts/context";
-import ProductFeatures from "../ProductFeatures/ProductFeatures";
-import BackDrop from "../../../../share/UI/BackDrop/BackDrop";
+import AddToWhilist from "../../../../cart/components/Cart/AddToWhilist/AddToWhilist";
 
 const ProductDetailBody = (props) => {
   const history = useHistory();
@@ -92,6 +91,10 @@ const ProductDetailBody = (props) => {
         />
       )}
       <div className="product-detail__body">
+        <div className="product-detail__brand">
+          <h4>{product.brand}</h4>
+          <AddToWhilist />
+        </div>
         <p className="product-detail__price">{product.price} KS</p>
         <p>{product.description}</p>
         <div className="product-detail__cart">
