@@ -95,6 +95,7 @@ const App = () => {
   };
 
   const logoutUserHandler = () => {
+    console.log("does this run??");
     setCurUser(false);
     setToken("");
     setAuthenticated(false);

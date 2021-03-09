@@ -40,3 +40,9 @@
 .order__item-price {
   margin: 0.4rem 0;
 }
+
+@media (max-width: 1000px) {
+  .order {
+    grid-template-columns: 100%;
+  }
+}

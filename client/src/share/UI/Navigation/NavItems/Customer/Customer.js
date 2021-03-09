@@ -16,7 +16,6 @@ const Customer = (props) => {
   };
 
   const hideDropDownHandler = () => {
-    console.log("Me get executed.");
     context.setShowDropDown(false);
   };
 
