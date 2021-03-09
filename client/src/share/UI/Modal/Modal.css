@@ -7,6 +7,7 @@
   line-height: 2;
   display: none;
   z-index: 999;
+  width: fit-content;
 }
 .modal__title {
   padding: 1rem 2rem;
@@ -23,4 +24,10 @@
 }
 .modal-show {
   display: inline-block;
+}
+
+@media (max-width: 600px) {
+  .modal {
+    width: 90vw;
+  }
 }

@@ -1,9 +1,8 @@
 import React from "react";
 
 import "./AllProducts.css";
-import Button from "../../../share/components/button/button";
 
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const AllProducts = (props) => {
   let allProductsOutput;

@@ -16,7 +16,13 @@ const ATCErrorMsg = (props) => {
       hideModal={() => props.hideModal()}
       body={
         <div style={{ textAlign: "center" }}>
-          <Button clicked={continueShoppingHandler}>Continue Shopping</Button>
+          <Button
+            style={{ padding: ".4rem", width: "10rem", marginRight: "1rem" }}
+            clicked={continueShoppingHandler}
+          >
+            Continue Shopping
+          </Button>
+          <Button>Checkout</Button>
         </div>
       }
       modalShow={props.error}
