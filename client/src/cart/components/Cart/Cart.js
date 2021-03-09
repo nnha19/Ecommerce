@@ -6,6 +6,7 @@ import RemoveItemFromCart from "./RemoveItemFromCart/RemoveItemFromCart";
 import OrderSummary from "./OrderSummary/OrderSummary";
 import AddToWhilist from "./AddToWhilist/AddToWhilist";
 import Context from "../../../contexts/context";
+import SecondaryBtn from "../../../share/components/SecondaryBtn/SecondaryBtn";
 
 import "./Cart.css";
 
@@ -69,9 +70,17 @@ const Cart = (props) => {
     <div className={`cart-container ${props.className}`}>
       <div className="cart">{cartItemsOutput}</div>
       {!props.checkout && (
-        <div className="order-summary">
+        <div className="order-summary cart-order-summary">
           <OrderSummary action="proceed to checkout" />
         </div>
+      )}
+      {!props.checkout && (
+        <SecondaryBtn
+          clicked={() => history.push("/checkout")}
+          className="mobile-ptc"
+        >
+          Proceed to Checkout
+        </SecondaryBtn>
       )}
     </div>
   );

@@ -30,4 +30,10 @@
   .modal {
     width: 90vw;
   }
+  .modal__title {
+    padding: 2rem 1rem;
+  }
+  .modal__body {
+    padding: 2rem 1rem;
+  }
 }

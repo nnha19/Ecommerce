@@ -44,3 +44,30 @@
   padding: 2rem;
   line-height: 1.5;
 }
+@media (max-width: 1100px) {
+  .cart-order-summary {
+    display: none;
+  }
+  .cart-container {
+    grid-template-columns: 100%;
+  }
+  .cart__item {
+    flex-wrap: wrap;
+  }
+  .cart__item-update {
+    margin-left: auto;
+  }
+}
+.mobile-ptc {
+  position: fixed;
+  width: 80%;
+  bottom: 1rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+@media (min-width: 1100px) {
+  .mobile-ptc {
+    display: none;
+  }
+}
