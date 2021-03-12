@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import "./ProductDetail.css";
 
@@ -14,6 +14,7 @@ const ProductDetail = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [showDropDown, setShowDropDown] = useState(false);
   const [showFeatures, setShowFeatures] = useState(false);
+  const [addedToWhilist, setAddedToWhilist] = useState(false);
 
   const context = useContext(Context);
 
@@ -44,6 +45,16 @@ const ProductDetail = (props) => {
 
   let colorOptions;
   const product = props.productDetail;
+
+  useEffect(() => {
+    if (product && context.whilist) {
+      const addedToWhilist = context.whilist.some(
+        (whilist) => whilist._id === product._id
+      );
+      setAddedToWhilist(addedToWhilist);
+    }
+  }, [product, context.whilist]);
+
   if (product && product.colors && product.colors.length > 0) {
     colorOptions = product.colors.map((c) => {
       return (
@@ -60,6 +71,7 @@ const ProductDetail = (props) => {
   if (!product) {
     return null;
   }
+
   return (
     <>
       <BackDrop clicked={hideShowFeaturesHandler} backDropShow={showFeatures} />
@@ -94,6 +106,7 @@ const ProductDetail = (props) => {
             </div>
           </div>
           <ProductDetailBody
+            addedToWhilist={addedToWhilist}
             showFeatures={showFeaturesHandler}
             product={product}
           />

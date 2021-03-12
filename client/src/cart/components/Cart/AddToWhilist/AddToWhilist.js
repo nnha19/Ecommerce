@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { useHttp } from "../../../../customHooks/useHttp";
+import Context from "../../../../contexts/context";
 
 import "./AddToWhilist.css";
 
 const AddToWhilist = (props) => {
+  console.log(props.addedToWhilist);
+
+  const context = useContext(Context);
   const [
     createdWhilist,
     loading,
@@ -12,10 +16,11 @@ const AddToWhilist = (props) => {
     fetchData,
     setCreatedWhilist,
     setError,
-  ] = useHttp();
+  ] = useHttp(null);
 
-  console.log(props.userId);
-  console.log(props.productId);
+  useEffect(() => {
+    createdWhilist && context.setWhilist(createdWhilist);
+  }, [createdWhilist]);
 
   const addToWhilistHandler = () => {
     fetchData(
@@ -28,7 +33,9 @@ const AddToWhilist = (props) => {
     <i
       onClick={addToWhilistHandler}
       title="Add to whilist"
-      className="far fa-heart cart__item-heart cart__item-icons"
+      className={`fa${
+        props.addedToWhilist ? "s" : "r"
+      } fa-heart cart__item-heart cart__item-icons`}
     ></i>
   );
 };

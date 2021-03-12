@@ -7,11 +7,11 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const whilistRoute = require("./routes/whilistRoute");
 const productsRoute = require("./routes/productsRoute");
 const cartRoute = require("./routes/cartRoute");
 const customerRoute = require("./routes/customerRoute");
 const orderRoute = require("./routes/orderRoute");
-const whilistRoute = require("./routes/whilistRoute");
 
 mongoose
   .connect(

@@ -93,6 +93,7 @@ const ProductDetailBody = (props) => {
         <div className="product-detail__brand">
           <h4>{product.brand}</h4>
           <AddToWhilist
+            addedToWhilist={props.addedToWhilist}
             productId={product._id}
             userId={context.curUser.userId}
           />

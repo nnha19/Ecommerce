@@ -10,8 +10,6 @@ import axios from "axios";
 const AllProductsPage = (props) => {
   const [allProducts, loading, error, fetchData, setAllProducts] = useHttp([]);
 
-  console.log(allProducts);
-
   const deleteProduct = (productId) => {
     const remainProducts = allProducts.filter(
       (product) => product._id !== productId

@@ -11,7 +11,6 @@ const getWhilistByUserId = async (req, res, next) => {
         if (!customer) {
           res.status(400).json("User with the provided id doesn't exist.");
         } else {
-          console.log(customer);
           res.status(200).json(customer.whilist);
         }
       }
@@ -31,7 +30,15 @@ const createWhilist = async (req, res, next) => {
       );
       customer.whilist = deletedWhilist;
       await customer.save();
-      res.status(200).json(deletedWhilist);
+      await Customer.findById(uid)
+        .populate("whilist")
+        .exec((err, customer) => {
+          if (err) {
+            res.status(400).json(err);
+          } else {
+            res.status(200).json(customer.whilist);
+          }
+        });
     } else {
       customer.whilist.push(productId);
       await customer.save();

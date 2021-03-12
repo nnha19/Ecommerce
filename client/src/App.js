@@ -2,6 +2,7 @@ import React, { useEffect, useState, Suspense } from "react";
 
 import "./App.css";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
+import axios from "axios";
 
 import AllProducts from "./products/pages/AllProductsPage/AllProductsPage";
 import ProductDetailPage from "./products/pages/ProductDetailPage/ProductDetailPage";
@@ -37,6 +38,19 @@ const App = () => {
   const [totalAmount, setTotalAmount] = useState();
   const [showDropDown, setShowDropDown] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+  const [whilist, setWhilist] = useState([]);
+
+  useEffect(() => {
+    curUser &&
+      (async () => {
+        const result = await axios.get(
+          `http://localhost:5000/whilist/${curUser.userId}`
+        );
+        setWhilist(result.data);
+      })();
+  }, [curUser]);
+
+  console.log(whilist);
 
   const updateCartItemAmount = () => {
     let totalAmount = 0;
@@ -95,7 +109,6 @@ const App = () => {
   };
 
   const logoutUserHandler = () => {
-    console.log("does this run??");
     setCurUser(false);
     setToken("");
     setAuthenticated(false);
@@ -167,6 +180,8 @@ const App = () => {
               fetchData: (url, method, data) => fetchData(url, method, data),
               setError: (boolean) => setError(boolean),
             },
+            setWhilist: (whilist) => setWhilist(whilist),
+            whilist,
           }}
         >
           {authenticated && <Route path="/cart" exact component={CartPage} />}

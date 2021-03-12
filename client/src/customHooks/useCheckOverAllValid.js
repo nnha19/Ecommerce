@@ -6,7 +6,6 @@ const useCheckOverAllValid = (obj, mode) => {
     !mode && delete obj.username;
     const overallValid = [];
     for (let key in obj) {
-      console.log(obj[key]);
       overallValid.push(obj[key].valid);
     }
     setAllValid(overallValid.every((valid) => valid));
