@@ -14,6 +14,9 @@ const OrderSummary = (props) => {
   const history = useHistory();
 
   const maniStr = (amount) => {
+    if (!amount) {
+      return;
+    }
     amount = amount.toString();
     if (amount.length > 3) {
       let words = [];
@@ -28,8 +31,10 @@ const OrderSummary = (props) => {
           w3 = "";
         }
       });
+      console.log(words);
       return words.join(",");
     } else {
+      console.log(amount);
       return amount;
     }
   };
