@@ -13,7 +13,6 @@ const ProductDetailBody = (props) => {
   const history = useHistory();
   const context = useContext(Context);
   const error = context.cartItemData;
-
   const product = props.product;
 
   const [itemQuantity, setItemQuantity] = useState(product.pickedQty);
@@ -93,7 +92,10 @@ const ProductDetailBody = (props) => {
       <div className="product-detail__body">
         <div className="product-detail__brand">
           <h4>{product.brand}</h4>
-          <AddToWhilist />
+          <AddToWhilist
+            productId={product._id}
+            userId={context.curUser.userId}
+          />
         </div>
         <p className="product-detail__price">{product.price} KS</p>
         <p>{product.description}</p>

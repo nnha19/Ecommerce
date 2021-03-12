@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import useHttp from "../../../../customHooks/useHttp";
+import { useHttp } from "../../../../customHooks/useHttp";
 
 import "./AddToWhilist.css";
 
@@ -12,10 +12,16 @@ const AddToWhilist = (props) => {
     fetchData,
     setCreatedWhilist,
     setError,
-  ] = useState();
+  ] = useHttp();
+
+  console.log(props.userId);
+  console.log(props.productId);
 
   const addToWhilistHandler = () => {
-    console.log("Adding to whilist");
+    fetchData(
+      `http://localhost:5000/whilist/${props.userId}/${props.productId}`,
+      "post"
+    );
   };
 
   return (

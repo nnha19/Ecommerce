@@ -22,10 +22,31 @@ const createWhilist = async (req, res, next) => {
   try {
     const { uid, productId } = req.params;
     const customer = await Customer.findById(uid);
-    customer.whilist.push(productId);
-    await customer.save();
-    console.log(customer);
-    res.status(200).json(customer.whilist);
+    const existingWhilist = customer.whilist.filter(
+      (whilist) => whilist._id.toString() === productId
+    );
+    if (existingWhilist.length > 0) {
+      const deletedWhilist = customer.whilist.filter(
+        (whilist) => whilist._id.toString() !== productId
+      );
+      customer.whilist = deletedWhilist;
+      await customer.save();
+      res.status(200).json(deletedWhilist);
+    } else {
+      customer.whilist.push(productId);
+      await customer.save();
+      Customer.findById(uid)
+        .populate("whilist")
+        .exec((err, customer) => {
+          if (err) {
+            res.status(400).json(err);
+            console.log(err);
+          } else {
+            console.log(customer);
+            res.status(200).json(customer.whilist);
+          }
+        });
+    }
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
