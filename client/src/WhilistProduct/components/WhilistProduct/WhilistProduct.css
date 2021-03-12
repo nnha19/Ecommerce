@@ -1,0 +1,23 @@
+.whilist {
+  background: rgba(128, 128, 128, 0.562);
+  min-height: 100vh;
+  padding: 2rem;
+}
+.whilist-product-container {
+  padding: 1rem;
+  margin-top: 2rem;
+  box-shadow: 0 1px 1px 3px grey;
+}
+.whilist-product-container h6 {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  color: green;
+  cursor: pointer;
+}
+.whilist-product-container h6:hover {
+  color: purple;
+}
+.whilist-first {
+  justify-content: space-between;
+}

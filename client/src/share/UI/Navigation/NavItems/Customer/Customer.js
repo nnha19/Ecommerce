@@ -30,7 +30,13 @@ const Customer = (props) => {
         <div className="customer__modal">
           <ul onClick={hideDropDownHandler} className="customer__lists">
             <li onClick={goToOrderPageHandler} className="customer__list">
-              Your orders
+              My orders
+            </li>
+            <li
+              onClick={() => history.push(`/whilist/${[props.curUser.userId]}`)}
+              className="customer__list"
+            >
+              My Whilists
             </li>
             <Logout />
             <li className="customer__list account">

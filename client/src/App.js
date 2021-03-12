@@ -18,6 +18,7 @@ import AdminNavBar from "./admin/components/NavBar/NavBar";
 import AllOrdersPage from "./admin/pages/AllOrdersPage";
 import CreateProductPage from "./admin/pages/CreateProductPage";
 import EditProductPage from "./admin/pages/EditProductPage";
+import WhilistProductPage from "./WhilistProduct/page/WhilistProductPage";
 
 const App = () => {
   const history = useHistory();
@@ -189,6 +190,7 @@ const App = () => {
           <Route exact path="/product/:id" component={ProductDetailPage} />
           <Route exact path="/order/:uid" component={CustomerOrder} />
           <Route exact path="/admin/order/:uid" component={AllOrdersPage} />
+          <Route exact path="/whilist/:uid" component={WhilistProductPage} />
           {curUser && curUser.admin && (
             <Route
               exact
