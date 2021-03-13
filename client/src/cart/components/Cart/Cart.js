@@ -58,7 +58,6 @@ const Cart = (props) => {
             product={item}
           />
           <div className="cart__item-update">
-            {!props.checkout && <AddToWhilist />}
             <RemoveItemFromCart item={item} />
           </div>
         </div>
