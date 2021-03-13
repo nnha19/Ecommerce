@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import "./WhilistProduct.css";
 
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 import RemoveWhilistProduct from "./RemoveWhilistProduct/RemoveWhilistProduct";
 import AddToCart from "./AddToCart/AddToCart";
+import Context from "../../../contexts/context";
 
 const WhilistProduct = (props) => {
+  const context = useContext(Context);
   const history = useHistory();
 
   const goToProductDetailHandler = (e, productId) => {
@@ -15,6 +18,15 @@ const WhilistProduct = (props) => {
       history.push(`/product/${productId}`);
     }
   };
+
+  const removeAllWhilistHandler = async () => {
+    await axios.delete(
+      `http://localhost:5000/whilist/${context.curUser.userId}`
+    );
+    console.log(context);
+    context.removeAllWhilist();
+  };
+
   let whilistProductOutput;
 
   whilistProductOutput = props.whilistProduct.map((whilistProduct) => {
@@ -45,7 +57,8 @@ const WhilistProduct = (props) => {
     <div className="whilist">
       <h4>Your favouritee products</h4>
       <div className="whilist-product-container">
-        <h6>Remove All</h6>
+        <h6 onClick={removeAllWhilistHandler}>Remove All</h6>
+        <h6>Add All To Cart</h6>
         {whilistProductOutput}
       </div>
     </div>

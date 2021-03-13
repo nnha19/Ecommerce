@@ -81,7 +81,7 @@ const deleteAllWhilist = async (req, res, next) => {
     const customer = await Customer.findById(uid);
     customer.whilist = [];
     await customer.save();
-    res.status(400).json("Deleted all whilists");
+    res.status(200).json("Deleted all whilists");
   } catch (err) {
     res.status(500).json(err);
   }

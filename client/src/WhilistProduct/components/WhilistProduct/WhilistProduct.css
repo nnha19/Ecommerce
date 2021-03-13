@@ -9,11 +9,17 @@
   box-shadow: 0 1px 1px 3px grey;
 }
 .whilist-product-container h6 {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 300;
   margin-bottom: 1rem;
   color: green;
   cursor: pointer;
+  display: inline-block;
+  border-left: 0.5px solid green;
+  border-right: 0.5px solid green;
+  padding: 0rem 0.8rem;
+  margin: 0.5rem;
+  margin-bottom: 2rem;
 }
 .whilist-product-container h6:hover {
   color: purple;
