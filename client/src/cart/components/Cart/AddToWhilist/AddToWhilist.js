@@ -23,6 +23,10 @@ const AddToWhilist = (props) => {
   }, [createdWhilist]);
 
   const addToWhilistHandler = () => {
+    if (!context.authenticated) {
+      context.toggleLogin();
+      return;
+    }
     fetchData(
       `http://localhost:5000/whilist/${props.userId}/${props.productId}`,
       "post"

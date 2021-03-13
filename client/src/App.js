@@ -51,7 +51,14 @@ const App = () => {
       })();
   }, [curUser]);
 
-  console.log(whilist);
+  const removeOneWhilist = (productId) => {
+    const updatedWhilist = whilist.filter(
+      (whilist) => whilist._id !== productId
+    );
+    console.log(whilist);
+    console.log(updatedWhilist);
+    setWhilist(updatedWhilist);
+  };
 
   const updateCartItemAmount = () => {
     let totalAmount = 0;
@@ -183,6 +190,7 @@ const App = () => {
             },
             setWhilist: (whilist) => setWhilist(whilist),
             whilist,
+            removeOneWhilist: (productId) => removeOneWhilist(productId),
           }}
         >
           {authenticated && <Route path="/cart" exact component={CartPage} />}

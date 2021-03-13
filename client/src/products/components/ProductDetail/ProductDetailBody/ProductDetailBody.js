@@ -95,7 +95,7 @@ const ProductDetailBody = (props) => {
           <AddToWhilist
             addedToWhilist={props.addedToWhilist}
             productId={product._id}
-            userId={context.curUser.userId}
+            userId={context.curUser && context.curUser.userId}
           />
         </div>
         <p className="product-detail__price">{product.price} KS</p>
