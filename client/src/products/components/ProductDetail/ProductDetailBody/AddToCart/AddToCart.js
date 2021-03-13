@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { useHistory } from "react-router-dom";
 
 import Button from "../../../../../share/components/button/button";
+import AddToCartDisplayMsg from "../AddToCartDisplayMsg/AddToCartDisplayMsg";
 
 const AddToCart = (props) => {
   const history = useHistory();
 
+  const [addedToCart, setAddedToCart] = useState(false);
+
   const product = props.product;
   const error = props.error;
-  const addToCartHandler = (type) => {
+
+  useEffect(() => {
+    if (error && error.error) {
+      setTimeout(() => {
+        setAddedToCart(false);
+      }, 500);
+    }
+  }, [error.error]);
+
+  const addToCartHandler = () => {
     if (!props.context.authenticated) {
       props.context.toggleLogin();
       return;
@@ -47,17 +59,41 @@ const AddToCart = (props) => {
       return;
     }
     setTimeout(() => {
-      !error.error && props.setAddedToCart(true);
-    }, 1500);
+      !error.error && setAddedToCart(true);
+    }, 500);
+  };
+
+  const hideModalHandler = () => {
+    setAddedToCart(false);
   };
 
   return (
-    <Button
-      clicked={() => addToCartHandler()}
-      className={`product-detail__btn cart-btn ${props.className}`}
-    >
-      Add To Cart
-    </Button>
+    <>
+      {addedToCart && !error.error && (
+        <AddToCartDisplayMsg
+          hideModal={() => hideModalHandler()}
+          name={product.brand}
+          amount={props.itemQuantity}
+          addedToCart={addedToCart}
+          error={error}
+        />
+      )}
+      {props.whilist ? (
+        <i
+          className={`fas fa-shopping-cart ${props.className}`}
+          onClick={() => addToCartHandler()}
+        >
+          <span>+</span>
+        </i>
+      ) : (
+        <Button
+          clicked={() => addToCartHandler()}
+          className={`product-detail__btn cart-btn ${props.className}`}
+        >
+          Add To Cart
+        </Button>
+      )}
+    </>
   );
 };
 

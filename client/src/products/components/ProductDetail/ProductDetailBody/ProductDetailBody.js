@@ -3,7 +3,6 @@ import React, { useState, useContext, useEffect } from "react";
 import "./ProductDetailBody.css";
 import Button from "../../../../share/components/button/button";
 import ProductQuantity from "../ProductDetailBody/ProductQuantity/ProductQuantity";
-import AddToCartDisplayMsg from "./AddToCartDisplayMsg/AddToCartDisplayMsg";
 import ATCErrorMsg from "./ATCErrorMsg/ATCErrorMsg";
 import Context from "../../../../contexts/context";
 import AddToWhilist from "../../../../cart/components/Cart/AddToWhilist/AddToWhilist";
@@ -15,7 +14,6 @@ const ProductDetailBody = (props) => {
   const product = props.product;
 
   const [itemQuantity, setItemQuantity] = useState(product.pickedQty);
-  const [addedToCart, setAddedToCart] = useState(false);
 
   const updateQuantityHandler = (type) => {
     type === "add"
@@ -24,21 +22,11 @@ const ProductDetailBody = (props) => {
   };
 
   const hideModalHandler = () => {
-    setAddedToCart(false);
     context.cartItemData.setError(false);
   };
 
   return (
     <>
-      {addedToCart && (
-        <AddToCartDisplayMsg
-          hideModal={() => hideModalHandler()}
-          name={product.brand}
-          amount={itemQuantity}
-          addedToCart={addedToCart}
-          error={error}
-        />
-      )}
       {error && (
         <ATCErrorMsg
           hideModal={() => hideModalHandler()}
@@ -70,7 +58,7 @@ const ProductDetailBody = (props) => {
               context={context}
               product={product}
               error={error}
-              setAddedToCart={(boolean) => setAddedToCart(boolean)}
+              hideModal={() => hideModalHandler()}
             />
             <AddToCart
               buy={true}
@@ -79,7 +67,7 @@ const ProductDetailBody = (props) => {
               context={context}
               product={product}
               error={error}
-              setAddedToCart={(boolean) => setAddedToCart(boolean)}
+              hideModal={() => hideModalHandler()}
             />
           </div>
           <div className="features-btn-container">

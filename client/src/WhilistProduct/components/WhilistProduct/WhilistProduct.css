@@ -27,3 +27,11 @@
 .whilist-first {
   justify-content: space-between;
 }
+
+.whilist-cart {
+  font-size: 1.2rem;
+  color: green;
+}
+.whilist-cart:hover {
+  color: purple;
+}

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import "./WhilistProduct.css";
 
@@ -6,12 +6,14 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 import RemoveWhilistProduct from "./RemoveWhilistProduct/RemoveWhilistProduct";
-import AddToCart from "./AddToCart/AddToCart";
+import AddToCart from "../../../products/components/ProductDetail/ProductDetailBody/AddToCart/AddToCart";
 import Context from "../../../contexts/context";
 
 const WhilistProduct = (props) => {
   const context = useContext(Context);
   const history = useHistory();
+
+  const [addedToCart, setAddedToCart] = useState(false);
 
   const goToProductDetailHandler = (e, productId) => {
     if (!e.target.closest(".whilist-second")) {
@@ -23,7 +25,6 @@ const WhilistProduct = (props) => {
     await axios.delete(
       `http://localhost:5000/whilist/${context.curUser.userId}`
     );
-    console.log(context);
     context.removeAllWhilist();
   };
 
@@ -47,7 +48,15 @@ const WhilistProduct = (props) => {
         </div>
         <div className="whilist-second">
           <RemoveWhilistProduct productId={whilistProduct._id} />
-          <AddToCart />
+          <AddToCart
+            product={whilistProduct}
+            context={context}
+            itemQuantity={1}
+            setAddedToCart={(boolean) => setAddedToCart(boolean)}
+            error={{}}
+            whilist={true}
+            className="whilist-cart"
+          />
         </div>
       </div>
     );
