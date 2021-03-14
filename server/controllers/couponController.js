@@ -20,6 +20,7 @@ const getCouponByUserId = async (req, res, next) => {
   try {
     const { uid } = req.params;
     const { code } = req.body;
+    console.log(req.body);
     const customer = await Customer.findById(uid);
     const customerCoupon = await Coupon.findOne({ code });
     console.log(customerCoupon);

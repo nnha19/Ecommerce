@@ -1,14 +1,24 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 
 import "./OrderSummary.css";
 
 import Context from "../../../../contexts/context";
 import { useHistory } from "react-router-dom";
+import { useHttp } from "../../../../customHooks/useHttp";
 
 import SecondaryBtn from "../../../../share/components/SecondaryBtn/SecondaryBtn";
 import Coupon from "./Coupon/Coupon";
 
 const OrderSummary = (props) => {
+  const [
+    appliedCoupon,
+    loading,
+    error,
+    fetchData,
+    setAppliedCoupon,
+    setError,
+  ] = useHttp(null);
+
   const context = useContext(Context);
   const totalAmount = context.totalAmount;
   const history = useHistory();
@@ -31,10 +41,8 @@ const OrderSummary = (props) => {
           w3 = "";
         }
       });
-      console.log(words);
       return words.join(",");
     } else {
-      console.log(amount);
       return amount;
     }
   };
@@ -42,6 +50,8 @@ const OrderSummary = (props) => {
   const clickedBtnHandler = () => {
     history.push("/checkout");
   };
+
+  console.log(appliedCoupon);
 
   const shippingFee = "2470";
 
@@ -60,7 +70,17 @@ const OrderSummary = (props) => {
           <span className="order-summary__ks">{shippingFee} KS</span>
         </li>
         <hr />
-        {props.checkout && <Coupon />}
+        {props.checkout && (
+          <Coupon
+            userId={context.curUser.userId}
+            loading={loading}
+            error={error}
+            appliedCoupon={appliedCoupon}
+            fetchData={(url, method, data, token) =>
+              fetchData(url, method, data, token)
+            }
+          />
+        )}
         <li className="order-summary__list total">
           <span className="order-summary__text">Total</span>
           <span className="order-summary__ks">

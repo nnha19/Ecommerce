@@ -6,7 +6,6 @@ import SecondaryBtn from "../../../../../share/components/SecondaryBtn/Secondary
 
 const Coupon = (props) => {
   const [coupon, setCoupon] = useState("");
-  const [invalidCoupon, setInvalidCoupon] = useState(false);
 
   const enteringCoupon = (e) => {
     setCoupon(e.target.value);
@@ -14,15 +13,14 @@ const Coupon = (props) => {
 
   const applyingCoupon = (e) => {
     e.preventDefault();
-    setInvalidCoupon(true);
+    const data = { code: coupon };
+    props.fetchData(
+      `${process.env.REACT_APP_BACKEND_URL}/coupon/${props.userId}`,
+      "post",
+      data
+    );
     setCoupon("");
   };
-
-  if (invalidCoupon) {
-    setTimeout(() => {
-      setInvalidCoupon(false);
-    }, 3000);
-  }
 
   return (
     <>
@@ -36,7 +34,6 @@ const Coupon = (props) => {
         />
         <SecondaryBtn className="coupon__btn">Apply</SecondaryBtn>
       </form>
-      {invalidCoupon && <p className="form__err-msg">Invalid Coupon!</p>}
     </>
   );
 };

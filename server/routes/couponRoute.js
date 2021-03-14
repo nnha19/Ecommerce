@@ -4,7 +4,7 @@ const authMiddleware = require("../middlewares/authMiddleware");
 
 // router.use(authMiddleware);
 router.get("/", couponController.getAllCoupons);
-router.get("/:uid", couponController.getCouponByUserId);
+router.post("/:uid", couponController.getCouponByUserId);
 router.post("/", couponController.createCoupon);
 router.delete("/:couponId", couponController.deleteCoupon);
 
