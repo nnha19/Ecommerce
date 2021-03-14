@@ -17,7 +17,7 @@ const AddToCart = (props) => {
     if (error && error.error) {
       setTimeout(() => {
         setAddedToCart(false);
-      }, 500);
+      }, 800);
     }
   }, [error.error]);
 
@@ -60,7 +60,7 @@ const AddToCart = (props) => {
     }
     setTimeout(() => {
       !error.error && setAddedToCart(true);
-    }, 500);
+    }, 800);
   };
 
   const hideModalHandler = () => {
