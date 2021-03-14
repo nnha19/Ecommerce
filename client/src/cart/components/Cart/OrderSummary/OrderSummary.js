@@ -76,8 +76,8 @@ const OrderSummary = (props) => {
             loading={loading}
             error={error}
             appliedCoupon={appliedCoupon}
-            fetchData={(url, method, data, token) =>
-              fetchData(url, method, data, token)
+            fetchData={(url, method, data) =>
+              fetchData(url, method, data, context.token)
             }
           />
         )}

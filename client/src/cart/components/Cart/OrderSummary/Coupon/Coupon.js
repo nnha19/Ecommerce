@@ -17,7 +17,8 @@ const Coupon = (props) => {
     props.fetchData(
       `${process.env.REACT_APP_BACKEND_URL}/coupon/${props.userId}`,
       "post",
-      data
+      data,
+      props.token
     );
     setCoupon("");
   };
