@@ -12,6 +12,7 @@ const productsRoute = require("./routes/productsRoute");
 const cartRoute = require("./routes/cartRoute");
 const customerRoute = require("./routes/customerRoute");
 const orderRoute = require("./routes/orderRoute");
+const couponRoute = require("./routes/couponRoute");
 
 mongoose
   .connect(
@@ -31,6 +32,7 @@ app.use("/cart/", cartRoute);
 app.use("/customer", customerRoute);
 app.use("/order/:uid", orderRoute);
 app.use("/whilist/:uid", whilistRoute);
+app.use("/coupon", couponRoute);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log("Server has started.");
