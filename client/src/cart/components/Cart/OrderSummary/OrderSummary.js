@@ -72,7 +72,7 @@ const OrderSummary = (props) => {
         <hr />
         {props.checkout && (
           <Coupon
-            userId={context.curUser.userId}
+            userId={context.curUser && context.curUser.userId}
             loading={loading}
             error={error}
             appliedCoupon={appliedCoupon}
