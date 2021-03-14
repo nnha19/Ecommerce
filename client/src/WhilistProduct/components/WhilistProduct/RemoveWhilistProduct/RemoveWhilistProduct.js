@@ -9,7 +9,7 @@ const RemoveWhilistProduct = (props) => {
 
   const removeWhilistProductHandler = async () => {
     await axios.delete(
-      `http://localhost:5000/whilist/${context.curUser.userId}/${props.productId}`
+      `${process.env.REACT_APP_BACKEND_URL}/whilist/${context.curUser.userId}/${props.productId}`
     );
     context.removeOneWhilist(props.productId);
   };

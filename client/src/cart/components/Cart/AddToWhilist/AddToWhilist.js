@@ -28,7 +28,7 @@ const AddToWhilist = (props) => {
       return;
     }
     fetchData(
-      `http://localhost:5000/whilist/${props.userId}/${props.productId}`,
+      `${process.env.REACT_APP_BACKEND_URL}/whilist/${props.userId}/${props.productId}`,
       "post"
     );
   };

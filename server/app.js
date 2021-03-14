@@ -32,6 +32,6 @@ app.use("/customer", customerRoute);
 app.use("/order/:uid", orderRoute);
 app.use("/whilist/:uid", whilistRoute);
 
-app.listen(5000, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log("Server has started.");
 });

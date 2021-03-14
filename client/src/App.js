@@ -45,7 +45,7 @@ const App = () => {
     curUser &&
       (async () => {
         const result = await axios.get(
-          `http://localhost:5000/whilist/${curUser.userId}`
+          `${process.env.REACT_APP_BACKEND_URL}/whilist/${curUser.userId}`
         );
         setWhilist(result.data);
       })();
