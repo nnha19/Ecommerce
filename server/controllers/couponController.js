@@ -4,7 +4,7 @@ const Customer = require("../Modals/Customer");
 
 const getAllCoupons = async (req, res, next) => {
   try {
-    if (req.admin) {
+    if (!req.admin) {
       res.status(400).json("You are not authorized to see the content.");
     } else {
       const allCoupons = await Coupon.find({});
@@ -20,10 +20,8 @@ const getCouponByUserId = async (req, res, next) => {
   try {
     const { uid } = req.params;
     const { code } = req.body;
-    console.log(req.body);
     const customer = await Customer.findById(uid);
     const customerCoupon = await Coupon.findOne({ code });
-    console.log(customerCoupon);
     if (!customerCoupon) {
       res.status(400).json("Invalid coupon code.");
     } else {
@@ -45,13 +43,12 @@ const getCouponByUserId = async (req, res, next) => {
 const createCoupon = async (req, res, next) => {
   try {
     const { code, discountPrice } = req.body;
-    if (!req.admin) {
+    if (req.admin) {
       const newCoupon = await Coupon.create({
         code,
         discountPrice,
       });
       res.status(200).json(newCoupon);
-      //   res.status(200).json("coupon sucessfully created.");
     } else {
       res.status(400).json("You are not authorized to take this action.");
     }
@@ -63,20 +60,18 @@ const createCoupon = async (req, res, next) => {
 
 const deleteCoupon = async (req, res, next) => {
   try {
-    if (res.admin) {
+    if (!res.admin) {
       res.status(400).json("You are not authorized to delete this coupon");
     } else {
       const { couponId } = req.params;
       await Coupon.findByIdAndRemove(couponId);
       const allCustomers = await Customer.find({});
       allCustomers.forEach(async (customer) => {
-        console.log(customer.usedCoupon);
         const leftCoupons = customer.usedCoupon.filter(
           (id) => id.toString() !== couponId
         );
         customer.usedCoupon = leftCoupons;
         await customer.save();
-        console.log(customer.usedCoupon);
       });
       res.status(200).json("Successfully delete the coupon.");
     }
