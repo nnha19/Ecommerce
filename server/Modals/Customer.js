@@ -8,6 +8,12 @@ const customerSchema = new mongoose.Schema({
   cart: [{ type: mongoose.Schema.Types.ObjectId, ref: "Cart" }],
   order: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order" }],
   whilist: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
+  usedCoupon: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Coupon",
+    },
+  ],
 });
 
 module.exports = mongoose.model("Customer", customerSchema);
