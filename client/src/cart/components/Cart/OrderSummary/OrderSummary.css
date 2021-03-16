@@ -7,7 +7,29 @@
 }
 .order-summary__list {
   margin: 1rem 0;
-
   display: flex;
   justify-content: space-between;
+}
+.coupon-error {
+  color: red;
+}
+.applied-coupon {
+  padding: 0.4rem;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+.coupon-code {
+  color: green;
+}
+.discount-price {
+  color: green;
+}
+.delete-coupon {
+  position: absolute;
+  top: -10px;
+  right: -4px;
+  color: black;
+  font-size: 1.2rem;
+  cursor: pointer;
 }

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import "./OrderSummary.css";
 
@@ -47,11 +47,19 @@ const OrderSummary = (props) => {
     }
   };
 
+  console.log(appliedCoupon);
+
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        setError(false);
+      }, [3000]);
+    }
+  }, [error]);
+
   const clickedBtnHandler = () => {
     history.push("/checkout");
   };
-
-  console.log(appliedCoupon);
 
   const shippingFee = "2470";
 
@@ -80,6 +88,21 @@ const OrderSummary = (props) => {
               fetchData(url, method, data, context.token)
             }
           />
+        )}
+        {error && <p className="coupon-error">{error}</p>}
+        {appliedCoupon && (
+          <p className="applied-coupon">
+            <span>
+              <span className="coupon-code">{appliedCoupon.code}</span> Applied
+            </span>
+            <span>
+              <span className="discount-price">
+                {appliedCoupon.discountPrice}
+              </span>
+              &nbsp; off
+            </span>
+            <span className="delete-coupon">x</span>
+          </p>
         )}
         <li className="order-summary__list total">
           <span className="order-summary__text">Total</span>
