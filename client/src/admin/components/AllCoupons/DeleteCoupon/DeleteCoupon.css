@@ -1,0 +1,9 @@
+.delete-coupon-btn {
+  background: red;
+  color: white;
+}
+.cancel-coupon-btn {
+  background: purple;
+  margin-left: 1rem;
+  color: white;
+}

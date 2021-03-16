@@ -2,33 +2,48 @@ import React from "react";
 
 import "./AllCoupons.css";
 
+import DeleteCoupon from "./DeleteCoupon/DeleteCoupon";
+import SecondaryBtn from "../../../share/components/SecondaryBtn/SecondaryBtn";
+
 const AllCoupons = (props) => {
   let couponOutput;
 
-  if (props.coupons.length === 0) {
-    couponOutput = (
-      <div>
-        <p>No Coupons</p>;
-      </div>
+  couponOutput = props.coupons.map((coupon) => {
+    return (
+      <tr>
+        <td>{coupon.code}</td>
+        <td>{coupon.discountPrice}</td>
+        <td>
+          <SecondaryBtn className="coupon-edit__btn">Edit</SecondaryBtn>
+        </td>
+        <td>
+          <DeleteCoupon couponId={coupon._id} />
+        </td>
+      </tr>
     );
-  } else {
-    couponOutput = props.coupons.map((coupon) => {
-      return (
-        <div key={coupon._id} className="coupon-output">
-          <span>{coupon.code}</span>
-          <span>{coupon.discountPrice}</span>
-          <div className="coupon-mani"></div>
-        </div>
-      );
-    });
-  }
+  });
 
   return (
     <>
       <div className="coupon-wrapper">
-        <h4>All Coupons</h4>
-
-        <div className="coupons">{couponOutput}</div>
+        {props.coupons.length === 0 ? (
+          <div className="error">
+            <p>No Coupons</p>
+          </div>
+        ) : (
+          <>
+            <h4>All Coupons</h4>
+            <table className="table">
+              <tr>
+                <th>Coupon Code</th>
+                <th>Discount Price</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+              {couponOutput}
+            </table>
+          </>
+        )}
       </div>
     </>
   );

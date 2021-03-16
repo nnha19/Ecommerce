@@ -11,14 +11,32 @@
 
 .coupons {
   margin-top: 2rem;
-
   min-height: 100vh;
 }
 
 .coupon-output {
-  color: white;
   padding: 1rem;
   background: purple;
   display: flex;
   justify-content: space-between;
+}
+
+.table {
+  width: 100%;
+  margin: 1rem;
+
+  line-height: 4rem;
+}
+.table th {
+  background: green;
+  font-weight: 500;
+}
+.table td {
+  text-align: center;
+  background: purple;
+  font-weight: 300;
+}
+
+.coupon-edit__btn {
+  width: 70%;
 }

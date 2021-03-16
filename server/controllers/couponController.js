@@ -60,7 +60,7 @@ const createCoupon = async (req, res, next) => {
 
 const deleteCoupon = async (req, res, next) => {
   try {
-    if (!res.admin) {
+    if (!req.admin) {
       res.status(400).json("You are not authorized to delete this coupon");
     } else {
       const { couponId } = req.params;

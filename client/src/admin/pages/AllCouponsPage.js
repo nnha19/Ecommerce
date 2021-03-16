@@ -3,6 +3,7 @@ import React, { useEffect, useContext } from "react";
 import AllCoupons from "../components/AllCoupons/AllCoupons";
 import { useHttp } from "../../customHooks/useHttp";
 import Context from "../../contexts/context";
+import Spinner from "../../share/UI/Spinner/Spinner";
 
 const AllCouponsPage = (props) => {
   const context = useContext(Context);
@@ -14,7 +15,7 @@ const AllCouponsPage = (props) => {
     fetchData,
     setAllCoupons,
     setError,
-  ] = useHttp("");
+  ] = useHttp([]);
 
   useEffect(() => {
     fetchData(
@@ -27,6 +28,7 @@ const AllCouponsPage = (props) => {
 
   return (
     <>
+      <Spinner show={loading} />
       <AllCoupons coupons={allCoupons} />
     </>
   );
