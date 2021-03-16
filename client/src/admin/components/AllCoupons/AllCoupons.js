@@ -10,7 +10,7 @@ const AllCoupons = (props) => {
 
   couponOutput = props.coupons.map((coupon) => {
     return (
-      <tr>
+      <tr key={coupon._id}>
         <td>{coupon.code}</td>
         <td>{coupon.discountPrice}</td>
         <td>
