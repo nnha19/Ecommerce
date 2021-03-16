@@ -47,7 +47,9 @@ const OrderSummary = (props) => {
     }
   };
 
-  console.log(appliedCoupon);
+  const removeAppliedCouponHandler = () => {
+    setAppliedCoupon(null);
+  };
 
   useEffect(() => {
     if (error) {
@@ -62,6 +64,11 @@ const OrderSummary = (props) => {
   };
 
   const shippingFee = "2470";
+  const allTotalAmount = parseInt(totalAmount) + parseInt(shippingFee);
+  let discountTotal;
+  if (appliedCoupon) {
+    discountTotal = allTotalAmount - appliedCoupon.discountPrice;
+  }
 
   return (
     <>
@@ -101,14 +108,28 @@ const OrderSummary = (props) => {
               </span>
               &nbsp; off
             </span>
-            <span className="delete-coupon">x</span>
+            <span
+              onClick={removeAppliedCouponHandler}
+              className="delete-coupon"
+            >
+              x
+            </span>
           </p>
         )}
-        <li className="order-summary__list total">
-          <span className="order-summary__text">Total</span>
-          <span className="order-summary__ks">
-            {maniStr(parseInt(totalAmount) + parseInt(shippingFee))} KS
-          </span>
+        <li className="total">
+          <div className="total-price-container">
+            <span className="order-summary__text">Total</span>
+            <span
+              className={`${
+                appliedCoupon ? "original-price" : ""
+              } order-summary__ks`}
+            >
+              {maniStr(allTotalAmount)} KS
+            </span>
+          </div>
+          {discountTotal && (
+            <p className="discount-price">{maniStr(discountTotal)} KS</p>
+          )}
         </li>
       </ul>
       <SecondaryBtn

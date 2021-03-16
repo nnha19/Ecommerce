@@ -33,7 +33,9 @@ const Coupon = (props) => {
           type="text"
           placeholder="Enter Coupon Code"
         />
-        <SecondaryBtn className="coupon__btn">Apply</SecondaryBtn>
+        <SecondaryBtn className="coupon__btn">
+          {props.loading ? <span className="coupon-loading"></span> : "Apply"}
+        </SecondaryBtn>
       </form>
     </>
   );

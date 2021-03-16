@@ -6,9 +6,17 @@
   list-style: none;
 }
 .order-summary__list {
-  margin: 1rem 0;
   display: flex;
   justify-content: space-between;
+  margin: 1rem 0;
+}
+.total-price-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.total {
+  margin: 1rem 0;
 }
 .coupon-error {
   color: red;
@@ -32,4 +40,11 @@
   color: black;
   font-size: 1.2rem;
   cursor: pointer;
+}
+.original-price {
+  text-decoration: line-through;
+}
+.discount-price {
+  text-align: end;
+  color: black;
 }

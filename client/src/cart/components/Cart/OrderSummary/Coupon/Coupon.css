@@ -15,7 +15,28 @@
   height: 100%;
   background: purple;
   padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .coupon__btn:hover {
   background: rgba(128, 0, 128, 0.568);
+}
+.coupon-loading {
+  height: 50%;
+  width: 1rem;
+  border: 2px solid black;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  display: inline-block;
+  animation: coupon-loading 1s infinite;
+}
+
+@keyframes coupon-loading {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
