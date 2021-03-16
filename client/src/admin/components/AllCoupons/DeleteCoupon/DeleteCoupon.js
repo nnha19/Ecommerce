@@ -7,11 +7,13 @@ import "./DeleteCoupon.css";
 import Modal from "../../../../share/UI/Modal/Modal";
 import Button from "../../../../share/components/button/button";
 import Context from "../../../../contexts/context";
+import Spinner from "../../../../share/UI/Spinner/Spinner";
 
 const DeleteCoupon = (props) => {
   const context = useContext(Context);
 
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
+  const [deleteCouponIsLoading, setDeleteCouponIsLoading] = useState(false);
 
   const showDeleteWarningHandler = () => {
     setShowDeleteWarning(true);
@@ -23,6 +25,8 @@ const DeleteCoupon = (props) => {
 
   const deleteCouponHandler = async () => {
     try {
+      setShowDeleteWarning(false);
+      setDeleteCouponIsLoading(true);
       const resp = await axios({
         url: `${process.env.REACT_APP_BACKEND_URL}/coupon/${props.couponId}`,
         method: "delete",
@@ -30,14 +34,17 @@ const DeleteCoupon = (props) => {
           Authorization: context.token,
         },
       });
-      console.log(resp);
+      props.deleteOneCoupon(props.couponId);
+      setDeleteCouponIsLoading(false);
     } catch (err) {
       console.log(err.response);
+      setDeleteCouponIsLoading(false);
     }
   };
 
   return (
     <>
+      <Spinner show={deleteCouponIsLoading} />
       <Modal
         modalShow={showDeleteWarning}
         hideModal={cancelDeleteCouponHandler}

@@ -17,7 +17,10 @@ const AllCoupons = (props) => {
           <SecondaryBtn className="coupon-edit__btn">Edit</SecondaryBtn>
         </td>
         <td>
-          <DeleteCoupon couponId={coupon._id} />
+          <DeleteCoupon
+            deleteOneCoupon={(couponId) => props.deleteOneCoupon(couponId)}
+            couponId={coupon._id}
+          />
         </td>
       </tr>
     );

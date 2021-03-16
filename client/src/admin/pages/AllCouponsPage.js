@@ -26,10 +26,20 @@ const AllCouponsPage = (props) => {
     );
   }, []);
 
+  const deleteOneCouponHandler = (couponId) => {
+    const updatedCoupon = allCoupons.filter(
+      (coupon) => couponId !== coupon._id
+    );
+    setAllCoupons(updatedCoupon);
+  };
+
   return (
     <>
       <Spinner show={loading} />
-      <AllCoupons coupons={allCoupons} />
+      <AllCoupons
+        deleteOneCoupon={(couponId) => deleteOneCouponHandler(couponId)}
+        coupons={allCoupons}
+      />
     </>
   );
 };
