@@ -1,0 +1,24 @@
+.coupon-wrapper {
+  min-height: 100vh;
+  background: grey;
+  padding: 2rem;
+}
+.coupon-wrapper h4 {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.coupons {
+  margin-top: 2rem;
+
+  min-height: 100vh;
+}
+
+.coupon-output {
+  color: white;
+  padding: 1rem;
+  background: purple;
+  display: flex;
+  justify-content: space-between;
+}
