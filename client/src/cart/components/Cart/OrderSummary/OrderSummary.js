@@ -27,6 +27,11 @@ const OrderSummary = (props) => {
     error && setAppliedCoupon(null);
   }, [error]);
 
+  useEffect(() => {
+    const coupon = JSON.parse(window.localStorage.getItem("appliedCoupon"));
+    setAppliedCoupon(coupon);
+  }, []);
+
   const maniStr = (amount) => {
     if (!amount) {
       return;
@@ -51,8 +56,14 @@ const OrderSummary = (props) => {
     }
   };
 
+  useEffect(() => {
+    appliedCoupon &&
+      localStorage.setItem("appliedCoupon", JSON.stringify(appliedCoupon));
+  }, [appliedCoupon]);
+
   const removeAppliedCouponHandler = () => {
     setAppliedCoupon(null);
+    localStorage.removeItem("appliedCoupon");
   };
 
   useEffect(() => {
