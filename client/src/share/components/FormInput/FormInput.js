@@ -44,6 +44,10 @@ const FormInput = (props) => {
     });
   };
 
+  if (props.cleanInput) {
+    inputVal.value = "";
+  }
+
   let output;
   if (props.elementType === "input") {
     output = (
