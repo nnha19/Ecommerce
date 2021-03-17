@@ -20,8 +20,8 @@ import CreateProductPage from "./admin/pages/CreateProductPage";
 import EditProductPage from "./admin/pages/EditProductPage";
 import WhilistProductPage from "./WhilistProduct/page/WhilistProductPage";
 import AllCouponsPage from "./admin/pages/AllCouponsPage";
-import CreateCoupon from "./admin/pages/CreateProductPage";
 import CreateCouponPage from "./admin/pages/CreateCouponPage";
+import EditCouponPage from "./admin/pages/EditCouponPage";
 
 const App = () => {
   const history = useHistory();
@@ -228,6 +228,13 @@ const App = () => {
               exact
               path="/admin/coupon/create"
               component={CreateCouponPage}
+            />
+          )}
+          {curUser && curUser.admin && (
+            <Route
+              exact
+              path="/admin/coupon/:couponId"
+              component={EditCouponPage}
             />
           )}
         </Context.Provider>

@@ -2,19 +2,26 @@ import React from "react";
 
 import "./AllCoupons.css";
 
+import { useHistory } from "react-router-dom";
+
 import DeleteCoupon from "./DeleteCoupon/DeleteCoupon";
 import SecondaryBtn from "../../../share/components/SecondaryBtn/SecondaryBtn";
 
 const AllCoupons = (props) => {
+  const history = useHistory();
   let couponOutput;
-
   couponOutput = props.coupons.map((coupon) => {
     return (
       <tr key={coupon._id}>
         <td>{coupon.code}</td>
         <td>{coupon.discountPrice}</td>
         <td>
-          <SecondaryBtn className="coupon-edit__btn">Edit</SecondaryBtn>
+          <SecondaryBtn
+            clicked={() => history.push(`/admin/coupon/${coupon._id}`)}
+            className="coupon-edit__btn"
+          >
+            Edit
+          </SecondaryBtn>
         </td>
         <td>
           <DeleteCoupon

@@ -69,11 +69,13 @@ const CreateCoupon = (props) => {
         <div className="checkout__delivery-infos coupon-form-container">
           <form className="checkout__form coupon__form">
             <FormInput
+              value={props.couponCode || ""}
               validRules={{ type: "REQUIRE" }}
               elementType="input"
               label="Coupon Code"
               type="text"
               changeLoginVal={(inputVal, id) =>
+                props.changeCouponVal(inputVal, id) ||
                 changeCouponValHandler(inputVal, id)
               }
               inputCls="checkout__input"
@@ -83,11 +85,13 @@ const CreateCoupon = (props) => {
               cleanInput={cleanInput}
             />
             <FormInput
+              value={props.discountPrice || null}
               validRules={{ type: "REQUIRE" }}
               elementType="input"
               label="Discount Price"
               type="number"
               changeLoginVal={(inputVal, id) =>
+                props.changeCouponVal(inputVal, id) ||
                 changeCouponValHandler(inputVal, id)
               }
               inputCls="checkout__input"
@@ -97,8 +101,8 @@ const CreateCoupon = (props) => {
               cleanInput={cleanInput}
             />
             <SecondaryBtn
-              clicked={createCouponHandler}
-              disabled={!allValid[0]}
+              clicked={props.editCoupon || createCouponHandler}
+              disabled={!props.allValid || !allValid[0]}
               className="coupon-form__btn"
             >
               Submit
