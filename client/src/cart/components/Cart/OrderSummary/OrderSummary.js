@@ -23,6 +23,10 @@ const OrderSummary = (props) => {
   const totalAmount = context.totalAmount;
   const history = useHistory();
 
+  useEffect(() => {
+    error && setAppliedCoupon(null);
+  }, [error]);
+
   const maniStr = (amount) => {
     if (!amount) {
       return;
@@ -104,7 +108,7 @@ const OrderSummary = (props) => {
             </span>
             <span>
               <span className="discount-price">
-                {appliedCoupon.discountPrice}
+                {appliedCoupon.discountPrice}KS
               </span>
               &nbsp; off
             </span>
