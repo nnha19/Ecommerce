@@ -18,7 +18,7 @@ const getAllCoupons = async (req, res, next) => {
 
 const getCouponById = async (req, res, next) => {
   try {
-    if (req.admin) {
+    if (!req.admin) {
       res.status(400).json("You are not authorized to get this coupon");
     } else {
       const coupon = await Coupon.findById(req.params.couponId);
@@ -57,7 +57,7 @@ const getCouponByUserId = async (req, res, next) => {
 const createCoupon = async (req, res, next) => {
   try {
     const { code, discountPrice } = req.body;
-    if (!req.admin) {
+    if (req.admin) {
       const newCoupon = await Coupon.create({
         code,
         discountPrice,

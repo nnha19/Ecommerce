@@ -1,35 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { useParams } from "react-router-dom";
 
 import CreateCoupon from "../CreateCoupon/CreateCoupon";
 import useCheckOverAllValid from "../../../customHooks/useCheckOverAllValid";
 import axios from "axios";
+import Context from "../../../contexts/context";
 
 const UpdateCoupon = (props) => {
+  const context = useContext(Context);
   const couponId = useParams().couponId;
-  const [editProductVal, setEditProductVal] = useState({
-    couponCode: {
-      value: "",
-      isValid: false,
-      isTouched: false,
-    },
-    discountPrice: {
-      value: "",
-      isValid: false,
-      isTouched: false,
-    },
-  });
+
+  const [editCouponVal, setEditCouponVal] = useState("");
+
+  const [couponVal, setCouponVal] = useState({});
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/coupon/${couponId}`);
+    (async () => {
+      const res = await axios({
+        url: `${process.env.REACT_APP_BACKEND_URL}/coupon/${couponId}`,
+        method: "get",
+        headers: {
+          Authorization: context.token,
+        },
+      });
+      const coupon = res.data;
+      setEditCouponVal(coupon);
+    })();
   }, []);
 
-  const allValid = useCheckOverAllValid(editProductVal);
+  let allValid = useCheckOverAllValid(couponVal);
 
   const editingCouponValHandler = (inputVal, id) => {
-    console.log(inputVal);
-    console.log(id);
+    setCouponVal({
+      ...couponVal,
+      [id]: inputVal,
+    });
   };
 
   const editCouponHandler = (e) => {
@@ -40,15 +46,18 @@ const UpdateCoupon = (props) => {
   return (
     <>
       <h4>Edit Coupon</h4>
-      <CreateCoupon
-        editCoupon={editCouponHandler}
-        changeCouponVal={(inputVal, id) =>
-          editingCouponValHandler(inputVal, id)
-        }
-        couponCode="s"
-        discountPrice={1200}
-        allValid={allValid}
-      />
+      {editCouponVal && (
+        <CreateCoupon
+          editing={true}
+          couponCode={editCouponVal.code}
+          discountPrice={editCouponVal.discountPrice}
+          editCoupon={editCouponHandler}
+          changeCouponVal={(inputVal, id) =>
+            editingCouponValHandler(inputVal, id)
+          }
+          allValid={allValid[0]}
+        />
+      )}
     </>
   );
 };
