@@ -16,6 +16,20 @@ const getAllCoupons = async (req, res, next) => {
   }
 };
 
+const getCouponById = async (req, res, next) => {
+  try {
+    if (req.admin) {
+      res.status(400).json("You are not authorized to get this coupon");
+    } else {
+      const coupon = await Coupon.findById(req.params.couponId);
+      res.status(200).json(coupon);
+    }
+  } catch (err) {
+    res.status(500).json(err);
+    console.log(err);
+  }
+};
+
 const getCouponByUserId = async (req, res, next) => {
   try {
     const { uid } = req.params;
@@ -99,6 +113,7 @@ const deleteCoupon = async (req, res, next) => {
 };
 
 exports.getAllCoupons = getAllCoupons;
+exports.getCouponById = getCouponById;
 exports.getCouponByUserId = getCouponByUserId;
 exports.createCoupon = createCoupon;
 exports.updateCoupon = updateCoupon;
