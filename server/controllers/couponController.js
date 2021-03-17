@@ -58,6 +58,23 @@ const createCoupon = async (req, res, next) => {
   }
 };
 
+const updateCoupon = async (req, res, next) => {
+  try {
+    if (!req.admin) {
+      res.status(400).json("Only admin can edit coupon");
+    } else {
+      const { code, discountPrice } = req.body;
+      const { couponId } = req.params;
+      const updateVal = { code, discountPrice };
+      const updatedCoupon = await Coupon.findByIdAndUpdate(couponId, updateVal);
+      res.status(200).json(updatedCoupon);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+};
+
 const deleteCoupon = async (req, res, next) => {
   try {
     if (!req.admin) {
@@ -84,4 +101,5 @@ const deleteCoupon = async (req, res, next) => {
 exports.getAllCoupons = getAllCoupons;
 exports.getCouponByUserId = getCouponByUserId;
 exports.createCoupon = createCoupon;
+exports.updateCoupon = updateCoupon;
 exports.deleteCoupon = deleteCoupon;
