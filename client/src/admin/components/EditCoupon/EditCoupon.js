@@ -1,17 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
 
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 
 import CreateCoupon from "../CreateCoupon/CreateCoupon";
 import useCheckOverAllValid from "../../../customHooks/useCheckOverAllValid";
 import Context from "../../../contexts/context";
+import Spinner from "../../../share/UI/Spinner/Spinner";
 
 const UpdateCoupon = (props) => {
+  const history = useHistory();
   const context = useContext(Context);
   const couponId = useParams().couponId;
 
   const [editCouponVal, setEditCouponVal] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [couponVal, setCouponVal] = useState({});
 
@@ -55,26 +58,33 @@ const UpdateCoupon = (props) => {
     });
   };
 
-  const editCouponHandler = (e) => {
+  const editCouponHandler = async (e) => {
     e.preventDefault();
-    const data = {
-      code: couponVal.couponCode.value,
-      discountPrice: couponVal.discountPrice.value,
-    };
-    axios({
-      url: `${process.env.REACT_APP_BACKEND_URL}/coupon/${editCouponVal._id}`,
-      method: "put",
-      headers: {
-        Authorization: context.token,
-      },
-      data,
-    });
+    try {
+      setLoading(true);
+      const data = {
+        code: couponVal.couponCode.value,
+        discountPrice: couponVal.discountPrice.value,
+      };
+      await axios({
+        url: `${process.env.REACT_APP_BACKEND_URL}/coupon/${editCouponVal._id}`,
+        method: "put",
+        headers: {
+          Authorization: context.token,
+        },
+        data,
+      });
+      history.push(`/admin/coupon`);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      alert(err);
+    }
   };
-
-  console.log(couponVal);
 
   return (
     <>
+      <Spinner show={loading} />
       <h4>Edit Coupon</h4>
       {editCouponVal && (
         <CreateCoupon
