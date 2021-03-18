@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 import CreateCoupon from "../CreateCoupon/CreateCoupon";
 import useCheckOverAllValid from "../../../customHooks/useCheckOverAllValid";
-import axios from "axios";
 import Context from "../../../contexts/context";
 
 const UpdateCoupon = (props) => {
@@ -29,6 +29,23 @@ const UpdateCoupon = (props) => {
     })();
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setCouponVal({
+        couponCode: {
+          value: editCouponVal.code,
+          valid: true,
+          isTouched: true,
+        },
+        discountPrice: {
+          value: editCouponVal.discountPrice,
+          valid: true,
+          isTouched: true,
+        },
+      });
+    }, 500);
+  }, [editCouponVal]);
+
   let allValid = useCheckOverAllValid(couponVal);
 
   const editingCouponValHandler = (inputVal, id) => {
@@ -40,8 +57,21 @@ const UpdateCoupon = (props) => {
 
   const editCouponHandler = (e) => {
     e.preventDefault();
-    console.log("editing");
+    const data = {
+      code: couponVal.couponCode.value,
+      discountPrice: couponVal.discountPrice.value,
+    };
+    axios({
+      url: `${process.env.REACT_APP_BACKEND_URL}/coupon/${editCouponVal._id}`,
+      method: "put",
+      headers: {
+        Authorization: context.token,
+      },
+      data,
+    });
   };
+
+  console.log(couponVal);
 
   return (
     <>
