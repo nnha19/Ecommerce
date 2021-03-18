@@ -1,4 +1,3 @@
-const { reset } = require("nodemon");
 const Coupon = require("../Modals/Coupon");
 const Customer = require("../Modals/Customer");
 
