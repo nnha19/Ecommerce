@@ -20,6 +20,7 @@ const UpdateCoupon = (props) => {
 
   useEffect(() => {
     (async () => {
+      setLoading(true);
       const res = await axios({
         url: `${process.env.REACT_APP_BACKEND_URL}/coupon/${couponId}`,
         method: "get",
@@ -29,6 +30,7 @@ const UpdateCoupon = (props) => {
       });
       const coupon = res.data;
       setEditCouponVal(coupon);
+      setLoading(false);
     })();
   }, []);
 
