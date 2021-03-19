@@ -1,6 +1,9 @@
-.coupon-wrapper {
-  min-height: 100vh;
+.coupon-container {
   background: grey;
+  min-height: 80vh;
+}
+.coupon-wrapper {
+  min-height: 0.1vh;
   padding: 2rem;
 }
 .coupon-wrapper h4 {
@@ -40,4 +43,19 @@
 
 .coupon-edit__btn {
   width: 70%;
+}
+
+@media (max-width: 550px) {
+  .coupon-wrapper {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .coupon-wrapper {
+    width: 30rem;
+  }
+  .coupon-container {
+    overflow-x: scroll;
+  }
 }

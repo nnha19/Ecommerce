@@ -35,24 +35,26 @@ const AllCoupons = (props) => {
 
   return (
     <>
-      <div className="coupon-wrapper">
-        {props.coupons.length === 0 ? (
-          <div className="error">
-            <p>No Coupons</p>
-          </div>
-        ) : (
-          <>
-            <table className="table">
-              <tr>
-                <th>Coupon Code</th>
-                <th>Discount Price</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-              {couponOutput}
-            </table>
-          </>
-        )}
+      <div className="coupon-container">
+        <div className="coupon-wrapper">
+          {props.coupons.length === 0 ? (
+            <div className="error">
+              <p>No Coupons</p>
+            </div>
+          ) : (
+            <>
+              <table className="table">
+                <tr>
+                  <th>Coupon Code</th>
+                  <th>Discount Price</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+                {couponOutput}
+              </table>
+            </>
+          )}
+        </div>
       </div>
     </>
   );
