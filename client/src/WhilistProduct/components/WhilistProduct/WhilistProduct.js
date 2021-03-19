@@ -8,12 +8,14 @@ import axios from "axios";
 import RemoveWhilistProduct from "./RemoveWhilistProduct/RemoveWhilistProduct";
 import AddToCart from "../../../products/components/ProductDetail/ProductDetailBody/AddToCart/AddToCart";
 import Context from "../../../contexts/context";
+import Spinner from "../../../share/UI/Spinner/Spinner";
 
 const WhilistProduct = (props) => {
   const context = useContext(Context);
   const history = useHistory();
 
   const [addedToCart, setAddedToCart] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const goToProductDetailHandler = (e, productId) => {
     if (!e.target.closest(".whilist-second")) {
@@ -22,11 +24,20 @@ const WhilistProduct = (props) => {
   };
 
   const removeAllWhilistHandler = async () => {
-    await axios.delete(
-      `${process.env.REACT_APP_BACKEND_URL}/whilist/${context.curUser.userId}`
-    );
-    context.removeAllWhilist();
+    try {
+      setLoading(true);
+      await axios.delete(
+        `${process.env.REACT_APP_BACKEND_URL}/whilist/${context.curUser.userId}`
+      );
+      context.removeAllWhilist();
+      setLoading(false);
+    } catch (err) {
+      alert(err);
+      setLoading(false);
+    }
   };
+
+  console.log(loading);
 
   let whilistProductOutput;
 
@@ -47,7 +58,10 @@ const WhilistProduct = (props) => {
           </div>
         </div>
         <div className="whilist-second">
-          <RemoveWhilistProduct productId={whilistProduct._id} />
+          <RemoveWhilistProduct
+            setLoading={(boolean) => setLoading(boolean)}
+            productId={whilistProduct._id}
+          />
           <AddToCart
             product={whilistProduct}
             context={context}
@@ -63,13 +77,16 @@ const WhilistProduct = (props) => {
   });
 
   return props.whilistProduct.length > 0 ? (
-    <div className="whilist">
-      <h4>Your favouritee products</h4>
-      <div className="whilist-product-container">
-        <h6 onClick={removeAllWhilistHandler}>Remove All</h6>
-        {whilistProductOutput}
+    <>
+      <Spinner show={loading} />
+      <div className="whilist">
+        <h4>Your favouritee products</h4>
+        <div className="whilist-product-container">
+          <h6 onClick={removeAllWhilistHandler}>Remove All</h6>
+          {whilistProductOutput}
+        </div>
       </div>
-    </div>
+    </>
   ) : (
     <div className="error-container">
       <p className="error">No whilist products.</p>
