@@ -1,4 +1,3 @@
-const { reset } = require("nodemon");
 const Coupon = require("../Modals/Coupon");
 const Customer = require("../Modals/Customer");
 
@@ -74,7 +73,7 @@ const createCoupon = async (req, res, next) => {
 
 const updateCoupon = async (req, res, next) => {
   try {
-    if (req.admin) {
+    if (!req.admin) {
       res.status(400).json("Only admin can edit coupon");
     } else {
       const { code, discountPrice } = req.body;
