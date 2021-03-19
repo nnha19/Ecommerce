@@ -87,7 +87,6 @@ const UpdateCoupon = (props) => {
   return (
     <>
       <Spinner show={loading} />
-      <h4>Edit Coupon</h4>
       {editCouponVal && (
         <CreateCoupon
           editing={true}

@@ -17,7 +17,7 @@ const AllCoupons = (props) => {
         <td>{coupon.discountPrice}</td>
         <td>
           <SecondaryBtn
-            clicked={() => history.push(`/admin/coupon/${coupon._id}`)}
+            clicked={() => history.push(`/admin/coupon/edit/${coupon._id}`)}
             className="coupon-edit__btn"
           >
             Edit
@@ -42,7 +42,6 @@ const AllCoupons = (props) => {
           </div>
         ) : (
           <>
-            <h4>All Coupons</h4>
             <table className="table">
               <tr>
                 <th>Coupon Code</th>

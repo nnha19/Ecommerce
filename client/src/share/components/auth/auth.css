@@ -38,5 +38,12 @@
 @media (max-width: 1000px) {
   .form {
     width: max-content;
+    height: 80%;
+  }
+}
+
+@media (max-width: 390px) {
+  .form {
+    padding: 0;
   }
 }

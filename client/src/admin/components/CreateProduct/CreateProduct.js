@@ -49,7 +49,6 @@ const CreateProduct = (props) => {
   return (
     <>
       <div className="checkout-container">
-        <h1>Create Product</h1>
         <ProductForm
           creatingProduct={(e) => creatingProductHandler(e)}
           allValid={allValid}

@@ -1,0 +1,14 @@
+.admin-form__btn {
+  width: 50%;
+}
+.admin-form__btn-container {
+  text-align: center;
+}
+@media (max-width: 900px) {
+  .admin-form__btn-container {
+    text-align: center;
+  }
+  .admin-form__btn {
+    width: 70%;
+  }
+}

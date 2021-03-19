@@ -3,6 +3,8 @@ import React from "react";
 import FormInput from "../../../../share/components/FormInput/FormInput";
 import SecondaryBtn from "../../../../share/components/SecondaryBtn/SecondaryBtn";
 
+import "./ProductForm.css";
+
 const ProductForm = (props) => {
   return (
     <form onSubmit={props.creatingProduct} className="admin-form">
@@ -122,9 +124,11 @@ const ProductForm = (props) => {
           />
         </div>
       </div>
-      <SecondaryBtn disabled={!props.allValid} className="admin-form__btn">
-        Submit
-      </SecondaryBtn>
+      <div className="admin-form__btn-container">
+        <SecondaryBtn disabled={!props.allValid} className="admin-form__btn">
+          Submit
+        </SecondaryBtn>
+      </div>
     </form>
   );
 };
