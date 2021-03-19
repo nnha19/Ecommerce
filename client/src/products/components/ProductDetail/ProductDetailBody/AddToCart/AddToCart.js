@@ -6,20 +6,20 @@ import Button from "../../../../../share/components/button/button";
 import AddToCartDisplayMsg from "../AddToCartDisplayMsg/AddToCartDisplayMsg";
 
 const AddToCart = (props) => {
+  const cartItemData = props.cartItemData;
   const history = useHistory();
-
   const [addedToCart, setAddedToCart] = useState(false);
-
+  const [buying, setBuying] = useState(false);
   const product = props.product;
-  const error = props.error;
 
   useEffect(() => {
-    if (error && error.error) {
-      setTimeout(() => {
-        setAddedToCart(false);
-      }, 800);
+    cartItemData.error && setAddedToCart(false);
+  });
+  useEffect(() => {
+    if (buying && !cartItemData.loading) {
+      history.push("/checkout");
     }
-  }, [error.error]);
+  }, [buying, cartItemData.loading]);
 
   const addToCartHandler = () => {
     if (!props.context.authenticated) {
@@ -32,7 +32,6 @@ const AddToCart = (props) => {
         chosenColor = c.color;
       }
     });
-
     const data = {
       brand: product.brand,
       price: product.price,
@@ -50,17 +49,11 @@ const AddToCart = (props) => {
       "post",
       data
     );
+    setAddedToCart(true);
     if (props.buy) {
-      error.error = null;
-      setTimeout(() => {
-        error.setError(false);
-        history.push("/checkout");
-      }, 500);
+      setBuying(true);
       return;
     }
-    setTimeout(() => {
-      !error.error && setAddedToCart(true);
-    }, 800);
   };
 
   const hideModalHandler = () => {
@@ -69,13 +62,12 @@ const AddToCart = (props) => {
 
   return (
     <>
-      {addedToCart && !error.error && (
+      {addedToCart && !cartItemData.loading && !cartItemData.error && (
         <AddToCartDisplayMsg
           hideModal={() => hideModalHandler()}
           name={product.brand}
           amount={props.itemQuantity}
           addedToCart={addedToCart}
-          error={error}
         />
       )}
       {props.whilist ? (
@@ -90,7 +82,7 @@ const AddToCart = (props) => {
           clicked={() => addToCartHandler()}
           className={`product-detail__btn cart-btn ${props.className}`}
         >
-          Add To Cart
+          {props.children}
         </Button>
       )}
     </>

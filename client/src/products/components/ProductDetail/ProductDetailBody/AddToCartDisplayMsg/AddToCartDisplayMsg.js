@@ -15,24 +15,19 @@ const AddToCartDisplayMsg = (props) => {
   };
 
   return (
-    !props.error.error && (
-      <Modal
-        hideModal={props.hideModal}
-        title={`${props.amount} ${props.name} added to cart`}
-        modalShow={props.addedToCart}
-        body={
-          <>
-            <Button
-              clicked={goToCheckoutHandler}
-              style={{ marginRight: "1rem" }}
-            >
-              Checkout
-            </Button>
-            <Button clicked={continueShoppingHandler}>Continue Shopping</Button>
-          </>
-        }
-      />
-    )
+    <Modal
+      hideModal={props.hideModal}
+      title={`${props.amount} ${props.name} added to cart`}
+      modalShow={props.addedToCart}
+      body={
+        <>
+          <Button clicked={goToCheckoutHandler} style={{ marginRight: "1rem" }}>
+            Checkout
+          </Button>
+          <Button clicked={continueShoppingHandler}>Continue Shopping</Button>
+        </>
+      }
+    />
   );
 };
 

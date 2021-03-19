@@ -7,13 +7,17 @@ import ATCErrorMsg from "./ATCErrorMsg/ATCErrorMsg";
 import Context from "../../../../contexts/context";
 import AddToWhilist from "../../../../cart/components/Cart/AddToWhilist/AddToWhilist";
 import AddToCart from "./AddToCart/AddToCart";
+import Spinner from "../../../../share/UI/Spinner/Spinner";
 
 const ProductDetailBody = (props) => {
   const context = useContext(Context);
-  const error = context.cartItemData;
+  const cartItemData = context.cartItemData;
   const product = props.product;
-
   const [itemQuantity, setItemQuantity] = useState(product.pickedQty);
+
+  useEffect(() => {
+    cartItemData.setError(false);
+  }, []);
 
   const updateQuantityHandler = (type) => {
     type === "add"
@@ -22,16 +26,17 @@ const ProductDetailBody = (props) => {
   };
 
   const hideModalHandler = () => {
-    context.cartItemData.setError(false);
+    cartItemData.setError(false);
   };
 
   return (
     <>
-      {error && (
+      <Spinner show={cartItemData.loading} />
+      {cartItemData.error && (
         <ATCErrorMsg
           hideModal={() => hideModalHandler()}
-          error={error.error}
-          setError={error.setError}
+          error={cartItemData.error}
+          setError={cartItemData.setError}
         />
       )}
       <div className="product-detail__body">
@@ -57,18 +62,22 @@ const ProductDetailBody = (props) => {
               itemQuantity={itemQuantity}
               context={context}
               product={product}
-              error={error}
               hideModal={() => hideModalHandler()}
-            />
+              cartItemData={cartItemData}
+            >
+              Add To Cart
+            </AddToCart>
             <AddToCart
               buy={true}
               className="product-detail__btn checkout-btn"
               itemQuantity={itemQuantity}
               context={context}
               product={product}
-              error={error}
               hideModal={() => hideModalHandler()}
-            />
+              cartItemData={cartItemData}
+            >
+              Buy Now
+            </AddToCart>
           </div>
           <div className="features-btn-container">
             <Button clicked={props.showFeatures} className="features-btn">

@@ -6,8 +6,6 @@ import Context from "../../../../contexts/context";
 import "./AddToWhilist.css";
 
 const AddToWhilist = (props) => {
-  console.log(props.addedToWhilist);
-
   const context = useContext(Context);
   const [
     createdWhilist,

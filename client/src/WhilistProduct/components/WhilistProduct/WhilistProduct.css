@@ -35,3 +35,9 @@
 .whilist-cart:hover {
   color: purple;
 }
+
+@media (max-width: 400px) {
+  .whilist-second {
+    margin: 2rem auto;
+  }
+}

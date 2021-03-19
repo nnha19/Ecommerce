@@ -22,7 +22,7 @@ const ATCErrorMsg = (props) => {
           >
             Continue Shopping
           </Button>
-          <Button>Checkout</Button>
+          <Button clicked={() => history.push(`/checkout`)}>Checkout</Button>
         </div>
       }
       modalShow={props.error}

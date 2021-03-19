@@ -80,7 +80,6 @@ const WhilistProduct = (props) => {
     <>
       <Spinner show={loading} />
       <div className="whilist">
-        <h4>Your favouritee products</h4>
         <div className="whilist-product-container">
           <h6 onClick={removeAllWhilistHandler}>Remove All</h6>
           {whilistProductOutput}
