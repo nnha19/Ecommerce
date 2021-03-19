@@ -1,0 +1,18 @@
+.add-to-whilist-loading {
+  height: 1.5rem;
+  width: 1.5rem;
+  /* display: inline-block; */
+  border-radius: 50%;
+  border: 3px solid black;
+  border-top: 3px solid orangered;
+  animation: spin 1s infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

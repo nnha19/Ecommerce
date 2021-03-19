@@ -33,7 +33,7 @@ const AddToWhilist = (props) => {
     );
   };
 
-  return (
+  return !loading ? (
     <i
       onClick={addToWhilistHandler}
       title="Add to whilist"
@@ -41,6 +41,8 @@ const AddToWhilist = (props) => {
         props.addedToWhilist ? "s" : "r"
       } fa-heart cart__item-heart cart__item-icons`}
     ></i>
+  ) : (
+    <span className="add-to-whilist-loading"></span>
   );
 };
 
