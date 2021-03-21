@@ -5,6 +5,7 @@
 .coupon-wrapper {
   min-height: 0.1vh;
   padding: 2rem;
+  width: 100%;
 }
 .coupon-wrapper h4 {
   text-align: center;
@@ -27,7 +28,6 @@
 .table {
   width: 100%;
   margin: 1rem auto;
-
   line-height: 4rem;
 }
 .table th {
@@ -53,9 +53,9 @@
 
 @media (max-width: 450px) {
   .coupon-wrapper {
-    width: 30rem;
+    overflow-x: auto;
   }
-  .coupon-container {
-    overflow-x: scroll;
+  .table {
+    width: 30rem;
   }
 }
