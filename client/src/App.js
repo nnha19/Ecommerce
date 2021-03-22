@@ -62,7 +62,6 @@ const App = () => {
   };
 
   const removeAllWhilistHandler = () => {
-    console.log("remove all whilist");
     setWhilist([]);
   };
 

@@ -17,13 +17,15 @@ const AllOrdersPage = (props) => {
   ] = useHttp([]);
 
   useEffect(() => {
-    fetchData(
-      `${process.env.REACT_APP_BACKEND_URL}/order/${context.curUser.userId}/admin`,
-      "get",
-      "",
-      context.token
-    );
-  }, []);
+    context.curUser &&
+      context.curUser.admin &&
+      fetchData(
+        `${process.env.REACT_APP_BACKEND_URL}/order/${context.curUser.userId}/admin`,
+        "get",
+        "",
+        context.token
+      );
+  }, [context.curUser]);
 
   return (
     <>
