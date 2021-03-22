@@ -79,7 +79,8 @@ const Checkout = (props) => {
     fetchData(
       `${process.env.REACT_APP_BACKEND_URL}/order/${context.curUser.userId}`,
       "post",
-      order
+      order,
+      context.token
     );
   };
 
