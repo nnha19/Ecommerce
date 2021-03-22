@@ -22,6 +22,7 @@ import WhilistProductPage from "./WhilistProduct/page/WhilistProductPage";
 import AllCouponsPage from "./admin/pages/AllCouponsPage";
 import CreateCouponPage from "./admin/pages/CreateCouponPage";
 import EditCouponPage from "./admin/pages/EditCouponPage";
+import DemoLogin from "./DemoLogin/DemoLogin";
 
 const App = () => {
   const history = useHistory();
@@ -166,6 +167,7 @@ const App = () => {
         }}
       >
         <Navigation />
+        {!authenticated && <DemoLogin />}
         {curUser && curUser.admin && <AdminNavBar curUser={curUser} />}
       </Context.Provider>
       <Switch>

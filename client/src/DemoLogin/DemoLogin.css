@@ -1,0 +1,59 @@
+.demo {
+  position: relative;
+  width: max-content;
+}
+.demo__login {
+  margin: 0.5rem 4rem;
+  background: rgba(0, 128, 0, 0.644);
+  padding: 0.5rem 2rem;
+  color: white;
+  border: 1px solid black;
+  outline: none;
+  cursor: pointer;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  text-align: center;
+}
+.demo-login:hover {
+  background: green;
+}
+
+.demo__icon {
+  margin-left: 0.4rem;
+  transition: all 0.3s;
+}
+.demo:hover .demo__icon {
+  transform: rotate(540deg);
+}
+
+.demo__lists {
+  background: white;
+  height: max-content;
+  width: max-content;
+  position: absolute;
+  left: 4rem;
+  top: 2.2rem;
+  list-style: none;
+  z-index: 10;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.4s;
+}
+
+.demo:hover .demo__lists {
+  visibility: visible;
+  opacity: 1;
+}
+
+.demo__list {
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+.demo__list:hover {
+  background: green;
+  color: white;
+}
