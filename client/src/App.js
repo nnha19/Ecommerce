@@ -167,7 +167,11 @@ const App = () => {
         }}
       >
         <Navigation />
-        {!authenticated && <DemoLogin />}
+        {!authenticated && (
+          <DemoLogin
+            loginUser={(customer, token) => loginUserHandler(customer, token)}
+          />
+        )}
         {curUser && curUser.admin && <AdminNavBar curUser={curUser} />}
       </Context.Provider>
       <Switch>
