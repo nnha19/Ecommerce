@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import "./HamburgerIcon.css";
+import AdminNavItems from "../AdminNavItems/AdminNavItems";
 
 const HamburgerIcon = (props) => {
   const [showAdminNav, setShowAdminNav] = useState(false);
@@ -9,16 +10,21 @@ const HamburgerIcon = (props) => {
     setShowAdminNav(!showAdminNav);
   };
 
+  const hideAdminNavHandler = () => {
+    setShowAdminNav(false);
+  };
+
   return (
     <div className="admin-nav-container">
       <div onClick={toggleAdminNavHandler} className="hamburger">
         <span className="hamburger__icon"></span>
       </div>
-      <div
-        className={`admin-nav__items-container ${
-          showAdminNav ? "show-admin-nav" : ""
-        }`}
-      ></div>
+      <ul
+        onClick={hideAdminNavHandler}
+        className={`admin-mobile-nav ${showAdminNav ? "show-admin-nav" : ""}`}
+      >
+        <AdminNavItems showAdminNav={showAdminNav} curUser={props.curUser} />
+      </ul>
     </div>
   );
 };

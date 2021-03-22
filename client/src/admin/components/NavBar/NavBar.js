@@ -3,35 +3,15 @@ import { NavLink } from "react-router-dom";
 
 import "./NavBar.css";
 
+import AdminNavItems from "./AdminNavItems/AdminNavItems";
 import HamburgerIcon from "./HamburgerIcon/HamburgerIcon";
 
 const NavBar = (props) => {
-  console.log(props);
   return (
     <nav classNam="admin-nav">
-      <HamburgerIcon />
+      <HamburgerIcon curUser={props.curUser && props.curUser} />
       <ul className="admin-nav__items">
-        <NavLink
-          className="nav__link admin-nav__link"
-          to={`/admin/order/${props.curUser.userId}`}
-        >
-          <li className="admin-nav__item">All Orders</li>
-        </NavLink>
-        <NavLink
-          className="nav__link admin-nav__link"
-          to={`/admin/product/create`}
-        >
-          <li className="admin-nav__item">Create Item</li>
-        </NavLink>
-        <NavLink className="nav__link admin-nav__link" to="/admin/coupon">
-          <li className="admin-nav__item">Coupons</li>
-        </NavLink>
-        <NavLink
-          className="nav__link admin-nav__link"
-          to="/admin/coupon/create"
-        >
-          <li className="admin-nav__item">Add Coupons</li>
-        </NavLink>
+        <AdminNavItems curUser={props.curUser && props.curUser} />
       </ul>
     </nav>
   );

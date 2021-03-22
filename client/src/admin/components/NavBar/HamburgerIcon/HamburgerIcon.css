@@ -1,6 +1,6 @@
 .admin-nav-container {
   background: purple;
-  height: 3rem;
+  min-height: 3rem;
 }
 .hamburger {
   height: 25px;
@@ -44,12 +44,38 @@
   z-index: 10;
   transition: all 0.4s;
 }
+
+.admin-mobile-nav {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  height: 0;
+  background: purple;
+  transition: all 0.4s;
+  opacity: 0;
+  visibility: hidden;
+}
+
 .show-admin-nav {
-  height: 12rem;
+  padding: 2rem 0;
+  height: max-content;
+  opacity: 1;
+  visibility: visible;
+  padding-bottom: 0;
 }
 
 @media (min-width: 550px) {
   .admin-nav-container {
     display: none;
+  }
+}
+
+@media (max-width: 550px) {
+  .admin-nav__link {
+    border-bottom: 1px solid grey;
+    padding: 1rem 4rem;
+  }
+  .admin-nav__link:first-child {
+    border-top: 1px solid grey;
   }
 }
