@@ -9,10 +9,12 @@ import RemoveWhilistProduct from "./RemoveWhilistProduct/RemoveWhilistProduct";
 import AddToCart from "../../../products/components/ProductDetail/ProductDetailBody/AddToCart/AddToCart";
 import Context from "../../../contexts/context";
 import Spinner from "../../../share/UI/Spinner/Spinner";
+import ATCErrorMsg from "../../../products/components/ProductDetail/ProductDetailBody/ATCErrorMsg/ATCErrorMsg";
 
 const WhilistProduct = (props) => {
   const context = useContext(Context);
   const history = useHistory();
+  const cartItemData = context.cartItemData;
 
   const [addedToCart, setAddedToCart] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -37,7 +39,9 @@ const WhilistProduct = (props) => {
     }
   };
 
-  console.log(loading);
+  const hideModalHandler = () => {
+    cartItemData.setError(false);
+  };
 
   let whilistProductOutput;
 
@@ -67,7 +71,7 @@ const WhilistProduct = (props) => {
             context={context}
             itemQuantity={1}
             setAddedToCart={(boolean) => setAddedToCart(boolean)}
-            error={{}}
+            cartItemData={cartItemData}
             whilist={true}
             className="whilist-cart"
           />
@@ -78,7 +82,14 @@ const WhilistProduct = (props) => {
 
   return props.whilistProduct.length > 0 ? (
     <>
-      <Spinner show={loading} />
+      {cartItemData.error && (
+        <ATCErrorMsg
+          hideModal={() => hideModalHandler()}
+          error={cartItemData.error}
+          setError={cartItemData.setError}
+        />
+      )}
+      <Spinner show={loading || context.cartItemData.loading} />
       <div className="whilist">
         <div className="whilist-product-container">
           <h6 onClick={removeAllWhilistHandler}>Remove All</h6>
