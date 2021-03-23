@@ -17,7 +17,11 @@ const HamburgerIcon = (props) => {
   return (
     <div className="admin-nav-container">
       <div onClick={toggleAdminNavHandler} className="hamburger">
-        <span className="hamburger__icon"></span>
+        {!showAdminNav ? (
+          <span className="hamburger__icon"></span>
+        ) : (
+          <span className="cross"></span>
+        )}
       </div>
       <ul
         onClick={hideAdminNavHandler}
