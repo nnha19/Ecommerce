@@ -55,6 +55,10 @@ const App = () => {
       })();
   }, [curUser]);
 
+  useEffect(() => {
+    !curUser && setWhilist();
+  }, [curUser]);
+
   const removeOneWhilist = (productId) => {
     const updatedWhilist = whilist.filter(
       (whilist) => whilist._id !== productId
@@ -65,8 +69,6 @@ const App = () => {
   const removeAllWhilistHandler = () => {
     setWhilist([]);
   };
-
-  useEffect(() => {}, []);
 
   const updateCartItemAmount = () => {
     let totalAmount = 0;
