@@ -44,6 +44,7 @@ const App = () => {
   const [showDropDown, setShowDropDown] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const [whilist, setWhilist] = useState([]);
+  const [tokenExpirationDate, setTokenExpirationDate] = useState();
 
   useEffect(() => {
     curUser &&
@@ -113,6 +114,7 @@ const App = () => {
       tokenDate || new Date(new Date().getTime() + 1000 * 60 * 60);
     setCurUser(customer);
     setToken(token);
+    setTokenExpirationDate(tokenExpirationDate);
     setAuthenticated(!!token);
     localStorage.setItem("token", JSON.stringify(token));
     localStorage.setItem("customer", JSON.stringify(customer));
@@ -143,6 +145,17 @@ const App = () => {
       loginUserHandler(customer, token, tokenExpirationDate);
     }
   }, []);
+
+  useEffect(() => {
+    if (token) {
+      var timer = setTimeout(
+        logoutUserHandler,
+        tokenExpirationDate.getTime() - new Date().getTime()
+      );
+    } else {
+      clearTimeout(timer);
+    }
+  }, [token, tokenExpirationDate]);
 
   const toggleLoginHandler = () => {
     setLogin(!login);

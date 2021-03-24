@@ -25,7 +25,9 @@ const Customer = (props) => {
 
   return (
     <li onClick={showDropDownHandler} className="customer">
-      <span className="customer__username">{props.curUser.username[0]}</span>
+      <span className="customer__username">
+        {props.curUser && props.curUser.username[0]}
+      </span>
       {context.showDropDown && (
         <div className="customer__modal">
           <ul onClick={hideDropDownHandler} className="customer__lists">
