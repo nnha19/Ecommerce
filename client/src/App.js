@@ -66,6 +66,8 @@ const App = () => {
     setWhilist([]);
   };
 
+  useEffect(() => {}, []);
+
   const updateCartItemAmount = () => {
     let totalAmount = 0;
     cartItem &&
@@ -101,25 +103,21 @@ const App = () => {
   }, [curUser]);
 
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("token"));
-    const customer = JSON.parse(localStorage.getItem("customer"));
-    if (token && customer) {
-      setToken(token);
-      setCurUser(customer);
-      setAuthenticated(!!token);
-    }
-  }, []);
-
-  useEffect(() => {
     updateCartItemAmount();
   }, [curUser, cartItem]);
 
-  const loginUserHandler = (customer, token) => {
+  const loginUserHandler = (customer, token, tokenDate) => {
+    const tokenExpirationDate =
+      tokenDate || new Date(new Date().getTime() + 1000 * 60 * 60);
     setCurUser(customer);
     setToken(token);
     setAuthenticated(!!token);
     localStorage.setItem("token", JSON.stringify(token));
     localStorage.setItem("customer", JSON.stringify(customer));
+    localStorage.setItem(
+      "tokenExpirationDate",
+      tokenExpirationDate.toISOString()
+    );
   };
 
   const logoutUserHandler = () => {
@@ -132,6 +130,17 @@ const App = () => {
     setCurUser("");
     setAuthenticated(false);
   };
+
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const customer = JSON.parse(localStorage.getItem("customer"));
+    const tokenExpirationDate = new Date(
+      localStorage.getItem("tokenExpirationDate")
+    );
+    if (token && customer && tokenExpirationDate > new Date().getTime()) {
+      loginUserHandler(customer, token, tokenExpirationDate);
+    }
+  }, []);
 
   const toggleLoginHandler = () => {
     setLogin(!login);
