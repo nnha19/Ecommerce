@@ -27,7 +27,7 @@ const NavItems = (props) => {
       <NavLink className="nav__link" to="/">
         <li className="logo">
           <img className="nav__logo" src={Logo} alt="Logo" />
-          <h1 className="nav__name">Ever Vision</h1>
+          <h1 className="nav__name">May Myo Vision</h1>
         </li>
       </NavLink>
       <div className="nav__side">

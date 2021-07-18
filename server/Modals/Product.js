@@ -24,6 +24,7 @@ const productSchema = new mongoose.Schema({
     size: Number,
     brand: String,
     return: String,
+    uv: String,
   },
 });
 
