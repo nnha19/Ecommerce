@@ -1,6 +1,5 @@
-const Customer = require("../Modals/Customer");
-const Cart = require("../Modals/Cart");
-const Order = require("../Modals/Order");
+const Customer = require("../Models/Customer");
+const Order = require("../Models/Order");
 
 const getAllOrders = async (req, res, next) => {
   const { uid } = req.params;

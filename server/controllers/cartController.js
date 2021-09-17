@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
-const Customer = require("../Modals/Customer");
-const Cart = require("../Modals/Cart");
-const Product = require("../Modals/Product");
+const Customer = require("../Models/Customer");
+const Cart = require("../Models/Cart");
+const Product = require("../Models/Product");
 
 const getAllItemsFromCart = async (req, res, next) => {
   try {
@@ -26,15 +26,8 @@ const getAllItemsFromCart = async (req, res, next) => {
 
 const createCartItem = async (req, res, next) => {
   try {
-    const {
-      productId,
-      brand,
-      color,
-      price,
-      pickedQty,
-      features,
-      image,
-    } = req.body;
+    const { productId, brand, color, price, pickedQty, features, image } =
+      req.body;
 
     const userId = req.params.id;
     Customer.findById(userId)

@@ -1,5 +1,5 @@
-const Coupon = require("../Modals/Coupon");
-const Customer = require("../Modals/Customer");
+const Coupon = require("../Models/Coupon");
+const Customer = require("../Models/Customer");
 
 const getAllCoupons = async (req, res, next) => {
   try {

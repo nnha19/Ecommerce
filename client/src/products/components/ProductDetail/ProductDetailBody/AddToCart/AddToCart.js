@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import Button from "../../../../../share/components/button/button";
+import SecondaryBtn from "../../../../../share/components/SecondaryBtn/SecondaryBtn";
 import AddToCartDisplayMsg from "../AddToCartDisplayMsg/AddToCartDisplayMsg";
 
 const AddToCart = (props) => {
@@ -26,12 +27,7 @@ const AddToCart = (props) => {
       props.context.toggleLogin();
       return;
     }
-    let chosenColor;
-    product.colors.forEach((c) => {
-      if (c.choosen) {
-        chosenColor = c.color;
-      }
-    });
+
     const data = {
       brand: product.brand,
       price: product.price,
@@ -40,7 +36,6 @@ const AddToCart = (props) => {
         gender: product.features.gender,
         inStock: product.features.inStock,
       },
-      color: chosenColor,
       image: product.image,
       pickedQty: props.itemQuantity,
     };
@@ -78,12 +73,12 @@ const AddToCart = (props) => {
           <span>+</span>
         </i>
       ) : (
-        <Button
+        <SecondaryBtn
           clicked={() => addToCartHandler()}
           className={`product-detail__btn cart-btn ${props.className}`}
         >
           {props.children}
-        </Button>
+        </SecondaryBtn>
       )}
     </>
   );

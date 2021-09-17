@@ -11,11 +11,12 @@ import Context from "../../../contexts/context";
 import BackDrop from "../../../share/UI/BackDrop/BackDrop";
 
 const ProductDetail = (props) => {
+  const product = props.productDetail;
   const [showModal, setShowModal] = useState(false);
   const [showDropDown, setShowDropDown] = useState(false);
   const [showFeatures, setShowFeatures] = useState(false);
+  const [mainImg, setMainImg] = useState(product.imgs[0]);
   const [addedToWhilist, setAddedToWhilist] = useState(false);
-
   const context = useContext(Context);
 
   const hideModalHandler = () => {
@@ -43,9 +44,6 @@ const ProductDetail = (props) => {
     setShowFeatures(false);
   };
 
-  let colorOptions;
-  const product = props.productDetail;
-
   useEffect(() => {
     if (product && context.whilist) {
       const addedToWhilist = context.whilist.some(
@@ -72,6 +70,19 @@ const ProductDetail = (props) => {
     return null;
   }
 
+  const setMainImgHandler = (src) => {
+    setMainImg(src);
+  };
+
+  const productImgs = product.imgs.map((img, i) => (
+    <img
+      key={i}
+      onClick={() => setMainImgHandler(img)}
+      className="product-detail__img"
+      src={img}
+    />
+  ));
+
   return (
     <>
       <BackDrop clicked={hideShowFeaturesHandler} backDropShow={showFeatures} />
@@ -93,9 +104,11 @@ const ProductDetail = (props) => {
       <div className="product-detail-container">
         <div onClick={hideDropDownHandler} className="product-detail">
           <div className="product-detail__img-container">
-            <img className="product-detail__img" src={product.image} />
+            <div className="product-detail__imgs">
+              <img className="main-img" src={mainImg} />
+              <div className="small-imgs">{productImgs}</div>
+            </div>
             <div className="product-detail__edit">
-              <div className="product-colors">{colorOptions}</div>
               {context.curUser && context.curUser.admin && (
                 <ManiProduct
                   productId={product._id}
@@ -111,6 +124,8 @@ const ProductDetail = (props) => {
             product={product}
           />
           <ProductFeatures
+            product={product}
+            context={context}
             showFeatures={showFeatures}
             productFeatures={product.features}
           />

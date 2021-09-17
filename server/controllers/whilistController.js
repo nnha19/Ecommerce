@@ -1,4 +1,4 @@
-const Customer = require("../Modals/Customer");
+const Customer = require("../Models/Customer");
 
 const getWhilistByUserId = async (req, res, next) => {
   const userId = req.params.uid;
