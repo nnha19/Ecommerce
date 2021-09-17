@@ -68,10 +68,8 @@ const WhilistProduct = (props) => {
           />
           <AddToCart
             product={whilistProduct}
-            context={context}
             itemQuantity={1}
             setAddedToCart={(boolean) => setAddedToCart(boolean)}
-            cartItemData={cartItemData}
             whilist={true}
             className="whilist-cart"
           />

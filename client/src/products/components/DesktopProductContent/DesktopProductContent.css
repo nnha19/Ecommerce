@@ -1,0 +1,8 @@
+.detail-feature {
+  display: flex;
+}
+@media (max-width: 1100px) {
+  .detail-feature {
+    display: none;
+  }
+}

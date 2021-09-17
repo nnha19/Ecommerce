@@ -1,17 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { useHistory } from "react-router-dom";
 
-import Button from "../../../../../share/components/button/button";
+import Context from "../../../../../contexts/context";
 import SecondaryBtn from "../../../../../share/components/SecondaryBtn/SecondaryBtn";
 import AddToCartDisplayMsg from "../AddToCartDisplayMsg/AddToCartDisplayMsg";
 
-const AddToCart = (props) => {
-  const cartItemData = props.cartItemData;
+const AddToCart = ({
+  itemQuantity,
+  className,
+  product,
+  buy,
+  whilist,
+  children,
+}) => {
+  const { cartItemData, authenticated, curUser, toggleLogin } =
+    useContext(Context);
   const history = useHistory();
   const [addedToCart, setAddedToCart] = useState(false);
   const [buying, setBuying] = useState(false);
-  const product = props.product;
 
   useEffect(() => {
     cartItemData.error && setAddedToCart(false);
@@ -23,8 +30,8 @@ const AddToCart = (props) => {
   }, [buying, cartItemData.loading]);
 
   const addToCartHandler = () => {
-    if (!props.context.authenticated) {
-      props.context.toggleLogin();
+    if (!authenticated) {
+      toggleLogin();
       return;
     }
 
@@ -37,15 +44,15 @@ const AddToCart = (props) => {
         inStock: product.features.inStock,
       },
       image: product.image,
-      pickedQty: props.itemQuantity,
+      pickedQty: itemQuantity,
     };
-    props.context.cartItemData.fetchData(
-      `${process.env.REACT_APP_BACKEND_URL}/cart/${props.context.curUser.userId}`,
+    cartItemData.fetchData(
+      `${process.env.REACT_APP_BACKEND_URL}/cart/${curUser.userId}`,
       "post",
       data
     );
     setAddedToCart(true);
-    if (props.buy) {
+    if (buy) {
       setBuying(true);
       return;
     }
@@ -61,13 +68,13 @@ const AddToCart = (props) => {
         <AddToCartDisplayMsg
           hideModal={() => hideModalHandler()}
           name={product.brand}
-          amount={props.itemQuantity}
+          amount={itemQuantity}
           addedToCart={addedToCart}
         />
       )}
-      {props.whilist ? (
+      {whilist ? (
         <i
-          className={`fas fa-shopping-cart ${props.className}`}
+          className={`fas fa-shopping-cart ${className}`}
           onClick={() => addToCartHandler()}
         >
           <span>+</span>
@@ -75,9 +82,9 @@ const AddToCart = (props) => {
       ) : (
         <SecondaryBtn
           clicked={() => addToCartHandler()}
-          className={`product-detail__btn cart-btn ${props.className}`}
+          className={`product-detail__btn cart-btn ${className}`}
         >
-          {props.children}
+          {children}
         </SecondaryBtn>
       )}
     </>

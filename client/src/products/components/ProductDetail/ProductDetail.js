@@ -10,16 +10,15 @@ import ManiProduct from "./ManiProduct/ManiProduct";
 import Context from "../../../contexts/context";
 import BackDrop from "../../../share/UI/BackDrop/BackDrop";
 import AddToWhilist from "../../../cart/components/Cart/AddToWhilist/AddToWhilist";
-import AddToCart from "./ProductDetailBody/AddToCart/AddToCart";
+import MobileProductContent from "../MobileProductContent/MobileProductContent";
+import DesktopProductContent from "../DesktopProductContent/DesktopProductContent";
 
 const ProductDetail = (props) => {
   const product = props.productDetail;
   const [showModal, setShowModal] = useState(false);
   const [showDropDown, setShowDropDown] = useState(false);
-  const [showFeatures, setShowFeatures] = useState(false);
   const [mainImg, setMainImg] = useState(product.imgs[0]);
   const [addedToWhilist, setAddedToWhilist] = useState(false);
-  const [toggleHeader, setToggleHeader] = useState("overview");
   const context = useContext(Context);
 
   const hideModalHandler = () => {
@@ -39,14 +38,6 @@ const ProductDetail = (props) => {
     }
   };
 
-  const showFeaturesHandler = () => {
-    setShowFeatures(true);
-  };
-
-  const hideShowFeaturesHandler = () => {
-    setShowFeatures(false);
-  };
-
   useEffect(() => {
     if (product && context.whilist) {
       const addedToWhilist = context.whilist.some(
@@ -56,23 +47,9 @@ const ProductDetail = (props) => {
     }
   }, [product, context.whilist]);
 
-  if (product && product.colors && product.colors.length > 0) {
-    colorOptions = product.colors.map((c) => {
-      return (
-        <button
-          key={c._id}
-          onClick={(e) => props.productColorChosen(e, c._id)}
-          className={`product-color ${c.choosen && "product-color-active"}`}
-        >
-          {c.color}
-        </button>
-      );
-    });
-  }
   if (!product) {
     return null;
   }
-
   const setMainImgHandler = (src) => {
     setMainImg(src);
   };
@@ -86,13 +63,8 @@ const ProductDetail = (props) => {
     />
   ));
 
-  const toggleHeaderHandler = (toggle) => {
-    setToggleHeader(toggle);
-  };
-
   return (
     <>
-      <BackDrop clicked={hideShowFeaturesHandler} backDropShow={showFeatures} />
       <Modal
         modalShow={showModal}
         title="Item already exists"
@@ -134,67 +106,9 @@ const ProductDetail = (props) => {
             />
             <p className="product-detail__price">{product.price} KS</p>
             {/* For Mobile */}
-            <div className="mobile toggle-container">
-              <div className="toggle-headers">
-                <h5
-                  className={`${
-                    toggleHeader === "overview" ? "active-toggle-header" : ""
-                  }`}
-                  onClick={() => toggleHeaderHandler("overview")}
-                >
-                  Product Overview
-                </h5>
-                <h5
-                  className={`${
-                    toggleHeader !== "overview" ? "active-toggle-header" : ""
-                  }`}
-                  onClick={() => toggleHeaderHandler("features")}
-                >
-                  Product Features
-                </h5>
-              </div>
-              <div className="toggle-result">
-                {toggleHeader === "overview" ? (
-                  <ProductDetailBody
-                    addedToWhilist={addedToWhilist}
-                    showFeatures={showFeaturesHandler}
-                    product={product}
-                  />
-                ) : (
-                  <ProductFeatures
-                    product={product}
-                    context={context}
-                    showFeatures={showFeatures}
-                    productFeatures={product.features}
-                    className="mobile-feature"
-                    mobile={true}
-                  />
-                )}
-              </div>
-            </div>
-            <AddToCart
-              itemQuantity={4}
-              product={product}
-              context={context}
-              cartItemData={context.cartItemData}
-              className="add-to-cart mobile"
-            >
-              Add To Cart
-            </AddToCart>
-            {/* Desktop */}
-            <div className="detail-feature">
-              <ProductDetailBody
-                addedToWhilist={addedToWhilist}
-                showFeatures={showFeaturesHandler}
-                product={product}
-              />
-              <ProductFeatures
-                product={product}
-                context={context}
-                showFeatures={showFeatures}
-                productFeatures={product.features}
-              />
-            </div>
+            <MobileProductContent product={product} />
+            {/*For Desktop */}
+            <DesktopProductContent product={product} />
           </div>
         </div>
       </div>
