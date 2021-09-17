@@ -21,7 +21,7 @@ const ProductFeatures = (props) => {
   });
 
   return (
-    <div className="features-wrapper">
+    <div className={`features-wrapper ${props.className}`}>
       <div
         className={`product-features ${
           props.showFeatures ? "show-features" : ""
@@ -30,15 +30,17 @@ const ProductFeatures = (props) => {
         <h4 className="product-features__heading">Features</h4>
         <ul className="product-features__lists">{keys}</ul>
       </div>
-      <AddToCart
-        itemQuantity={4}
-        product={props.product}
-        context={context}
-        cartItemData={context.cartItemData}
-        className="add-to-cart"
-      >
-        Add To Cart
-      </AddToCart>
+      {!props.mobile && (
+        <AddToCart
+          itemQuantity={4}
+          product={props.product}
+          context={context}
+          cartItemData={context.cartItemData}
+          className="add-to-cart"
+        >
+          Add To Cart
+        </AddToCart>
+      )}
     </div>
   );
 };

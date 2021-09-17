@@ -9,6 +9,8 @@ import Button from "../../../share/components/button/button";
 import ManiProduct from "./ManiProduct/ManiProduct";
 import Context from "../../../contexts/context";
 import BackDrop from "../../../share/UI/BackDrop/BackDrop";
+import AddToWhilist from "../../../cart/components/Cart/AddToWhilist/AddToWhilist";
+import AddToCart from "./ProductDetailBody/AddToCart/AddToCart";
 
 const ProductDetail = (props) => {
   const product = props.productDetail;
@@ -17,6 +19,7 @@ const ProductDetail = (props) => {
   const [showFeatures, setShowFeatures] = useState(false);
   const [mainImg, setMainImg] = useState(product.imgs[0]);
   const [addedToWhilist, setAddedToWhilist] = useState(false);
+  const [toggleHeader, setToggleHeader] = useState("overview");
   const context = useContext(Context);
 
   const hideModalHandler = () => {
@@ -83,6 +86,10 @@ const ProductDetail = (props) => {
     />
   ));
 
+  const toggleHeaderHandler = (toggle) => {
+    setToggleHeader(toggle);
+  };
+
   return (
     <>
       <BackDrop clicked={hideShowFeaturesHandler} backDropShow={showFeatures} />
@@ -118,17 +125,77 @@ const ProductDetail = (props) => {
               )}
             </div>
           </div>
-          <ProductDetailBody
-            addedToWhilist={addedToWhilist}
-            showFeatures={showFeaturesHandler}
-            product={product}
-          />
-          <ProductFeatures
-            product={product}
-            context={context}
-            showFeatures={showFeatures}
-            productFeatures={product.features}
-          />
+          <div className="product-detail__content">
+            <h4 className="product-detail__name">{product.brand}</h4>
+            <AddToWhilist
+              addedToWhilist={addedToWhilist}
+              productId={product._id}
+              userId={context.curUser && context.curUser.userId}
+            />
+            <p className="product-detail__price">{product.price} KS</p>
+            {/* For Mobile */}
+            <div className="mobile toggle-container">
+              <div className="toggle-headers">
+                <h5
+                  className={`${
+                    toggleHeader === "overview" ? "active-toggle-header" : ""
+                  }`}
+                  onClick={() => toggleHeaderHandler("overview")}
+                >
+                  Product Overview
+                </h5>
+                <h5
+                  className={`${
+                    toggleHeader !== "overview" ? "active-toggle-header" : ""
+                  }`}
+                  onClick={() => toggleHeaderHandler("features")}
+                >
+                  Product Features
+                </h5>
+              </div>
+              <div className="toggle-result">
+                {toggleHeader === "overview" ? (
+                  <ProductDetailBody
+                    addedToWhilist={addedToWhilist}
+                    showFeatures={showFeaturesHandler}
+                    product={product}
+                  />
+                ) : (
+                  <ProductFeatures
+                    product={product}
+                    context={context}
+                    showFeatures={showFeatures}
+                    productFeatures={product.features}
+                    className="mobile-feature"
+                    mobile={true}
+                  />
+                )}
+              </div>
+            </div>
+            <AddToCart
+              itemQuantity={4}
+              product={product}
+              context={context}
+              cartItemData={context.cartItemData}
+              className="add-to-cart mobile"
+            >
+              Add To Cart
+            </AddToCart>
+            {/* Desktop */}
+            <div className="detail-feature">
+              <ProductDetailBody
+                addedToWhilist={addedToWhilist}
+                showFeatures={showFeaturesHandler}
+                product={product}
+              />
+              <ProductFeatures
+                product={product}
+                context={context}
+                showFeatures={showFeatures}
+                productFeatures={product.features}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </>

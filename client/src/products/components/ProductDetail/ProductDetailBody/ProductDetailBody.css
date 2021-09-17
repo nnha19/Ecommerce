@@ -1,5 +1,5 @@
 .product-detail__body {
-  padding: 1rem;
+  flex: 1;
 }
 
 .product-detail__brand {

@@ -30,17 +30,20 @@ const AddToWhilist = (props) => {
       "post"
     );
   };
-
-  return !loading ? (
-    <i
-      onClick={addToWhilistHandler}
-      title="Add to whilist"
-      className={`fa${
-        props.addedToWhilist ? "s" : "r"
-      } fa-heart cart__item-heart cart__item-icons`}
-    ></i>
-  ) : (
-    <span className="add-to-whilist-loading"></span>
+  return (
+    <div className="add-to-whilist-container">
+      {!loading ? (
+        <i
+          onClick={addToWhilistHandler}
+          title="Add to whilist"
+          className={`fa${
+            props.addedToWhilist ? "s" : "r"
+          } fa-heart cart__item-heart cart__item-icons ${props.className}`}
+        ></i>
+      ) : (
+        <span className="add-to-whilist-loading"></span>
+      )}
+    </div>
   );
 };
 

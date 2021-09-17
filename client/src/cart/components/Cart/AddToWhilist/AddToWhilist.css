@@ -1,10 +1,28 @@
-.add-to-whilist-loading {
-  height: 1.5rem;
-  width: 1.5rem;
-  /* display: inline-block; */
+.add-to-whilist-container {
+  background: black;
   border-radius: 50%;
-  border: 3px solid black;
+  background: black;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+.cart__item-heart {
+  color: white !important;
+}
+.add-to-whilist-loading {
+  display: inline-block;
+  height: 80%;
+  width: 80%;
+  border-radius: 50%;
+  border: 3px solid transparent;
   border-top: 3px solid orangered;
+  border-bottom: 3px solid orangered;
   animation: spin 1s infinite;
 }
 
