@@ -44,7 +44,7 @@ const MobileProductContent = ({ product }) => {
           />
         )}
         <AddToCart
-          itemQuantity={4}
+          itemQuantity={1}
           product={product}
           className="add-to-cart mobile"
         >

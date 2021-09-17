@@ -20,6 +20,7 @@
 .product-detail__name {
   font-size: 1.4rem;
   margin-bottom: 0.9rem;
+  margin-right: 4rem;
 }
 .product-detail__imgs {
   height: 100%;
@@ -49,8 +50,6 @@
 
 .product-detail__edit {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .product-detail__price {

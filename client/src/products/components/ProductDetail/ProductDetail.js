@@ -1,19 +1,22 @@
 import React, { useState, useContext, useEffect } from "react";
 
 import "./ProductDetail.css";
+import { useInView } from "react-intersection-observer";
 
-import ProductDetailBody from "./ProductDetailBody/ProductDetailBody";
-import ProductFeatures from "./ProductFeatures/ProductFeatures";
 import Modal from "../../../share/UI/Modal/Modal";
 import Button from "../../../share/components/button/button";
 import ManiProduct from "./ManiProduct/ManiProduct";
 import Context from "../../../contexts/context";
-import BackDrop from "../../../share/UI/BackDrop/BackDrop";
 import AddToWhilist from "../../../cart/components/Cart/AddToWhilist/AddToWhilist";
 import MobileProductContent from "../MobileProductContent/MobileProductContent";
 import DesktopProductContent from "../DesktopProductContent/DesktopProductContent";
+import Admin from "../../../share/components/Admin/Admin";
+import StickyCTA from "../StickyCTA/StickyCTA";
 
 const ProductDetail = (props) => {
+  const { ref, inView } = useInView({
+    threshold: 0,
+  });
   const product = props.productDetail;
   const [showModal, setShowModal] = useState(false);
   const [showDropDown, setShowDropDown] = useState(false);
@@ -81,24 +84,24 @@ const ProductDetail = (props) => {
         }
       />
       <div className="product-detail-container">
-        <div onClick={hideDropDownHandler} className="product-detail">
+        <div ref={ref} onClick={hideDropDownHandler} className="product-detail">
           <div className="product-detail__img-container">
             <div className="product-detail__imgs">
               <img className="main-img" src={mainImg} />
               <div className="small-imgs">{productImgs}</div>
             </div>
+          </div>
+          <div className="product-detail__content">
             <div className="product-detail__edit">
-              {context.curUser && context.curUser.admin && (
+              <h4 className="product-detail__name">{product.brand}</h4>
+              <Admin>
                 <ManiProduct
                   productId={product._id}
                   showDropDown={showDropDown}
                   showDropDownHandler={showDropDownHandler}
                 />
-              )}
+              </Admin>
             </div>
-          </div>
-          <div className="product-detail__content">
-            <h4 className="product-detail__name">{product.brand}</h4>
             <AddToWhilist
               addedToWhilist={addedToWhilist}
               productId={product._id}
@@ -110,6 +113,7 @@ const ProductDetail = (props) => {
             {/*For Desktop */}
             <DesktopProductContent product={product} />
           </div>
+          <StickyCTA inView={inView} product={product} />
         </div>
       </div>
     </>
