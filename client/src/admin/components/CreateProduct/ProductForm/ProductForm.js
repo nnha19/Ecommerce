@@ -1,6 +1,7 @@
 import React from "react";
 
 import FormInput from "../../../../share/components/FormInput/FormInput";
+import ImageUpload from "../../../../share/components/ImageUpload/ImageUpload";
 import SecondaryBtn from "../../../../share/components/SecondaryBtn/SecondaryBtn";
 
 import "./ProductForm.css";
@@ -32,17 +33,7 @@ const ProductForm = (props) => {
             validRules={{ type: "REQUIRE" }}
             changeLoginVal={(type, label) => props.changeLoginVal(type, label)}
           />
-          <FormInput
-            value={props.image}
-            inputCls="checkout__input"
-            errorMsg="This field is required"
-            elementType="input"
-            type="text"
-            placeholder="Image"
-            id="image"
-            validRules={{ type: "REQUIRE" }}
-            changeLoginVal={(type, label) => props.changeLoginVal(type, label)}
-          />
+          <ImageUpload changeImgVal={props.changeImgVal} />
           <FormInput
             value={props.description}
             inputCls="checkout__input"

@@ -26,7 +26,7 @@ mongoose
     console.log("connected to database");
   })
   .catch((err) => console.log(err));
-
+app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use("/products", productsRoute);
 app.use("/cart/", cartRoute);
 app.use("/customer", customerRoute);

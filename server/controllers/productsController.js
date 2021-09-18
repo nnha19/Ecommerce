@@ -36,28 +36,26 @@ const getProductByGender = async (req, res, next) => {
 const createProduct = async (req, res, next) => {
   //Create Product
   try {
-    const colors = [
-      { color: "blue", choosen: true },
-      {
-        color: "black",
-        choosen: false,
-      },
-      {
-        color: "green",
-        choosen: false,
-      },
-    ];
-    const { brand, price, onSale, description, image, features } = req.body;
-    if (req.admin) {
+    const imgs = req.files.map((file) => file.path);
+    console.log(imgs);
+    const { brand, price, description } = req.body;
+    if (!req.admin) {
       const product = await Product.create({
         brand,
         price,
-        onSale,
         description,
-        image,
-        colors,
-        pickedQty: 1,
-        features,
+        features: {
+          gender: "Man",
+          inStock: 12,
+          cashOnDelivery: "Available",
+          warranty: "1 year included",
+          size: 42,
+          return: "7 days return",
+          uv: "400",
+        },
+        imgs,
+        reviews: [],
+        questions: [],
       });
       res.status(200).json(product);
     } else {

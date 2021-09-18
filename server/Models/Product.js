@@ -12,7 +12,7 @@ const productSchema = new mongoose.Schema({
   features: {
     gender: { type: String, required: true },
     inStock: { type: Number, required: true },
-    cashOnDelivery: { type: Boolean, required: true },
+    cashOnDelivery: { type: String, required: true },
     warranty: { type: String, required: true },
     size: { type: Number, required: true },
     return: { type: String, required: true },

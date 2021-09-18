@@ -20,7 +20,9 @@ const ProductDetail = (props) => {
   const product = props.productDetail;
   const [showModal, setShowModal] = useState(false);
   const [showDropDown, setShowDropDown] = useState(false);
-  const [mainImg, setMainImg] = useState(product.imgs[0]);
+  const [mainImg, setMainImg] = useState(
+    `${process.env.REACT_APP_BACKEND_URL}/${product.imgs[0]}`
+  );
   const [addedToWhilist, setAddedToWhilist] = useState(false);
   const context = useContext(Context);
 
@@ -54,7 +56,7 @@ const ProductDetail = (props) => {
     return null;
   }
   const setMainImgHandler = (src) => {
-    setMainImg(src);
+    setMainImg(`${process.env.REACT_APP_BACKEND_URL}/${src}`);
   };
 
   const productImgs = product.imgs.map((img, i) => (
@@ -62,7 +64,7 @@ const ProductDetail = (props) => {
       key={i}
       onClick={() => setMainImgHandler(img)}
       className="product-detail__img"
-      src={img}
+      src={`${process.env.REACT_APP_BACKEND_URL}/${img}`}
     />
   ));
 
