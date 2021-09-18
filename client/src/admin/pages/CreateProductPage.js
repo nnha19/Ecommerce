@@ -26,7 +26,7 @@ const CreateProductPage = (props) => {
       value,
       context.token
     );
-    history.push("/");
+    // history.push("/");
   };
 
   return (

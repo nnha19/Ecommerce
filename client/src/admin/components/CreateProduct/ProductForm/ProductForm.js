@@ -82,7 +82,10 @@ const ProductForm = ({
             validRules={{ required: true }}
             changeVal={changeVal}
           />
-          <ImageUpload changeImgVal={changeImgVal} />
+          <ImageUpload
+            validRules={{ required: true }}
+            changeImgVal={changeImgVal}
+          />
         </div>
         <div className="admin-form__btn-container">
           <SecondaryBtn disabled={!allValid} className="admin-form__btn">

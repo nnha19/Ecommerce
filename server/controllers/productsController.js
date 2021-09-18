@@ -36,20 +36,17 @@ const getProductByGender = async (req, res, next) => {
 const createProduct = async (req, res, next) => {
   //Create Product
   try {
+    const productDetail = JSON.parse(req.body.productDetail);
+
     const imgs = req.files.map((file) => file.path);
-    console.log(imgs);
-    const { brand, price, description } = req.body;
+    const { brand, price, description, features } = productDetail;
     if (!req.admin) {
       const product = await Product.create({
         brand,
         price,
         description,
         features: {
-          gender: "Man",
-          inStock: 12,
-          cashOnDelivery: "Available",
-          warranty: "1 year included",
-          size: 42,
+          ...features,
           return: "7 days return",
           uv: "400",
         },
@@ -57,6 +54,7 @@ const createProduct = async (req, res, next) => {
         reviews: [],
         questions: [],
       });
+      console.log(product);
       res.status(200).json(product);
     } else {
       res.status(400).json("You are not authorized to do this.");

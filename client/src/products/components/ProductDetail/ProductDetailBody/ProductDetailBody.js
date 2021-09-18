@@ -18,7 +18,7 @@ const ProductDetailBody = ({ product }) => {
       <Spinner show={cartItemData.loading} />
       {cartItemData.error && (
         <ATCErrorMsg
-          hideModal={() => hideModalHandler()}
+          // hideModal={() => hideModalHandler()}
           error={cartItemData.error}
           setError={cartItemData.setError}
         />
