@@ -1,14 +1,18 @@
-.admin-form__btn {
-  width: 50%;
+.admin-form-container {
+  background: white;
+  width: 29rem;
+  margin: auto;
+  padding: 2rem;
+}
+.admin-form {
+  width: 100%;
+  margin: 2rem auto;
 }
 .admin-form__btn-container {
-  text-align: center;
+  margin: 1rem 0;
 }
-@media (max-width: 900px) {
-  .admin-form__btn-container {
-    text-align: center;
-  }
-  .admin-form__btn {
-    width: 70%;
-  }
+.admin-form__header {
+  font-weight: 400;
+  border-bottom: 1px solid black;
+  padding: 0.4rem;
 }

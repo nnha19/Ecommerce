@@ -6,121 +6,91 @@ import SecondaryBtn from "../../../../share/components/SecondaryBtn/SecondaryBtn
 
 import "./ProductForm.css";
 
-const ProductForm = (props) => {
+const ProductForm = ({
+  productVals,
+  changeVal,
+  creatingProduct,
+  changeImgVal,
+  allValid,
+}) => {
   return (
-    <form onSubmit={props.creatingProduct} className="admin-form">
-      <div className="admin-form__inputs">
-        <div className="admin-form__product">
+    <div className="admin-form-container">
+      <h2 className="admin-form__header">Create Product</h2>
+      <form onSubmit={creatingProduct} className="admin-form">
+        <div className="admin-form__inputs">
           <FormInput
-            value={props.brand}
-            inputCls="checkout__input"
-            errorMsg="This field is required"
-            elementType="input"
+            name="brand"
             type="text"
-            placeholder="Brand"
-            id="brand"
-            validRules={{ type: "REQUIRE" }}
-            changeLoginVal={(type, label) => props.changeLoginVal(type, label)}
+            label="Brand"
+            value={productVals.brand.value}
+            changeVal={changeVal}
+            validRules={{ required: true }}
           />
           <FormInput
-            value={props.price}
-            inputCls="checkout__input"
-            errorMsg="This field is required"
-            elementType="input"
+            name="price"
             type="number"
-            placeholder="Price"
-            id="price"
-            validRules={{ type: "REQUIRE" }}
-            changeLoginVal={(type, label) => props.changeLoginVal(type, label)}
+            label="Price"
+            value={productVals.price.value}
+            validRules={{ required: true }}
+            changeVal={changeVal}
           />
-          <ImageUpload changeImgVal={props.changeImgVal} />
           <FormInput
-            value={props.description}
-            inputCls="checkout__input"
-            errorMsg="This field is required"
-            elementType="textarea"
+            name="description"
             type="text"
-            placeholder="Description"
-            id="description"
-            validRules={{ type: "REQUIRE" }}
-            changeLoginVal={(type, label) => props.changeLoginVal(type, label)}
+            label="Description"
+            value={productVals.description.value}
+            validRules={{ required: true }}
+            changeVal={changeVal}
           />
+          <FormInput
+            name="gender"
+            type="text"
+            label="Gender"
+            value={productVals.gender.value}
+            validRules={{ required: true }}
+            changeVal={changeVal}
+          />
+          <FormInput
+            name="inStock"
+            type="number"
+            label="In Stock"
+            value={productVals.inStock.value}
+            validRules={{ required: true }}
+            changeVal={changeVal}
+          />
+          <FormInput
+            name="cashOnDelivery"
+            type="text"
+            label="Cash On Delivery"
+            value={productVals.cashOnDelivery.value}
+            validRules={{ required: true }}
+            changeVal={changeVal}
+          />
+          <FormInput
+            name="warranty"
+            type="text"
+            label="Warranty"
+            value={productVals.warranty.value}
+            validRules={{ required: true }}
+            changeVal={changeVal}
+          />
+          <FormInput
+            name="size"
+            type="number"
+            label="Size"
+            value={productVals.size.value}
+            validRules={{ required: true }}
+            changeVal={changeVal}
+          />
+          <ImageUpload changeImgVal={changeImgVal} />
         </div>
-        <div className="admin-form__features">
-          <FormInput
-            value={props.gender}
-            inputCls="checkout__input"
-            errorMsg="This field is required"
-            elementType="input"
-            type="text"
-            placeholder="Gender"
-            id="gender"
-            validRules={{ type: "REQUIRE" }}
-            changeLoginVal={(type, label) => props.changeLoginVal(type, label)}
-          />
-          <FormInput
-            value={props.inStock}
-            inputCls="checkout__input"
-            errorMsg="This field is required"
-            elementType="input"
-            type="number"
-            placeholder="In Stock"
-            id="inStock"
-            validRules={{ type: "REQUIRE" }}
-            changeLoginVal={(type, label) => props.changeLoginVal(type, label)}
-          />
-          <FormInput
-            value={props.cashOnDelivery}
-            inputCls="checkout__input"
-            errorMsg="This field is required"
-            elementType="input"
-            type="text"
-            placeholder="Cash On Delivery"
-            id="cashOnDelivery"
-            validRules={{ type: "REQUIRE" }}
-            changeLoginVal={(type, label) => props.changeLoginVal(type, label)}
-          />
-          <FormInput
-            value={props.warranty}
-            inputCls="checkout__input"
-            errorMsg="This field is required"
-            elementType="input"
-            type="text"
-            placeholder="Warranty"
-            id="warranty"
-            validRules={{ type: "REQUIRE" }}
-            changeLoginVal={(type, label) => props.changeLoginVal(type, label)}
-          />
-          <FormInput
-            value={props.size}
-            inputCls="checkout__input"
-            errorMsg="This field is required"
-            elementType="input"
-            type="number"
-            placeholder="Size"
-            id="size"
-            validRules={{ type: "REQUIRE" }}
-            changeLoginVal={(type, label) => props.changeLoginVal(type, label)}
-          />
-          <FormInput
-            value={props.return}
-            inputCls="checkout__input"
-            errorMsg="This field is required"
-            elementType="input"
-            type="text"
-            placeholder="Return Policy"
-            id="return"
-            validRules={{ type: "REQUIRE" }}
-            changeLoginVal={(type, label) => props.changeLoginVal(type, label)}
-          />
+        <div className="admin-form__btn-container">
+          <SecondaryBtn disabled={!allValid} className="admin-form__btn">
+            Submit
+          </SecondaryBtn>
         </div>
-      </div>
-      <div className="admin-form__btn-container">
-        <SecondaryBtn disabled={!props.allValid} className="admin-form__btn">
-          Submit
-        </SecondaryBtn>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 };
 

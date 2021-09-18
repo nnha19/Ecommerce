@@ -21,10 +21,6 @@ const CreateProduct = (props) => {
 
   const [allValid] = useCheckOverAllValid(productVal);
 
-  const changeLoginValHandler = (val, label) => {
-    setProductVal({ ...productVal, [label]: val });
-  };
-
   const changeImgValHandler = (e) => {
     setProductVal({ ...productVal, image: e.target.files });
   };
@@ -55,6 +51,10 @@ const CreateProduct = (props) => {
     props.createProduct(formData);
   };
 
+  const changeValHandler = (e) => {
+    setProductVal({ ...productVal, [e.target.name]: e.target.value });
+  };
+
   return (
     <>
       <div className="checkout-container">
@@ -62,7 +62,8 @@ const CreateProduct = (props) => {
           changeImgVal={changeImgValHandler}
           creatingProduct={(e) => creatingProductHandler(e)}
           allValid={allValid}
-          changeLoginVal={(val, label) => changeLoginValHandler(val, label)}
+          changeVal={changeValHandler}
+          productVals={productVal}
         />
       </div>
     </>

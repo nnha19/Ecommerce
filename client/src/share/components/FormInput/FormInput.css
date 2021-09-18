@@ -1,23 +1,16 @@
-.form__input-container {
-  margin-bottom: 1rem;
-
-  width: 70%;
-}
-
-.form__label {
-  display: block;
-  color: white;
-  font-size: 1.3rem;
-  text-transform: capitalize;
+.input-container {
   margin-bottom: 0.4rem;
 }
-.form__input {
-  border: none;
-  outline: none;
-  padding: 0.4rem 1rem;
+.input__field {
   width: 100%;
+  padding: 0.4rem 1rem;
+  border: 1px solid green;
 }
-.form__err-msg {
+.input__label {
+  margin-bottom: 8px;
+  display: block;
+}
+.error-msg {
   color: red;
-  margin: 0.4rem 0;
+  margin-top: 0.4rem;
 }
