@@ -44,7 +44,8 @@
   border: 3px solid transparent;
   transition: all 0.4s;
 }
-.product-detail__img:hover {
+.product-detail__img:hover,
+.img-active {
   border: 3px solid green;
 }
 

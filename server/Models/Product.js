@@ -19,20 +19,20 @@ const productSchema = new mongoose.Schema({
     uv: String,
     frameColor: { type: String },
     lensColor: { type: String },
-    reviews: [
-      {
-        star: Number,
-        review: String,
-      },
-    ],
-    questions: [{ question: String, answer: String }],
-    buyers: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Order",
-      },
-    ],
   },
+  reviews: [
+    {
+      star: Number,
+      review: String,
+    },
+  ],
+  questions: [{ question: String, answer: String }],
+  buyers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Order",
+    },
+  ],
 });
 
 module.exports = mongoose.model("Product", productSchema);

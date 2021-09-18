@@ -59,14 +59,19 @@ const ProductDetail = (props) => {
     setMainImg(`${process.env.REACT_APP_BACKEND_URL}/${src}`);
   };
 
-  const productImgs = product.imgs.map((img, i) => (
-    <img
-      key={i}
-      onClick={() => setMainImgHandler(img)}
-      className="product-detail__img"
-      src={`${process.env.REACT_APP_BACKEND_URL}/${img}`}
-    />
-  ));
+  const productImgs = product.imgs.map((img, i) => {
+    const src = `${process.env.REACT_APP_BACKEND_URL}/${img}`;
+    return (
+      <img
+        key={i}
+        onClick={() => setMainImgHandler(img)}
+        className={`product-detail__img ${
+          mainImg === src ? "img-active" : ""
+        } `}
+        src={src}
+      />
+    );
+  });
 
   return (
     <>
