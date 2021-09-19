@@ -17,6 +17,8 @@ const CreateProduct = (props) => {
     cashOnDelivery: { value: "", error: true },
     warranty: { value: "", error: true },
     size: { value: "", error: true },
+    return: { value: "", error: true },
+    uv: { value: "", error: true },
   });
 
   const [allValid] = useCheckOverAllValid(productVal);
@@ -30,6 +32,8 @@ const CreateProduct = (props) => {
       cashOnDelivery: productVal.cashOnDelivery.value,
       warranty: productVal.warranty.value,
       size: productVal.size.value,
+      return: productVal.return.value,
+      uv: productVal.uv.value,
     };
     const data = {
       brand: productVal.brand.value,

@@ -45,11 +45,7 @@ const createProduct = async (req, res, next) => {
         brand,
         price,
         description,
-        features: {
-          ...features,
-          return: "7 days return",
-          uv: "400",
-        },
+        features,
         imgs,
         reviews: [],
         questions: [],

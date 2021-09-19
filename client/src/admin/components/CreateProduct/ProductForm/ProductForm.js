@@ -82,6 +82,22 @@ const ProductForm = ({
             validRules={{ required: true }}
             changeVal={changeVal}
           />
+          <FormInput
+            name="return"
+            type="text"
+            label="Return Policy"
+            value={productVals.return.value}
+            validRules={{ required: true }}
+            changeVal={changeVal}
+          />
+          <FormInput
+            name="uv"
+            type="number"
+            label="UV"
+            value={productVals.uv.value}
+            validRules={{ required: true }}
+            changeVal={changeVal}
+          />
           <ImageUpload
             validRules={{ required: true }}
             changeImgVal={changeImgVal}
