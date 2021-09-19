@@ -8,7 +8,6 @@ import Context from "../../contexts/context";
 
 const CreateProductPage = (props) => {
   const context = useContext(Context);
-
   const history = useHistory();
   const [
     createdProduct,

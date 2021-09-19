@@ -73,6 +73,7 @@ const CreateProduct = ({ createProduct, editProductVal }) => {
           allValid={allValid}
           changeVal={changeValHandler}
           productVals={productVal}
+          isEditing={!!editProductVal}
         />
       </div>
       7/

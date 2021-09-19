@@ -33,7 +33,6 @@ const EditProduct = (props) => {
   return editProductVal ? (
     <>
       <Spinner show={loading || editIsLoading} />
-      <h1>Edit your product</h1>
       <CreateProduct
         editProductVal={editProductVal}
         createProduct={editProductHandler}

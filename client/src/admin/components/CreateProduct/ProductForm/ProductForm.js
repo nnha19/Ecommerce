@@ -12,10 +12,13 @@ const ProductForm = ({
   creatingProduct,
   changeImgVal,
   allValid,
+  isEditing,
 }) => {
   return (
     <div className="admin-form-container">
-      <h2 className="admin-form__header">Create Product</h2>
+      <h2 className="admin-form__header">
+        {!isEditing ? "Create Product" : "Edit Product"}
+      </h2>
       <form onSubmit={creatingProduct} className="admin-form">
         <div className="admin-form__inputs">
           <FormInput
