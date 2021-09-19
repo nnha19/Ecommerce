@@ -6,6 +6,7 @@ export const useHttp = (initVal, url, method) => {
   const [respData, setRespData] = useState(initVal);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [finished, setFinished] = useState(false);
 
   const fetchData = async (url, method, data, token) => {
     try {
@@ -25,6 +26,7 @@ export const useHttp = (initVal, url, method) => {
       setError(err.response.data);
       setLoading(false);
     }
+    setFinished(true);
   };
-  return [respData, loading, error, fetchData, setRespData, setError];
+  return [respData, loading, error, fetchData, setRespData, setError, finished];
 };

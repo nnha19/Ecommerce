@@ -9,7 +9,8 @@ import CreateProduct from "../CreateProduct/CreateProduct";
 const EditProduct = (props) => {
   const { token } = useContext(Context);
   const [editProductVal, loading, error, fetchData] = useHttp();
-  const [editedProduct, editIsLoading, editError, editData] = useHttp();
+  const [editedProduct, editIsLoading, editError, editData, , , finished] =
+    useHttp();
 
   const { productId } = useParams();
 
@@ -20,15 +21,17 @@ const EditProduct = (props) => {
   const history = useHistory();
 
   const editProductHandler = (value) => {
-    console.log(value);
     editData(
       `${process.env.REACT_APP_BACKEND_URL}/products/${editProductVal._id}`,
       "put",
       value,
       token
     );
-    history.push("/");
   };
+  useEffect(() => {
+    //redirect when finish editing product
+    finished && history.push("/");
+  }, [finished]);
 
   return editProductVal ? (
     <>

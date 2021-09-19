@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import CreateProduct from "../components/CreateProduct/CreateProduct";
@@ -16,6 +16,7 @@ const CreateProductPage = (props) => {
     fetchData,
     setCreatedProduct,
     setError,
+    finished,
   ] = useHttp();
 
   const createProductHandler = (value) => {
@@ -25,8 +26,11 @@ const CreateProductPage = (props) => {
       value,
       context.token
     );
-    history.push("/");
   };
+  useEffect(() => {
+    //redirect homepage when finished creating product
+    finished && history.push("/");
+  }, [finished]);
 
   return (
     <>
