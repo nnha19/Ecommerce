@@ -1,26 +1,26 @@
 import React, { useState } from "react";
 
 import "./CreateProduct.css";
-import { serialize } from "object-to-formdata";
 
 import useCheckOverAllValid from "../../../customHooks/useCheckOverAllValid";
 import ProductForm from "./ProductForm/ProductForm";
 
-const CreateProduct = (props) => {
-  const [productVal, setProductVal] = useState({
-    brand: { value: "", error: true },
-    price: { value: "", error: true },
-    image: { value: "", error: true },
-    description: { value: "", error: true },
-    gender: { value: "", error: true },
-    inStock: { value: "", error: true },
-    cashOnDelivery: { value: "", error: true },
-    warranty: { value: "", error: true },
-    size: { value: "", error: true },
-    return: { value: "", error: true },
-    uv: { value: "", error: true },
+const CreateProduct = ({ createProduct, editProductVal }) => {
+  const productValsArr =
+    "brand price image description gender inStock cashOnDelivery warranty size return uv".split(
+      " "
+    );
+  const productValObj = {};
+  productValsArr.forEach((key) => {
+    if (editProductVal) {
+      const newObj = { ...editProductVal, ...editProductVal.features };
+      productValObj[key] = { value: newObj[key], error: false };
+    } else {
+      productValObj[key] = { value: "", error: true };
+    }
   });
-
+  const [productVal, setProductVal] = useState(productValObj);
+  console.log(productVal);
   const [allValid] = useCheckOverAllValid(productVal);
 
   const creatingProductHandler = (e) => {
@@ -41,12 +41,13 @@ const CreateProduct = (props) => {
       description: productVal.description.value,
       features,
     };
+    console.log(data);
     const formData = new FormData();
     formData.append("productDetail", JSON.stringify(data));
     Array.from(productVal.image.value).forEach((img) =>
       formData.append("images", img)
     );
-    props.createProduct(formData);
+    createProduct(formData);
   };
 
   const changeValHandler = (e, error) => {

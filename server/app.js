@@ -1,8 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-
 const app = express();
+require("dotenv").config();
 
 app.use(express.json());
 app.use(cors());
@@ -15,13 +15,10 @@ const orderRoute = require("./routes/orderRoute");
 const couponRoute = require("./routes/couponRoute");
 
 mongoose
-  .connect(
-    `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0-shard-00-00.yrg2a.mongodb.net:27017,cluster0-shard-00-01.yrg2a.mongodb.net:27017,cluster0-shard-00-02.yrg2a.mongodb.net:27017/${process.env.DB_NAME}?ssl=true&replicaSet=atlas-90vt8b-shard-0&authSource=admin&retryWrites=true&w=majority`,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(process.env.CONNECT_DB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("connected to database");
   })
@@ -35,5 +32,5 @@ app.use("/whilist/:uid", whilistRoute);
 app.use("/coupon", couponRoute);
 
 app.listen(process.env.PORT || 5000, () => {
-  console.log("Server has started.");
+  console.log(`Server has started on ${process.env.PORT || "5000"}`);
 });

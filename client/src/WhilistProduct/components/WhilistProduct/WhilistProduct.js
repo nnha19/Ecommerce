@@ -11,7 +11,7 @@ import Context from "../../../contexts/context";
 import Spinner from "../../../share/UI/Spinner/Spinner";
 import ATCErrorMsg from "../../../products/components/ProductDetail/ProductDetailBody/ATCErrorMsg/ATCErrorMsg";
 
-const WhilistProduct = (props) => {
+const WhilistProduct = ({ whilistProduct }) => {
   const context = useContext(Context);
   const history = useHistory();
   const cartItemData = context.cartItemData;
@@ -45,14 +45,17 @@ const WhilistProduct = (props) => {
 
   let whilistProductOutput;
 
-  whilistProductOutput = props.whilistProduct.map((whilistProduct) => {
+  whilistProductOutput = whilistProduct.map((whilistProduct) => {
     return (
       <div
         onClick={(e) => goToProductDetailHandler(e, whilistProduct._id)}
         className="cart__item"
       >
         <div className="cart__item-about whilist-first">
-          <img className="cart__item-img" src={whilistProduct.image} />
+          <img
+            className="cart__item-img"
+            src={`${process.env.REACT_APP_BACKEND_URL}/${whilistProduct.imgs[0]}`}
+          />
           <div className="cart__item-features">
             <h4 className="cart__item-name">{whilistProduct.brand}</h4>
             <p className="cart__item-price">{whilistProduct.price}</p>
@@ -78,7 +81,7 @@ const WhilistProduct = (props) => {
     );
   });
 
-  return props.whilistProduct.length > 0 ? (
+  return (
     <>
       {cartItemData.error && (
         <ATCErrorMsg
@@ -95,10 +98,6 @@ const WhilistProduct = (props) => {
         </div>
       </div>
     </>
-  ) : (
-    <div className="error-container">
-      <p className="error">No whilist products.</p>
-    </div>
   );
 };
 

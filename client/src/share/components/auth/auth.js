@@ -15,16 +15,19 @@ const Auth = (props) => {
   const [customer, loading, error, fetchData, , setError] = useHttp();
 
   const [loginVals, setLoginVals] = useState({
-    email: "",
-    password: "",
+    email: { value: "", error: true },
+    password: { value: "", error: true },
+    username: { value: "", error: true },
   });
 
   const [allValid] = useCheckOverAllValid(loginVals, signUp);
 
-  const changeLoginValHandler = (val, objKey) => {
+  const changeLoginValHandler = (e, error) => {
+    const { name, value } = e.target;
+    const update = { ...loginVals[name], value, error };
     setLoginVals({
       ...loginVals,
-      [objKey]: val,
+      [name]: update,
     });
   };
 
@@ -88,32 +91,26 @@ const Auth = (props) => {
       >
         {signUp && (
           <FormInput
-            id="username"
-            label="username"
-            errorMsg="This field can't be empty"
+            label="Username"
             type="text"
-            elementType="input"
-            validRules={{ type: "REQUIRE" }}
-            changeLoginVal={(e, objKey) => changeLoginValHandler(e, objKey)}
+            validRules={{ required: true }}
+            changeVal={changeLoginValHandler}
+            name="username"
           />
         )}
         <FormInput
-          id="email"
-          changeLoginVal={(e, objKey) => changeLoginValHandler(e, objKey)}
-          validRules={{ type: "REQUIRE" }}
-          elementType="input"
-          type="text"
-          label="email"
-          errorMsg="This field can't be empty"
+          changeVal={changeLoginValHandler}
+          validRules={{ required: true }}
+          type="email"
+          label="Email"
+          name="email"
         />
         <FormInput
-          id="password"
-          changeLoginVal={(e, objKey) => changeLoginValHandler(e, objKey)}
-          validRules={{ type: "MIN_LENGTH", amount: 5 }}
-          elementType="input"
+          changeVal={changeLoginValHandler}
+          validRules={{ required: true }}
           type="password"
-          label="password"
-          errorMsg="at least 6 characters"
+          label="Password"
+          name="password"
         />
         <Button disabled={!allValid} className="form__btn">
           Submit

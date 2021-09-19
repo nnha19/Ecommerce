@@ -8,6 +8,7 @@ const useCheckOverAllValid = (obj, mode) => {
     for (let key in obj) {
       overallValid.push(obj[key].error);
     }
+    console.log(overallValid);
     setAllValid(!overallValid.some((err) => err));
   }, [obj, mode]);
 

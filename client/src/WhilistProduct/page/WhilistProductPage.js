@@ -4,12 +4,14 @@ import WhilistProduct from "../components/WhilistProduct/WhilistProduct";
 import Context from "../../contexts/context";
 
 const WhilistProductPage = (props) => {
-  const context = useContext(Context);
+  const { whilist } = useContext(Context);
 
-  return (
-    <>
-      <WhilistProduct whilistProduct={context.whilist} />
-    </>
+  return whilist && whilist.length > 0 ? (
+    <WhilistProduct whilistProduct={whilist} />
+  ) : (
+    <div className="error-container">
+      <p className="error">No whilistd products.</p>
+    </div>
   );
 };
 

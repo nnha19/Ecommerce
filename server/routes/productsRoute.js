@@ -7,9 +7,9 @@ router.get("/", productsController.getAllProducts);
 router.get("/:id", productsController.getProductById);
 router.get("/filter/:gender", productsController.getProductByGender);
 
-// router.use(authMiddleWare);
+router.use(authMiddleWare);
 
-router.put("/:id", productsController.updateProduct);
+router.put("/:id", upload.array("images", 5), productsController.updateProduct);
 router.post("/", upload.array("images", 5), productsController.createProduct);
 router.delete("/:id", productsController.deleteProduct);
 

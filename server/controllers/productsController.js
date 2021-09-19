@@ -1,4 +1,19 @@
 const Product = require("../Models/Product");
+const fs = require("fs");
+
+//Delete images if error occur.
+function deleteFile(filePath) {
+  fs.stat(filePath, (err, suc) => {
+    if (err) {
+      console.log(err);
+    } else {
+      fs.unlink(filePath, function (err) {
+        if (err) return console.log(err);
+        console.log("file deleted successfully");
+      });
+    }
+  });
+}
 
 const getAllProducts = async (req, res, next) => {
   try {
@@ -26,7 +41,6 @@ const getProductByGender = async (req, res, next) => {
     const filteredProducts = await Product.find({
       "features.gender": gender,
     });
-    console.log(filteredProducts);
     res.status(200).json(filteredProducts);
   } catch (err) {
     res.status(500).json(err);
@@ -37,10 +51,9 @@ const createProduct = async (req, res, next) => {
   //Create Product
   try {
     const productDetail = JSON.parse(req.body.productDetail);
-
     const imgs = req.files.map((file) => file.path);
     const { brand, price, description, features } = productDetail;
-    if (!req.admin) {
+    if (req.admin) {
       const product = await Product.create({
         brand,
         price,
@@ -50,9 +63,9 @@ const createProduct = async (req, res, next) => {
         reviews: [],
         questions: [],
       });
-      console.log(product);
       res.status(200).json(product);
     } else {
+      imgs.forEach((img) => deleteFile(`${img}`));
       res.status(400).json("You are not authorized to do this.");
     }
   } catch (err) {
@@ -62,14 +75,17 @@ const createProduct = async (req, res, next) => {
 
 const updateProduct = async (req, res, next) => {
   try {
+    const productDetail = JSON.parse(req.body.productDetail);
+    const imgs = req.files.map((file) => file.path);
     const productId = req.params.id;
-    const { brand, price, onSale, description, image, features } = req.body;
+    const { brand, price, onSale, description, image, features } =
+      productDetail;
     if (req.admin) {
       const updateProduct = await Product.findByIdAndUpdate(productId, {
         brand,
         price,
         description,
-        image,
+        imgs,
         features,
       });
       res.status(200).json(updateProduct);
