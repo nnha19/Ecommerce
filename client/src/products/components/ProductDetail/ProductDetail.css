@@ -1,12 +1,10 @@
 .product-detail-container {
   min-height: 500vh;
-  background: rgba(128, 128, 128, 0.452);
   overflow: hidden;
+  padding: 2rem;
 }
 .product-detail {
   position: relative;
-  background: white;
-  margin: 2rem;
   display: grid;
   grid-template-columns: 40% 1fr;
   gap: 1rem;
@@ -85,6 +83,11 @@
   margin-top: 1rem;
   background: purple;
   color: white;
+}
+
+.more-products {
+  background-color: white;
+  padding: 2rem 0;
 }
 
 @media (max-width: 1100px) {

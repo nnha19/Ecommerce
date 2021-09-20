@@ -109,7 +109,10 @@ const ProductDetail = (props) => {
           </div>
           <StickyCTA inView={inView} product={product} />
         </div>
-        <SimilarProducts />
+        <div className="more-products">
+          <h2>You might also interested in</h2>
+          <SimilarProducts />
+        </div>
       </div>
     </>
   );
