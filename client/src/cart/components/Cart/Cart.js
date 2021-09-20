@@ -35,6 +35,7 @@ const Cart = (props) => {
   let cartItemsOutput;
   if (cartItems && cartItems.length > 0) {
     cartItemsOutput = cartItems.map((item) => {
+      console.log(item);
       return (
         <div
           key={item._id}
@@ -42,7 +43,10 @@ const Cart = (props) => {
           className="cart__item"
         >
           <div className="cart__item-about">
-            <img className="cart__item-img" src={item.image} />
+            {/* <img
+              className="cart__item-img"
+              src={`${process.env.REACT_APP_BACKEND_URL}/${item.imgs[0]}`}
+            /> */}
             <div className="cart__item-features">
               <h4 className="cart__item-name">
                 {item.brand}/{item.features.gender}

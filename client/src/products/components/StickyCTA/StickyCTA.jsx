@@ -7,12 +7,20 @@ import "./StickyCTA.css";
 const StickyCTA = ({ product, inView }) => {
   return !inView ? (
     <div className="sticky-cta">
-      <img src={product.imgs[0]} />
-      <h3>{product.brand}</h3>
-      <p className="sticky-cta__price">{product.price} USD</p>
-      <AddToCart itemQuantity={1} product={product} className="add-to-cart">
-        Add To Cart
-      </AddToCart>
+      <div className="sticky-cta__img-brand">
+        <img src={`${process.env.REACT_APP_BACKEND_URL}/${product.imgs[0]}`} />
+        <h3>{product.brand}</h3>
+      </div>
+      <div className="sticky-cta__atc-price">
+        <AddToCart
+          itemQuantity={1}
+          product={product}
+          className="sticky-cta__add-to-cart add-to-cart"
+        >
+          Add To Cart
+        </AddToCart>
+        <p className="sticky-cta__price">{product.price} USD</p>
+      </div>
     </div>
   ) : null;
 };

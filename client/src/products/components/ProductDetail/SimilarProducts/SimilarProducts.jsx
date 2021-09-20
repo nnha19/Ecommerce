@@ -26,12 +26,13 @@ const SimilarProducts = (props) => {
       while (finalResult.length !== 10) {
         finalResult.push(
           withoutCurrentProduct.splice(
-            Math.random() * withoutCurrentProduct.length,
+            Math.floor(Math.random() * withoutCurrentProduct.length),
             1
-          )
+          )[0]
         );
       }
     }
+    console.log(finalResult);
     //finalResult =[randomProducts],lenth =10
     setMoreProducts(finalResult);
   }, [allProducts]);

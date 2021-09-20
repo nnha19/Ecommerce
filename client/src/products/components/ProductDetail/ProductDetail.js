@@ -101,7 +101,7 @@ const ProductDetail = (props) => {
               </Admin>
             </div>
             <AddToWhilist product={product} />
-            <p className="product-detail__price">{product.price} KS</p>
+            <p className="product-detail__price">{product.price} USD</p>
             {/* For Mobile */}
             <MobileProductContent product={product} />
             {/*For Desktop */}

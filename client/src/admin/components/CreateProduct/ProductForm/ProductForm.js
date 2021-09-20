@@ -79,7 +79,7 @@ const ProductForm = ({
           />
           <FormInput
             name="size"
-            type="number"
+            type="text"
             label="Size"
             value={productVals.size.value}
             validRules={{ required: true }}
