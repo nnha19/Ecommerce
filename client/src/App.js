@@ -26,14 +26,8 @@ import DemoLogin from "./DemoLogin/DemoLogin";
 
 const App = () => {
   const history = useHistory();
-  const [
-    cartItem,
-    loading,
-    error,
-    fetchData,
-    setCartItem,
-    setError,
-  ] = useHttp();
+  const [cartItem, loading, error, fetchData, setCartItem, setError] =
+    useHttp();
 
   const [cartItemAmount, setCartItemAmount] = useState();
   const [login, setLogin] = useState(false);
@@ -199,13 +193,6 @@ const App = () => {
         {curUser && curUser.admin && <AdminNavBar curUser={curUser} />}
       </Context.Provider>
       <Switch>
-        <Route exact path="/products" component={AllProducts} />
-        <Route exact path="/" component={AllProducts} />
-        <Route
-          exact
-          path="/product/filter/:gender"
-          component={FilterProductPage}
-        />
         <Context.Provider
           value={{
             token,
@@ -229,6 +216,14 @@ const App = () => {
             removeAllWhilist: () => removeAllWhilistHandler(),
           }}
         >
+          <Route exact path="/products" component={AllProducts} />
+          <Route exact path="/" component={AllProducts} />
+          <Route
+            exact
+            path="/product/filter/:gender"
+            component={FilterProductPage}
+          />
+
           {authenticated && <Route path="/cart" exact component={CartPage} />}
           <Route exact path="/checkout" component={CheckoutPage} />
           <Route exact path="/product/:id" component={ProductDetailPage} />

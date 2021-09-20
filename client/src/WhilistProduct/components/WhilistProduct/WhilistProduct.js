@@ -16,7 +16,6 @@ const WhilistProduct = ({ whilistProduct }) => {
   const history = useHistory();
   const cartItemData = context.cartItemData;
 
-  const [addedToCart, setAddedToCart] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const goToProductDetailHandler = (e, productId) => {
@@ -72,7 +71,6 @@ const WhilistProduct = ({ whilistProduct }) => {
           <AddToCart
             product={whilistProduct}
             itemQuantity={1}
-            setAddedToCart={(boolean) => setAddedToCart(boolean)}
             whilist={true}
             className="whilist-cart"
           />
@@ -83,13 +81,6 @@ const WhilistProduct = ({ whilistProduct }) => {
 
   return (
     <>
-      {cartItemData.error && (
-        <ATCErrorMsg
-          hideModal={() => hideModalHandler()}
-          error={cartItemData.error}
-          setError={cartItemData.setError}
-        />
-      )}
       <Spinner show={loading || context.cartItemData.loading} />
       <div className="whilist">
         <div className="whilist-product-container">

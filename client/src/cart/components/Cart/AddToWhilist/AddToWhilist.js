@@ -1,11 +1,13 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { useHttp } from "../../../../customHooks/useHttp";
 import Context from "../../../../contexts/context";
 
 import "./AddToWhilist.css";
 
-const AddToWhilist = (props) => {
+const AddToWhilist = ({ product, className }) => {
+  const [addedToWhilist, setAddedToWhilist] = useState(false);
+
   const context = useContext(Context);
   const [
     createdWhilist,
@@ -17,6 +19,15 @@ const AddToWhilist = (props) => {
   ] = useHttp(null);
 
   useEffect(() => {
+    if (product && context.whilist) {
+      const addedToWhilist = context.whilist.some(
+        (whilist) => whilist._id === product._id
+      );
+      setAddedToWhilist(addedToWhilist);
+    }
+  }, [product, context.whilist]);
+
+  useEffect(() => {
     createdWhilist && context.setWhilist(createdWhilist);
   }, [createdWhilist]);
 
@@ -26,7 +37,7 @@ const AddToWhilist = (props) => {
       return;
     }
     fetchData(
-      `${process.env.REACT_APP_BACKEND_URL}/whilist/${props.userId}/${props.productId}`,
+      `${process.env.REACT_APP_BACKEND_URL}/whilist/${context.curUser.userId}/${product._id}`,
       "post"
     );
   };
@@ -37,8 +48,8 @@ const AddToWhilist = (props) => {
           onClick={addToWhilistHandler}
           title="Add to whilist"
           className={`fa${
-            props.addedToWhilist ? "s" : "r"
-          } fa-heart cart__item-heart cart__item-icons ${props.className}`}
+            addedToWhilist ? "s" : "r"
+          } fa-heart cart__item-heart cart__item-icons ${className}`}
         ></i>
       ) : (
         <span className="add-to-whilist-loading"></span>

@@ -23,7 +23,6 @@ const ProductDetail = (props) => {
   const [mainImg, setMainImg] = useState(
     `${process.env.REACT_APP_BACKEND_URL}/${product.imgs[0]}`
   );
-  const [addedToWhilist, setAddedToWhilist] = useState(false);
   const context = useContext(Context);
 
   const hideModalHandler = () => {
@@ -42,15 +41,6 @@ const ProductDetail = (props) => {
       setShowDropDown(false);
     }
   };
-
-  useEffect(() => {
-    if (product && context.whilist) {
-      const addedToWhilist = context.whilist.some(
-        (whilist) => whilist._id === product._id
-      );
-      setAddedToWhilist(addedToWhilist);
-    }
-  }, [product, context.whilist]);
 
   if (!product) {
     return null;
@@ -109,11 +99,7 @@ const ProductDetail = (props) => {
                 />
               </Admin>
             </div>
-            <AddToWhilist
-              addedToWhilist={addedToWhilist}
-              productId={product._id}
-              userId={context.curUser && context.curUser.userId}
-            />
+            <AddToWhilist product={product} />
             <p className="product-detail__price">{product.price} KS</p>
             {/* For Mobile */}
             <MobileProductContent product={product} />

@@ -23,10 +23,10 @@
   border: 3px solid transparent;
   border-top: 3px solid orangered;
   border-bottom: 3px solid orangered;
-  animation: spin 1s infinite;
+  animation: spinHeart 1s infinite;
 }
 
-@keyframes spin {
+@keyframes spinHeart {
   from {
     transform: rotate(0);
   }
