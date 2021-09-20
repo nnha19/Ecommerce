@@ -30,7 +30,7 @@ const productSchema = new mongoose.Schema({
   buyers: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Order",
+      ref: "Customer",
     },
   ],
 });

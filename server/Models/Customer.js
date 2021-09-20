@@ -5,7 +5,7 @@ const customerSchema = new mongoose.Schema({
   admin: Boolean,
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  cart: [{ type: mongoose.Schema.Types.ObjectId, ref: "Cart" }],
+  cart: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
   order: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order" }],
   whilist: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
   usedCoupon: [

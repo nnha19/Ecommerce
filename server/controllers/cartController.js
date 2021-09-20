@@ -1,23 +1,11 @@
-const mongoose = require("mongoose");
-
 const Customer = require("../Models/Customer");
-const Cart = require("../Models/Cart");
-const Product = require("../Models/Product");
 
 const getAllItemsFromCart = async (req, res, next) => {
   try {
     const userId = req.params.id;
-    const customer = await Customer.findById(userId);
+    const customer = await Customer.findById(userId).populate("cart");
 
-    Customer.findById(userId)
-      .populate("cart")
-      .exec((err, customer) => {
-        if (err) {
-          res.status(400).json(err);
-        } else {
-          res.status(200).json(customer.cart);
-        }
-      });
+    res.status(200).json(customer.cart);
   } catch (err) {
     console.log(err);
     res.json(err);
@@ -26,45 +14,25 @@ const getAllItemsFromCart = async (req, res, next) => {
 
 const createCartItem = async (req, res, next) => {
   try {
-    const { productId, brand, color, price, pickedQty, features, image } =
-      req.body;
+    const { productId } = req.body;
 
     const userId = req.params.id;
-    Customer.findById(userId)
-      .populate("cart")
-      .exec(async (err, customer) => {
-        if (err) {
-          console.log(err);
-        } else {
-          const existingCartItem = customer.cart.filter(
-            (c) => c.productId.toString() === productId
-          );
-          if (existingCartItem.length > 0) {
-            res.status(400).json("This item already exists in the cart");
-          } else {
-            const cartItem = await Cart.create({
-              productId,
-              brand,
-              color,
-              price,
-              pickedQty,
-              features,
-              image,
-            });
-            customer.cart.push(cartItem);
-            await customer.save();
-            Customer.findById(userId)
-              .populate("cart")
-              .exec((err, customer) => {
-                if (err) {
-                  res.status(400).json(err);
-                } else {
-                  res.status(200).json(customer.cart);
-                }
-              });
-          }
-        }
-      });
+    const customer = await Customer.findById(userId);
+    if (customer) {
+      const cartItemExist = customer.cart.some(
+        (cartId) => cartId.toString() === productId
+      );
+      if (cartItemExist) {
+        res.status(400).json("This item already exists in the cart.");
+      } else {
+        customer.cart.push(productId);
+        await customer.save();
+        const cust = await Customer.findById(userId).populate("cart");
+        res.status(200).json(cust);
+      }
+    } else {
+      res.status(400).json(err);
+    }
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

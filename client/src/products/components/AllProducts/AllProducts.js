@@ -17,11 +17,11 @@ const AllProducts = ({ allProducts, title, style }) => {
         e.target.closest(".add-to-whilist-container")
       )
         return;
-
       history.push(url);
     };
     allProductsOutput = allProducts.map((product, i) => {
       let stock = product.features.inStock > 0 ? "In Stock" : "Out Of Stock";
+
       return (
         <div
           onClick={(e) =>
