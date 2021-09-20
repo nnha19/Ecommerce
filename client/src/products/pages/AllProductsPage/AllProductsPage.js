@@ -9,13 +9,6 @@ import { useHttp } from "../../../customHooks/useHttp";
 const AllProductsPage = (props) => {
   const [allProducts, loading, error, fetchData, setAllProducts] = useHttp([]);
 
-  const deleteProduct = (productId) => {
-    const remainProducts = allProducts.filter(
-      (product) => product._id !== productId
-    );
-    setAllProducts(remainProducts);
-  };
-
   useEffect(() => {
     fetchData(`${process.env.REACT_APP_BACKEND_URL}/products`, "get");
   }, []);

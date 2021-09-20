@@ -12,6 +12,7 @@ import MobileProductContent from "../MobileProductContent/MobileProductContent";
 import DesktopProductContent from "../DesktopProductContent/DesktopProductContent";
 import Admin from "../../../share/components/Admin/Admin";
 import StickyCTA from "../StickyCTA/StickyCTA";
+import SimilarProducts from "./SimilarProducts/SimilarProducts";
 
 const ProductDetail = (props) => {
   const { ref, inView } = useInView({
@@ -108,6 +109,7 @@ const ProductDetail = (props) => {
           </div>
           <StickyCTA inView={inView} product={product} />
         </div>
+        <SimilarProducts />
       </div>
     </>
   );

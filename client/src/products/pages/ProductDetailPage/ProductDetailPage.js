@@ -11,20 +11,8 @@ const ProductDetailPage = (props) => {
   const [productDetail, loading, error, fetchData, setProductDetail] =
     useHttp();
 
-  const productColorChosenHandler = (e, id) => {
-    const productDetailColors = [...productDetail.colors];
-    const colors = productDetailColors.map((c) => {
-      console.log(id);
-      if (c._id === id) {
-        return (c.choosen = true);
-      } else {
-        return (c.choosen = false);
-      }
-    });
-    setProductDetail({ ...productDetail, colors: productDetailColors });
-  };
-
   useEffect(() => {
+    //fetch detail of a product
     fetchData(
       `${process.env.REACT_APP_BACKEND_URL}/products/${productId}`,
       "get"
@@ -34,10 +22,7 @@ const ProductDetailPage = (props) => {
   return productDetail ? (
     <>
       <Spinner show={loading} />
-      <ProductDetail
-        productColorChosen={(e, id) => productColorChosenHandler(e, id)}
-        productDetail={productDetail}
-      />
+      <ProductDetail productDetail={productDetail} />
     </>
   ) : null;
 };

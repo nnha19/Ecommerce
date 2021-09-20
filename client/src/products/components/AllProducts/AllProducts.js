@@ -6,22 +6,21 @@ import { useHistory } from "react-router-dom";
 import AddToCart from "../../components/ProductDetail/ProductDetailBody/AddToCart/AddToCart";
 import AddToWhilist from "../../../cart/components/Cart/AddToWhilist/AddToWhilist";
 
-const AllProducts = (props) => {
+const AllProducts = ({ allProducts, title }) => {
   const history = useHistory();
   let allProductsOutput;
-  if (props.allProducts && props.allProducts.length > 0) {
+  if (allProducts && allProducts.length > 0) {
     const navigateToProductDetailHandler = (e, url) => {
       if (
-        !e.target.classList.contains("product__add-to-cart") &&
-        !e.target.classList.contains("backdrop") &&
+        e.target.classList.contains("product__add-to-cart") ||
+        e.target.classList.contains("backdrop") ||
         e.target.closest(".add-to-whilist-container")
-      ) {
-        console.log("Dont go anywhere");
-      } else {
-        history.push(url);
-      }
+      )
+        return;
+
+      history.push(url);
     };
-    allProductsOutput = props.allProducts.map((product, i) => {
+    allProductsOutput = allProducts.map((product, i) => {
       let stock = product.features.inStock > 0 ? "In Stock" : "Out Of Stock";
       return (
         <div
@@ -40,7 +39,7 @@ const AllProducts = (props) => {
           />
           <div className="product__body">
             <h2 className="product__brand">{product.brand}</h2>
-            <p className="product__price">{product.price} $</p>
+            <p className="product__price">{product.price} USD</p>
             <div className="stars">
               <i class="rating-star fas fa-star"></i>
               <i class="rating-star fas fa-star"></i>
@@ -66,7 +65,7 @@ const AllProducts = (props) => {
 
   return (
     <>
-      <h4 className="all-products__heading">{props.title}</h4>
+      <h4 className="all-products__heading">{title}</h4>
       <div className="all-products">{allProductsOutput}</div>
     </>
   );
