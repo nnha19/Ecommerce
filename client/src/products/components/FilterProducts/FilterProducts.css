@@ -1,0 +1,20 @@
+.filter {
+  margin-bottom: 2rem;
+}
+.filter-products {
+  box-shadow: 0 0 1px grey;
+  padding: 1rem 0.4rem;
+  align-self: start;
+}
+.filter__vals {
+  margin-top: 1.4rem;
+}
+.filter__child {
+  margin: 0.4rem 0;
+}
+.filter__title {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.4rem;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+}

@@ -5,8 +5,9 @@ import { useHistory } from "react-router-dom";
 
 import AddToCart from "../../components/ProductDetail/ProductDetailBody/AddToCart/AddToCart";
 import AddToWhilist from "../../../cart/components/Cart/AddToWhilist/AddToWhilist";
+import FilterProducts from "../FilterProducts/FilterProducts";
 
-const AllProducts = ({ allProducts, title, style }) => {
+const AllProducts = ({ allProducts, title, style, filter }) => {
   const history = useHistory();
   let allProductsOutput;
   if (allProducts && allProducts.length > 0) {
@@ -62,14 +63,21 @@ const AllProducts = ({ allProducts, title, style }) => {
   } else {
     allProductsOutput = null;
   }
-
-  return (
+  const returnChildren = (
     <>
-      <h4 className="all-products__heading">{title}</h4>
+      {filter && <FilterProducts />}
       <div style={style} className="all-products">
         {allProductsOutput}
       </div>
     </>
+  );
+
+  return filter ? (
+    <>
+      <div className="all-products-container">{returnChildren}</div>
+    </>
+  ) : (
+    returnChildren
   );
 };
 

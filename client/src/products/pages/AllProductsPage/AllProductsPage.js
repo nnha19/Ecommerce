@@ -1,6 +1,4 @@
-//Random Products Page
-
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 
 import AllProducts from "../../components/AllProducts/AllProducts";
 import { useHttp } from "../../../customHooks/useHttp";
@@ -9,7 +7,6 @@ import Context from "../../../contexts/context";
 import ATCErrorMsg from "../../components/ProductDetail/ProductDetailBody/ATCErrorMsg/ATCErrorMsg";
 
 const AllProductsPage = (props) => {
-  const { cartItemData } = useContext(Context);
   const [allProducts, loading, error, fetchData, setAllProducts] = useHttp([]);
 
   useEffect(() => {
@@ -20,7 +17,7 @@ const AllProductsPage = (props) => {
     <>
       <ATCErrorMsg />
       <SkeletonLoading show={loading} />
-      <AllProducts allProducts={allProducts} />{" "}
+      <AllProducts filter={true} allProducts={allProducts} />
     </>
   );
 };
