@@ -16,23 +16,21 @@ const CreateCoupon = (props) => {
   const [couponVal, setCouponVal] = useState({
     couponCode: {
       value: "",
-      isValid: false,
-      isTouched: false,
+      error: true,
     },
     discountPrice: {
       value: "",
-      isValid: "false",
-      isTouched: false,
+      error: true,
     },
   });
 
   const [loading, setLoading] = useState(false);
   const allValid = useCheckOverAllValid(couponVal);
 
-  const changeCouponValHandler = (inputVal, id) => {
-    let updated = couponVal[id];
-    updated = inputVal;
-    setCouponVal({ ...couponVal, [id]: updated });
+  const changeCouponValHandler = (e, error) => {
+    const { value, name } = e.target;
+    const updated = { ...couponVal[name], value, error };
+    setCouponVal({ ...couponVal, [name]: updated });
   };
 
   const createCouponHandler = async (e) => {
@@ -66,41 +64,24 @@ const CreateCoupon = (props) => {
     <>
       <Spinner show={loading} />
       <div className="checkout-container">
-        <div className="checkout__delivery-infos coupon-form-container">
+        <div className=" coupon-form-container">
           <form className="checkout__form coupon__form">
             <FormInput
-              value={props.couponCode}
-              validRules={{ type: "REQUIRE" }}
-              elementType="input"
+              value={couponVal["couponCode"].value}
+              validRules={{ required: true }}
               label="Coupon Code"
               type="text"
-              changeLoginVal={(inputVal, id) =>
-                props.editing
-                  ? props.changeCouponVal(inputVal, id)
-                  : changeCouponValHandler(inputVal, id)
-              }
-              inputCls="checkout__input"
-              labelCls="checkout__label"
-              errorMsg="This field is required"
-              id="couponCode"
-              cleanInput={cleanInput}
+              name="couponCode"
+              changeVal={changeCouponValHandler}
             />
             <FormInput
-              value={props.discountPrice}
-              validRules={{ type: "REQUIRE" }}
-              elementType="input"
+              value={couponVal["discountPrice"].value}
+              validRules={{ required: true }}
               label="Discount Price"
+              placeholder="Eg:12"
               type="number"
-              changeLoginVal={(inputVal, id) =>
-                props.editing
-                  ? props.changeCouponVal(inputVal, id)
-                  : changeCouponValHandler(inputVal, id)
-              }
-              inputCls="checkout__input"
-              labelCls="checkout__label"
-              errorMsg="This field is required"
-              id="discountPrice"
-              cleanInput={cleanInput}
+              name="discountPrice"
+              changeVal={changeCouponValHandler}
             />
             <SecondaryBtn
               clicked={props.editCoupon || createCouponHandler}

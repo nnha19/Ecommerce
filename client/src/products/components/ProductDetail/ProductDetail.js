@@ -78,21 +78,6 @@ const ProductDetail = ({ productDetail }) => {
 
   return (
     <>
-      <Modal
-        modalShow={showModal}
-        title="Item already exists"
-        body={
-          <>
-            <p className="modal__paragraph">
-              This item already exists in the cart.Do you want to replace it?
-            </p>
-            <Button className="modal__btn">Replace</Button>
-            <Button clicked={hideModalHandler} className="modal__cancel">
-              Cancel
-            </Button>
-          </>
-        }
-      />
       <div className="product-detail-container">
         <div ref={ref} onClick={hideDropDownHandler} className="product-detail">
           <div className="product-detail__img-container">

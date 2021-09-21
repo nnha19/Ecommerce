@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import ProductDetail from "../../components/ProductDetail/ProductDetail";
 import { useHttp } from "../../../customHooks/useHttp";
 import Spinner from "../../../share/UI/Spinner/Spinner";
+import ATCErrorMsg from "../../components/ProductDetail/ProductDetailBody/ATCErrorMsg/ATCErrorMsg";
 
 const ProductDetailPage = (props) => {
   const productId = useParams().id;
@@ -21,6 +22,7 @@ const ProductDetailPage = (props) => {
 
   return productDetail ? (
     <>
+      <ATCErrorMsg />
       <Spinner show={loading} />
       <ProductDetail productDetail={productDetail} />
     </>

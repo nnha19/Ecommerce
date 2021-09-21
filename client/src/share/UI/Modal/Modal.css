@@ -3,17 +3,17 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: green;
+  background: white;
   line-height: 2;
   display: none;
   z-index: 999;
   width: fit-content;
+  border-radius: 0 8px 0 8px;
 }
 .modal__title {
   padding: 1rem 2rem;
   font-size: 1.4rem;
-  color: white;
-  background: purple;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.308);
 }
 .modal__body {
   padding: 2rem;

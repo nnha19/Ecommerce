@@ -97,7 +97,7 @@ const Auth = (props) => {
         onSubmit={submitHandler}
         className={`auth__form ${props.login && "show-login"}`}
       >
-        <i onClick={props.toggleLogin} class="hide-form fas fa-times"></i>
+        <i onClick={props.toggleLogin} className="hide-form fas fa-times"></i>
         {signUp && (
           <FormInput
             inputContainerCls="auth-input-container"

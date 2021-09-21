@@ -6,39 +6,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2rem 0;
+  width: 20rem;
+  background-color: white;
+  padding: 8rem 2rem;
+  margin: 2rem auto;
 }
 .coupon-form-container {
   width: 60%;
   margin: 2rem auto;
 }
 .coupon-form__btn {
-  width: 70%;
+  width: 100%;
+  margin-top: 1rem;
 }
 
 @media (max-width: 1000px) {
   .coupon-form-container {
     width: 60vw;
-  }
-}
-
-@media (max-width: 700px) {
-  .coupon-form-container {
-    width: 80vw;
-    padding: 1rem;
-  }
-  .coupon__form {
-    width: 90%;
-  }
-  .form__input-container {
-    width: 90%;
-  }
-  .coupon-form__btn {
-    width: 90%;
-  }
-}
-@media (max-width: 370px) {
-  .coupon-form-container {
-    width: 90vw;
   }
 }

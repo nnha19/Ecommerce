@@ -51,20 +51,11 @@ const AddToCart = ({
   };
 
   const hideModalHandler = () => {
-    console.log("Hide");
     setAddedToCart(false);
-    cartItemData.setError(false);
   };
 
   return (
     <>
-      {cartItemData.error && (
-        <ATCErrorMsg
-          hideModal={() => hideModalHandler()}
-          error={cartItemData.error}
-          setError={cartItemData.setError}
-        />
-      )}
       {addedToCart && !cartItemData.loading && !cartItemData.error && (
         <AddToCartDisplayMsg
           hideModal={() => hideModalHandler()}
