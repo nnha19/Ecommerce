@@ -27,16 +27,22 @@
   background-color: rgba(128, 128, 128, 0.411);
 }
 #skeleton-animation {
-  animation: skeleton-animation 2s infinite ease-in;
+  animation: skeleton-animation 1s infinite ease-in reverse;
 }
 .skeleton__content > *:last-child {
   width: 40%;
 }
 @keyframes skeleton-animation {
-  from {
+  25% {
     opacity: 0.4;
   }
-  to {
+  50% {
+    opacity: 0.8;
+  }
+  25% {
     opacity: 1;
+  }
+  25% {
+    opacity: 0.4;
   }
 }
