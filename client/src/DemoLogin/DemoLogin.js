@@ -6,14 +6,8 @@ import { useHttp } from "../customHooks/useHttp";
 import Spinner from "../share/UI/Spinner/Spinner";
 
 const DemoLogin = (props) => {
-  const [
-    customer,
-    loading,
-    error,
-    fetchData,
-    setAdminData,
-    setError,
-  ] = useHttp();
+  const [customer, loading, error, fetchData, setAdminData, setError] =
+    useHttp();
 
   const loginAsAdminHandler = (type) => {
     if (type === "admin") {
@@ -38,7 +32,7 @@ const DemoLogin = (props) => {
       <Spinner show={loading} />
       <div className="demo">
         <button className="demo__login">
-          Demo <i class="demo__icon fas fa-angle-down"></i>
+          Demo <i className="demo__icon fas fa-angle-down"></i>
         </button>
         <ul className="demo__lists">
           <li

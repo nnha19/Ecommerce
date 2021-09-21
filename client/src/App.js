@@ -85,7 +85,6 @@ const App = () => {
         .reduce((pre, cur) => {
           return pre + cur;
         }, 0);
-    console.log(totalAmount);
     setCartItemAmount(result);
     setTotalAmount(totalAmount);
   };

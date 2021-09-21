@@ -35,8 +35,6 @@ const CreateCoupon = (props) => {
     setCouponVal({ ...couponVal, [id]: updated });
   };
 
-  console.log(loading);
-
   const createCouponHandler = async (e) => {
     try {
       e.preventDefault();

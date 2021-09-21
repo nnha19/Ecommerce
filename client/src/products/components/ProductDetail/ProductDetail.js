@@ -19,7 +19,6 @@ const ProductDetail = ({ productDetail }) => {
   const { ref, inView } = useInView({
     threshold: 0,
   });
-  console.log(topRef);
   useEffect(() => {
     //Scroll to top when params change
     if (topRef && topRef.current) {

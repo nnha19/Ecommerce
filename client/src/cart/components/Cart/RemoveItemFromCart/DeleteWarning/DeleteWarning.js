@@ -4,8 +4,6 @@ import Modal from "../../../../../share/UI/Modal/Modal";
 import Button from "../../../../../share/components/button/button";
 
 const DeleteWarning = (props) => {
-  console.log(props.showDeleteWarning);
-
   return (
     <Modal
       modalShow={props.showDeleteWarning}

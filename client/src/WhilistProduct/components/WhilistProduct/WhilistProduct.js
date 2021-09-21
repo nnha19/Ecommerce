@@ -47,6 +47,7 @@ const WhilistProduct = ({ whilistProduct }) => {
   whilistProductOutput = whilistProduct.map((whilistProduct) => {
     return (
       <div
+        key={whilistProduct._id}
         onClick={(e) => goToProductDetailHandler(e, whilistProduct._id)}
         className="cart__item"
       >

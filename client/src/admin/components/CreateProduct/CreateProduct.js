@@ -20,7 +20,6 @@ const CreateProduct = ({ createProduct, editProductVal }) => {
     }
   });
   const [productVal, setProductVal] = useState(productValObj);
-  console.log(productVal);
   const [allValid] = useCheckOverAllValid(productVal);
 
   const creatingProductHandler = (e) => {

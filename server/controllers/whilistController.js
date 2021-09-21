@@ -49,7 +49,6 @@ const createWhilist = async (req, res, next) => {
             res.status(400).json(err);
             console.log(err);
           } else {
-            console.log(customer);
             res.status(200).json(customer.whilist);
           }
         });

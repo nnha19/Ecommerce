@@ -41,11 +41,11 @@ const AllProducts = ({ allProducts, title, style }) => {
             <h2 className="product__brand">{product.brand}</h2>
             <p className="product__price">{product.price} USD</p>
             <div className="stars">
-              <i class="rating-star fas fa-star"></i>
-              <i class="rating-star fas fa-star"></i>
-              <i class="rating-star fas fa-star"></i>
-              <i class="rating-star fas fa-star"></i>
-              <i class="rating-star fas fa-star"></i>
+              <i className="rating-star fas fa-star"></i>
+              <i className="rating-star fas fa-star"></i>
+              <i className="rating-star fas fa-star"></i>
+              <i className="rating-star fas fa-star"></i>
+              <i className="rating-star fas fa-star"></i>
               <span>({product.reviews.length})</span>
             </div>
             <AddToCart

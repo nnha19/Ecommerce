@@ -8,7 +8,7 @@ import HamburgerIcon from "./HamburgerIcon/HamburgerIcon";
 
 const NavBar = (props) => {
   return (
-    <nav classNam="admin-nav">
+    <nav className="admin-nav">
       <HamburgerIcon curUser={props.curUser && props.curUser} />
       <ul className="admin-nav__items">
         <AdminNavItems curUser={props.curUser && props.curUser} />
