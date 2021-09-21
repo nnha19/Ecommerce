@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from "react";
 
 import AllProducts from "../../components/AllProducts/AllProducts";
-import Spinner from "../../../share/UI/Spinner/Spinner";
 import { useHttp } from "../../../customHooks/useHttp";
+import SkeletonLoading from "../../../share/UI/SkeletonLoading/SkeletonLoading";
 
 const AllProductsPage = (props) => {
   const [allProducts, loading, error, fetchData, setAllProducts] = useHttp([]);
@@ -14,7 +14,7 @@ const AllProductsPage = (props) => {
   }, []);
   return (
     <>
-      <Spinner show={loading} />
+      <SkeletonLoading show={loading} />
       <AllProducts allProducts={allProducts} />{" "}
     </>
   );

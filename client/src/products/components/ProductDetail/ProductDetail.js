@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import "./ProductDetail.css";
 import { useInView } from "react-intersection-observer";
@@ -6,25 +6,38 @@ import { useInView } from "react-intersection-observer";
 import Modal from "../../../share/UI/Modal/Modal";
 import Button from "../../../share/components/button/button";
 import ManiProduct from "./ManiProduct/ManiProduct";
-import Context from "../../../contexts/context";
 import AddToWhilist from "../../../cart/components/Cart/AddToWhilist/AddToWhilist";
 import MobileProductContent from "../MobileProductContent/MobileProductContent";
 import DesktopProductContent from "../DesktopProductContent/DesktopProductContent";
 import Admin from "../../../share/components/Admin/Admin";
 import StickyCTA from "../StickyCTA/StickyCTA";
 import SimilarProducts from "./SimilarProducts/SimilarProducts";
+import Context from "../../../contexts/context";
 
-const ProductDetail = (props) => {
+const ProductDetail = ({ productDetail }) => {
+  const { topRef } = useContext(Context);
   const { ref, inView } = useInView({
     threshold: 0,
   });
-  const product = props.productDetail;
+  console.log(topRef);
+  useEffect(() => {
+    //Scroll to top when params change
+    if (topRef && topRef.current) {
+      topRef.current.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  }, [productDetail]);
+
   const [showModal, setShowModal] = useState(false);
   const [showDropDown, setShowDropDown] = useState(false);
   const [mainImg, setMainImg] = useState(
-    `${process.env.REACT_APP_BACKEND_URL}/${product.imgs[0]}`
+    `${process.env.REACT_APP_BACKEND_URL}/${productDetail.imgs[0]}`
   );
-  const context = useContext(Context);
+
+  useEffect(() => {
+    setMainImg(`${process.env.REACT_APP_BACKEND_URL}/${productDetail.imgs[0]}`);
+  }, [productDetail]);
 
   const hideModalHandler = () => {
     setShowModal(false);
@@ -43,14 +56,14 @@ const ProductDetail = (props) => {
     }
   };
 
-  if (!product) {
+  if (!productDetail) {
     return null;
   }
   const setMainImgHandler = (src) => {
     setMainImg(`${process.env.REACT_APP_BACKEND_URL}/${src}`);
   };
 
-  const productImgs = product.imgs.map((img, i) => {
+  const productImgs = productDetail.imgs.map((img, i) => {
     const src = `${process.env.REACT_APP_BACKEND_URL}/${img}`;
     return (
       <img
@@ -91,23 +104,23 @@ const ProductDetail = (props) => {
           </div>
           <div className="product-detail__content">
             <div className="product-detail__edit">
-              <h4 className="product-detail__name">{product.brand}</h4>
+              <h4 className="product-detail__name">{productDetail.brand}</h4>
               <Admin>
                 <ManiProduct
-                  productId={product._id}
+                  productId={productDetail._id}
                   showDropDown={showDropDown}
                   showDropDownHandler={showDropDownHandler}
                 />
               </Admin>
             </div>
-            <AddToWhilist product={product} />
-            <p className="product-detail__price">{product.price} USD</p>
+            <AddToWhilist product={productDetail} />
+            <p className="product-detail__price">{productDetail.price} USD</p>
             {/* For Mobile */}
-            <MobileProductContent product={product} />
+            <MobileProductContent product={productDetail} />
             {/*For Desktop */}
-            <DesktopProductContent product={product} />
+            <DesktopProductContent product={productDetail} />
           </div>
-          <StickyCTA inView={inView} product={product} />
+          <StickyCTA inView={inView} product={productDetail} />
         </div>
         <div className="more-products">
           <h2>You might also interested in</h2>

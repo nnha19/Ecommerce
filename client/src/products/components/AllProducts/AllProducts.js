@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import "./AllProducts.css";
 import { useHistory } from "react-router-dom";

@@ -1,0 +1,42 @@
+.skeletons {
+  padding: 4rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 1.5rem;
+  justify-content: center;
+  min-height: 100vh;
+}
+.skeleton {
+  box-shadow: 0 2px 2px grey;
+  padding: 1rem;
+  height: max-content;
+}
+
+.skeleton__img {
+  background-color: rgba(128, 128, 128, 0.411);
+  height: 4rem;
+  width: 100%;
+}
+.skeleton__header {
+  margin: 0 auto;
+}
+.skeleton__content > * {
+  margin-top: 1rem;
+  height: 1rem;
+  width: 60%;
+  background-color: rgba(128, 128, 128, 0.411);
+}
+#skeleton-animation {
+  animation: skeleton-animation 2s infinite ease-in;
+}
+.skeleton__content > *:last-child {
+  width: 40%;
+}
+@keyframes skeleton-animation {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}

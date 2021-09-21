@@ -17,7 +17,7 @@ const ProductDetailPage = (props) => {
       `${process.env.REACT_APP_BACKEND_URL}/products/${productId}`,
       "get"
     );
-  }, []);
+  }, [productId]);
 
   return productDetail ? (
     <>

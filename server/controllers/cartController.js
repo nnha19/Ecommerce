@@ -1,10 +1,10 @@
 const Customer = require("../Models/Customer");
+const Cart = require("../Models/Cart");
 
 const getAllItemsFromCart = async (req, res, next) => {
   try {
     const userId = req.params.id;
     const customer = await Customer.findById(userId).populate("cart");
-
     res.status(200).json(customer.cart);
   } catch (err) {
     console.log(err);
@@ -25,7 +25,11 @@ const createCartItem = async (req, res, next) => {
       if (cartItemExist) {
         res.status(400).json("This item already exists in the cart.");
       } else {
-        customer.cart.push(productId);
+        const cartItem = await Cart.create({
+          cartItem: productId,
+          pickedQty: 1,
+        });
+        customer.cart.push(cartItem);
         await customer.save();
         const cust = await Customer.findById(userId).populate("cart");
         res.status(200).json(cust);
@@ -48,6 +52,7 @@ const updateCartItem = async (req, res, next) => {
     cartItem.pickedQty =
       type === "add" ? cartItem.pickedQty + 1 : cartItem.pickedQty - 1;
     await cartItem.save();
+
     Customer.findById(userId)
       .populate("cart")
       .exec((err, customer) => {
@@ -72,7 +77,7 @@ const deleteCartItem = async (req, res, next) => {
         if (err) {
           res.status(400).json(err);
         } else {
-          const cartItemId = req.params.cartItemId;
+          const { cartItemId } = req.params;
           const deleteCartItem = customer.cart.filter(
             (c) => c._id.toString() !== cartItemId
           );

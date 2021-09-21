@@ -1,7 +1,7 @@
-import React, { useEffect, useState, Suspense } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import "./App.css";
-import { Route, Switch, Redirect, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import axios from "axios";
 
 import AllProducts from "./products/pages/AllProductsPage/AllProductsPage";
@@ -39,6 +39,8 @@ const App = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [whilist, setWhilist] = useState([]);
   const [tokenExpirationDate, setTokenExpirationDate] = useState();
+
+  const topRef = useRef();
 
   useEffect(() => {
     curUser &&
@@ -165,7 +167,7 @@ const App = () => {
   };
 
   return (
-    <div onClick={hideDropDownHandler} className="wrapper">
+    <div ref={topRef} onClick={hideDropDownHandler} className="wrapper">
       <Auth
         loginUser={(customer, token) => loginUserHandler(customer, token)}
         toggleLogin={toggleLoginHandler}
@@ -214,6 +216,7 @@ const App = () => {
             whilist,
             removeOneWhilist: (productId) => removeOneWhilist(productId),
             removeAllWhilist: () => removeAllWhilistHandler(),
+            topRef,
           }}
         >
           <Route exact path="/products" component={AllProducts} />

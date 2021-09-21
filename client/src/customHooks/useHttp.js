@@ -22,8 +22,7 @@ export const useHttp = (initVal, url, method) => {
       setRespData(resp.data);
       setLoading(false);
     } catch (err) {
-      console.log(err);
-      setError(err.response.data);
+      setError(err);
       setLoading(false);
     }
     setFinished(true);

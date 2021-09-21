@@ -10,7 +10,7 @@ const SimilarProducts = (props) => {
   const [allProducts, , , fetchData, , , ,] = useHttp();
   useEffect(() => {
     fetchData(`${process.env.REACT_APP_BACKEND_URL}/products`, "get");
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     if (!allProducts || allProducts.length < 1) {
@@ -32,7 +32,6 @@ const SimilarProducts = (props) => {
         );
       }
     }
-    console.log(finalResult);
     //finalResult =[randomProducts],lenth =10
     setMoreProducts(finalResult);
   }, [allProducts]);
