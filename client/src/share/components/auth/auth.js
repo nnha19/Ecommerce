@@ -9,6 +9,7 @@ import { useHttp } from "../../../customHooks/useHttp";
 import Spinner from "../../../share/UI/Spinner/Spinner";
 import Modal from "../../../share/UI/Modal/Modal";
 import useCheckOverAllValid from "../../../customHooks/useCheckOverAllValid";
+import SecondaryBtn from "../SecondaryBtn/SecondaryBtn";
 
 const Auth = (props) => {
   const [signUp, setSignUp] = useState(false);
@@ -19,7 +20,6 @@ const Auth = (props) => {
     password: { value: "", error: true },
     username: { value: "", error: true },
   });
-
   const [allValid] = useCheckOverAllValid(loginVals, signUp);
 
   const changeLoginValHandler = (e, error) => {
@@ -32,6 +32,15 @@ const Auth = (props) => {
   };
 
   const changeModeHandler = () => {
+    const updatedLoginVals = { ...loginVals };
+    if (!signUp) {
+      updatedLoginVals.username = { value: "", error: true };
+    }
+    Object.keys(updatedLoginVals).map((key) => {
+      updatedLoginVals[key].value = "";
+      updatedLoginVals[key].error = true;
+    });
+    setLoginVals(updatedLoginVals);
     setSignUp(!signUp);
   };
 
@@ -62,7 +71,6 @@ const Auth = (props) => {
       loginVals[key].valid = false;
     }
   };
-
   useEffect(() => {
     customer && props.loginUser(customer.user, customer.token);
   }, [customer]);
@@ -87,34 +95,48 @@ const Auth = (props) => {
       <BackDrop clicked={props.toggleLogin} backDropShow={props.login} />
       <form
         onSubmit={submitHandler}
-        className={`form ${props.login && "show-login"}`}
+        className={`auth__form ${props.login && "show-login"}`}
       >
+        <i onClick={props.toggleLogin} class="hide-form fas fa-times"></i>
         {signUp && (
           <FormInput
+            inputContainerCls="auth-input-container"
+            inputClsName="auth-form__input"
             label="Username"
             type="text"
             validRules={{ required: true }}
             changeVal={changeLoginValHandler}
             name="username"
+            placeholder="Your Name"
+            value={loginVals["username"].value}
           />
         )}
         <FormInput
+          inputContainerCls="auth-input-container"
+          inputClsName="auth-form__input"
           changeVal={changeLoginValHandler}
           validRules={{ required: true }}
           type="email"
           label="Email"
           name="email"
+          placeholder="Your Email"
+          value={loginVals["email"].value}
         />
         <FormInput
+          inputContainerCls="auth-input-container"
+          inputClsName="auth-form__input"
           changeVal={changeLoginValHandler}
           validRules={{ required: true }}
           type="password"
           label="Password"
           name="password"
+          placeholder="Your Password"
+          value={loginVals["password"].value}
         />
-        <Button disabled={!allValid} className="form__btn">
+
+        <SecondaryBtn disabled={!allValid} className="form__btn">
           Submit
-        </Button>
+        </SecondaryBtn>
         <p className="change-mode">
           {signUp ? "Already have an account?" : "Don't have an account?"}
           <Button

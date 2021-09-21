@@ -11,6 +11,8 @@ const FormInput = ({
   inputClsName,
   validRules,
   name,
+  style,
+  inputContainerCls,
 }) => {
   const [inputError, setInputError] = useState(false);
   const [outFocused, setOutFocused] = useState(false);
@@ -29,7 +31,7 @@ const FormInput = ({
     changeVal && changeVal(e, error);
   };
   return (
-    <div className="input-container">
+    <div style={style} className={`input-container ${inputContainerCls}`}>
       <label className="input__label">{label}</label>
       <input
         className={`input__field ${inputClsName}`}

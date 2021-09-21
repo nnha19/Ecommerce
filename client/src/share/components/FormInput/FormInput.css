@@ -4,13 +4,22 @@
 .input__field {
   width: 100%;
   padding: 0.4rem 1rem;
+  font-size: 1rem;
   border: 1px solid green;
+  font-weight: bold;
 }
 .input__label {
   margin-bottom: 8px;
   display: block;
+  font-weight: 400;
 }
 .error-msg {
   color: red;
   margin-top: 0.4rem;
+}
+.input__field:-webkit-autofill,
+.input__field:-webkit-autofill:hover,
+.input__field:-webkit-autofill:focus,
+.input__field:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
