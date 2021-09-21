@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import ProductQuantity from "../../../products/components/ProductDetail/ProductDetailBody/ProductQuantity/ProductQuantity";
 import RemoveItemFromCart from "./RemoveItemFromCart/RemoveItemFromCart";
 import OrderSummary from "./OrderSummary/OrderSummary";
-import AddToWhilist from "./AddToWhilist/AddToWhilist";
 import Context from "../../../contexts/context";
 import SecondaryBtn from "../../../share/components/SecondaryBtn/SecondaryBtn";
 
@@ -35,31 +34,33 @@ const Cart = (props) => {
   let cartItemsOutput;
   if (cartItems && cartItems.length > 0) {
     cartItemsOutput = cartItems.map((item) => {
-      console.log(item);
+      const cartItem = { ...item.cartItem, pickedQty: item.pickedQty };
+
       return (
         <div
           key={item._id}
-          onClick={(e) => viewDetailProductHandler(e, item.productId)}
+          onClick={(e) => viewDetailProductHandler(e, cartItem._id)}
           className="cart__item"
         >
           <div className="cart__item-about">
-            {/* <img
+            <img
               className="cart__item-img"
-              src={`${process.env.REACT_APP_BACKEND_URL}/${item.imgs[0]}`}
-            /> */}
+              src={`${process.env.REACT_APP_BACKEND_URL}/${cartItem.imgs[0]}`}
+            />
             <div className="cart__item-features">
               <h4 className="cart__item-name">
-                {item.brand}/{item.features.gender}
+                {cartItem.brand}/{cartItem.features.gender}
               </h4>
-              <p className="cart__item-price">{item.price} KS</p>
+              <p className="cart__item-price">{cartItem.price} USD</p>
               <p className="cart__item-instock">
-                {item.features.inStock} instock
+                {cartItem.features.inStock} in stock
               </p>
             </div>
           </div>
           <ProductQuantity
             updateItemQuantity={updateItemQuantity(item)}
-            product={item}
+            product={cartItem}
+            pickedQty={item.pickedQty}
           />
           <div className="cart__item-update">
             <RemoveItemFromCart item={item} />

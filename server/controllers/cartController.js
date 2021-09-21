@@ -4,7 +4,10 @@ const Cart = require("../Models/Cart");
 const getAllItemsFromCart = async (req, res, next) => {
   try {
     const userId = req.params.id;
-    const customer = await Customer.findById(userId).populate("cart");
+    const customer = await Customer.findById(userId).populate({
+      path: "cart",
+      populate: { path: "cartItem" },
+    });
     res.status(200).json(customer.cart);
   } catch (err) {
     console.log(err);
@@ -31,7 +34,10 @@ const createCartItem = async (req, res, next) => {
         });
         customer.cart.push(cartItem);
         await customer.save();
-        const cust = await Customer.findById(userId).populate("cart");
+        const cust = await Customer.findById(userId).populate({
+          path: "cart",
+          populate: { path: "cartItem" },
+        });
         res.status(200).json(cust);
       }
     } else {

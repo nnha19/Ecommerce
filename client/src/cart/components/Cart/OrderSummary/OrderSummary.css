@@ -18,6 +18,10 @@
 .total {
   margin: 1rem 0;
 }
+.order-summary__total {
+  font-size: 1.2rem;
+  color: green;
+}
 .coupon-error {
   color: red;
 }

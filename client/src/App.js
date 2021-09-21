@@ -72,7 +72,7 @@ const App = () => {
     cartItem &&
       Array.isArray(cartItem) &&
       cartItem.forEach((cartItem) => {
-        totalAmount += parseInt(cartItem.price) * cartItem.pickedQty;
+        totalAmount += parseInt(cartItem.cartItem.price) * cartItem.pickedQty;
       });
 
     const result =
@@ -85,6 +85,7 @@ const App = () => {
         .reduce((pre, cur) => {
           return pre + cur;
         }, 0);
+    console.log(totalAmount);
     setCartItemAmount(result);
     setTotalAmount(totalAmount);
   };

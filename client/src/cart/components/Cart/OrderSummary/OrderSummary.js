@@ -10,17 +10,10 @@ import SecondaryBtn from "../../../../share/components/SecondaryBtn/SecondaryBtn
 import Coupon from "./Coupon/Coupon";
 
 const OrderSummary = (props) => {
-  const [
-    appliedCoupon,
-    loading,
-    error,
-    fetchData,
-    setAppliedCoupon,
-    setError,
-  ] = useHttp(null);
+  const [appliedCoupon, loading, error, fetchData, setAppliedCoupon, setError] =
+    useHttp(null);
 
-  const context = useContext(Context);
-  const totalAmount = context.totalAmount;
+  const { totalAmount, curUser, cartItemAmount, token } = useContext(Context);
   const history = useHistory();
 
   useEffect(() => {
@@ -78,7 +71,7 @@ const OrderSummary = (props) => {
     history.push("/checkout");
   };
 
-  const shippingFee = "2470";
+  const shippingFee = "3";
   const allTotalAmount = parseInt(totalAmount) + parseInt(shippingFee);
   let discountTotal;
   if (appliedCoupon) {
@@ -91,23 +84,23 @@ const OrderSummary = (props) => {
       <ul className="order-summary__lists">
         <li className="order-summary__list">
           <span className="order-summary__text">
-            Subtotal({context.cartItemAmount} items)
+            Subtotal({cartItemAmount} items)
           </span>
-          <span className="order-summary__ks">{maniStr(totalAmount)} KS</span>
+          <span className="order-summary__ks">{maniStr(totalAmount)} USD</span>
         </li>
         <li className="order-summary__list">
           <span className="order-summary__text">Shipping Fee</span>
-          <span className="order-summary__ks">{shippingFee} KS</span>
+          <span className="order-summary__ks">{shippingFee} USD</span>
         </li>
         <hr />
         {props.checkout && (
           <Coupon
-            userId={context.curUser && context.curUser.userId}
+            userId={curUser && curUser.userId}
             loading={loading}
             error={error}
             appliedCoupon={appliedCoupon}
             fetchData={(url, method, data) =>
-              fetchData(url, method, data, context.token)
+              fetchData(url, method, data, token)
             }
           />
         )}
@@ -137,13 +130,13 @@ const OrderSummary = (props) => {
             <span
               className={`${
                 appliedCoupon ? "original-price" : ""
-              } order-summary__ks`}
+              } order-summary__total`}
             >
-              {maniStr(allTotalAmount)} KS
+              {maniStr(allTotalAmount)} USD
             </span>
           </div>
           {discountTotal && (
-            <p className="discount-price">{maniStr(discountTotal)} KS</p>
+            <p className="discount-price">{maniStr(discountTotal)} USD</p>
           )}
         </li>
       </ul>

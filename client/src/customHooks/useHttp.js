@@ -22,7 +22,7 @@ export const useHttp = (initVal, url, method) => {
       setRespData(resp.data);
       setLoading(false);
     } catch (err) {
-      setError(err);
+      setError(err.response.data);
       setLoading(false);
     }
     setFinished(true);
