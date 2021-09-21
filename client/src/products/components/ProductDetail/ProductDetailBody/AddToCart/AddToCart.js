@@ -35,17 +35,8 @@ const AddToCart = ({
       toggleLogin();
       return;
     }
-
     const data = {
-      brand: product.brand,
-      price: product.price,
       productId: product._id,
-      features: {
-        gender: product.features.gender,
-        inStock: product.features.inStock,
-      },
-      image: product.image,
-      pickedQty: itemQuantity,
     };
     cartItemData.fetchData(
       `${process.env.REACT_APP_BACKEND_URL}/cart/${curUser.userId}`,

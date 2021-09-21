@@ -59,7 +59,7 @@ const Cart = (props) => {
           </div>
           <ProductQuantity
             updateItemQuantity={updateItemQuantity(item)}
-            product={cartItem}
+            product={item}
             pickedQty={item.pickedQty}
           />
           <div className="cart__item-update">

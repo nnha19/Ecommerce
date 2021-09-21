@@ -8,7 +8,7 @@ const ProductQuantity = (props) => {
   const context = useContext(Context);
   const product = props.product;
   const addDisableCart =
-    product.pickedQty === parseInt(product.features.inStock);
+    product.pickedQty === parseInt(product.cartItem.features.inStock);
   const subtractDisableCart =
     props.type === "body" ? props.itemQuantity === 1 : product.pickedQty === 1;
 
@@ -17,7 +17,8 @@ const ProductQuantity = (props) => {
       type,
     };
     if (
-      (type === "add" && cartItem.features.inStock > cartItem.pickedQty) ||
+      (type === "add" &&
+        cartItem.cartItem.features.inStock > cartItem.pickedQty) ||
       (type === "subtract" && cartItem.pickedQty > 1)
     ) {
       context.cartItemData.fetchData(
@@ -34,7 +35,8 @@ const ProductQuantity = (props) => {
       <span className="quantity-text">Quantity</span>
       <button
         disabled={
-          props.itemQuantity === product.features.inStock || addDisableCart
+          props.itemQuantity === product.cartItem.features.inStock ||
+          addDisableCart
         }
         className="quantity-btn"
         onClick={() =>
