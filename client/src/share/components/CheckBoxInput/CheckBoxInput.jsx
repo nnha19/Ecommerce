@@ -2,11 +2,11 @@ import React from "react";
 
 import "./CheckBoxInput.css";
 
-const CheckBoxInput = ({ value, changeVal, id, key }) => {
+const CheckBoxInput = ({ value, changeVal }) => {
   return (
-    <label htmlFor={id} className="checkbox-container">
+    <label htmlFor={value} className="checkbox-container">
       {value}
-      <input value={value} onChange={changeVal} id={id} type="checkbox" />
+      <input value={value} onChange={changeVal} id={value} type="checkbox" />
       <span className="checkmark"></span>
     </label>
   );

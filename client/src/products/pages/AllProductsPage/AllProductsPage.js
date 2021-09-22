@@ -17,7 +17,11 @@ const AllProductsPage = (props) => {
       <ATCErrorMsg />
       <SkeletonLoading show={loading} />
       {allProducts && allProducts.length > 0 && (
-        <AllProducts filter={true} allProducts={allProducts} />
+        <AllProducts
+          setAllProducts={setAllProducts}
+          filter={true}
+          allProducts={allProducts}
+        />
       )}
     </>
   );

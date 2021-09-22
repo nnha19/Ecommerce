@@ -7,7 +7,7 @@ import AddToCart from "../../components/ProductDetail/ProductDetailBody/AddToCar
 import AddToWhilist from "../../../cart/components/Cart/AddToWhilist/AddToWhilist";
 import FilterProducts from "../FilterProducts/FilterProducts";
 
-const AllProducts = ({ allProducts, title, style, filter }) => {
+const AllProducts = ({ allProducts, style, filter, setAllProducts }) => {
   const history = useHistory();
   let allProductsOutput;
 
@@ -63,7 +63,12 @@ const AllProducts = ({ allProducts, title, style, filter }) => {
 
   const returnChildren = (
     <>
-      {filter && <FilterProducts />}
+      {filter && (
+        <FilterProducts
+          allProducts={allProducts}
+          setAllProducts={setAllProducts}
+        />
+      )}
       <div style={style} className="all-products">
         {allProductsOutput}
       </div>
