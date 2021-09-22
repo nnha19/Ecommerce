@@ -1,7 +1,7 @@
 .all-products-container {
   padding: 4rem;
   display: grid;
-  grid-template-columns: 25% 1fr;
+  grid-template-columns: 15% 1fr;
   gap: 0.4rem;
 }
 
@@ -50,10 +50,7 @@
   align-self: center;
   display: none;
 }
-/* .product:hover {
-  box-shadow: 0 2px 2px gray;
-  transform: scale(1.009);
-} */
+
 .product:hover .product__stock {
   display: inline-block;
 }

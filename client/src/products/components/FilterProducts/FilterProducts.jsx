@@ -5,10 +5,8 @@ import "./FilterProducts.css";
 
 const FilterProducts = (props) => {
   const filterBy = [
-    {
-      brand: ["Ray Band", "AO", "Okaley", "Dior"],
-      date: ["Newest", "Any"],
-    },
+    { brand: ["Ray Band", "AO", "Dior", "Okaley"] },
+    { star: ["one star", "two star", "three star", "four star", "five star"] },
   ];
 
   const changeValHandler = (e) => {
@@ -16,7 +14,17 @@ const FilterProducts = (props) => {
     console.log(value, checked);
   };
 
-  const filterList = filterBy.map((type, i) => {});
+  const filterList = filterBy.map((f) => {
+    const key = Object.keys(f);
+    return (
+      <div className="filter">
+        <h4 className="filter__header">{key}</h4>
+        {f[key].map((val) => {
+          return <CheckBoxInput value={val.toLowerCase()} label={val} />;
+        })}
+      </div>
+    );
+  });
 
   return <div className="filter-products">{filterList}</div>;
 };

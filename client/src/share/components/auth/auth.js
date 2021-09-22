@@ -93,61 +93,63 @@ const Auth = (props) => {
       />
       <Spinner show={loading} />
       <BackDrop clicked={props.toggleLogin} backDropShow={props.login} />
-      <form
-        onSubmit={submitHandler}
-        className={`auth__form ${props.login && "show-login"}`}
-      >
-        <i onClick={props.toggleLogin} className="hide-form fas fa-times"></i>
-        {signUp && (
+      <div className={`${props.login && "show-login"} auth-form-container`}>
+        <h3 className="auth__form-header">
+          {signUp ? "Create account" : "Log In"}
+        </h3>
+        <form onSubmit={submitHandler} className={`auth__form `}>
+          <i onClick={props.toggleLogin} className="hide-form fas fa-times"></i>
+          {signUp && (
+            <FormInput
+              inputContainerCls="auth-input-container"
+              inputClsName="auth-form__input"
+              label="Username"
+              type="text"
+              validRules={{ required: true }}
+              changeVal={changeLoginValHandler}
+              name="username"
+              placeholder="Your Name"
+              value={loginVals["username"].value}
+            />
+          )}
           <FormInput
             inputContainerCls="auth-input-container"
             inputClsName="auth-form__input"
-            label="Username"
-            type="text"
-            validRules={{ required: true }}
             changeVal={changeLoginValHandler}
-            name="username"
-            placeholder="Your Name"
-            value={loginVals["username"].value}
+            validRules={{ required: true }}
+            type="email"
+            label="Email"
+            name="email"
+            placeholder="Your Email"
+            value={loginVals["email"].value}
           />
-        )}
-        <FormInput
-          inputContainerCls="auth-input-container"
-          inputClsName="auth-form__input"
-          changeVal={changeLoginValHandler}
-          validRules={{ required: true }}
-          type="email"
-          label="Email"
-          name="email"
-          placeholder="Your Email"
-          value={loginVals["email"].value}
-        />
-        <FormInput
-          inputContainerCls="auth-input-container"
-          inputClsName="auth-form__input"
-          changeVal={changeLoginValHandler}
-          validRules={{ required: true }}
-          type="password"
-          label="Password"
-          name="password"
-          placeholder="Your Password"
-          value={loginVals["password"].value}
-        />
+          <FormInput
+            inputContainerCls="auth-input-container"
+            inputClsName="auth-form__input"
+            changeVal={changeLoginValHandler}
+            validRules={{ required: true }}
+            type="password"
+            label="Password"
+            name="password"
+            placeholder="Your Password"
+            value={loginVals["password"].value}
+          />
 
-        <SecondaryBtn disabled={!allValid} className="form__btn">
-          Submit
-        </SecondaryBtn>
-        <p className="change-mode">
-          {signUp ? "Already have an account?" : "Don't have an account?"}
-          <Button
-            clicked={changeModeHandler}
-            type="button"
-            className="change-mode__btn"
-          >
-            {signUp ? "Login" : "Sign Up"}
-          </Button>
-        </p>
-      </form>
+          <SecondaryBtn disabled={!allValid} className="form__btn">
+            Submit
+          </SecondaryBtn>
+          <p className="change-mode">
+            {signUp ? "Already have an account?" : "Don't have an account?"}
+            <Button
+              clicked={changeModeHandler}
+              type="button"
+              className="change-mode__btn"
+            >
+              {signUp ? "Login" : "Sign Up"}
+            </Button>
+          </p>
+        </form>
+      </div>
     </>
   );
 };

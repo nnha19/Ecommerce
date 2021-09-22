@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import AllProducts from "../../components/AllProducts/AllProducts";
 import { useHttp } from "../../../customHooks/useHttp";
 import SkeletonLoading from "../../../share/UI/SkeletonLoading/SkeletonLoading";
-import Context from "../../../contexts/context";
 import ATCErrorMsg from "../../components/ProductDetail/ProductDetailBody/ATCErrorMsg/ATCErrorMsg";
 
 const AllProductsPage = (props) => {
@@ -17,7 +16,9 @@ const AllProductsPage = (props) => {
     <>
       <ATCErrorMsg />
       <SkeletonLoading show={loading} />
-      <AllProducts filter={true} allProducts={allProducts} />
+      {allProducts && allProducts.length > 0 && (
+        <AllProducts filter={true} allProducts={allProducts} />
+      )}
     </>
   );
 };

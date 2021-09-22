@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 import Context from "../../../../../contexts/context";
 import SecondaryBtn from "../../../../../share/components/SecondaryBtn/SecondaryBtn";
 import AddToCartDisplayMsg from "../AddToCartDisplayMsg/AddToCartDisplayMsg";
-import ATCErrorMsg from "../ATCErrorMsg/ATCErrorMsg";
 
 const AddToCart = ({
   itemQuantity,

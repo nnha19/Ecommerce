@@ -12,8 +12,8 @@
 .filter__child {
   margin: 0.4rem 0;
 }
-.filter__title {
-  font-size: 1rem;
+.filter__header {
+  font-size: 1.2rem;
   font-weight: 500;
   padding: 0.4rem;
   border-bottom: 1px solid rgba(128, 128, 128, 0.4);
