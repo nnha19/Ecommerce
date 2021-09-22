@@ -3,14 +3,13 @@ import CheckBoxInput from "../../../share/components/CheckBoxInput/CheckBoxInput
 
 import "./FilterProducts.css";
 
-const FilterProducts = ({ allProducts }) => {
+const FilterProducts = ({ allProducts, setResultProducts, showFilter }) => {
   const [filterField, setFilterField] = useState({});
   const filterBy = [
     { brand: ["Ray Band", "AO", "Dior", "Okaley"] },
     { star: ["one star", "two star", "three star", "four star", "five star"] },
-    { price: ["Less than 100", "Less than 200", "Less than 500"] },
+    { price: ["100", "200", "300", "400", "500"] },
   ];
-
   const changeValHandler = (e, title) => {
     const { value, checked } = e.target;
     let update;
@@ -23,20 +22,44 @@ const FilterProducts = ({ allProducts }) => {
   };
 
   useEffect(() => {
-    allProducts;
+    const filterKeys = Object.keys(filterField);
+
+    if (filterKeys[0] && filterField[filterKeys[0]].length > 0) {
+      const filtered = allProducts.filter((product) => {
+        const result = Object.keys(filterField).reduce((acc, filter) => {
+          const filterValues = filterField[filter];
+          const productValue = product[filter];
+          //This line defines what is your match
+          const found = filterValues.find((fv) => {
+            if (filter === "price") {
+              return parseInt(productValue) < parseInt(fv);
+            }
+            return fv == productValue.toString().toLowerCase();
+          });
+          return acc && found;
+        }, true);
+
+        return result;
+      });
+
+      setResultProducts(filtered);
+    } else {
+      setResultProducts(allProducts);
+    }
   }, [filterField]);
 
   const filterList = filterBy.map((f, i) => {
-    const key = Object.keys(f);
+    const key = Object.keys(f)[0];
     return (
       <div key={i} className="filter">
         <h4 className="filter__header">{key}</h4>
         {f[key].map((val) => {
           return (
             <CheckBoxInput
+              key={val}
               changeVal={(e) => changeValHandler(e, key)}
               value={val.toLowerCase()}
-              label={val}
+              label={`${key === "price" ? `less than ${val}` : val}`}
             />
           );
         })}
@@ -44,7 +67,11 @@ const FilterProducts = ({ allProducts }) => {
     );
   });
 
-  return <div className="filter-products">{filterList}</div>;
+  return (
+    <div className={`filter-products ${showFilter ? "show-filter" : ""}`}>
+      {filterList}
+    </div>
+  );
 };
 
 export default FilterProducts;

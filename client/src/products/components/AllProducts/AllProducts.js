@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./AllProducts.css";
 import { useHistory } from "react-router-dom";
@@ -8,6 +8,8 @@ import AddToWhilist from "../../../cart/components/Cart/AddToWhilist/AddToWhilis
 import FilterProducts from "../FilterProducts/FilterProducts";
 
 const AllProducts = ({ allProducts, style, filter, setAllProducts }) => {
+  const [resultProducts, setResultProducts] = useState(allProducts);
+  const [showFilter, setShowFilter] = useState(true);
   const history = useHistory();
   let allProductsOutput;
 
@@ -20,7 +22,7 @@ const AllProducts = ({ allProducts, style, filter, setAllProducts }) => {
       return;
     history.push(url);
   };
-  allProductsOutput = allProducts.map((product, i) => {
+  allProductsOutput = resultProducts.map((product, i) => {
     let stock = product.features.inStock > 0 ? "In Stock" : "Out Of Stock";
 
     return (
@@ -65,20 +67,32 @@ const AllProducts = ({ allProducts, style, filter, setAllProducts }) => {
     <>
       {filter && (
         <FilterProducts
+          showFilter={showFilter}
           allProducts={allProducts}
-          setAllProducts={setAllProducts}
+          setResultProducts={setResultProducts}
         />
       )}
-      <div style={style} className="all-products">
+      <div
+        style={style}
+        className={`all-products ${showFilter ? "" : "order-1"}`}
+      >
         {allProductsOutput}
       </div>
     </>
   );
 
   return filter ? (
-    <>
-      <div className="all-products-container">{returnChildren}</div>
-    </>
+    <div className="all-products-container">
+      <button onClick={() => setShowFilter(!showFilter)} className="filter-btn">
+        <i class="fas fa-sort-amount-down"></i>
+        Filter
+      </button>
+      <div
+        className={`all-products-content ${showFilter ? "" : "hidden-filter"}`}
+      >
+        {returnChildren}
+      </div>
+    </div>
   ) : (
     returnChildren
   );

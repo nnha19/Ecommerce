@@ -1,16 +1,33 @@
 .all-products-container {
   padding: 4rem;
-  display: grid;
-  grid-template-columns: 15% 1fr;
-  gap: 0.4rem;
 }
-
+.all-products-content {
+  display: flex;
+}
+.hidden-filter {
+  grid-template-columns: 1fr;
+}
+.filter-btn {
+  padding: 0.8rem 1rem;
+  font-size: 1.2rem;
+  background: none;
+  margin: 0.8rem 0;
+  cursor: pointer;
+}
+.filter-btn:hover {
+  background: rgba(128, 128, 128, 0.1);
+}
+.filter-btn i {
+  margin-right: 0.4rem;
+}
 .all-products {
+  transition: all 0.4s;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   gap: 1.5rem;
   justify-content: center;
   min-height: 100vh;
+  flex-basis: 100%;
 }
 
 .product__detail-link {

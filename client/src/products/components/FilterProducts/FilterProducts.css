@@ -1,10 +1,15 @@
 .filter {
   margin-bottom: 2rem;
+  transition: all 0.4s ease-in-out;
 }
 .filter-products {
   box-shadow: 0 0 1px grey;
   padding: 1rem 0.4rem;
   align-self: start;
+  transform: translateX(-24rem);
+  display: none;
+  flex-basis: 14rem;
+  margin-right: 0.7rem;
 }
 .filter__vals {
   margin-top: 1.4rem;
@@ -17,4 +22,18 @@
   font-weight: 500;
   padding: 0.4rem;
   border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+}
+.show-filter {
+  position: static;
+  display: block;
+  transform: translateX(0);
+}
+
+@media (max-width: 900px) {
+  .filter-products {
+    position: fixed;
+    transform: translateX(-24rem);
+  }
+  /* .hide-filter {
+  } */
 }
