@@ -9,7 +9,7 @@ import FilterProducts from "../FilterProducts/FilterProducts";
 
 const AllProducts = ({ allProducts, style, filter, setAllProducts }) => {
   const [resultProducts, setResultProducts] = useState(allProducts);
-  const [showFilter, setShowFilter] = useState(true);
+  const [showFilter, setShowFilter] = useState(false);
   const history = useHistory();
   let allProductsOutput;
 
@@ -70,6 +70,7 @@ const AllProducts = ({ allProducts, style, filter, setAllProducts }) => {
           showFilter={showFilter}
           allProducts={allProducts}
           setResultProducts={setResultProducts}
+          setShowFilter={setShowFilter}
         />
       )}
       <div

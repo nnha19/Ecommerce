@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import CheckBoxInput from "../../../share/components/CheckBoxInput/CheckBoxInput";
+import BackDrop from "../../../share/UI/BackDrop/BackDrop";
 
 import "./FilterProducts.css";
 
-const FilterProducts = ({ allProducts, setResultProducts, showFilter }) => {
+const FilterProducts = ({
+  allProducts,
+  setResultProducts,
+  showFilter,
+  setShowFilter,
+}) => {
   const [filterField, setFilterField] = useState({});
   const filterBy = [
     { brand: ["Ray Band", "AO", "Dior", "Okaley"] },
@@ -68,9 +74,20 @@ const FilterProducts = ({ allProducts, setResultProducts, showFilter }) => {
   });
 
   return (
-    <div className={`filter-products ${showFilter ? "show-filter" : ""}`}>
-      {filterList}
-    </div>
+    <>
+      <BackDrop
+        className="mobile-backdrop"
+        backDropShow={showFilter}
+        clicked={() => setShowFilter(false)}
+      />
+      <div className={`filter-products ${showFilter ? "show-filter" : ""}`}>
+        <i
+          onClick={() => setShowFilter(false)}
+          className="hide-filter-icon fas fa-times"
+        ></i>
+        {filterList}
+      </div>
+    </>
   );
 };
 
