@@ -23,6 +23,7 @@ import AllCouponsPage from "./admin/pages/AllCouponsPage";
 import CreateCouponPage from "./admin/pages/CreateCouponPage";
 import EditCouponPage from "./admin/pages/EditCouponPage";
 import DemoLogin from "./DemoLogin/DemoLogin";
+import Footer from "./share/UI/Footer/Footer";
 
 const App = () => {
   const history = useHistory();
@@ -266,6 +267,7 @@ const App = () => {
           )}
         </Context.Provider>
       </Switch>
+      <Footer />
     </div>
   );
 };
