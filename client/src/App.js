@@ -4,7 +4,7 @@ import "./App.css";
 import { Route, Switch, useHistory } from "react-router-dom";
 import axios from "axios";
 
-import AllProducts from "./products/pages/AllProductsPage/AllProductsPage";
+import AllProductsPage from "./products/pages/AllProductsPage/AllProductsPage";
 import ProductDetailPage from "./products/pages/ProductDetailPage/ProductDetailPage";
 import Navigation from "./share/UI/Navigation/Navigation";
 import FilterProductPage from "./products/pages/FilterProductPage/FilterProductPage";
@@ -220,8 +220,7 @@ const App = () => {
             topRef,
           }}
         >
-          <Route exact path="/products" component={AllProducts} />
-          <Route exact path="/" component={AllProducts} />
+          <Route path="/products" component={AllProductsPage} />
           <Route
             exact
             path="/product/filter/:gender"

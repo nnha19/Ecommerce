@@ -36,7 +36,7 @@ const SimilarProducts = (props) => {
     setMoreProducts(finalResult);
   }, [allProducts]);
 
-  return moreProducts || moreProducts.length > 0 ? (
+  return moreProducts && moreProducts.length > 0 ? (
     <AllProducts style={{ padding: "2rem 0" }} allProducts={moreProducts} />
   ) : null;
 };

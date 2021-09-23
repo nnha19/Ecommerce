@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 
+import { Route } from "react-router-dom";
+
 import AllProducts from "../../components/AllProducts/AllProducts";
 import { useHttp } from "../../../customHooks/useHttp";
 import SkeletonLoading from "../../../share/UI/SkeletonLoading/SkeletonLoading";
@@ -16,11 +18,17 @@ const AllProductsPage = (props) => {
     <>
       <ATCErrorMsg />
       <SkeletonLoading show={loading} />
-      {allProducts && allProducts.length > 0 && (
-        <AllProducts
-          setAllProducts={setAllProducts}
-          filter={true}
-          allProducts={allProducts}
+      {allProducts && !!allProducts.length && (
+        <Route
+          path="/products/"
+          component={(props) => (
+            <AllProducts
+              {...props}
+              setAllProducts={setAllProducts}
+              homePage={true}
+              allProducts={allProducts}
+            />
+          )}
         />
       )}
     </>

@@ -6,13 +6,8 @@ import AllProducts from "../../../products/components/AllProducts/AllProducts";
 
 const FilterProductPage = (props) => {
   const gender = useParams().gender;
-  const [
-    filteredProduct,
-    loading,
-    error,
-    fetchData,
-    setFilteredProduct,
-  ] = useHttp();
+  const [filteredProduct, loading, error, fetchData, setFilteredProduct] =
+    useHttp();
 
   useEffect(() => {
     console.log(gender);
@@ -21,7 +16,6 @@ const FilterProductPage = (props) => {
       "get"
     );
   }, [gender]);
-  console.log(filteredProduct);
   const capitalizedGender =
     gender.split("")[0].toUpperCase() + gender.substr(1, gender.length);
   return (

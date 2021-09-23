@@ -6,8 +6,9 @@ import { useHistory } from "react-router-dom";
 import AddToCart from "../../components/ProductDetail/ProductDetailBody/AddToCart/AddToCart";
 import AddToWhilist from "../../../cart/components/Cart/AddToWhilist/AddToWhilist";
 import FilterProducts from "../FilterProducts/FilterProducts";
+import Pagination from "../Pagination/Pagination";
 
-const AllProducts = ({ allProducts, style, filter, setAllProducts }) => {
+const AllProducts = ({ allProducts, style, homePage }) => {
   const [resultProducts, setResultProducts] = useState(allProducts);
   const [showFilter, setShowFilter] = useState(false);
   const history = useHistory();
@@ -65,7 +66,7 @@ const AllProducts = ({ allProducts, style, filter, setAllProducts }) => {
 
   const returnChildren = (
     <>
-      {filter && (
+      {homePage && (
         <FilterProducts
           showFilter={showFilter}
           allProducts={allProducts}
@@ -81,11 +82,11 @@ const AllProducts = ({ allProducts, style, filter, setAllProducts }) => {
       </div>
     </>
   );
-
-  return filter ? (
+  //if homepage is true homepage. Otherwise similar products being used from productDetail
+  return homePage ? (
     <div className="all-products-container">
       <button onClick={() => setShowFilter(!showFilter)} className="filter-btn">
-        <i class="fas fa-sort-amount-down"></i>
+        <i class="fas fa-filter"></i>
         Filter
       </button>
       <div
@@ -93,6 +94,10 @@ const AllProducts = ({ allProducts, style, filter, setAllProducts }) => {
       >
         {returnChildren}
       </div>
+      <Pagination
+        resultProducts={resultProducts}
+        setResultProducts={setResultProducts}
+      />
     </div>
   ) : (
     returnChildren
