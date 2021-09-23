@@ -95,7 +95,7 @@ const AllProducts = ({ allProducts, style, homePage }) => {
         {returnChildren}
       </div>
       <Pagination
-        resultProducts={resultProducts}
+        allProducts={allProducts}
         setResultProducts={setResultProducts}
       />
     </div>

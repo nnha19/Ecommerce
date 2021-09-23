@@ -13,7 +13,11 @@
   border: 1px solid black;
   background: none;
 }
-
+.pagination button:disabled {
+  pointer-events: none;
+  background: rgba(128, 128, 128, 0.452);
+  border: none;
+}
 .pagination button:hover {
   background: green;
   border: 1px solid transparent;

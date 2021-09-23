@@ -20,7 +20,22 @@ const AllProductsPage = (props) => {
       <SkeletonLoading show={loading} />
       {allProducts && !!allProducts.length && (
         <Route
+          exact
           path="/products/"
+          component={(props) => (
+            <AllProducts
+              {...props}
+              setAllProducts={setAllProducts}
+              homePage={true}
+              allProducts={allProducts}
+            />
+          )}
+        />
+      )}
+      {allProducts && !!allProducts.length && (
+        <Route
+          exact
+          path="/products/:curPage"
           component={(props) => (
             <AllProducts
               {...props}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 
 import "./App.css";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory, Redirect } from "react-router-dom";
 import axios from "axios";
 
 import AllProductsPage from "./products/pages/AllProductsPage/AllProductsPage";
@@ -196,6 +196,7 @@ const App = () => {
         {curUser && curUser.admin && <AdminNavBar curUser={curUser} />}
       </Context.Provider>
       <Switch>
+        <Redirect exact from="/" to="/products/" />
         <Context.Provider
           value={{
             token,
