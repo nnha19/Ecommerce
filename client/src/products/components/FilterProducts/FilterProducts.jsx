@@ -15,6 +15,7 @@ const FilterProducts = ({
     { brand: ["Ray Band", "AO", "Dior", "Okaley"] },
     { star: ["one star", "two star", "three star", "four star", "five star"] },
     { price: ["100", "200", "300", "400", "500"] },
+    { gender: ["male", "female", "unisex"] },
   ];
   const changeValHandler = (e, title) => {
     const { value, checked } = e.target;

@@ -6,17 +6,18 @@ import "./Pagination.css";
 
 const Pagination = ({ allProducts, setResultProducts }) => {
   const { topRef } = useContext(Context);
-  console.log(topRef);
 
   const history = useHistory();
   const curPage = parseInt(useParams().curPage) || 1;
-  const contentPerPage = 5;
+  const contentPerPage = 20;
   const totalPages = Math.ceil(allProducts.length / contentPerPage);
 
   const navigateHandler = (type) => {
-    topRef.current.scrollIntoView({
-      behavior: "smooth",
-    });
+    setTimeout(() => {
+      topRef.current.scrollIntoView({
+        behavior: "smooth",
+      });
+    }, 200);
     history.push(`/products/${type === "next" ? curPage + 1 : curPage - 1}`);
   };
 
