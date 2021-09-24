@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./PostQuestion.css";
-import useCheckOverAllValid from "../../../../customHooks/useCheckOverAllValid";
+import axios from "axios";
 
 import SecondaryBtn from "../../../../share/components/SecondaryBtn/SecondaryBtn";
 import TextArea from "../../../../share/components/TextArea/TextArea";
 import BackDrop from "../../../../share/UI/BackDrop/BackDrop";
+import { useParams } from "react-router";
+import Context from "../../../../contexts/context";
 
 const PostQuestion = (props) => {
+  const context = useContext(Context);
+  const { userId } = context.curUser;
+  const { id: productId } = useParams();
   const [showForm, setShowForm] = useState(false);
   const [questionInput, setQuestionInput] = useState({
     question: { value: "", error: true },
@@ -20,10 +25,26 @@ const PostQuestion = (props) => {
     setQuestionInput({ ...questionInput, question: { value, error } });
   };
 
-  const postQuestionHandler = (e) => {
+  const postQuestionHandler = async (e) => {
     e.preventDefault();
+
+    try {
+      const resp = await axios({
+        url: `${process.env.REACT_APP_BACKEND_URL}/product/${productId}/question`,
+        method: "POST",
+        data: {
+          question: questionInput.question.value,
+          userId,
+        },
+      });
+      if (resp.status === 200) {
+        setShowForm(false);
+      }
+    } catch (err) {
+      alert(err);
+    }
   };
-  console.log(questionInput);
+
   return (
     <>
       <button onClick={showQuestionFormHandler} className="post-question__btn">

@@ -13,15 +13,18 @@ TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
 
 const Questions = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { id: productId } = useParams();
   const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
     (async () => {
+      setIsLoading(true);
       const resp = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/product/${productId}/question`
       );
       setQuestions(resp.data);
+      setIsLoading(false);
     })();
   }, []);
 
