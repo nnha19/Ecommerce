@@ -3,8 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import "./ProductDetail.css";
 import { useInView } from "react-intersection-observer";
 
-import Modal from "../../../share/UI/Modal/Modal";
-import Button from "../../../share/components/button/button";
 import ManiProduct from "./ManiProduct/ManiProduct";
 import AddToWhilist from "../../../cart/components/Cart/AddToWhilist/AddToWhilist";
 import MobileProductContent from "../MobileProductContent/MobileProductContent";
@@ -13,7 +11,7 @@ import Admin from "../../../share/components/Admin/Admin";
 import StickyCTA from "../StickyCTA/StickyCTA";
 import SimilarProducts from "./SimilarProducts/SimilarProducts";
 import Context from "../../../contexts/context";
-import RatingsAndQuestions from "./RatingsAndQuestions/RatingsAndQuestions";
+import ReviewsAndQuestions from "./ReviewsAndQuestions/ReviewsAndQuestions";
 
 const ProductDetail = ({ productDetail }) => {
   const { topRef } = useContext(Context);
@@ -111,7 +109,7 @@ const ProductDetail = ({ productDetail }) => {
           <h2>You might also be interested in</h2>
           <SimilarProducts />
         </div>
-        <RatingsAndQuestions />
+        <ReviewsAndQuestions />
       </div>
     </>
   );

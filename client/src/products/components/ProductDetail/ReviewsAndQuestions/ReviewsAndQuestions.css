@@ -1,0 +1,18 @@
+.rnq {
+  display: flex;
+  border: 1px solid rgba(128, 128, 128, 0.4);
+}
+.rnq h2 {
+  padding: 1rem 2rem;
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-right: 2rem;
+  cursor: pointer;
+  opacity: 0.6;
+  border: 3px solid transparent;
+}
+#rnq-active {
+  opacity: 1;
+  border-bottom: 3px solid black;
+  font-weight: 500;
+}

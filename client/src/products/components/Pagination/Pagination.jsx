@@ -9,7 +9,7 @@ const Pagination = ({ allProducts, setResultProducts }) => {
 
   const history = useHistory();
   const curPage = parseInt(useParams().curPage) || 1;
-  const contentPerPage = 20;
+  const contentPerPage = 5;
   const totalPages = Math.ceil(allProducts.length / contentPerPage);
 
   const navigateHandler = (type) => {
