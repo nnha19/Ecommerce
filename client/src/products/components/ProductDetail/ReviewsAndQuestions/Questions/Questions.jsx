@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
+import ReactTimeAgo from "react-time-ago";
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
+import ru from "javascript-time-ago/locale/ru";
 
 import "./Questions.css";
 import axios from "axios";
+
+TimeAgo.addDefaultLocale(en);
+TimeAgo.addLocale(ru);
 
 const Questions = (props) => {
   const { id: productId } = useParams();
@@ -18,6 +25,8 @@ const Questions = (props) => {
     })();
   }, []);
 
+  console.log(questions);
+
   const qasLists =
     questions && !!questions.length ? (
       questions.map((q, i) => {
@@ -26,13 +35,19 @@ const Questions = (props) => {
             <p className="qa__content">
               <span className="qa__text">question</span>
               <span>{q.question.q}</span>
-              <span className="qa__timestamp">({q.question.timeStamp})</span>
+              <ReactTimeAgo date={q.question.timeStamp} locale="en-US" />
             </p>
-            <p className="qa__content">
-              <span className="qa__text">answer</span>
-              <span>{q.answer.a}</span>
-              <span className="qa__timestamp">({q.answer.timeStamp})</span>
-            </p>
+            {q.answer ? (
+              <p className="qa__content">
+                <span className="qa__text">answer</span>
+                <span>{q.answer.a}</span>
+                <ReactTimeAgo date={q.question.timeStamp} locale="en-US" />
+              </p>
+            ) : (
+              <p className="qa-no-answer">
+                Admin will answer this question soon
+              </p>
+            )}
           </div>
         );
       })

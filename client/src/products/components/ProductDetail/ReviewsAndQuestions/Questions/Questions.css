@@ -1,3 +1,7 @@
+.qas {
+  border: 1px solid rgba(128, 128, 128, 0.5);
+  padding: 2rem 0;
+}
 .qa {
   margin: 1rem;
   font-size: 1.2rem;
@@ -9,6 +13,10 @@
   display: grid;
   grid-template-columns: 8rem 1fr 8rem;
 }
+.qa__content time {
+  font-size: 1rem;
+  font-weight: 400;
+}
 .qa__text {
   text-transform: capitalize;
   font-size: 1.2rem;
@@ -19,4 +27,8 @@
   margin-left: 1rem;
   font-weight: 200;
   font-size: 1rem;
+}
+.qa-no-answer {
+  font-size: 1rem;
+  color: green;
 }
