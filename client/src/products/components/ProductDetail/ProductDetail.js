@@ -12,6 +12,7 @@ import StickyCTA from "../StickyCTA/StickyCTA";
 import SimilarProducts from "./SimilarProducts/SimilarProducts";
 import Context from "../../../contexts/context";
 import ReviewsAndQuestions from "./ReviewsAndQuestions/ReviewsAndQuestions";
+import PostQuestion from "./PostQuestion/PostQuestion";
 
 const ProductDetail = ({ productDetail }) => {
   const { topRef } = useContext(Context);
@@ -98,6 +99,7 @@ const ProductDetail = ({ productDetail }) => {
             </div>
             <AddToWhilist product={productDetail} />
             <p className="product-detail__price">{productDetail.price} USD</p>
+            <PostQuestion />
             {/* For Mobile */}
             <MobileProductContent product={productDetail} />
             {/*For Desktop */}

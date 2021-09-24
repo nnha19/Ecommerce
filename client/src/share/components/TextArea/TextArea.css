@@ -1,0 +1,12 @@
+.text-area {
+  width: 100%;
+}
+.text-area textarea {
+  width: 100%;
+  border: 1px solid green;
+  padding: 1rem;
+}
+
+.text-area p {
+  margin-bottom: 1rem;
+}

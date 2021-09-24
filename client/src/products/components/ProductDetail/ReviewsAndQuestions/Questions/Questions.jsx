@@ -25,8 +25,6 @@ const Questions = (props) => {
     })();
   }, []);
 
-  console.log(questions);
-
   const qasLists =
     questions && !!questions.length ? (
       questions.map((q, i) => {
