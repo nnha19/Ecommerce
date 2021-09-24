@@ -23,7 +23,10 @@ const AllProducts = ({ allProducts, style, homePage }) => {
       return;
     history.push(url);
   };
-  allProductsOutput = resultProducts.map((product, i) => {
+  //loop through allProducts in similarProducts page. resultProducts for homePage
+  const mapArr = homePage ? resultProducts : allProducts;
+
+  allProductsOutput = mapArr.map((product, i) => {
     let stock = product.features.inStock > 0 ? "In Stock" : "Out Of Stock";
 
     return (

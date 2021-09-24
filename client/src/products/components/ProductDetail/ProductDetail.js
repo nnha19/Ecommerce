@@ -13,6 +13,7 @@ import Admin from "../../../share/components/Admin/Admin";
 import StickyCTA from "../StickyCTA/StickyCTA";
 import SimilarProducts from "./SimilarProducts/SimilarProducts";
 import Context from "../../../contexts/context";
+import RatingsAndQuestions from "./RatingsAndQuestions/RatingsAndQuestions";
 
 const ProductDetail = ({ productDetail }) => {
   const { topRef } = useContext(Context);
@@ -107,9 +108,10 @@ const ProductDetail = ({ productDetail }) => {
           <StickyCTA inView={inView} product={productDetail} />
         </div>
         <div className="more-products">
-          <h2>You might also interested in</h2>
+          <h2>You might also be interested in</h2>
           <SimilarProducts />
         </div>
+        <RatingsAndQuestions />
       </div>
     </>
   );

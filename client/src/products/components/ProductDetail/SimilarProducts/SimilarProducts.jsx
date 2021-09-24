@@ -16,9 +16,9 @@ const SimilarProducts = (props) => {
     if (!allProducts || allProducts.length < 1) {
       return;
     }
-    const withoutCurrentProduct = allProducts.filter(
-      (product) => product._id !== id
-    );
+    const withoutCurrentProduct = allProducts.filter((product) => {
+      return product._id !== id;
+    });
     let finalResult = [];
     if (withoutCurrentProduct.length < 10) {
       finalResult = withoutCurrentProduct;
@@ -32,7 +32,6 @@ const SimilarProducts = (props) => {
         );
       }
     }
-    //finalResult =[randomProducts],lenth =10
     setMoreProducts(finalResult);
   }, [allProducts]);
 
