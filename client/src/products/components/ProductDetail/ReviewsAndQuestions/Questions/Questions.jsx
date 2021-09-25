@@ -13,6 +13,8 @@ import { ReviewsAndQuestionsContext } from "../../../../../contexts/reviewsAndQu
 import Context from "../../../../../contexts/context";
 import axios from "axios";
 import { useParams } from "react-router";
+import ErrorMsg from "../../../../../share/components/ErrorMsg/ErrorMsg";
+import PostQuestion from "../../PostQuestion/PostQuestion";
 
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
@@ -29,7 +31,7 @@ const Questions = () => {
     },
   });
 
-  const postAnswerHandler = async (e, qid) => {
+  const postAnswerHandler = async (e, q) => {
     e.preventDefault();
     try {
       const answer = answerInputVal.answer.value;
@@ -37,22 +39,22 @@ const Questions = () => {
         url: `${process.env.REACT_APP_BACKEND_URL}/product/${productId}/question`,
         data: {
           answer,
-          qid,
+          qid: q._id,
         },
         method: "POST",
         headers: {
           Authorization: token,
         },
       });
-      setAnswerQuestionForm(false);
       const updatedQuestion = [...questions];
       const updatedQuestions = updatedQuestion.map((q) => {
-        if (q._id.toString() === answerQuestionForm.toString()) {
+        if (q._id.toString() === answerQuestionForm._id.toString()) {
           return resp.data;
         } else {
           return q;
         }
       });
+      setAnswerQuestionForm(false);
       setQuestions(updatedQuestions);
     } catch (err) {
       alert(err);
@@ -64,11 +66,11 @@ const Questions = () => {
   };
 
   let noAnswer;
-  if (curUser.admin) {
-    noAnswer = (qid) => (
+  if (curUser && curUser.admin) {
+    noAnswer = (q) => (
       <>
         <SecondaryBtn
-          clicked={() => setAnswerQuestionForm(qid)}
+          clicked={() => setAnswerQuestionForm(q)}
           style={{ width: "8rem", borderRadius: "9px" }}
         >
           Answer
@@ -80,6 +82,7 @@ const Questions = () => {
           postQuestion={postAnswerHandler}
           inputVal={answerInputVal}
           changeVal={changeValHandler}
+          answer={true}
         />
       </>
     );
@@ -103,18 +106,23 @@ const Questions = () => {
               <p className="qa__content">
                 <span className="qa__text">answer</span>
                 <span>{q.answer.a}</span>
-                <ReactTimeAgo date={q.question.timeStamp} locale="en-US" />
+                <ReactTimeAgo date={q.answer.timeStamp} locale="en-US" />
               </p>
             ) : (
-              noAnswer(q._id)
+              noAnswer(q)
             )}
           </div>
         );
       })
     ) : (
-      <div>
-        <p>No Questions here. Ask one.</p>
-      </div>
+      <ErrorMsg
+        error={
+          <div>
+            <p>No Questions.</p>
+            <PostQuestion />
+          </div>
+        }
+      />
     );
   return <div className="qas">{qasLists}</div>;
 };

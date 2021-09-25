@@ -1,0 +1,12 @@
+.error-msg-container {
+  height: 40vh;
+  border: 1px solid rgba(128, 128, 128, 0.5);
+  padding: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.error-msg-container p {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
