@@ -1,18 +1,94 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import ReactTimeAgo from "react-time-ago";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import ru from "javascript-time-ago/locale/ru";
 
+import SecondaryBtn from "../../../../../share/components/SecondaryBtn/SecondaryBtn";
+import QuestionForm from "../../QuestionForm/QuestionForm";
+
 import "./Questions.css";
 import { ReviewsAndQuestionsContext } from "../../../../../contexts/reviewsAndQuestionsContext";
+import Context from "../../../../../contexts/context";
+import axios from "axios";
+import { useParams } from "react-router";
 
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
 
 const Questions = () => {
-  const { questions } = useContext(ReviewsAndQuestionsContext);
+  const { questions, setQuestions } = useContext(ReviewsAndQuestionsContext);
+  const { curUser, token } = useContext(Context);
+  const { id: productId } = useParams();
+  const [answerQuestionForm, setAnswerQuestionForm] = useState(false);
+  const [answerInputVal, setAnswerInputVal] = useState({
+    answer: {
+      value: "",
+      error: true,
+    },
+  });
+
+  const postAnswerHandler = async (e, qid) => {
+    e.preventDefault();
+    try {
+      const answer = answerInputVal.answer.value;
+      const resp = await axios({
+        url: `${process.env.REACT_APP_BACKEND_URL}/product/${productId}/question`,
+        data: {
+          answer,
+          qid,
+        },
+        method: "POST",
+        headers: {
+          Authorization: token,
+        },
+      });
+      setAnswerQuestionForm(false);
+      const updatedQuestion = [...questions];
+      const updatedQuestions = updatedQuestion.map((q) => {
+        if (q._id.toString() === answerQuestionForm.toString()) {
+          return resp.data;
+        } else {
+          return q;
+        }
+      });
+      setQuestions(updatedQuestions);
+    } catch (err) {
+      alert(err);
+    }
+  };
+
+  const changeValHandler = (value, error) => {
+    setAnswerInputVal({ ...answerInputVal, answer: { value, error } });
+  };
+
+  let noAnswer;
+  if (curUser.admin) {
+    noAnswer = (qid) => (
+      <>
+        <SecondaryBtn
+          clicked={() => setAnswerQuestionForm(qid)}
+          style={{ width: "8rem", borderRadius: "9px" }}
+        >
+          Answer
+        </SecondaryBtn>
+        <QuestionForm
+          type="answer"
+          showForm={answerQuestionForm}
+          setShowForm={setAnswerQuestionForm}
+          postQuestion={postAnswerHandler}
+          inputVal={answerInputVal}
+          changeVal={changeValHandler}
+        />
+      </>
+    );
+  } else {
+    noAnswer = () => (
+      <p className="qa-no-answer">Admin will answer this question soon</p>
+    );
+  }
+
   const qasLists =
     questions && !!questions.length ? (
       questions.map((q, i) => {
@@ -30,9 +106,7 @@ const Questions = () => {
                 <ReactTimeAgo date={q.question.timeStamp} locale="en-US" />
               </p>
             ) : (
-              <p className="qa-no-answer">
-                Admin will answer this question soon
-              </p>
+              noAnswer(q._id)
             )}
           </div>
         );

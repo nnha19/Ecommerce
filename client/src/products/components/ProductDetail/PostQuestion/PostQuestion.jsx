@@ -8,6 +8,7 @@ import BackDrop from "../../../../share/UI/BackDrop/BackDrop";
 import { useParams } from "react-router";
 import Context from "../../../../contexts/context";
 import { ReviewsAndQuestionsContext } from "../../../../contexts/reviewsAndQuestionsContext";
+import QuestionForm from "../QuestionForm/QuestionForm";
 
 const PostQuestion = (props) => {
   const [questionSubmitted, setQuestionSubmitted] = useState(false);
@@ -69,27 +70,13 @@ const PostQuestion = (props) => {
       >
         You questions has been submitted successfully.
       </p>
-
-      <BackDrop clicked={() => setShowForm(false)} backDropShow={showForm} />
-      {showForm && (
-        <div className="question-form-container">
-          <div className="question-form__header">
-            <h4>Ask question about this product</h4>
-            <i onClick={() => setShowForm(false)} className="fas fa-times"></i>
-          </div>
-          <form onSubmit={postQuestionHandler} className="question-form">
-            <TextArea
-              value={questionInput.value}
-              changeVal={changeValHandler}
-              placeholder="Your Question"
-              validRules={{ required: true }}
-            />
-            <SecondaryBtn disabled={questionInput.question.error}>
-              Submit Your Question
-            </SecondaryBtn>
-          </form>
-        </div>
-      )}
+      <QuestionForm
+        postQuestion={postQuestionHandler}
+        showForm={showForm}
+        setShowForm={setShowForm}
+        inputVal={questionInput}
+        changeVal={changeValHandler}
+      />
     </>
   );
 };
