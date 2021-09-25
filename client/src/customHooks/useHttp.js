@@ -20,11 +20,10 @@ export const useHttp = (initVal, url, method) => {
         },
       });
       setRespData(resp.data);
-      setLoading(false);
     } catch (err) {
       setError(err.response.data);
-      setLoading(false);
     }
+    setLoading(false);
     setFinished(true);
   };
   return [respData, loading, error, fetchData, setRespData, setError, finished];

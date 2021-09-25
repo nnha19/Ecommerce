@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 
 import ProductDetail from "../../components/ProductDetail/ProductDetail";
 import { useHttp } from "../../../customHooks/useHttp";
-import Spinner from "../../../share/UI/Spinner/Spinner";
 import ATCErrorMsg from "../../components/ProductDetail/ProductDetailBody/ATCErrorMsg/ATCErrorMsg";
+import ProductDetailSkeleton from "../../../share/UI/ProductDetailSkeleton/ProductDetailSkeleton";
 
 const ProductDetailPage = (props) => {
   const productId = useParams().id;
@@ -19,14 +19,17 @@ const ProductDetailPage = (props) => {
       "get"
     );
   }, [productId]);
-
-  return productDetail ? (
+  return (
     <>
-      <ATCErrorMsg />
-      <Spinner show={loading} />
-      <ProductDetail productDetail={productDetail} />
+      {loading && <ProductDetailSkeleton />}
+      {productDetail ? (
+        <>
+          <ATCErrorMsg />
+          <ProductDetail productDetail={productDetail} />
+        </>
+      ) : null}
     </>
-  ) : null;
+  );
 };
 
 export default ProductDetailPage;
