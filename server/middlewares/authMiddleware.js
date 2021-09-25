@@ -6,10 +6,14 @@ const authMiddleWare = (req, res, next) => {
     if (!token) {
       res.status(400).json("You are not authorized");
     }
-    checkToken = jwt.verify(token, process.env.JWT_KEY);
-    req.userId = checkToken.userId;
-    req.admin = checkToken.admin;
-    next();
+    const checkToken = jwt.verify(token, process.env.JWT_KEY);
+    if (checkToken) {
+      req.userId = checkToken.userId;
+      req.admin = checkToken.admin;
+      next();
+    } else {
+      res.status(400).json("Authorization failed.");
+    }
   } catch (err) {
     console.log("error");
     console.log(err);

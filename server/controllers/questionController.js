@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const Question = require("../Models/Question");
 
 const getQuestionsByProductId = async (req, res) => {
@@ -24,11 +25,16 @@ const postQuestions = async (req, res) => {
       }
     } else {
       //create an answer
-      const { qid, answer } = req.body;
-      const question = await Question.findById(qid);
-      question.answer = { a: answer, timeStamp: new Date() };
-      await question.save();
-      res.status(200).json(question);
+      const token = jwt.verify(req.headers.authorization, process.env.JWT_KEY);
+      if (token && token.admin) {
+        const { qid, answer } = req.body;
+        const question = await Question.findById(qid);
+        question.answer = { a: answer, timeStamp: new Date() };
+        await question.save();
+        res.status(200).json(question);
+      } else {
+        res.status(400).json("Authorization failed");
+      }
     }
   } catch (err) {
     console.log(err);
