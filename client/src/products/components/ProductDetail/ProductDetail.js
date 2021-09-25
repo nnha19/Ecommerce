@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 
 import "./ProductDetail.css";
 import { useInView } from "react-intersection-observer";
+import Context from "../../../contexts/context";
+import ReviewsAndQuestionsProvider from "../../../contexts/reviewsAndQuestionsContext";
 
 import ManiProduct from "./ManiProduct/ManiProduct";
 import AddToWhilist from "../../../cart/components/Cart/AddToWhilist/AddToWhilist";
@@ -10,15 +12,16 @@ import DesktopProductContent from "../DesktopProductContent/DesktopProductConten
 import Admin from "../../../share/components/Admin/Admin";
 import StickyCTA from "../StickyCTA/StickyCTA";
 import SimilarProducts from "./SimilarProducts/SimilarProducts";
-import Context from "../../../contexts/context";
 import ReviewsAndQuestions from "./ReviewsAndQuestions/ReviewsAndQuestions";
 import PostQuestion from "./PostQuestion/PostQuestion";
 
 const ProductDetail = ({ productDetail }) => {
+  const [questions, setQuestions] = useState([]);
   const { topRef } = useContext(Context);
   const { ref, inView } = useInView({
     threshold: 0,
   });
+
   useEffect(() => {
     //Scroll to top when params change
     if (topRef && topRef.current) {
@@ -28,7 +31,6 @@ const ProductDetail = ({ productDetail }) => {
     }
   }, [productDetail]);
 
-  const [showModal, setShowModal] = useState(false);
   const [showDropDown, setShowDropDown] = useState(false);
   const [mainImg, setMainImg] = useState(
     `${process.env.REACT_APP_BACKEND_URL}/${productDetail.imgs[0]}`
@@ -37,10 +39,6 @@ const ProductDetail = ({ productDetail }) => {
   useEffect(() => {
     setMainImg(`${process.env.REACT_APP_BACKEND_URL}/${productDetail.imgs[0]}`);
   }, [productDetail]);
-
-  const hideModalHandler = () => {
-    setShowModal(false);
-  };
 
   const showDropDownHandler = (e) => {
     setShowDropDown(true);
@@ -99,7 +97,12 @@ const ProductDetail = ({ productDetail }) => {
             </div>
             <AddToWhilist product={productDetail} />
             <p className="product-detail__price">{productDetail.price} USD</p>
-            <PostQuestion />
+            <ReviewsAndQuestionsProvider
+              questions={questions}
+              setQuestions={setQuestions}
+            >
+              <PostQuestion />
+            </ReviewsAndQuestionsProvider>
             {/* For Mobile */}
             <MobileProductContent product={productDetail} />
             {/*For Desktop */}
@@ -111,7 +114,12 @@ const ProductDetail = ({ productDetail }) => {
           <h2>You might also be interested in</h2>
           <SimilarProducts />
         </div>
-        <ReviewsAndQuestions />
+        <ReviewsAndQuestionsProvider
+          questions={questions}
+          setQuestions={setQuestions}
+        >
+          <ReviewsAndQuestions />
+        </ReviewsAndQuestionsProvider>
       </div>
     </>
   );

@@ -1,33 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 
-import { useParams } from "react-router-dom";
 import ReactTimeAgo from "react-time-ago";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import ru from "javascript-time-ago/locale/ru";
 
 import "./Questions.css";
-import axios from "axios";
+import { ReviewsAndQuestionsContext } from "../../../../../contexts/reviewsAndQuestionsContext";
 
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
 
-const Questions = (props) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const { id: productId } = useParams();
-  const [questions, setQuestions] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      setIsLoading(true);
-      const resp = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/product/${productId}/question`
-      );
-      setQuestions(resp.data);
-      setIsLoading(false);
-    })();
-  }, []);
-
+const Questions = () => {
+  const { questions } = useContext(ReviewsAndQuestionsContext);
   const qasLists =
     questions && !!questions.length ? (
       questions.map((q, i) => {

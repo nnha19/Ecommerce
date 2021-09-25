@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./PostQuestion.css";
 import axios from "axios";
 
@@ -7,16 +7,18 @@ import TextArea from "../../../../share/components/TextArea/TextArea";
 import BackDrop from "../../../../share/UI/BackDrop/BackDrop";
 import { useParams } from "react-router";
 import Context from "../../../../contexts/context";
+import { ReviewsAndQuestionsContext } from "../../../../contexts/reviewsAndQuestionsContext";
 
 const PostQuestion = (props) => {
+  const [questionSubmitted, setQuestionSubmitted] = useState(false);
   const context = useContext(Context);
-  const { userId } = context.curUser;
+  const { userId } = context;
+  const { setQuestions, questions } = useContext(ReviewsAndQuestionsContext);
   const { id: productId } = useParams();
   const [showForm, setShowForm] = useState(false);
   const [questionInput, setQuestionInput] = useState({
     question: { value: "", error: true },
   });
-
   const showQuestionFormHandler = () => {
     setShowForm(true);
   };
@@ -27,7 +29,6 @@ const PostQuestion = (props) => {
 
   const postQuestionHandler = async (e) => {
     e.preventDefault();
-
     try {
       const resp = await axios({
         url: `${process.env.REACT_APP_BACKEND_URL}/product/${productId}/question`,
@@ -37,6 +38,8 @@ const PostQuestion = (props) => {
           userId,
         },
       });
+      setQuestions([...questions, resp.data]);
+      setQuestionSubmitted(true);
       if (resp.status === 200) {
         setShowForm(false);
       }
@@ -45,11 +48,28 @@ const PostQuestion = (props) => {
     }
   };
 
+  useEffect(() => {
+    if (questionSubmitted) {
+      setTimeout(() => {
+        setQuestionSubmitted(false);
+      }, 2000);
+    }
+  }, [questionSubmitted]);
+
   return (
     <>
       <button onClick={showQuestionFormHandler} className="post-question__btn">
         Post Question
       </button>
+
+      <p
+        className={`question-submitted ${
+          questionSubmitted ? "show-question-submitted" : ""
+        }`}
+      >
+        You questions has been submitted successfully.
+      </p>
+
       <BackDrop clicked={() => setShowForm(false)} backDropShow={showForm} />
       {showForm && (
         <div className="question-form-container">

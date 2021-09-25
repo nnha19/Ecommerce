@@ -9,7 +9,6 @@ const getQuestionsByProductId = async (req, res) => {
 const postQuestions = async (req, res) => {
   try {
     const { question, userId } = req.body;
-    console.log(req.body);
     const { productId } = req.params;
     if (question) {
       //create a question
