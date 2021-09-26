@@ -1,16 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import "./Rate.css";
+import { ReviewsAndQuestionsContext } from "../../../../contexts/reviewsAndQuestionsContext";
+import axios from "axios";
+import Context from "../../../../contexts/context";
+import { useParams } from "react-router";
 
 import TextArea from "../../../../share/components/TextArea/TextArea";
 import SecondaryBtn from "../../../../share/components/SecondaryBtn/SecondaryBtn";
 import BackDrop from "../../../../share/UI/BackDrop/BackDrop";
-import axios from "axios";
-import { useParams } from "react-router";
-import Context from "../../../../contexts/context";
-import { ReviewsAndQuestionsContext } from "../../../../contexts/reviewsAndQuestionsContext";
+import Spinner from "../../../../share/UI/Spinner/Spinner";
 
 const Rate = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { reviews, setReviews } = useContext(ReviewsAndQuestionsContext);
   const { id: productId } = useParams();
   const { curUser } = useContext(Context);
@@ -39,6 +41,8 @@ const Rate = (props) => {
   const disabledBtn = !stars.some((star) => star === "fas fa-star");
 
   const rateProductHandler = async (e) => {
+    setShowRatingForm(false);
+    setIsLoading(true);
     e.preventDefault();
     try {
       const resp = await axios({
@@ -51,14 +55,15 @@ const Rate = (props) => {
         },
       });
       setReviews([...reviews, resp.data]);
-      setShowRatingForm(false);
     } catch (err) {
       alert(err);
     }
+    setIsLoading(false);
   };
 
   return (
     <>
+      <Spinner show={isLoading} />
       <button onClick={() => setShowRatingForm(true)} className="rate-btn">
         Rate
       </button>

@@ -76,7 +76,7 @@ const Reviews = (props) => {
                   {stars.map((star) => star)}
                   <span>({review.rating}/5)</span>
                 </div>
-                <p>{review.text}</p>
+                {review.text && <p>{review.text}</p>}
               </div>
             </div>
           </div>
@@ -90,7 +90,8 @@ const Reviews = (props) => {
         <div className="overall-rating-container">
           <div className="total-rating">
             <p className="total-rating-score">
-              {total}/5 <i className="rating-star fas fa-star"></i>
+              {total}/<span className="maximum-rating">5</span>{" "}
+              <i className="rating-star fas fa-star"></i>
               <p className="total-ratings-count">{reviews.length} ratings</p>
             </p>
           </div>

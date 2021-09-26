@@ -83,3 +83,7 @@
 .customer-name-container {
   display: flex;
 }
+.maximum-rating {
+  font-size: 2rem;
+  font-weight: 100;
+}
