@@ -1,5 +1,5 @@
 const Review = require("../Models/Review");
-
+const Product = require("../Models/Product");
 const getReviewsByProductId = async (req, res) => {
   try {
     const { productId } = req.params;
@@ -13,6 +13,7 @@ const getReviewsByProductId = async (req, res) => {
 const createReviews = async (req, res) => {
   try {
     const { productId } = req.params;
+    const product = await Product.findById(productId);
     const { userId, text, rating } = req.body;
     const newReview = await Review.create({
       text,
@@ -20,7 +21,13 @@ const createReviews = async (req, res) => {
       productId,
       rating,
     });
-    res.status(200).json(newReview);
+    if (newReview) {
+      product.reviews.push(newReview);
+      await product.save();
+      res.status(200).json(newReview);
+    } else {
+      console.log("Something went wrong.");
+    }
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

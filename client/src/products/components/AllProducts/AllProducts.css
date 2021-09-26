@@ -102,3 +102,6 @@
   width: max-content !important;
   text-transform: none !important;
 }
+.product__overall-rating {
+  margin-right: 8px;
+}

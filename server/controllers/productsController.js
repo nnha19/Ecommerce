@@ -17,7 +17,9 @@ function deleteFile(filePath) {
 
 const getAllProducts = async (req, res, next) => {
   try {
-    const products = await Product.find({});
+    const products = await Product.find({}).populate({
+      path: "reviews",
+    });
     res.status(200).json(products);
   } catch (err) {
     res.status(500).json(err);

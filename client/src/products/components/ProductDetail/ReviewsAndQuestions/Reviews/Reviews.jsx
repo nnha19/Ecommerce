@@ -3,6 +3,7 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import { ReviewsAndQuestionsContext } from "../../../../../contexts/reviewsAndQuestionsContext";
 
 import "./Reviews.css";
+import calOverallRating from "../../../../../functions/calOverallRating";
 
 const Reviews = (props) => {
   const [ratings, setRatings] = useState({});
@@ -44,12 +45,11 @@ const Reviews = (props) => {
         </div>
       );
     });
-  let total = 0;
-  for (let key in ratings) {
-    total += key * ratings[key];
-  }
-  total =
-    reviews.length > 0 ? Math.round((total / reviews.length) * 10) / 10 : 0;
+
+  //calculating overall rating
+  const total = calOverallRating(reviews);
+
+  //========
 
   const reviewLists =
     reviews &&

@@ -20,13 +20,7 @@ const productSchema = new mongoose.Schema({
     frameColor: { type: String },
     lensColor: { type: String },
   },
-  reviews: [
-    {
-      star: Number,
-      review: String,
-    },
-  ],
-  questions: [{ question: String, answer: String }],
+  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
   buyers: [
     {
       type: mongoose.Schema.Types.ObjectId,
