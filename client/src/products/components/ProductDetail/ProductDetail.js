@@ -14,6 +14,7 @@ import StickyCTA from "../StickyCTA/StickyCTA";
 import SimilarProducts from "./SimilarProducts/SimilarProducts";
 import ReviewsAndQuestions from "./ReviewsAndQuestions/ReviewsAndQuestions";
 import PostQuestion from "./PostQuestion/PostQuestion";
+import Rate from "./Rate/Rate";
 
 const ProductDetail = ({ productDetail }) => {
   const [questions, setQuestions] = useState([]);
@@ -103,6 +104,7 @@ const ProductDetail = ({ productDetail }) => {
               setQuestions={setQuestions}
             >
               <PostQuestion />
+              <Rate />
             </ReviewsAndQuestionsProvider>
             {/* For Mobile */}
             <MobileProductContent product={productDetail} />

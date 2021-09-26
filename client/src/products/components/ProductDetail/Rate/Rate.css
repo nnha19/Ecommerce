@@ -1,0 +1,31 @@
+.rate-btn {
+  padding: 0.8rem 2rem;
+  display: block;
+  margin-bottom: 1rem;
+  background: purple;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.review-stars {
+  text-align: center;
+  font-size: 2rem;
+  color: green;
+}
+.review-stars > * {
+  margin-right: 4px;
+  cursor: pointer;
+}
+.review-container {
+  z-index: 40;
+  width: 30rem;
+  box-shadow: 0 2px 2px 2px rgba(128, 128, 128, 0.3);
+  padding: 4rem 2rem;
+  background-color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
