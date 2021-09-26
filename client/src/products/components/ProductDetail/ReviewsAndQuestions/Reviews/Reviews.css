@@ -1,0 +1,37 @@
+.review {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+  padding: 1rem 0;
+}
+.review-list__customer {
+  display: flex;
+  align-items: center;
+}
+.customer-avatar {
+  margin-right: 2rem;
+  height: 4rem;
+  width: 4rem;
+  background: purple;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.customer-name {
+  font-weight: 500;
+}
+.review-list__review {
+  margin-top: 1rem;
+}
+.rating-stars {
+  margin-bottom: 3px;
+}
+.rating-stars span {
+  margin-left: 0.4rem;
+  font-weight: 400;
+}
+.rating-stars i {
+  margin-right: 2px;
+  font-size: 1rem;
+}

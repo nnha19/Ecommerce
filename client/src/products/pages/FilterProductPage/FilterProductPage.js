@@ -10,7 +10,6 @@ const FilterProductPage = (props) => {
     useHttp();
 
   useEffect(() => {
-    console.log(gender);
     fetchData(
       `${process.env.REACT_APP_BACKEND_URL}/products/filter/${gender}`,
       "get"

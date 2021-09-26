@@ -14,6 +14,7 @@ const customerRoute = require("./routes/customerRoute");
 const orderRoute = require("./routes/orderRoute");
 const couponRoute = require("./routes/couponRoute");
 const questionRoute = require("./routes/questionRoute");
+const reviewsRoute = require("./routes/reviewsRoute");
 
 mongoose
   .connect(process.env.CONNECT_DB, {
@@ -27,6 +28,7 @@ mongoose
 app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use("/products", productsRoute);
 app.use("/product/:productId/question", questionRoute);
+app.use("/product/:productId/review", reviewsRoute);
 app.use("/cart/", cartRoute);
 app.use("/customer", customerRoute);
 app.use("/order/:uid", orderRoute);

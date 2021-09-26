@@ -4,8 +4,15 @@ import axios from "axios";
 
 export const ReviewsAndQuestionsContext = createContext();
 
-const ReviewsAndQuestionsProvider = ({ children, questions, setQuestions }) => {
+const ReviewsAndQuestionsProvider = ({
+  children,
+  questions,
+  setQuestions,
+  reviews,
+  setReviews,
+}) => {
   const { id: productId } = useParams();
+
   useEffect(() => {
     //fetch questions of a specific product
     (async () => {
@@ -15,8 +22,21 @@ const ReviewsAndQuestionsProvider = ({ children, questions, setQuestions }) => {
       setQuestions(resp.data);
     })();
   }, [productId]);
+
+  useEffect(() => {
+    //fetch reviews of a specific product
+    (async () => {
+      const resp = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/product/${productId}/review`
+      );
+      setReviews(resp.data);
+    })();
+  }, [productId]);
+
   return (
-    <ReviewsAndQuestionsContext.Provider value={{ questions, setQuestions }}>
+    <ReviewsAndQuestionsContext.Provider
+      value={{ questions, setQuestions, reviews, setReviews }}
+    >
       {children}
     </ReviewsAndQuestionsContext.Provider>
   );
