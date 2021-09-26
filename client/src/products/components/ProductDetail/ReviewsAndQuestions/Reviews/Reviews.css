@@ -1,3 +1,40 @@
+.overall-ratings {
+  padding: 1rem 2rem;
+  border: 1px solid rgba(128, 128, 128, 0.4);
+  margin-top: 1rem;
+}
+.overall-ratings__header {
+  margin-bottom: 1rem;
+}
+.overall-rating-container {
+  display: flex;
+  align-items: center;
+}
+.total-rating-score {
+  margin-right: 3rem;
+  font-size: 3rem;
+}
+.total-rating i {
+  font-size: 3rem;
+}
+.overall-rating {
+  display: flex;
+}
+.total-ratings-count {
+  font-size: 1.2rem;
+  font-weight: normal;
+  text-align: center;
+  margin-top: 1rem;
+}
+.overall-rating__star {
+  margin-right: 0.8rem;
+}
+.overall-rating > * {
+  margin-right: 2rem;
+}
+.review-lists {
+  padding: 1rem 2rem;
+}
 .review {
   margin-bottom: 1.5rem;
   border-bottom: 1px solid rgba(128, 128, 128, 0.4);

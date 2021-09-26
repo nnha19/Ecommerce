@@ -6,6 +6,25 @@ import "./Reviews.css";
 const Reviews = (props) => {
   const { reviews } = useContext(ReviewsAndQuestionsContext);
 
+  const arr = [5, 4, 3, 2, 1];
+
+  const overallRating = arr.map((star, i) => {
+    let starCount = reviews.filter((review) => review.rating === star);
+    console.log(starCount);
+    return (
+      <div className="overall-rating" key={i}>
+        <div>
+          <span className="overall-rating__star">{star}</span>
+          <i className="rating-star fas fa-star"></i>
+        </div>
+        <div>Progress Bar</div>
+        <span>{starCount.length} </span>
+      </div>
+    );
+  });
+
+  let calculateOverallRating;
+
   const reviewLists =
     reviews &&
     !!reviews.length &&
@@ -18,7 +37,7 @@ const Reviews = (props) => {
         stars.push(<i className="rating-star far fa-star"></i>);
       }
       return (
-        <div className="review">
+        <div key={review._id} className="review">
           <div className="review-list__customer">
             <div className="customer-avatar">Avatar</div>
             <div>
@@ -37,7 +56,18 @@ const Reviews = (props) => {
     });
   return (
     <div className="reviews">
-      <div>Over all Reviews</div>
+      <div className="overall-ratings">
+        <h4 className="overall-ratings__header">Ratings & Reviews</h4>
+        <div className="overall-rating-container">
+          <div className="total-rating">
+            <p className="total-rating-score">
+              4.5/6 <i className="rating-star fas fa-star"></i>
+              <p className="total-ratings-count">{reviews.length} ratings</p>
+            </p>
+          </div>
+          <div>{overallRating}</div>
+        </div>
+      </div>
       <div className="review-lists">{reviewLists}</div>
     </div>
   );
