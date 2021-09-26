@@ -58,6 +58,7 @@
 }
 .customer-name {
   font-weight: 500;
+  margin-right: 9px;
 }
 .review-list__review {
   margin-top: 1rem;
@@ -78,4 +79,7 @@
 }
 .progress-bar span {
   display: none !important;
+}
+.customer-name-container {
+  display: flex;
 }

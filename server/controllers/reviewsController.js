@@ -20,6 +20,7 @@ const createReviews = async (req, res) => {
       userId,
       productId,
       rating,
+      timeStamp: new Date(),
     });
     if (newReview) {
       product.reviews.push(newReview);

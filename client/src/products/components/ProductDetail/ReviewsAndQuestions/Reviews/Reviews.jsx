@@ -67,7 +67,10 @@ const Reviews = (props) => {
           <div className="review-list__customer">
             <div className="customer-avatar">Avatar</div>
             <div>
-              <h4 className="customer-name">Customer Name</h4>
+              <div className="customer-name-container">
+                <h4 className="customer-name">Customer Name</h4>
+                <span>({review.timeStamp})</span>
+              </div>
               <div className="review-list__review">
                 <div className="rating-stars">
                   {stars.map((star) => star)}
