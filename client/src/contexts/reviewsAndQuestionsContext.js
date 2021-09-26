@@ -29,7 +29,7 @@ const ReviewsAndQuestionsProvider = ({
       const resp = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/product/${productId}/review`
       );
-      setReviews(resp.data);
+      setReviews && setReviews(resp.data);
     })();
   }, [productId]);
 

@@ -19,6 +19,7 @@
 }
 .overall-rating {
   display: flex;
+  margin-bottom: 0.4rem;
 }
 .total-ratings-count {
   font-size: 1.2rem;
@@ -71,4 +72,10 @@
 .rating-stars i {
   margin-right: 2px;
   font-size: 1rem;
+}
+.progress-bar {
+  width: 12rem;
+}
+.progress-bar span {
+  display: none !important;
 }

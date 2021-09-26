@@ -18,12 +18,10 @@ import PostQuestion from "./PostQuestion/PostQuestion";
 const ProductDetail = ({ productDetail }) => {
   const [questions, setQuestions] = useState([]);
   const [reviews, setReviews] = useState([]);
-  const { topRef, curUser } = useContext(Context);
+  const { topRef } = useContext(Context);
   const { ref, inView } = useInView({
     threshold: 0,
   });
-  console.log(curUser);
-  console.log(productDetail);
 
   useEffect(() => {
     //Scroll to top when params change

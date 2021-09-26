@@ -1,34 +1,55 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import ProgressBar from "@ramonak/react-progress-bar";
 import { ReviewsAndQuestionsContext } from "../../../../../contexts/reviewsAndQuestionsContext";
 
 import "./Reviews.css";
 
 const Reviews = (props) => {
+  const [ratings, setRatings] = useState({});
   const { reviews } = useContext(ReviewsAndQuestionsContext);
 
-  const arr = [5, 4, 3, 2, 1];
+  const arr = [1, 2, 3, 4, 5];
 
-  const overallRatingDisplay = {};
+  useEffect(() => {
+    const obj = {};
+    arr.forEach((num) => {
+      const count = reviews.filter((review) => review.rating === num).length;
+      obj[num] = count;
+    });
+    setRatings(obj);
+  }, [reviews]);
 
-  const overallRating = arr.map((star, i) => {
-    let starCount = reviews.filter((review) => review.rating === star).length;
-    overallRatingDisplay[star] = starCount;
-    return (
-      <div className="overall-rating" key={i}>
-        <div>
-          <span className="overall-rating__star">{star}</span>
-          <i className="rating-star fas fa-star"></i>
+  const overallRating = Object.keys(ratings)
+    .reverse()
+    .map((key, i) => {
+      let percentage = (ratings[key] / reviews.length) * 100;
+      if (reviews.length < 1) {
+        percentage = 0;
+      }
+
+      return (
+        <div className="overall-rating" key={i}>
+          <div>
+            <span className="overall-rating__star">{key}</span>
+            <i className="rating-star fas fa-star"></i>
+          </div>
+          <div className="progress-bar">
+            <ProgressBar
+              borderRadius={0}
+              bgColor="#008000"
+              completed={percentage}
+            />
+          </div>
+          <span>{ratings[key]} </span>
         </div>
-        <div>Progress Bar</div>
-        <span>{starCount} </span>
-      </div>
-    );
-  });
+      );
+    });
   let total = 0;
-  for (let key in overallRatingDisplay) {
-    total += key * overallRatingDisplay[key];
+  for (let key in ratings) {
+    total += key * ratings[key];
   }
-  total = Math.round((total / reviews.length) * 10) / 10;
+  total =
+    reviews.length > 0 ? Math.round((total / reviews.length) * 10) / 10 : 0;
 
   const reviewLists =
     reviews &&
@@ -70,7 +91,7 @@ const Reviews = (props) => {
               <p className="total-ratings-count">{reviews.length} ratings</p>
             </p>
           </div>
-          <div>{overallRating}</div>
+          <div className="overall-rating-display">{overallRating}</div>
         </div>
       </div>
       <div className="review-lists">{reviewLists}</div>
