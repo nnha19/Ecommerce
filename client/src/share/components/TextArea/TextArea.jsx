@@ -16,7 +16,7 @@ const TextArea = ({
   const changeInputValHandler = (e) => {
     const { value } = e.target;
     let error;
-    if (validRules.required) {
+    if (validRules && validRules.required) {
       if (value === "") {
         error = "This field is required";
       }

@@ -102,6 +102,8 @@ const ProductDetail = ({ productDetail }) => {
             <ReviewsAndQuestionsProvider
               questions={questions}
               setQuestions={setQuestions}
+              reviews={reviews}
+              setReviews={setReviews}
             >
               <PostQuestion />
               <Rate />
