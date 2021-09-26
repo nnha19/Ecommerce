@@ -8,9 +8,11 @@ const Reviews = (props) => {
 
   const arr = [5, 4, 3, 2, 1];
 
+  const overallRatingDisplay = {};
+
   const overallRating = arr.map((star, i) => {
-    let starCount = reviews.filter((review) => review.rating === star);
-    console.log(starCount);
+    let starCount = reviews.filter((review) => review.rating === star).length;
+    overallRatingDisplay[star] = starCount;
     return (
       <div className="overall-rating" key={i}>
         <div>
@@ -18,12 +20,15 @@ const Reviews = (props) => {
           <i className="rating-star fas fa-star"></i>
         </div>
         <div>Progress Bar</div>
-        <span>{starCount.length} </span>
+        <span>{starCount} </span>
       </div>
     );
   });
-
-  let calculateOverallRating;
+  let total = 0;
+  for (let key in overallRatingDisplay) {
+    total += key * overallRatingDisplay[key];
+  }
+  total = Math.round((total / reviews.length) * 10) / 10;
 
   const reviewLists =
     reviews &&
@@ -61,7 +66,7 @@ const Reviews = (props) => {
         <div className="overall-rating-container">
           <div className="total-rating">
             <p className="total-rating-score">
-              4.5/6 <i className="rating-star fas fa-star"></i>
+              {total}/5 <i className="rating-star fas fa-star"></i>
               <p className="total-ratings-count">{reviews.length} ratings</p>
             </p>
           </div>
