@@ -78,9 +78,11 @@ const ProductDetail = ({ productDetail }) => {
     );
   });
 
-  const userAlreadyRated = reviews.find(
-    (review) => review.userId.toString() === curUser.userId.toString()
-  );
+  const userAlreadyRated =
+    curUser &&
+    reviews.find(
+      (review) => review.userId._id.toString() === curUser.userId.toString()
+    );
 
   return (
     <div className="product-detail-container">

@@ -3,7 +3,11 @@ const Product = require("../Models/Product");
 const getReviewsByProductId = async (req, res) => {
   try {
     const { productId } = req.params;
-    const reviews = await Review.find({ productId });
+    const reviews = await Review.find({ productId }).populate({
+      path: "userId",
+      select: "username",
+    });
+
     res.status(200).json(reviews);
   } catch (err) {
     res.status(400).json(err);
@@ -33,7 +37,11 @@ const createReviews = async (req, res) => {
       if (newReview) {
         product.reviews.push(newReview);
         await product.save();
-        res.status(200).json(newReview);
+        const returnReview = await Review.findById(newReview._id).populate({
+          path: "userId",
+          select: "username",
+        });
+        res.status(200).json(returnReview);
       } else {
         console.log("Something went wrong.");
       }

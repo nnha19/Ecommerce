@@ -8,7 +8,7 @@ const CurUserRating = ({ rating }) => {
     ratings.push("far fa-star");
   }
   return (
-    <div style={{ marginBottom: "1rem", display: "flex" }}>
+    <div style={{ marginBottom: "1rem", display: "flex", color: "green" }}>
       <p style={{ marginRight: ".5rem" }}>your rating</p>
       <div>
         {ratings.map((star) => (

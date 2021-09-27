@@ -4,10 +4,6 @@ import ReactTimeAgo from "react-time-ago";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import ru from "javascript-time-ago/locale/ru";
-
-import SecondaryBtn from "../../../../../share/components/SecondaryBtn/SecondaryBtn";
-import QuestionForm from "../../QuestionForm/QuestionForm";
-
 import "./Questions.css";
 import { ReviewsAndQuestionsContext } from "../../../../../contexts/reviewsAndQuestionsContext";
 import Context from "../../../../../contexts/context";
@@ -15,6 +11,9 @@ import axios from "axios";
 import { useParams } from "react-router";
 import ErrorMsg from "../../../../../share/components/ErrorMsg/ErrorMsg";
 import PostQuestion from "../../PostQuestion/PostQuestion";
+
+import SecondaryBtn from "../../../../../share/components/SecondaryBtn/SecondaryBtn";
+import QuestionForm from "../../QuestionForm/QuestionForm";
 
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);

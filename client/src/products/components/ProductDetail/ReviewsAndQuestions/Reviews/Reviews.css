@@ -55,10 +55,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  text-transform: capitalize;
+  font-size: 2rem;
 }
 .customer-name {
   font-weight: 500;
   margin-right: 9px;
+  text-transform: capitalize;
 }
 .review-list__review {
   margin-top: 1rem;

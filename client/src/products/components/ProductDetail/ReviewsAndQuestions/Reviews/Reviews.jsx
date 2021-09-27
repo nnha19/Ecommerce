@@ -4,6 +4,7 @@ import { ReviewsAndQuestionsContext } from "../../../../../contexts/reviewsAndQu
 
 import "./Reviews.css";
 import calOverallRating from "../../../../../functions/calOverallRating";
+import ReactTimeAgo from "react-time-ago/commonjs/ReactTimeAgo";
 
 const Reviews = (props) => {
   const [ratings, setRatings] = useState({});
@@ -51,6 +52,8 @@ const Reviews = (props) => {
 
   //========
 
+  console.log(reviews);
+
   const reviewLists =
     reviews &&
     !!reviews.length &&
@@ -65,11 +68,13 @@ const Reviews = (props) => {
       return (
         <div key={review._id} className="review">
           <div className="review-list__customer">
-            <div className="customer-avatar">Avatar</div>
+            <div className="customer-avatar">
+              {review.userId.username.substr(0, 1)}
+            </div>
             <div>
               <div className="customer-name-container">
-                <h4 className="customer-name">Customer Name</h4>
-                <span>({review.timeStamp})</span>
+                <h4 className="customer-name">{review.userId.username}</h4>
+                <ReactTimeAgo date={review.timeStamp} locale="en-US" />
               </div>
               <div className="review-list__review">
                 <div className="rating-stars">
