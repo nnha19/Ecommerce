@@ -15,19 +15,28 @@ const createReviews = async (req, res) => {
     const { productId } = req.params;
     const product = await Product.findById(productId);
     const { userId, text, rating } = req.body;
-    const newReview = await Review.create({
-      text,
-      userId,
-      productId,
-      rating,
-      timeStamp: new Date(),
-    });
-    if (newReview) {
-      product.reviews.push(newReview);
-      await product.save();
-      res.status(200).json(newReview);
+    const curProductReviews = await Review.find({ productId });
+    const curUserAlreadyRated = curProductReviews.some(
+      (review) => review.userId.toString() === userId.toString()
+    );
+    if (curUserAlreadyRated) {
+      res.status(400).json("One user can only give rating to product once.");
+      return;
     } else {
-      console.log("Something went wrong.");
+      const newReview = await Review.create({
+        text,
+        userId,
+        productId,
+        rating,
+        timeStamp: new Date(),
+      });
+      if (newReview) {
+        product.reviews.push(newReview);
+        await product.save();
+        res.status(200).json(newReview);
+      } else {
+        console.log("Something went wrong.");
+      }
     }
   } catch (err) {
     console.log(err);

@@ -11,11 +11,11 @@ import SecondaryBtn from "../../../../share/components/SecondaryBtn/SecondaryBtn
 import BackDrop from "../../../../share/UI/BackDrop/BackDrop";
 import Spinner from "../../../../share/UI/Spinner/Spinner";
 
-const Rate = (props) => {
+const Rate = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { reviews, setReviews } = useContext(ReviewsAndQuestionsContext);
   const { id: productId } = useParams();
-  const { curUser } = useContext(Context);
+  const { curUser, toggleLogin, token } = useContext(Context);
   const [showRatingForm, setShowRatingForm] = useState(false);
   const [review, setReview] = useState("");
   const [stars, setStars] = useState([]);
@@ -53,6 +53,9 @@ const Rate = (props) => {
           rating: stars.filter((rating) => rating === "fas fa-star").length,
           userId: curUser.userId,
         },
+        headers: {
+          authorization: token,
+        },
       });
       setReviews([...reviews, resp.data]);
     } catch (err) {
@@ -61,10 +64,18 @@ const Rate = (props) => {
     setIsLoading(false);
   };
 
+  const setShowRatingFormHandler = () => {
+    if (!curUser) {
+      toggleLogin(true);
+    } else {
+      setShowRatingForm(true);
+    }
+  };
+
   return (
     <>
       <Spinner show={isLoading} />
-      <button onClick={() => setShowRatingForm(true)} className="rate-btn">
+      <button onClick={setShowRatingFormHandler} className="rate-btn">
         Rate
       </button>
       {showRatingForm && (

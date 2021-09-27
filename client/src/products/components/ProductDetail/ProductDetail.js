@@ -15,11 +15,12 @@ import SimilarProducts from "./SimilarProducts/SimilarProducts";
 import ReviewsAndQuestions from "./ReviewsAndQuestions/ReviewsAndQuestions";
 import PostQuestion from "./PostQuestion/PostQuestion";
 import Rate from "./Rate/Rate";
+import CurUserRating from "./CurUserRating/CurUserRating";
 
 const ProductDetail = ({ productDetail }) => {
   const [questions, setQuestions] = useState([]);
   const [reviews, setReviews] = useState([]);
-  const { topRef } = useContext(Context);
+  const { topRef, curUser } = useContext(Context);
   const { ref, inView } = useInView({
     threshold: 0,
   });
@@ -76,59 +77,65 @@ const ProductDetail = ({ productDetail }) => {
     );
   });
 
+  const userAlreadyRated = reviews.find(
+    (review) => review.userId.toString() === curUser.userId.toString()
+  );
+  console.log(userAlreadyRated);
   return (
-    <>
-      <div className="product-detail-container">
-        <div ref={ref} onClick={hideDropDownHandler} className="product-detail">
-          <div className="product-detail__img-container">
-            <div className="product-detail__imgs">
-              <img className="main-img" src={mainImg} />
-              <div className="small-imgs">{productImgs}</div>
-            </div>
+    <div className="product-detail-container">
+      <div ref={ref} onClick={hideDropDownHandler} className="product-detail">
+        <div className="product-detail__img-container">
+          <div className="product-detail__imgs">
+            <img className="main-img" src={mainImg} />
+            <div className="small-imgs">{productImgs}</div>
           </div>
-          <div className="product-detail__content">
-            <div className="product-detail__edit">
-              <h4 className="product-detail__name">{productDetail.brand}</h4>
-              <Admin>
-                <ManiProduct
-                  productId={productDetail._id}
-                  showDropDown={showDropDown}
-                  showDropDownHandler={showDropDownHandler}
-                />
-              </Admin>
-            </div>
-            <AddToWhilist product={productDetail} />
-            <p className="product-detail__price">{productDetail.price} USD</p>
-            <ReviewsAndQuestionsProvider
-              questions={questions}
-              setQuestions={setQuestions}
-              reviews={reviews}
-              setReviews={setReviews}
-            >
-              <PostQuestion />
+        </div>
+        <div className="product-detail__content">
+          <div className="product-detail__edit">
+            <h4 className="product-detail__name">{productDetail.brand}</h4>
+            <Admin>
+              <ManiProduct
+                productId={productDetail._id}
+                showDropDown={showDropDown}
+                showDropDownHandler={showDropDownHandler}
+              />
+            </Admin>
+          </div>
+          <AddToWhilist product={productDetail} />
+          <p className="product-detail__price">{productDetail.price} USD</p>
+          <ReviewsAndQuestionsProvider
+            questions={questions}
+            setQuestions={setQuestions}
+            reviews={reviews}
+            setReviews={setReviews}
+          >
+            <PostQuestion />
+            {!userAlreadyRated ? (
               <Rate />
-            </ReviewsAndQuestionsProvider>
-            {/* For Mobile */}
-            <MobileProductContent product={productDetail} />
-            {/*For Desktop */}
-            <DesktopProductContent product={productDetail} />
-          </div>
-          <StickyCTA inView={inView} product={productDetail} />
+            ) : (
+              <CurUserRating rating={userAlreadyRated.rating} />
+            )}
+          </ReviewsAndQuestionsProvider>
+          {/* For Mobile */}
+          <MobileProductContent product={productDetail} />
+          {/*For Desktop */}
+          <DesktopProductContent product={productDetail} />
         </div>
-        <div className="more-products">
-          <h2>You might also be interested in</h2>
-          <SimilarProducts />
-        </div>
-        <ReviewsAndQuestionsProvider
-          questions={questions}
-          setQuestions={setQuestions}
-          reviews={reviews}
-          setReviews={setReviews}
-        >
-          <ReviewsAndQuestions />
-        </ReviewsAndQuestionsProvider>
+        <StickyCTA inView={inView} product={productDetail} />
       </div>
-    </>
+      <div className="more-products">
+        <h2>You might also be interested in</h2>
+        <SimilarProducts />
+      </div>
+      <ReviewsAndQuestionsProvider
+        questions={questions}
+        setQuestions={setQuestions}
+        reviews={reviews}
+        setReviews={setReviews}
+      >
+        <ReviewsAndQuestions />
+      </ReviewsAndQuestionsProvider>
+    </div>
   );
 };
 

@@ -15,8 +15,8 @@ const authMiddleWare = (req, res, next) => {
       res.status(400).json("Authorization failed.");
     }
   } catch (err) {
-    console.log("error");
     console.log(err);
+    res.status(400).json(err);
   }
 };
 
