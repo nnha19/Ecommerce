@@ -11,6 +11,7 @@ const calOverallRating = (reviews) => {
   }
   total =
     reviews.length > 0 ? Math.round((total / reviews.length) * 10) / 10 : 0;
+
   return total;
 };
 

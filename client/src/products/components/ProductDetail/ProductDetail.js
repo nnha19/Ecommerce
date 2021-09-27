@@ -16,6 +16,7 @@ import ReviewsAndQuestions from "./ReviewsAndQuestions/ReviewsAndQuestions";
 import PostQuestion from "./PostQuestion/PostQuestion";
 import Rate from "./Rate/Rate";
 import CurUserRating from "./CurUserRating/CurUserRating";
+import OverallRatings from "../OverallRatings/OverallRatings";
 
 const ProductDetail = ({ productDetail }) => {
   const [questions, setQuestions] = useState([]);
@@ -80,7 +81,7 @@ const ProductDetail = ({ productDetail }) => {
   const userAlreadyRated = reviews.find(
     (review) => review.userId.toString() === curUser.userId.toString()
   );
-  console.log(userAlreadyRated);
+
   return (
     <div className="product-detail-container">
       <div ref={ref} onClick={hideDropDownHandler} className="product-detail">
@@ -110,6 +111,7 @@ const ProductDetail = ({ productDetail }) => {
             setReviews={setReviews}
           >
             <PostQuestion />
+            <OverallRatings style={{ margin: "1rem 0" }} reviews={reviews} />
             {!userAlreadyRated ? (
               <Rate />
             ) : (

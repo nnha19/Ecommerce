@@ -87,7 +87,7 @@
   display: flex;
   align-items: center;
 }
-.stars span {
+.stars span:last-child {
   margin-left: 0.4rem;
 }
 .rating-star {

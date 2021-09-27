@@ -2,12 +2,12 @@ import React, { useState } from "react";
 
 import "./AllProducts.css";
 import { useHistory } from "react-router-dom";
-import calOverallRating from "../../../functions/calOverallRating";
 
 import AddToCart from "../../components/ProductDetail/ProductDetailBody/AddToCart/AddToCart";
 import AddToWhilist from "../../../cart/components/Cart/AddToWhilist/AddToWhilist";
 import FilterProducts from "../FilterProducts/FilterProducts";
 import Pagination from "../Pagination/Pagination";
+import OverallRatings from "../OverallRatings/OverallRatings";
 
 const AllProducts = ({ allProducts, style, homePage }) => {
   const [resultProducts, setResultProducts] = useState(allProducts);
@@ -28,8 +28,6 @@ const AllProducts = ({ allProducts, style, homePage }) => {
   const mapArr = homePage ? resultProducts : allProducts;
 
   allProductsOutput = mapArr.map((product, i) => {
-    const overallRating = calOverallRating(product.reviews);
-
     let stock = product.features.inStock > 0 ? "In Stock" : "Out Of Stock";
 
     return (
@@ -50,15 +48,7 @@ const AllProducts = ({ allProducts, style, homePage }) => {
         <div className="product__body">
           <h2 className="product__brand">{product.brand}</h2>
           <p className="product__price">{product.price} USD</p>
-          <div className="stars">
-            <span className="product__overall-rating">{overallRating}/5</span>
-            <i className="rating-star fas fa-star"></i>
-            <i className="rating-star fas fa-star"></i>
-            <i className="rating-star fas fa-star"></i>
-            <i className="rating-star fas fa-star"></i>
-            <i className="rating-star fas fa-star"></i>
-            <span>({product.reviews.length})</span>
-          </div>
+          <OverallRatings reviews={product.reviews} />
           <AddToCart
             className="product__add-to-cart"
             itemQuantity={1}
