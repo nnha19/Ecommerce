@@ -35,6 +35,9 @@ const EditProduct = (props) => {
 
   return editProductVal ? (
     <>
+      <div style={{ textAlign: "center" }} className="edit-product-warning">
+        <p>If you don't provide new images, old images will be used</p>
+      </div>
       <Spinner show={loading || editIsLoading} />
       <CreateProduct
         editProductVal={editProductVal}

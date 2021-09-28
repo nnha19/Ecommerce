@@ -1,13 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./FilterProducts.css";
 import axios from "axios";
+import { FilterContext } from "../../../contexts/filterContext";
+import Context from "../../../contexts/context";
 
+import Button from "../../../share/components/button/button";
 import BackDrop from "../../../share/UI/BackDrop/BackDrop";
 import CheckBoxInput from "../../../share/components/CheckBoxInput/CheckBoxInput";
 import Spinner from "../../../share/UI/Spinner/Spinner";
-import { FilterContext } from "../../../contexts/filterContext";
 
 const FilterProducts = ({ allProducts, setResultProducts }) => {
+  const { topRef } = useContext(Context);
   const { showFilter, setShowFilter } = useContext(FilterContext);
 
   const [filterField, setFilterField] = useState({});
@@ -31,6 +34,7 @@ const FilterProducts = ({ allProducts, setResultProducts }) => {
     const updatedFilterField = { ...filterField, [title]: update };
     setFilterField(updatedFilterField);
     localStorage.setItem("filterField", JSON.stringify(updatedFilterField));
+    topRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -38,19 +42,21 @@ const FilterProducts = ({ allProducts, setResultProducts }) => {
     filterVals && setFilterField(filterVals);
   }, []);
 
-  console.log(filterField);
-
   useEffect(() => {
     const filterKeys = Object.keys(filterField);
 
+    let clonedFilterField;
     if (filterKeys.length > 0) {
       filterKeys.forEach((key) => {
         if (filterField[key].length < 1) {
-          const clonedFilterField = { ...filterField };
+          clonedFilterField = { ...filterField };
           delete clonedFilterField[key];
           setFilterField(clonedFilterField);
         }
       });
+      if (clonedFilterField && Object.keys(clonedFilterField).length < 1)
+        return;
+
       (async () => {
         setFilterIsLoading(true);
         try {
@@ -74,7 +80,9 @@ const FilterProducts = ({ allProducts, setResultProducts }) => {
     const key = Object.keys(f)[0];
     return (
       <div key={i} className="filter">
-        <h4 className="filter__header">{key}</h4>
+        <h4 className="filter__header">
+          Filter by <span>"{key}"</span>
+        </h4>
         {f[key].map((val) => {
           const checked =
             filterField[key] &&
@@ -95,6 +103,12 @@ const FilterProducts = ({ allProducts, setResultProducts }) => {
     );
   });
 
+  const clearAllFilterFieldHandler = () => {
+    setFilterField({});
+    localStorage.removeItem("filterField");
+    topRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <>
       <Spinner show={filterIsLoading} />
@@ -109,6 +123,13 @@ const FilterProducts = ({ allProducts, setResultProducts }) => {
           className="hide-filter-icon fas fa-times"
         ></i>
         {filterList}
+
+        <button
+          onClick={clearAllFilterFieldHandler}
+          className="clear-filter-btn"
+        >
+          Clear All
+        </button>
       </div>
     </>
   );

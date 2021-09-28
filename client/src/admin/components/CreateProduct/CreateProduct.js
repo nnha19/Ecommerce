@@ -40,9 +40,13 @@ const CreateProduct = ({ createProduct, editProductVal }) => {
       description: productVal.description.value,
       features,
     };
-    console.log(data);
+
     const formData = new FormData();
     formData.append("productDetail", JSON.stringify(data));
+    if (editProductVal && !productVal.image.value) {
+      createProduct(formData);
+      return;
+    }
     Array.from(productVal.image.value).forEach((img) =>
       formData.append("images", img)
     );

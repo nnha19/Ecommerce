@@ -121,15 +121,17 @@ const updateProduct = async (req, res, next) => {
   try {
     const productDetail = JSON.parse(req.body.productDetail);
     const imgs = req.files.map((file) => file.path);
+
     const productId = req.params.id;
     const { brand, price, onSale, description, image, features } =
       productDetail;
     if (req.admin) {
+      const oldProduct = await Product.findById(productId);
       const updateProduct = await Product.findByIdAndUpdate(productId, {
         brand,
         price,
         description,
-        imgs,
+        imgs: imgs.length < 1 ? oldProduct.imgs : imgs,
         features,
       });
       res.status(200).json(updateProduct);
