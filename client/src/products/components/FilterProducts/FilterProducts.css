@@ -10,6 +10,13 @@
   display: none;
   flex-basis: 14rem;
   margin-right: 0.7rem;
+  position: sticky;
+  top: 12px;
+  height: 40rem;
+  background: white;
+  border-radius: 4px;
+  align-self: flex-start;
+  overflow-y: auto;
 }
 .filter__vals {
   margin-top: 1.4rem;
@@ -24,7 +31,6 @@
   border-bottom: 1px solid rgba(128, 128, 128, 0.4);
 }
 .show-filter {
-  position: static;
   display: block;
   transform: translateX(0);
 }
@@ -41,7 +47,9 @@
     width: 18rem;
     z-index: 50;
     padding: 2rem;
-    margin: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 90vh;
   }
   .hide-filter-icon {
     display: block;

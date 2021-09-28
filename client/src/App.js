@@ -195,6 +195,7 @@ const App = () => {
         )}
         {curUser && curUser.admin && <AdminNavBar curUser={curUser} />}
       </Context.Provider>
+
       <Switch>
         <Redirect exact from="/" to="/products/" />
         <Context.Provider

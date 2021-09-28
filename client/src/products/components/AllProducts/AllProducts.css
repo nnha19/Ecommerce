@@ -3,6 +3,7 @@
 }
 .all-products-content {
   display: flex;
+  min-height: 100vh;
 }
 .hidden-filter {
   grid-template-columns: 1fr;
