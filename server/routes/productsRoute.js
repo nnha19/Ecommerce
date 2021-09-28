@@ -6,6 +6,7 @@ const authMiddleWare = require("../middlewares/authMiddleware");
 router.get("/", productsController.getAllProducts);
 router.get("/:id", productsController.getProductById);
 router.get("/filter/:gender", productsController.getProductByGender);
+router.post("/filter", productsController.getProductsByFilterValue);
 
 router.use(authMiddleWare);
 

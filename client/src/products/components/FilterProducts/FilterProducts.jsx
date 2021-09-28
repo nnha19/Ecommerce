@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import CheckBoxInput from "../../../share/components/CheckBoxInput/CheckBoxInput";
-import BackDrop from "../../../share/UI/BackDrop/BackDrop";
-
 import "./FilterProducts.css";
+import axios from "axios";
+
+import BackDrop from "../../../share/UI/BackDrop/BackDrop";
+import CheckBoxInput from "../../../share/components/CheckBoxInput/CheckBoxInput";
 
 const FilterProducts = ({
   allProducts,
@@ -14,7 +15,7 @@ const FilterProducts = ({
   const filterBy = [
     { brand: ["Ray Band", "AO", "Dior", "Okaley"] },
     { star: ["one star", "two star", "three star", "four star", "five star"] },
-    { price: ["100", "200", "300", "400", "500"] },
+    { price: ["100", "300", "400", "500", "1000"] },
     { gender: ["male", "female", "unisex"] },
     { size: ["Large", "Medium", "Small"] },
   ];
@@ -32,25 +33,27 @@ const FilterProducts = ({
   useEffect(() => {
     const filterKeys = Object.keys(filterField);
 
-    if (filterKeys[0] && filterField[filterKeys[0]].length > 0) {
-      const filtered = allProducts.filter((product) => {
-        const result = Object.keys(filterField).reduce((acc, filter) => {
-          const filterValues = filterField[filter];
-          const productValue = product[filter];
-          //This line defines what is your match
-          const found = filterValues.find((fv) => {
-            if (filter === "price") {
-              return parseInt(productValue) < parseInt(fv);
-            }
-            return fv == productValue.toString().toLowerCase();
-          });
-          return acc && found;
-        }, true);
-
-        return result;
+    if (filterKeys.length > 0) {
+      filterKeys.forEach((key) => {
+        if (filterField[key].length < 1) {
+          const clonedFilterField = { ...filterField };
+          delete clonedFilterField[key];
+          setFilterField(clonedFilterField);
+        }
       });
-
-      setResultProducts(filtered);
+      (async () => {
+        try {
+          const resp = await axios({
+            method: "POST",
+            url: `${process.env.REACT_APP_BACKEND_URL}/products/filter`,
+            data: { filterField },
+          });
+          console.log(resp);
+          setResultProducts(resp.data);
+        } catch (err) {
+          alert(err);
+        }
+      })();
     } else {
       setResultProducts(allProducts);
     }

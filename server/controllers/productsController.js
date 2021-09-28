@@ -26,6 +26,44 @@ const getAllProducts = async (req, res, next) => {
   }
 };
 
+const getProductsByFilterValue = async (req, res) => {
+  try {
+    const { filterField } = req.body;
+    console.log(filterField);
+    const mongooseFindArr = [];
+    for (let key in filterField) {
+      if (key === "gender" || key === "size") {
+        const optVals = [];
+        const objKey = `features.${key}`;
+        filterField[key].forEach((v) => optVals.push(new RegExp(v, "i")));
+        mongooseFindArr.push({
+          [objKey]: { $in: optVals },
+        });
+      } else if (key === "price") {
+        mongooseFindArr.push({
+          [key]: {
+            $lt: parseInt(filterField[key][filterField[key].length - 1]),
+          },
+        });
+      } else {
+        const optVals = [];
+        filterField[key].forEach((val) => optVals.push(new RegExp(val, "i")));
+
+        mongooseFindArr.push({ [key]: { $in: optVals } });
+      }
+    }
+    console.log(mongooseFindArr);
+    const filteredProducts = await Product.find({
+      $and: mongooseFindArr,
+    });
+
+    res.status(200).json(filteredProducts);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+};
+
 const getProductById = async (req, res, next) => {
   //Fect product with id
   try {
@@ -120,3 +158,4 @@ exports.createProduct = createProduct;
 exports.getProductByGender = getProductByGender;
 exports.updateProduct = updateProduct;
 exports.deleteProduct = deleteProduct;
+exports.getProductsByFilterValue = getProductsByFilterValue;
