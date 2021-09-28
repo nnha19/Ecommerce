@@ -48,7 +48,7 @@ const FilterProducts = ({
             url: `${process.env.REACT_APP_BACKEND_URL}/products/filter`,
             data: { filterField },
           });
-          console.log(resp);
+          resp.data.map((p) => console.log(p.features.gender));
           setResultProducts(resp.data);
         } catch (err) {
           alert(err);
