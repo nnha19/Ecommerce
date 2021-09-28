@@ -9,7 +9,6 @@ const FilterContextProvider = ({ children }) => {
 
   useEffect(() => {
     const filter = JSON.parse(localStorage.getItem("showFilter"));
-    console.log(filter);
     setShowFilter(filter);
   }, []);
 

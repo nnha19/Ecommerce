@@ -38,6 +38,8 @@ const FilterProducts = ({ allProducts, setResultProducts }) => {
     filterVals && setFilterField(filterVals);
   }, []);
 
+  console.log(filterField);
+
   useEffect(() => {
     const filterKeys = Object.keys(filterField);
 
@@ -57,7 +59,6 @@ const FilterProducts = ({ allProducts, setResultProducts }) => {
             url: `${process.env.REACT_APP_BACKEND_URL}/products/filter`,
             data: { filterField },
           });
-          resp.data.map((p) => console.log(p.features.gender));
           setResultProducts(resp.data);
         } catch (err) {
           alert(err);
@@ -75,12 +76,18 @@ const FilterProducts = ({ allProducts, setResultProducts }) => {
       <div key={i} className="filter">
         <h4 className="filter__header">{key}</h4>
         {f[key].map((val) => {
+          const checked =
+            filterField[key] &&
+            filterField[key].some(
+              (filterVal) => filterVal.toLowerCase() === val.toLowerCase()
+            );
           return (
             <CheckBoxInput
               key={val}
               changeVal={(e) => changeValHandler(e, key)}
               value={val.toLowerCase()}
               label={`${key === "price" ? `less than ${val}` : val}`}
+              checked={checked}
             />
           );
         })}

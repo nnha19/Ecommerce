@@ -12,8 +12,9 @@ import { FilterContext } from "../../../contexts/filterContext";
 
 const AllProducts = ({ allProducts, style, homePage }) => {
   let showFilter, setShowFilter;
+  const filterContext = useContext(FilterContext);
   if (homePage) {
-    ({ showFilter, setShowFilter } = useContext(FilterContext));
+    ({ showFilter, setShowFilter } = filterContext);
   }
   const [resultProducts, setResultProducts] = useState(allProducts);
   const history = useHistory();
