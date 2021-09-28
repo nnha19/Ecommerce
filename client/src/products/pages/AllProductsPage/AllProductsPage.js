@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { Route } from "react-router-dom";
+import { useHttp } from "../../../customHooks/useHttp";
 
 import AllProducts from "../../components/AllProducts/AllProducts";
-import { useHttp } from "../../../customHooks/useHttp";
 import SkeletonLoading from "../../../share/UI/SkeletonLoading/SkeletonLoading";
 import ATCErrorMsg from "../../components/ProductDetail/ProductDetailBody/ATCErrorMsg/ATCErrorMsg";
+import FilterContextProvider from "../../../contexts/filterContext";
 
 const AllProductsPage = (props) => {
   const [allProducts, loading, error, fetchData, setAllProducts] = useHttp([]);
@@ -18,34 +19,36 @@ const AllProductsPage = (props) => {
     <>
       <ATCErrorMsg />
       <SkeletonLoading show={loading} />
-      {allProducts && !!allProducts.length && (
-        <Route
-          exact
-          path="/products/"
-          component={(props) => (
-            <AllProducts
-              {...props}
-              setAllProducts={setAllProducts}
-              homePage={true}
-              allProducts={allProducts}
-            />
-          )}
-        />
-      )}
-      {allProducts && !!allProducts.length && (
-        <Route
-          exact
-          path="/products/:curPage"
-          component={(props) => (
-            <AllProducts
-              {...props}
-              setAllProducts={setAllProducts}
-              homePage={true}
-              allProducts={allProducts}
-            />
-          )}
-        />
-      )}
+      <FilterContextProvider>
+        {allProducts && !!allProducts.length && (
+          <Route
+            exact
+            path="/products/"
+            component={(props) => (
+              <AllProducts
+                {...props}
+                setAllProducts={setAllProducts}
+                homePage={true}
+                allProducts={allProducts}
+              />
+            )}
+          />
+        )}
+        {allProducts && !!allProducts.length && (
+          <Route
+            exact
+            path="/products/:curPage"
+            component={(props) => (
+              <AllProducts
+                {...props}
+                setAllProducts={setAllProducts}
+                homePage={true}
+                allProducts={allProducts}
+              />
+            )}
+          />
+        )}
+      </FilterContextProvider>
     </>
   );
 };

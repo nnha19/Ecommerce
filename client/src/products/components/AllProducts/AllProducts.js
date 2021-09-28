@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import "./AllProducts.css";
 import { useHistory } from "react-router-dom";
@@ -8,10 +8,14 @@ import AddToWhilist from "../../../cart/components/Cart/AddToWhilist/AddToWhilis
 import FilterProducts from "../FilterProducts/FilterProducts";
 import Pagination from "../Pagination/Pagination";
 import OverallRatings from "../OverallRatings/OverallRatings";
+import { FilterContext } from "../../../contexts/filterContext";
 
 const AllProducts = ({ allProducts, style, homePage }) => {
+  let showFilter, setShowFilter;
+  if (homePage) {
+    ({ showFilter, setShowFilter } = useContext(FilterContext));
+  }
   const [resultProducts, setResultProducts] = useState(allProducts);
-  const [showFilter, setShowFilter] = useState(false);
   const history = useHistory();
   let allProductsOutput;
 
@@ -71,10 +75,7 @@ const AllProducts = ({ allProducts, style, homePage }) => {
           setShowFilter={setShowFilter}
         />
       )}
-      <div
-        style={style}
-        className={`all-products ${showFilter ? "" : "order-1"}`}
-      >
+      <div style={style} className={`all-products `}>
         {allProductsOutput}
       </div>
     </>

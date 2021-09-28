@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./FilterProducts.css";
 import axios from "axios";
 
 import BackDrop from "../../../share/UI/BackDrop/BackDrop";
 import CheckBoxInput from "../../../share/components/CheckBoxInput/CheckBoxInput";
+import Spinner from "../../../share/UI/Spinner/Spinner";
+import { FilterContext } from "../../../contexts/filterContext";
 
-const FilterProducts = ({
-  allProducts,
-  setResultProducts,
-  showFilter,
-  setShowFilter,
-}) => {
+const FilterProducts = ({ allProducts, setResultProducts }) => {
+  const { showFilter, setShowFilter } = useContext(FilterContext);
+
   const [filterField, setFilterField] = useState({});
+  const [filterIsLoading, setFilterIsLoading] = useState(false);
   const filterBy = [
     { brand: ["Ray Band", "AO", "Dior", "Okaley"] },
     { star: ["one star", "two star", "three star", "four star", "five star"] },
@@ -42,6 +42,7 @@ const FilterProducts = ({
         }
       });
       (async () => {
+        setFilterIsLoading(true);
         try {
           const resp = await axios({
             method: "POST",
@@ -53,6 +54,7 @@ const FilterProducts = ({
         } catch (err) {
           alert(err);
         }
+        setFilterIsLoading(false);
       })();
     } else {
       setResultProducts(allProducts);
@@ -80,6 +82,7 @@ const FilterProducts = ({
 
   return (
     <>
+      <Spinner show={filterIsLoading} />
       <BackDrop
         className="mobile-backdrop"
         backDropShow={showFilter}
