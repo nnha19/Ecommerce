@@ -19,6 +19,7 @@ const FilterProducts = ({ allProducts, setResultProducts }) => {
     { gender: ["male", "female", "unisex"] },
     { size: ["Large", "Medium", "Small"] },
   ];
+
   const changeValHandler = (e, title) => {
     const { value, checked } = e.target;
     let update;
@@ -27,8 +28,15 @@ const FilterProducts = ({ allProducts, setResultProducts }) => {
     } else {
       update = filterField[title].filter((val) => val !== value);
     }
-    setFilterField({ ...filterField, [title]: update });
+    const updatedFilterField = { ...filterField, [title]: update };
+    setFilterField(updatedFilterField);
+    localStorage.setItem("filterField", JSON.stringify(updatedFilterField));
   };
+
+  useEffect(() => {
+    const filterVals = JSON.parse(localStorage.getItem("filterField"));
+    filterVals && setFilterField(filterVals);
+  }, []);
 
   useEffect(() => {
     const filterKeys = Object.keys(filterField);

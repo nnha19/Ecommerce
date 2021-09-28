@@ -47,9 +47,8 @@
     width: 18rem;
     z-index: 50;
     padding: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
     height: 90vh;
+    margin-top: 1rem;
   }
   .hide-filter-icon {
     display: block;
