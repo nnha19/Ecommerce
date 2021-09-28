@@ -26,6 +26,7 @@
   font-weight: normal;
   text-align: center;
   margin-top: 1rem;
+  display: block;
 }
 .overall-rating__star {
   margin-right: 0.8rem;

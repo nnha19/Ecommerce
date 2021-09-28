@@ -85,7 +85,7 @@ const AllProducts = ({ allProducts, style, homePage }) => {
   return homePage ? (
     <div className="all-products-container">
       <button onClick={() => setShowFilter(!showFilter)} className="filter-btn">
-        <i class="fas fa-filter"></i>
+        <i className="fas fa-filter"></i>
         Filter
       </button>
       <div

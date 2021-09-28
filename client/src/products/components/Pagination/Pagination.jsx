@@ -30,7 +30,7 @@ const Pagination = ({ allProducts, setResultProducts }) => {
   return (
     <div className="pagination">
       <button disabled={curPage === 1} onClick={() => navigateHandler("prev")}>
-        <i class="fas fa-long-arrow-alt-left"></i>Prev
+        <i className="fas fa-long-arrow-alt-left"></i>Prev
       </button>
       <span className="pagination__display">
         {curPage}/{totalPages}
@@ -39,7 +39,7 @@ const Pagination = ({ allProducts, setResultProducts }) => {
         disabled={curPage === totalPages}
         onClick={() => navigateHandler("next")}
       >
-        <i class="fas fa-long-arrow-alt-right"></i>Next
+        <i className="fas fa-long-arrow-alt-right"></i>Next
       </button>
     </div>
   );

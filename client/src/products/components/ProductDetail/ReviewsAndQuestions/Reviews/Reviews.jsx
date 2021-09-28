@@ -37,7 +37,7 @@ const Reviews = (props) => {
           </div>
           <div className="progress-bar">
             <ProgressBar
-              borderRadius={0}
+              borderRadius={"0"}
               bgColor="#008000"
               completed={percentage}
             />
@@ -51,8 +51,6 @@ const Reviews = (props) => {
   const total = calOverallRating(reviews);
 
   //========
-
-  console.log(reviews);
 
   const reviewLists =
     reviews &&
@@ -97,7 +95,9 @@ const Reviews = (props) => {
             <p className="total-rating-score">
               {total}/<span className="maximum-rating">5</span>{" "}
               <i className="rating-star fas fa-star"></i>
-              <p className="total-ratings-count">{reviews.length} ratings</p>
+              <span className="total-ratings-count">
+                {reviews.length} ratings
+              </span>
             </p>
           </div>
           <div className="overall-rating-display">{overallRating}</div>
