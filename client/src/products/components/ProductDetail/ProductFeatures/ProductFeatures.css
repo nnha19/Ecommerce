@@ -19,6 +19,7 @@
   display: flex;
   justify-content: space-between;
   font-weight: 500;
+  text-transform: capitalize;
 }
 
 .show-features {
