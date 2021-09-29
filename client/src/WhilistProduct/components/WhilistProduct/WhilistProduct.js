@@ -13,6 +13,8 @@ import ATCErrorMsg from "../../../products/components/ProductDetail/ProductDetai
 
 const WhilistProduct = ({ whilistProduct }) => {
   const context = useContext(Context);
+  document.title =
+    context.curUser && `${context.curUser.username} (whilisted products)`;
   const history = useHistory();
   const cartItemData = context.cartItemData;
 

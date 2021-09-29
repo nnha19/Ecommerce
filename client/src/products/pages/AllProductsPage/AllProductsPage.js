@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { Route, Switch } from "react-router-dom";
+import { Route, useHistory } from "react-router-dom";
 import { useHttp } from "../../../customHooks/useHttp";
 
 import AllProducts from "../../components/AllProducts/AllProducts";
@@ -12,13 +12,21 @@ import Pagination from "../../components/Pagination/Pagination";
 import NoProductsError from "../../components/AllProducts/NoProductsError/NoProductsError";
 
 const AllProductsPage = () => {
+  const history = useHistory();
+  document.title = "May Myo Vision (Products)";
   const [curPage, setCurPage] = useState(1);
   const [showFilter, setShowFilter] = useState(false);
   const [allProducts, loading, error, fetchData, setAllProducts] = useHttp([]);
   const [resultProducts, setResultProducts] = useState(allProducts);
+
   useEffect(() => {
     fetchData(`${process.env.REACT_APP_BACKEND_URL}/products`, "get");
   }, []);
+
+  useEffect(() => {
+    history.push(`/products/1`);
+  }, [allProducts]);
+
   //display the number of filters
   const filterField = JSON.parse(localStorage.getItem("filterField"));
   const filterItems = [];

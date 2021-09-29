@@ -11,6 +11,8 @@ const ProductDetailPage = (props) => {
 
   const [productDetail, loading, error, fetchData, setProductDetail] =
     useHttp();
+  document.title =
+    productDetail && `${productDetail.brand}(${productDetail.price}) USD`;
 
   useEffect(() => {
     //fetch detail of a product

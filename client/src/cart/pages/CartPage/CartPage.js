@@ -9,6 +9,7 @@ const CartPage = (props) => {
   const [cartItemError, setCartItemError] = useState(false);
   const context = useContext(Context);
   const cartItemData = context.cartItemData;
+  document.title = context.curUser && `${context.curUser.username} (Cart)`;
 
   useEffect(() => {
     if (
