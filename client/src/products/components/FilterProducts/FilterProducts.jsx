@@ -4,7 +4,6 @@ import axios from "axios";
 import { FilterContext } from "../../../contexts/filterContext";
 import Context from "../../../contexts/context";
 
-import Button from "../../../share/components/button/button";
 import BackDrop from "../../../share/UI/BackDrop/BackDrop";
 import CheckBoxInput from "../../../share/components/CheckBoxInput/CheckBoxInput";
 import Spinner from "../../../share/UI/Spinner/Spinner";
@@ -39,19 +38,17 @@ const FilterProducts = ({ allProducts, setAllProducts }) => {
 
   useEffect(() => {
     const filterVals = JSON.parse(localStorage.getItem("filterField"));
+
     filterVals && setFilterField(filterVals);
   }, []);
 
   //filtering products
   useEffect(() => {
-    console.log("Hello");
     const filterKeys = Object.keys(filterField);
-
-    let clonedFilterField;
-
+    if (filterKeys.length < 1) return;
+    let clonedFilterField = { ...filterField };
     filterKeys.forEach((key) => {
       if (filterField[key].length < 1) {
-        clonedFilterField = { ...filterField };
         delete clonedFilterField[key];
         setFilterField(clonedFilterField);
       }
@@ -63,12 +60,11 @@ const FilterProducts = ({ allProducts, setAllProducts }) => {
         const resp = await axios({
           method: "POST",
           url: `${process.env.REACT_APP_BACKEND_URL}/products/filter`,
-          data: { filterField },
+          data: { filterField: clonedFilterField },
         });
-        console.log(resp.data);
         setAllProducts(resp.data);
       } catch (err) {
-        alert(err);
+        console.log(err);
       }
       setFilterIsLoading(false);
     })();
@@ -103,7 +99,7 @@ const FilterProducts = ({ allProducts, setAllProducts }) => {
 
   const clearAllFilterFieldHandler = () => {
     localStorage.removeItem("filterField");
-    setFilterField({});
+    setFilterField({ brand: [] });
     topRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -113,7 +109,7 @@ const FilterProducts = ({ allProducts, setAllProducts }) => {
       <BackDrop
         className="mobile-backdrop"
         backDropShow={showFilter}
-        clicked={() => setShowFilter(false)}
+        clicked={setShowFilter}
       />
       <div className={`filter-products ${showFilter ? "show-filter" : ""}`}>
         <i

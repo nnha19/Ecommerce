@@ -29,12 +29,14 @@ const getAllProducts = async (req, res, next) => {
 const getProductsByFilterValue = async (req, res) => {
   try {
     const { filterField } = req.body;
+
     const filterKeys = Object.keys(filterField);
     if (filterKeys.length === 0 || filterField[filterKeys[0]].length < 1) {
       const allProducts = await Product.find({});
       res.status(200).json(allProducts);
       return;
     }
+
     const mongooseFindArr = [];
     for (let key in filterField) {
       if (key === "gender" || key === "size") {

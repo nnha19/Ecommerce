@@ -12,6 +12,7 @@
 }
 .product-detail__img-container {
   box-shadow: 0 2px 2px 2px rgba(128, 128, 128, 0.3);
+  height: max-content;
 }
 
 .product-detail__content {
@@ -31,7 +32,6 @@
 .main-img {
   width: 100%;
   cursor: auto;
-  height: 100%;
 }
 
 .small-imgs {

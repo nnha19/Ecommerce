@@ -10,20 +10,8 @@ const FilterContextProvider = ({ children, showFilter, setShowFilter }) => {
     setShowFilter(filter);
   }, []);
 
-  const setShowFilterHandler = (boolean) => {
-    if (boolean) {
-      setShowFilter(true);
-      JSON.stringify(localStorage.setItem("showFilter", true));
-    } else {
-      setShowFilter(false);
-      JSON.stringify(localStorage.setItem("showFilter", false));
-    }
-  };
-
   return (
-    <FilterContext.Provider
-      value={{ showFilter, setShowFilter: setShowFilterHandler }}
-    >
+    <FilterContext.Provider value={{ showFilter, setShowFilter }}>
       {children}
     </FilterContext.Provider>
   );

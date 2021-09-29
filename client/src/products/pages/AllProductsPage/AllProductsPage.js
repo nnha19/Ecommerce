@@ -8,6 +8,7 @@ import SkeletonLoading from "../../../share/UI/SkeletonLoading/SkeletonLoading";
 import ATCErrorMsg from "../../components/ProductDetail/ProductDetailBody/ATCErrorMsg/ATCErrorMsg";
 import FilterContextProvider from "../../../contexts/filterContext";
 import FilterProducts from "../../components/FilterProducts/FilterProducts";
+import Pagination from "../../components/Pagination/Pagination";
 
 const AllProductsPage = (props) => {
   const [showFilter, setShowFilter] = useState(false);
@@ -25,59 +26,70 @@ const AllProductsPage = (props) => {
   }
   const filterCount = filterItems.flat().length;
 
+  //show filter
+  const setShowFilterHandler = () => {
+    if (!showFilter) {
+      setShowFilter(true);
+      JSON.stringify(localStorage.setItem("showFilter", true));
+    } else {
+      setShowFilter(false);
+      JSON.stringify(localStorage.setItem("showFilter", false));
+    }
+  };
+
   return (
     <div className="all-products-wrapper">
       <ATCErrorMsg />
       <SkeletonLoading show={loading} />
       <FilterContextProvider
         showFilter={showFilter}
-        setShowFilter={setShowFilter}
+        setShowFilter={setShowFilterHandler}
       >
-        <button
-          onClick={() => setShowFilter(!showFilter)}
-          className="filter-btn"
-        >
-          <i className="fas fa-filter"></i>
-          Filter
-          {filterCount > 0 && (
-            <span className="filter-count">({filterCount})</span>
-          )}
-        </button>
-
+        {!loading && (
+          <button onClick={setShowFilterHandler} className="filter-btn">
+            <i className="fas fa-filter"></i>
+            Filter
+            {filterCount > 0 && (
+              <span className="filter-count">({filterCount})</span>
+            )}
+          </button>
+        )}
         <div className="all-products-container">
-          <FilterProducts
-            showFilter={showFilter}
-            allProducts={allProducts}
-            setShowFilter={setShowFilter}
-            setAllProducts={setAllProducts}
-          />
-          {allProducts && !!allProducts.length && (
-            <Route
-              exact
-              path="/products/"
-              component={(props) => (
-                <AllProducts
-                  {...props}
-                  setAllProducts={setAllProducts}
-                  homePage={true}
-                  allProducts={allProducts}
-                />
-              )}
+          {!loading && (
+            <FilterProducts
+              showFilter={showFilter}
+              allProducts={allProducts}
+              setShowFilter={setShowFilter}
+              setAllProducts={setAllProducts}
             />
           )}
-          {allProducts && !!allProducts.length && (
-            <Route
-              exact
-              path="/products/:curPage"
-              component={(props) => (
-                <AllProducts
-                  {...props}
-                  setAllProducts={setAllProducts}
-                  homePage={true}
-                  allProducts={allProducts}
-                />
-              )}
-            />
+          {allProducts && allProducts.length > 0 && (
+            <>
+              <Route
+                exact
+                path="/products/"
+                component={(props) => (
+                  <AllProducts
+                    {...props}
+                    setAllProducts={setAllProducts}
+                    homePage={true}
+                    allProducts={allProducts}
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/products/:curPage"
+                component={(props) => (
+                  <AllProducts
+                    {...props}
+                    setAllProducts={setAllProducts}
+                    homePage={true}
+                    allProducts={allProducts}
+                  />
+                )}
+              />
+            </>
           )}
         </div>
       </FilterContextProvider>
