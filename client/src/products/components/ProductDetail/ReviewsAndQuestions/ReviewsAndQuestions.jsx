@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import "./ReviewsAndQuestions.css";
+
 import Questions from "./Questions/Questions";
 import Reviews from "./Reviews/Reviews";
-
-import "./ReviewsAndQuestions.css";
 
 const ReviewsAndQuestions = (props) => {
   const [activeHeader, setActiveHeader] = useState("reviews");

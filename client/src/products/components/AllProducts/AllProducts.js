@@ -66,6 +66,14 @@ const AllProducts = ({ allProducts, style, homePage }) => {
     );
   });
 
+  //display the number of filters
+  const filterField = JSON.parse(localStorage.getItem("filterField"));
+  const filterItems = [];
+  for (let key in filterField) {
+    filterItems.push(filterField[key]);
+  }
+  const filterCount = filterItems.flat().length;
+
   const returnChildren = (
     <>
       {homePage && (
@@ -87,6 +95,9 @@ const AllProducts = ({ allProducts, style, homePage }) => {
       <button onClick={() => setShowFilter(!showFilter)} className="filter-btn">
         <i className="fas fa-filter"></i>
         Filter
+        {filterCount > 0 && (
+          <span className="filter-count">({filterCount})</span>
+        )}
       </button>
       <div
         className={`all-products-content ${showFilter ? "" : "hidden-filter"}`}
