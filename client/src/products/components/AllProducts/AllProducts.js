@@ -1,13 +1,17 @@
 import React from "react";
 
 import "./AllProducts.css";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import AddToCart from "../../components/ProductDetail/ProductDetailBody/AddToCart/AddToCart";
 import AddToWhilist from "../../../cart/components/Cart/AddToWhilist/AddToWhilist";
 import OverallRatings from "../OverallRatings/OverallRatings";
 
-const AllProducts = ({ allProducts, style }) => {
+const AllProducts = ({ allProducts, style, setCurPage }) => {
+  const { curPage } = useParams();
+  if (curPage) {
+    setCurPage(parseInt(curPage));
+  }
   const history = useHistory();
   let allProductsOutput;
 

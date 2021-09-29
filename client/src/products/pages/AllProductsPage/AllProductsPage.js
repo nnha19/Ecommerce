@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { useHttp } from "../../../customHooks/useHttp";
 
 import AllProducts from "../../components/AllProducts/AllProducts";
@@ -11,16 +11,14 @@ import FilterProducts from "../../components/FilterProducts/FilterProducts";
 import Pagination from "../../components/Pagination/Pagination";
 import NoProductsError from "../../components/AllProducts/NoProductsError/NoProductsError";
 
-let originalProducts;
-
 const AllProductsPage = () => {
+  const [curPage, setCurPage] = useState(1);
   const [showFilter, setShowFilter] = useState(false);
   const [allProducts, loading, error, fetchData, setAllProducts] = useHttp([]);
-  originalProducts = allProducts;
+  const [resultProducts, setResultProducts] = useState(allProducts);
   useEffect(() => {
     fetchData(`${process.env.REACT_APP_BACKEND_URL}/products`, "get");
   }, []);
-
   //display the number of filters
   const filterField = JSON.parse(localStorage.getItem("filterField"));
   const filterItems = [];
@@ -39,7 +37,6 @@ const AllProductsPage = () => {
       JSON.stringify(localStorage.setItem("showFilter", false));
     }
   };
-  console.log(showFilter);
 
   return (
     <div className="all-products-wrapper">
@@ -62,7 +59,7 @@ const AllProductsPage = () => {
           {!loading && (
             <FilterProducts
               showFilter={showFilter}
-              allProducts={allProducts}
+              allProducts={resultProducts}
               setShowFilter={setShowFilter}
               setAllProducts={setAllProducts}
             />
@@ -72,24 +69,23 @@ const AllProductsPage = () => {
               <Route
                 exact
                 path="/products/"
-                component={(props) => (
+                render={(props) => (
                   <AllProducts
                     {...props}
                     setAllProducts={setAllProducts}
-                    homePage={true}
-                    allProducts={allProducts}
+                    allProducts={resultProducts}
                   />
                 )}
               />
               <Route
                 exact
                 path="/products/:curPage"
-                component={(props) => (
+                render={(props) => (
                   <AllProducts
                     {...props}
+                    setCurPage={setCurPage}
                     setAllProducts={setAllProducts}
-                    homePage={true}
-                    allProducts={allProducts}
+                    allProducts={resultProducts}
                   />
                 )}
               />
@@ -98,11 +94,14 @@ const AllProductsPage = () => {
             <NoProductsError loading={loading} />
           )}
         </div>
-        <Pagination
-          allProducts={allProducts}
-          setAllProducts={setAllProducts}
-          originalProducts={originalProducts}
-        />
+        {allProducts && allProducts.length > 0 && (
+          <Pagination
+            curPage={curPage}
+            allProducts={allProducts}
+            setAllProducts={setAllProducts}
+            setResultProducts={setResultProducts}
+          />
+        )}
       </FilterContextProvider>
     </div>
   );
