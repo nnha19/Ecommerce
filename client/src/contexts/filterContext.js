@@ -7,7 +7,8 @@ export const FilterContext = createContext();
 const FilterContextProvider = ({ children, showFilter, setShowFilter }) => {
   useEffect(() => {
     const filter = JSON.parse(localStorage.getItem("showFilter"));
-    setShowFilter(filter);
+
+    filter && setShowFilter();
   }, []);
 
   return (

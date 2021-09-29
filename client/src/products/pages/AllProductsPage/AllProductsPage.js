@@ -11,10 +11,12 @@ import FilterProducts from "../../components/FilterProducts/FilterProducts";
 import Pagination from "../../components/Pagination/Pagination";
 import NoProductsError from "../../components/AllProducts/NoProductsError/NoProductsError";
 
-const AllProductsPage = (props) => {
+let originalProducts;
+
+const AllProductsPage = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [allProducts, loading, error, fetchData, setAllProducts] = useHttp([]);
-
+  originalProducts = allProducts;
   useEffect(() => {
     fetchData(`${process.env.REACT_APP_BACKEND_URL}/products`, "get");
   }, []);
@@ -37,6 +39,7 @@ const AllProductsPage = (props) => {
       JSON.stringify(localStorage.setItem("showFilter", false));
     }
   };
+  console.log(showFilter);
 
   return (
     <div className="all-products-wrapper">
@@ -92,9 +95,14 @@ const AllProductsPage = (props) => {
               />
             </>
           ) : (
-            <NoProductsError />
+            <NoProductsError loading={loading} />
           )}
         </div>
+        <Pagination
+          allProducts={allProducts}
+          setAllProducts={setAllProducts}
+          originalProducts={originalProducts}
+        />
       </FilterContextProvider>
     </div>
   );

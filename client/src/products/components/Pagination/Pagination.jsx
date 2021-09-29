@@ -4,13 +4,12 @@ import Context from "../../../contexts/context";
 
 import "./Pagination.css";
 
-const Pagination = ({ allProducts, setResultProducts }) => {
+const Pagination = ({ allProducts, setAllProducts, originalProducts }) => {
   const { topRef } = useContext(Context);
-
   const history = useHistory();
   const curPage = parseInt(useParams().curPage) || 1;
   const contentPerPage = 5;
-  const totalPages = Math.ceil(allProducts.length / contentPerPage);
+  const totalPages = Math.ceil(originalProducts.length / contentPerPage);
 
   const navigateHandler = (type) => {
     setTimeout(() => {
@@ -24,8 +23,9 @@ const Pagination = ({ allProducts, setResultProducts }) => {
   useEffect(() => {
     const start = (curPage - 1) * contentPerPage;
     const end = curPage * contentPerPage;
-    setResultProducts(allProducts.slice(start, end));
+    setAllProducts(originalProducts.slice(start, end));
   }, [curPage]);
+  console.log(allProducts);
 
   return (
     <div className="pagination">
