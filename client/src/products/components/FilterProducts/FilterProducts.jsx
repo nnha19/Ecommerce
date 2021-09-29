@@ -9,7 +9,7 @@ import BackDrop from "../../../share/UI/BackDrop/BackDrop";
 import CheckBoxInput from "../../../share/components/CheckBoxInput/CheckBoxInput";
 import Spinner from "../../../share/UI/Spinner/Spinner";
 
-const FilterProducts = ({ allProducts, setResultProducts }) => {
+const FilterProducts = ({ allProducts, setAllProducts }) => {
   const { topRef } = useContext(Context);
   const { showFilter, setShowFilter } = useContext(FilterContext);
 
@@ -42,38 +42,36 @@ const FilterProducts = ({ allProducts, setResultProducts }) => {
     filterVals && setFilterField(filterVals);
   }, []);
 
+  //filtering products
   useEffect(() => {
+    console.log("Hello");
     const filterKeys = Object.keys(filterField);
 
     let clonedFilterField;
-    if (filterKeys.length > 0) {
-      filterKeys.forEach((key) => {
-        if (filterField[key].length < 1) {
-          clonedFilterField = { ...filterField };
-          delete clonedFilterField[key];
-          setFilterField(clonedFilterField);
-        }
-      });
-      if (clonedFilterField && Object.keys(clonedFilterField).length < 1)
-        return;
 
-      (async () => {
-        setFilterIsLoading(true);
-        try {
-          const resp = await axios({
-            method: "POST",
-            url: `${process.env.REACT_APP_BACKEND_URL}/products/filter`,
-            data: { filterField },
-          });
-          setResultProducts(resp.data);
-        } catch (err) {
-          alert(err);
-        }
-        setFilterIsLoading(false);
-      })();
-    } else {
-      setResultProducts(allProducts);
-    }
+    filterKeys.forEach((key) => {
+      if (filterField[key].length < 1) {
+        clonedFilterField = { ...filterField };
+        delete clonedFilterField[key];
+        setFilterField(clonedFilterField);
+      }
+    });
+
+    (async () => {
+      setFilterIsLoading(true);
+      try {
+        const resp = await axios({
+          method: "POST",
+          url: `${process.env.REACT_APP_BACKEND_URL}/products/filter`,
+          data: { filterField },
+        });
+        console.log(resp.data);
+        setAllProducts(resp.data);
+      } catch (err) {
+        alert(err);
+      }
+      setFilterIsLoading(false);
+    })();
   }, [filterField]);
 
   const filterList = filterBy.map((f, i) => {
@@ -104,8 +102,8 @@ const FilterProducts = ({ allProducts, setResultProducts }) => {
   });
 
   const clearAllFilterFieldHandler = () => {
-    setFilterField({});
     localStorage.removeItem("filterField");
+    setFilterField({});
     topRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -123,7 +121,6 @@ const FilterProducts = ({ allProducts, setResultProducts }) => {
           className="hide-filter-icon fas fa-times"
         ></i>
         {filterList}
-
         <button
           onClick={clearAllFilterFieldHandler}
           className="clear-filter-btn"

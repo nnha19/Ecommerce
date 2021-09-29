@@ -4,9 +4,7 @@ import { createContext, useEffect, useState } from "react";
 
 export const FilterContext = createContext();
 
-const FilterContextProvider = ({ children }) => {
-  const [showFilter, setShowFilter] = useState(false);
-
+const FilterContextProvider = ({ children, showFilter, setShowFilter }) => {
   useEffect(() => {
     const filter = JSON.parse(localStorage.getItem("showFilter"));
     setShowFilter(filter);

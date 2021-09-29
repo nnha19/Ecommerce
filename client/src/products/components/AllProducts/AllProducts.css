@@ -1,10 +1,10 @@
-.all-products-container {
+.all-products-wrapper {
   padding: 4rem;
 }
-.all-products-content {
+.all-products-container {
   display: flex;
-  min-height: 100vh;
 }
+
 .hidden-filter {
   grid-template-columns: 1fr;
 }

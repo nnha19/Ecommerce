@@ -66,49 +66,21 @@ const AllProducts = ({ allProducts, style, homePage }) => {
     );
   });
 
-  //display the number of filters
-  const filterField = JSON.parse(localStorage.getItem("filterField"));
-  const filterItems = [];
-  for (let key in filterField) {
-    filterItems.push(filterField[key]);
-  }
-  const filterCount = filterItems.flat().length;
-
   const returnChildren = (
-    <>
-      {homePage && (
-        <FilterProducts
-          showFilter={showFilter}
-          allProducts={allProducts}
-          setResultProducts={setResultProducts}
-          setShowFilter={setShowFilter}
-        />
-      )}
-      <div style={style} className={`all-products `}>
-        {allProductsOutput}
-      </div>
-    </>
+    <div style={style} className={`all-products `}>
+      {allProductsOutput}
+    </div>
   );
   //if homepage is true homepage. Otherwise similar products being used from productDetail
   return homePage ? (
-    <div className="all-products-container">
-      <button onClick={() => setShowFilter(!showFilter)} className="filter-btn">
-        <i className="fas fa-filter"></i>
-        Filter
-        {filterCount > 0 && (
-          <span className="filter-count">({filterCount})</span>
-        )}
-      </button>
-      <div
-        className={`all-products-content ${showFilter ? "" : "hidden-filter"}`}
-      >
-        {returnChildren}
-      </div>
-      <Pagination
+    <>
+      {returnChildren}
+
+      {/* <Pagination
         allProducts={allProducts}
         setResultProducts={setResultProducts}
-      />
-    </div>
+      /> */}
+    </>
   ) : (
     returnChildren
   );
