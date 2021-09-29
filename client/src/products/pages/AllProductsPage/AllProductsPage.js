@@ -9,6 +9,7 @@ import ATCErrorMsg from "../../components/ProductDetail/ProductDetailBody/ATCErr
 import FilterContextProvider from "../../../contexts/filterContext";
 import FilterProducts from "../../components/FilterProducts/FilterProducts";
 import Pagination from "../../components/Pagination/Pagination";
+import NoProductsError from "../../components/AllProducts/NoProductsError/NoProductsError";
 
 const AllProductsPage = (props) => {
   const [showFilter, setShowFilter] = useState(false);
@@ -63,7 +64,7 @@ const AllProductsPage = (props) => {
               setAllProducts={setAllProducts}
             />
           )}
-          {allProducts && allProducts.length > 0 && (
+          {allProducts && allProducts.length > 0 ? (
             <>
               <Route
                 exact
@@ -90,6 +91,8 @@ const AllProductsPage = (props) => {
                 )}
               />
             </>
+          ) : (
+            <NoProductsError />
           )}
         </div>
       </FilterContextProvider>

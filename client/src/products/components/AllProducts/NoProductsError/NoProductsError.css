@@ -1,0 +1,23 @@
+.no-products-error {
+  width: 100%;
+  min-height: 70vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+  object-fit: contain;
+  display: flex;
+  padding: 4rem;
+  border: 1px solid grey;
+}
+.no-products-error h3 {
+  font-size: 1.3rem;
+  margin-right: 1rem;
+  align-self: center;
+  font-weight: normal;
+}
+.no-products-error h3 span {
+  display: block;
+  margin-top: 2rem;
+  font-weight: 500;
+}

@@ -16,7 +16,6 @@ const FilterProducts = ({ allProducts, setAllProducts }) => {
   const [filterIsLoading, setFilterIsLoading] = useState(false);
   const filterBy = [
     { brand: ["Ray Band", "AO", "Dior", "Okaley"] },
-    { star: ["one star", "two star", "three star", "four star", "five star"] },
     { price: ["100", "300", "400", "500", "1000"] },
     { gender: ["male", "female", "unisex"] },
     { size: ["Large", "Medium", "Small"] },
