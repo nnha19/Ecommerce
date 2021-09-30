@@ -1,0 +1,48 @@
+.home {
+  min-height: 80vh;
+}
+.home {
+  display: flex;
+  align-items: center;
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.2)
+    ),
+    url("../../../assets//couple.jpg") !important;
+  background-size: cover;
+  background-position: top;
+  height: 100vh;
+}
+.home__header {
+  font-family: sans-serif;
+  padding: 8rem 3rem;
+  font-size: 1.8rem;
+  line-height: 1.6;
+}
+.home__main-header {
+  color: green;
+  display: block;
+}
+.home__img {
+  height: 100%;
+  width: 100%;
+}
+.home__btn {
+  padding: 0.8rem 2rem;
+  background: rgba(0, 128, 0, 1);
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.home__btn i {
+  margin-right: 1rem;
+}
+.home__btn:hover {
+  background: rgba(0, 128, 0, 0.6);
+}

@@ -24,6 +24,7 @@ import CreateCouponPage from "./admin/pages/CreateCouponPage";
 import EditCouponPage from "./admin/pages/EditCouponPage";
 import DemoLogin from "./DemoLogin/DemoLogin";
 import Footer from "./share/UI/Footer/Footer";
+import HomePage from "./home/pages/homePage";
 
 const App = () => {
   const history = useHistory();
@@ -197,7 +198,6 @@ const App = () => {
       </Context.Provider>
 
       <Switch>
-        <Redirect exact from="/" to="/products/" />
         <Context.Provider
           value={{
             token,
@@ -230,6 +230,7 @@ const App = () => {
           />
 
           {authenticated && <Route path="/cart" exact component={CartPage} />}
+          <Route exact path="/" component={HomePage} />
           <Route exact path="/checkout" component={CheckoutPage} />
           <Route exact path="/product/:id" component={ProductDetailPage} />
           <Route exact path="/order/:uid" component={CustomerOrder} />
