@@ -6,12 +6,11 @@ import { useParams } from "react-router";
 import Context from "../../../../contexts/context";
 import { ReviewsAndQuestionsContext } from "../../../../contexts/reviewsAndQuestionsContext";
 import QuestionForm from "../QuestionForm/QuestionForm";
-import {
-  disableBodyScrollBar,
-  enableBodyScrollBar,
-} from "../../../../functions/disableBodyScrollBar";
+import Spinner from "../../../../share/UI/Spinner/Spinner";
+import PopUpMsg from "../../../../share/UI/PopUpMsg/PopUpMsg";
 
 const PostQuestion = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [questionSubmitted, setQuestionSubmitted] = useState(false);
   const context = useContext(Context);
   const { userId } = context;
@@ -30,6 +29,8 @@ const PostQuestion = (props) => {
   };
 
   const postQuestionHandler = async (e) => {
+    setShowForm(false);
+    setIsLoading(true);
     e.preventDefault();
     try {
       const resp = await axios({
@@ -41,13 +42,13 @@ const PostQuestion = (props) => {
         },
       });
       setQuestions([...questions, resp.data]);
-      setQuestionSubmitted(true);
       if (resp.status === 200) {
-        setShowForm(false);
+        setQuestionSubmitted(true);
       }
     } catch (err) {
       alert(err);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -60,17 +61,14 @@ const PostQuestion = (props) => {
 
   return (
     <>
+      <Spinner show={isLoading} />
       <button onClick={showQuestionFormHandler} className="post-question__btn">
         Post Question
       </button>
+      {questionSubmitted && (
+        <PopUpMsg>You question has been submitted successfully.</PopUpMsg>
+      )}
 
-      <p
-        className={`question-submitted ${
-          questionSubmitted ? "show-question-submitted" : ""
-        }`}
-      >
-        You questions has been submitted successfully.
-      </p>
       <QuestionForm
         postQuestion={postQuestionHandler}
         showForm={showForm}

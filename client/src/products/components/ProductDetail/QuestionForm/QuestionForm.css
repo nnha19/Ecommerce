@@ -41,25 +41,6 @@
   margin-top: 1rem;
   border-radius: 4px;
 }
-.question-submitted {
-  padding: 0.8rem 2rem;
-  background: green;
-  width: max-content;
-  color: white;
-  border-radius: 50px;
-  font-size: 1.1rem;
-  position: fixed;
-  z-index: 40;
-  left: 50%;
-  transform: translateX(-50%);
-  top: -20rem;
-  opacity: 0;
-  transition: all 0.4s;
-}
-.show-question-submitted {
-  top: 7rem;
-  opacity: 1;
-}
 
 .question {
   font-weight: 400;

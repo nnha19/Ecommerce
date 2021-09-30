@@ -1,0 +1,23 @@
+.popup-msg {
+  padding: 0.8rem 2rem;
+  background: purple;
+  width: max-content;
+  color: white;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  position: fixed;
+  z-index: 40;
+  left: 50%;
+  top: 3rem;
+  transition: all 0.4s;
+  animation: slideDown 0.4s ease;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translate(-50%, -100%);
+  }
+  to {
+    transform: translate(-50%, 0);
+  }
+}

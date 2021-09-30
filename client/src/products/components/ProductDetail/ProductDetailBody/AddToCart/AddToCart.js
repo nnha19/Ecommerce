@@ -1,33 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
 
-import { useHistory } from "react-router-dom";
-
 import Context from "../../../../../contexts/context";
 import SecondaryBtn from "../../../../../share/components/SecondaryBtn/SecondaryBtn";
-import AddToCartDisplayMsg from "../AddToCartDisplayMsg/AddToCartDisplayMsg";
+import PopUpMsg from "../../../../../share/UI/PopUpMsg/PopUpMsg";
 
-const AddToCart = ({
-  itemQuantity,
-  className,
-  product,
-  buy,
-  whilist,
-  children,
-}) => {
+const AddToCart = ({ className, product, whilist, children }) => {
   const { cartItemData, authenticated, curUser, toggleLogin } =
     useContext(Context);
-  const history = useHistory();
   const [addedToCart, setAddedToCart] = useState(false);
-  const [buying, setBuying] = useState(false);
 
   useEffect(() => {
     cartItemData.error && setAddedToCart(false);
   });
-  useEffect(() => {
-    if (buying && !cartItemData.loading) {
-      history.push("/checkout");
-    }
-  }, [buying, cartItemData.loading]);
 
   const addToCartHandler = () => {
     if (!authenticated) {
@@ -43,26 +27,20 @@ const AddToCart = ({
       data
     );
     setAddedToCart(true);
-    if (buy) {
-      setBuying(true);
-      return;
-    }
   };
 
-  const hideModalHandler = () => {
-    setAddedToCart(false);
-  };
+  useEffect(() => {
+    setTimeout(() => {
+      addedToCart && setAddedToCart(false);
+    }, 5000);
+  }, [addedToCart]);
 
   return (
     <>
       {addedToCart && !cartItemData.loading && !cartItemData.error && (
-        <AddToCartDisplayMsg
-          hideModal={() => hideModalHandler()}
-          name={product.brand}
-          amount={itemQuantity}
-          addedToCart={addedToCart}
-        />
+        <PopUpMsg>{product.brand} added to cart</PopUpMsg>
       )}
+
       {whilist ? (
         <i
           className={`fas fa-shopping-cart ${className}`}
