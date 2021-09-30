@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 import "./auth.css";
+import {
+  disableBodyScrollBar,
+  enableBodyScrollBar,
+} from "../../../functions/disableBodyScrollBar";
 
 import Button from "../../../share/components/button/button";
 import FormInput from "../FormInput/FormInput";
@@ -11,7 +15,7 @@ import Modal from "../../../share/UI/Modal/Modal";
 import useCheckOverAllValid from "../../../customHooks/useCheckOverAllValid";
 import SecondaryBtn from "../SecondaryBtn/SecondaryBtn";
 
-const Auth = (props) => {
+const Auth = ({ login, toggleLogin, loginUser }) => {
   const [signUp, setSignUp] = useState(false);
   const [customer, loading, error, fetchData, , setError] = useHttp();
 
@@ -64,20 +68,24 @@ const Auth = (props) => {
         password,
       });
     }
-    props.toggleLogin();
+    toggleLogin();
     for (let key in loginVals) {
       loginVals[key].value = "";
       loginVals[key].isTouched = false;
       loginVals[key].valid = false;
     }
   };
-  useEffect(() => {
-    customer && props.loginUser(customer.user, customer.token);
-  }, [customer]);
 
   const hideErrorModalHandler = () => {
     setError(false);
   };
+  useEffect(() => {
+    customer && loginUser(customer.user, customer.token);
+  }, [customer]);
+
+  useEffect(() => {
+    login ? disableBodyScrollBar() : enableBodyScrollBar();
+  }, [login]);
 
   return (
     <>
@@ -92,13 +100,13 @@ const Auth = (props) => {
         }
       />
       <Spinner show={loading} />
-      <BackDrop clicked={props.toggleLogin} backDropShow={props.login} />
-      <div className={`${props.login && "show-login"} auth-form-container`}>
+      <BackDrop clicked={toggleLogin} backDropShow={login} />
+      <div className={`${login && "show-login"} auth-form-container`}>
         <h3 className="auth__form-header">
           {signUp ? "Create account" : "Log In"}
         </h3>
         <form onSubmit={submitHandler} className={`auth__form `}>
-          <i onClick={props.toggleLogin} className="hide-form fas fa-times"></i>
+          <i onClick={toggleLogin} className="hide-form fas fa-times"></i>
           {signUp && (
             <FormInput
               inputContainerCls="auth-input-container"

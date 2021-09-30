@@ -48,8 +48,8 @@
 }
 .customer-avatar {
   margin-right: 2rem;
-  height: 4rem;
-  width: 4rem;
+  height: 4rem !important;
+  width: 4rem !important;
   background: purple;
   color: white;
   border-radius: 50%;
@@ -58,6 +58,10 @@
   align-items: center;
   text-transform: capitalize;
   font-size: 2rem;
+  align-self: flex-start;
+}
+.review__text {
+  width: 100%;
 }
 .customer-name {
   font-weight: 500;
@@ -90,4 +94,10 @@
 .maximum-rating {
   font-size: 2rem;
   font-weight: 100;
+}
+
+@media (max-width: 500px) {
+  .review-lists {
+    padding: 1rem 0;
+  }
 }

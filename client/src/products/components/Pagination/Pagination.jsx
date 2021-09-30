@@ -7,7 +7,7 @@ import "./Pagination.css";
 const Pagination = ({ allProducts, setResultProducts, curPage }) => {
   const { topRef } = useContext(Context);
   const history = useHistory();
-  const contentPerPage = 5;
+  const contentPerPage = 20;
   const totalPages = Math.ceil(allProducts.length / contentPerPage);
 
   const navigateHandler = (type) => {

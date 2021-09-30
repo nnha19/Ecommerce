@@ -2,12 +2,15 @@
   width: 30rem;
   background: white;
   position: fixed;
-  padding: 1rem 0;
+  padding: 0;
   box-shadow: 0 2px 2px rgba(128, 128, 128, 0.548);
   z-index: 40;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  height: 40rem;
+  overflow-y: auto;
+  border-radius: 8px;
 }
 .question-form__header {
   padding: 1rem 2rem;
@@ -15,6 +18,9 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+  position: sticky;
+  top: 0;
+  background-color: white;
 }
 .question-form__header h4 {
   font-weight: 400;
@@ -27,6 +33,9 @@
 }
 .question-form {
   padding: 8rem 2rem;
+}
+.no-padding {
+  padding: 2rem;
 }
 .question-form button {
   margin-top: 1rem;
@@ -60,4 +69,10 @@
 .question span {
   font-weight: 700;
   font-size: 1.2rem;
+}
+
+@media (max-width: 500px) {
+  .question-form-container {
+    width: 24rem;
+  }
 }

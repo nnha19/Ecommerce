@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "./QuestionForm.css";
+import {
+  disableBodyScrollBar,
+  enableBodyScrollBar,
+} from "../../../../functions/disableBodyScrollBar";
 
 import BackDrop from "../../../../share/UI/BackDrop/BackDrop";
 import TextArea from "../../../../share/components/TextArea/TextArea";
@@ -20,6 +24,11 @@ const QuestionForm = ({
   const value = inputVal.question
     ? inputVal.question.value
     : inputVal.answer.value;
+
+  useEffect(() => {
+    showForm ? disableBodyScrollBar() : enableBodyScrollBar();
+  }, [showForm]);
+
   return (
     <>
       <BackDrop clicked={() => setShowForm(false)} backDropShow={showForm} />
@@ -38,7 +47,7 @@ const QuestionForm = ({
           )}
           <form
             onSubmit={(e) => postQuestion(e, showForm)}
-            className="question-form"
+            className={`question-form ${answer ? "no-padding" : ""}`}
           >
             <TextArea
               value={value}

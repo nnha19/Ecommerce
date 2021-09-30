@@ -2,15 +2,14 @@
   padding: 0.8rem 2rem;
   margin: 0.8rem 0;
   cursor: pointer;
-  border: none;
   outline: none;
-  font-size: 1;
   border-radius: 5px;
   border: 1px solid green;
   background: none;
   transition: all 0.2s;
   text-transform: uppercase;
   margin-bottom: 1.5rem;
+  width: max-content;
 }
 .post-question__btn:hover {
   background: green;

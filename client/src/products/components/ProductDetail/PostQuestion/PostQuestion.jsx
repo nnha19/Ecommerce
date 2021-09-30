@@ -2,13 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import "./PostQuestion.css";
 import axios from "axios";
 
-import SecondaryBtn from "../../../../share/components/SecondaryBtn/SecondaryBtn";
-import TextArea from "../../../../share/components/TextArea/TextArea";
-import BackDrop from "../../../../share/UI/BackDrop/BackDrop";
 import { useParams } from "react-router";
 import Context from "../../../../contexts/context";
 import { ReviewsAndQuestionsContext } from "../../../../contexts/reviewsAndQuestionsContext";
 import QuestionForm from "../QuestionForm/QuestionForm";
+import {
+  disableBodyScrollBar,
+  enableBodyScrollBar,
+} from "../../../../functions/disableBodyScrollBar";
 
 const PostQuestion = (props) => {
   const [questionSubmitted, setQuestionSubmitted] = useState(false);

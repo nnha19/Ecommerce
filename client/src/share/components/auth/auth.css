@@ -70,7 +70,7 @@
 }
 
 @media (max-width: 500px) {
-  .auth-form__container {
+  .auth-form-container {
     padding-right: 1rem;
     padding-left: 1rem;
     width: 24rem;
@@ -78,7 +78,7 @@
 }
 @media (max-width: 400px) {
   .auth-form__container {
-    width: 100%;
+    width: 20rem;
   }
 }
 @media (max-width: 600px) {

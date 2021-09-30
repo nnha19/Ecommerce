@@ -31,3 +31,15 @@
   font-size: 1rem;
   color: green;
 }
+
+@media (max-width: 400px) {
+  .qa {
+    padding: 1rem 0;
+    margin: 0;
+  }
+  .qa__content {
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content max-content max-content;
+    row-gap: 0.5rem;
+  }
+}

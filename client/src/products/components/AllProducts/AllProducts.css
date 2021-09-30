@@ -109,3 +109,9 @@
 .filter-count {
   margin-left: 0.4rem;
 }
+
+@media (max-width: 500px) {
+  .all-products-wrapper {
+    padding: 1rem;
+  }
+}

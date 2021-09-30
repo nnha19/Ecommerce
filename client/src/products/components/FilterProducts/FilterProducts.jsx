@@ -18,7 +18,7 @@ const FilterProducts = ({ allProducts, setAllProducts }) => {
     { brand: ["Ray Band", "AO", "Dior", "Okaley"] },
     { price: ["100", "300", "400", "500", "1000"] },
     { gender: ["male", "female", "unisex"] },
-    { size: ["Large", "Medium", "Small"] },
+    { size: ["Large", "Medium", "Small", "Free Size"] },
   ];
 
   const changeValHandler = (e, title) => {
@@ -116,12 +116,14 @@ const FilterProducts = ({ allProducts, setAllProducts }) => {
           className="hide-filter-icon fas fa-times"
         ></i>
         {filterList}
-        <button
-          onClick={clearAllFilterFieldHandler}
-          className="clear-filter-btn"
-        >
-          Clear All
-        </button>
+        <div className="clear-filter-container">
+          <button
+            onClick={clearAllFilterFieldHandler}
+            className="clear-filter-btn"
+          >
+            Clear All
+          </button>
+        </div>
       </div>
     </>
   );

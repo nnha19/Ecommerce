@@ -5,6 +5,10 @@ import { ReviewsAndQuestionsContext } from "../../../../contexts/reviewsAndQuest
 import axios from "axios";
 import Context from "../../../../contexts/context";
 import { useParams } from "react-router";
+import {
+  disableBodyScrollBar,
+  enableBodyScrollBar,
+} from "../../../../functions/disableBodyScrollBar";
 
 import TextArea from "../../../../share/components/TextArea/TextArea";
 import SecondaryBtn from "../../../../share/components/SecondaryBtn/SecondaryBtn";
@@ -37,6 +41,10 @@ const Rate = () => {
     }
     setStars(stars);
   }, []);
+
+  useEffect(() => {
+    showRatingForm ? disableBodyScrollBar() : enableBodyScrollBar();
+  }, [showRatingForm]);
 
   const disabledBtn = !stars.some((star) => star === "fas fa-star");
 

@@ -2,7 +2,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   height: 100vh;
-  border: 1px solid;
   padding: 4rem;
   gap: 1rem;
   animation: skeleton-animation 3s ease infinite reverse;
@@ -40,4 +39,18 @@
   background-color: rgba(128, 128, 128, 0.4);
   height: 60%;
   width: 80%;
+}
+@media (max-width: 900px) {
+  .product-detail-skeleton {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: max-content max-content;
+  }
+}
+
+@media (max-width: 600px) {
+  .product-detail-skeleton {
+    padding: 1rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content max-content max-content;
+  }
 }

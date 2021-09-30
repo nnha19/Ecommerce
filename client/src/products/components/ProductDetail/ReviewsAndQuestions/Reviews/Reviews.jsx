@@ -69,7 +69,7 @@ const Reviews = (props) => {
             <div className="customer-avatar">
               {review.userId.username.substr(0, 1)}
             </div>
-            <div>
+            <div className="review__text">
               <div className="customer-name-container">
                 <h4 className="customer-name">{review.userId.username}</h4>
                 <ReactTimeAgo date={review.timeStamp} locale="en-US" />
