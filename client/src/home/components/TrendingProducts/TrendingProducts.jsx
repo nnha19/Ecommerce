@@ -5,9 +5,18 @@ import Img from "../../../assets/sunglasses-pic.webp";
 import SecondaryBtn from "../../../share/components/SecondaryBtn/SecondaryBtn";
 
 const TrendingProducts = () => {
-  const trendingProducts = Array.from(new Array(15));
+  const { innerWidth: wWidth } = window;
+  const trendingProducts = Array.from(new Array(10));
   const [currentPosition, setCurrentPosition] = useState(0);
-  const productsPerView = 5;
+  let productsPerView = 5;
+  if (wWidth < 1100 && wWidth > 900) {
+    productsPerView = 4;
+  } else if (wWidth < 900 && wWidth > 600) {
+    productsPerView = 3;
+  } else if (wWidth < 600) {
+    productsPerView = 2;
+  }
+
   const sliderRef = useRef();
   const containerRef = useRef();
   const [curIndex, setCurIndex] = useState(productsPerView);
