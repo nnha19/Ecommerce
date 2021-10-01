@@ -4,6 +4,7 @@ const productsController = require("../controllers/productsController");
 const authMiddleWare = require("../middlewares/authMiddleware");
 
 router.get("/", productsController.getAllProducts);
+router.get("/random/:count", productsController.getRandomProducts);
 router.get("/:id", productsController.getProductById);
 router.get("/filter/:gender", productsController.getProductByGender);
 router.post("/filter", productsController.getProductsByFilterValue);

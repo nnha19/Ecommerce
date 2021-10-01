@@ -1,0 +1,14 @@
+.slider-skeleton-container {
+  width: 100%;
+  padding: 3rem;
+  overflow-x: hidden;
+}
+.slider-skeletons {
+  display: flex;
+  width: max-content;
+}
+.slider-skeleton {
+  width: 20rem;
+  margin-right: 1rem;
+  height: 18rem;
+}

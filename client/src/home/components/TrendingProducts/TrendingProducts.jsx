@@ -1,10 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import "./TrendingProducts.css";
 import Img from "../../../assets/sunglasses-pic.webp";
 
 import SecondaryBtn from "../../../share/components/SecondaryBtn/SecondaryBtn";
 import AddToWhilist from "../../../cart/components/Cart/AddToWhilist/AddToWhilist";
+import AllProducts from "../../../products/components/AllProducts/AllProducts";
 
 const TrendingProducts = ({ title, products }) => {
   const { innerWidth: wWidth } = window;
@@ -21,31 +22,17 @@ const TrendingProducts = ({ title, products }) => {
   const sliderRef = useRef();
   const containerRef = useRef();
   const [curIndex, setCurIndex] = useState(productsPerView);
+  const [productWidth, setProductWidth] = useState(undefined);
 
-  const productWidth =
-    containerRef.current &&
-    containerRef.current.getBoundingClientRect().width / productsPerView;
+  const containerWidth =
+    containerRef.current && containerRef.current.getBoundingClientRect().width;
 
-  const productLists = products.map((product) => {
-    return (
-      <div
-        style={{ width: `${productWidth - 16}px` }}
-        className="trending-product"
-      >
-        <AddToWhilist />
-        <img src={Img} />
-        <div className="trending-product__body">
-          <h4>Ray Band</h4>
-          <p className="trending-product__price">1200 USD</p>
-          <SecondaryBtn className="trending-product__btn">
-            Add To Cart
-          </SecondaryBtn>
-        </div>
-      </div>
-    );
-  });
+  useEffect(() => {
+    setProductWidth(containerWidth / productsPerView);
+  }, [containerWidth]);
 
   const slideHandler = (type) => {
+    if (productWidth === undefined) return;
     const { current: slider } = sliderRef;
     let nextPosition;
     if (type === "next") {
@@ -65,7 +52,13 @@ const TrendingProducts = ({ title, products }) => {
       <h2 className="">{title}</h2>
       <div ref={containerRef} className="slider ">
         <div ref={sliderRef} className="trending-products">
-          {productLists}
+          <AllProducts
+            allProducts={products}
+            sliderWrapperStyle={{
+              width: productWidth - 16,
+              marginRight: "1rem",
+            }}
+          />
         </div>
         <button
           disabled={curIndex == products.length}

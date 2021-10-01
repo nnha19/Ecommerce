@@ -69,6 +69,17 @@ const getAllProducts = async (req, res, next) => {
   }
 };
 
+const getRandomProducts = async (req, res) => {
+  const count = req.params.count || 10;
+  const randomProducts = [];
+  const allProducts = await Product.find({});
+  while (randomProducts.length < count) {
+    const rn = Math.floor(Math.random() * allProducts.length);
+    randomProducts.push(allProducts[rn]);
+  }
+  res.status(200).json(randomProducts);
+};
+
 const getProductsByFilterValue = async (req, res) => {
   try {
     const { filterField } = req.body;
@@ -204,6 +215,7 @@ const deleteProduct = async (req, res, next) => {
 };
 
 exports.getAllProducts = getAllProducts;
+exports.getRandomProducts = getRandomProducts;
 exports.getProductById = getProductById;
 exports.createProduct = createProduct;
 exports.getProductByGender = getProductByGender;

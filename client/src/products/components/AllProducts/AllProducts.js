@@ -7,7 +7,12 @@ import AddToCart from "../../components/ProductDetail/ProductDetailBody/AddToCar
 import AddToWhilist from "../../../cart/components/Cart/AddToWhilist/AddToWhilist";
 import OverallRatings from "../OverallRatings/OverallRatings";
 
-const AllProducts = ({ allProducts, style, setCurPage }) => {
+const AllProducts = ({
+  allProducts,
+  style,
+  setCurPage,
+  sliderWrapperStyle,
+}) => {
   const { curPage } = useParams();
   if (curPage) {
     setCurPage(parseInt(curPage));
@@ -27,8 +32,7 @@ const AllProducts = ({ allProducts, style, setCurPage }) => {
 
   allProductsOutput = allProducts.map((product, i) => {
     let stock = product.features.inStock > 0 ? "In Stock" : "Out Of Stock";
-
-    return (
+    let returnProductResult = (
       <div
         onClick={(e) =>
           navigateToProductDetailHandler(e, `/product/${product._id}`)
@@ -57,12 +61,24 @@ const AllProducts = ({ allProducts, style, setCurPage }) => {
         </div>
       </div>
     );
+    if (sliderWrapperStyle) {
+      return <div style={sliderWrapperStyle}>{returnProductResult}</div>;
+    } else {
+      return returnProductResult;
+    }
   });
 
-  return (
+  // return (
+  //   <div style={style} className={`all-products `}>
+  //     {allProductsOutput}
+  //   </div>
+  // );
+  return !sliderWrapperStyle ? (
     <div style={style} className={`all-products `}>
       {allProductsOutput}
     </div>
+  ) : (
+    allProductsOutput
   );
 };
 
