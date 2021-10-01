@@ -4,19 +4,9 @@
   height: 2rem;
   cursor: pointer;
   outline: none;
-  border: 1px solid burlywood;
-  border-radius: 24rem;
   transition: all 0.2s;
+  background-color: GREEN;
 }
 .btn:hover {
-  border: 3px solid burlywood;
-}
-.btn:disabled {
-  background: black;
-  cursor: not-allowed;
-  border: none;
-  color: rgba(255, 255, 255, 0.527);
-}
-.btn:disabled:hover {
-  border: 0 solid burlywood;
+  border: 3px solid;
 }
