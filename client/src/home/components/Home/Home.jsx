@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <section className="home-page">
       <div className="home">
-        <div className="home__header">
+        <div className="home__header home-container">
           <h2>
             <span>May Myo Vision</span>
             <span className="home__main-header">Sunglasses Store</span>
@@ -22,7 +22,7 @@ const Home = () => {
           </button>
         </div>
       </div>
-      <section className="choose-us">
+      <section className="choose-us home-container">
         <h2>Why you should choose us</h2>
         <div className="choose-us__reasons">
           <div className="choose-us__reason">

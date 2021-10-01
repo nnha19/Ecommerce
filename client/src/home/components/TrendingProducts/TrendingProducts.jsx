@@ -2,11 +2,12 @@ import React, { useRef, useState } from "react";
 
 import "./TrendingProducts.css";
 import Img from "../../../assets/sunglasses-pic.webp";
-import SecondaryBtn from "../../../share/components/SecondaryBtn/SecondaryBtn";
 
-const TrendingProducts = () => {
+import SecondaryBtn from "../../../share/components/SecondaryBtn/SecondaryBtn";
+import AddToWhilist from "../../../cart/components/Cart/AddToWhilist/AddToWhilist";
+
+const TrendingProducts = ({ title, products }) => {
   const { innerWidth: wWidth } = window;
-  const trendingProducts = Array.from(new Array(10));
   const [currentPosition, setCurrentPosition] = useState(0);
   let productsPerView = 5;
   if (wWidth < 1100 && wWidth > 900) {
@@ -23,14 +24,15 @@ const TrendingProducts = () => {
 
   const productWidth =
     containerRef.current &&
-    (containerRef.current.getBoundingClientRect().width - 48) / productsPerView;
+    containerRef.current.getBoundingClientRect().width / productsPerView;
 
-  const productLists = trendingProducts.map((product) => {
+  const productLists = products.map((product) => {
     return (
       <div
         style={{ width: `${productWidth - 16}px` }}
         className="trending-product"
       >
+        <AddToWhilist />
         <img src={Img} />
         <div className="trending-product__body">
           <h4>Ray Band</h4>
@@ -59,14 +61,14 @@ const TrendingProducts = () => {
   };
 
   return (
-    <section className="trending-section">
-      <h2>Trending Now</h2>
-      <div ref={containerRef} className="slider">
+    <section className="trending-section home-container">
+      <h2 className="">{title}</h2>
+      <div ref={containerRef} className="slider ">
         <div ref={sliderRef} className="trending-products">
           {productLists}
         </div>
         <button
-          disabled={curIndex == trendingProducts.length}
+          disabled={curIndex == products.length}
           onClick={() => slideHandler("next")}
           className="slide next-slide"
         >
