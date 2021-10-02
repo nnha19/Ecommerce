@@ -72,9 +72,9 @@
     right: 0;
     width: 18rem;
     z-index: 50;
-    padding: 2rem;
     height: 90vh;
     margin-top: 1rem;
+    padding-top: 3rem;
   }
   .hide-filter-icon {
     display: block;

@@ -109,6 +109,9 @@
   .product-detail-container {
     padding: 1rem;
   }
+  .product-detail__content {
+    margin-top: 2rem;
+  }
 }
 
 @media (max-width: 500px) {

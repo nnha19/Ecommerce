@@ -78,3 +78,8 @@
   text-transform: capitalize;
   margin-bottom: 1rem;
 }
+@media (max-width: 600px) {
+  .home-container {
+    padding: 1rem;
+  }
+}

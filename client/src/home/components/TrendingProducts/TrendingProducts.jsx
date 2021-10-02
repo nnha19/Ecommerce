@@ -1,15 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import "./TrendingProducts.css";
-import Img from "../../../assets/sunglasses-pic.webp";
 
-import SecondaryBtn from "../../../share/components/SecondaryBtn/SecondaryBtn";
-import AddToWhilist from "../../../cart/components/Cart/AddToWhilist/AddToWhilist";
 import AllProducts from "../../../products/components/AllProducts/AllProducts";
 
 const TrendingProducts = ({ title, products }) => {
   const { innerWidth: wWidth } = window;
   const [currentPosition, setCurrentPosition] = useState(0);
+
   let productsPerView = 5;
   if (wWidth < 1100 && wWidth > 900) {
     productsPerView = 4;
@@ -46,6 +44,8 @@ const TrendingProducts = ({ title, products }) => {
     }
     setCurrentPosition(nextPosition);
   };
+  console.log(currentPosition);
+  console.log(productWidth);
 
   return (
     <section className="trending-section home-container">
