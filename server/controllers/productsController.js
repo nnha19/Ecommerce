@@ -135,18 +135,6 @@ const getProductById = async (req, res, next) => {
   }
 };
 
-const getProductByGender = async (req, res, next) => {
-  try {
-    const { gender } = req.params;
-    const filteredProducts = await Product.find({
-      "features.gender": gender,
-    });
-    res.status(200).json(filteredProducts);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-};
-
 const createProduct = async (req, res, next) => {
   //Create Product
   try {

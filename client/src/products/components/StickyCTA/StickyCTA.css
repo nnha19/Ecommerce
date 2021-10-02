@@ -1,7 +1,7 @@
 .sticky-cta {
   position: fixed;
   right: 0;
-  top: 0;
+  top: 4rem;
   width: max-content;
   padding: 0.4rem 2rem;
   background: white;

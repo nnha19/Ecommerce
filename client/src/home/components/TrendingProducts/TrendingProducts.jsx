@@ -44,8 +44,6 @@ const TrendingProducts = ({ title, products }) => {
     }
     setCurrentPosition(nextPosition);
   };
-  console.log(currentPosition);
-  console.log(productWidth);
 
   return (
     <section className="trending-section home-container">

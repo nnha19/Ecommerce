@@ -1,5 +1,4 @@
 .demo {
-  position: relative;
   width: max-content;
 }
 .demo__login {
@@ -10,10 +9,9 @@
   border: 1px solid black;
   outline: none;
   cursor: pointer;
-  position: absolute;
+
   display: flex;
   align-items: center;
-  position: relative;
 
   text-align: center;
 }

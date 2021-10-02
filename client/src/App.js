@@ -7,7 +7,6 @@ import axios from "axios";
 import AllProductsPage from "./products/pages/AllProductsPage/AllProductsPage";
 import ProductDetailPage from "./products/pages/ProductDetailPage/ProductDetailPage";
 import Navigation from "./share/UI/Navigation/Navigation";
-import FilterProductPage from "./products/pages/FilterProductPage/FilterProductPage";
 import CartPage from "./cart/pages/CartPage/CartPage";
 import Context from "./contexts/context";
 import Auth from "./share/components/auth/auth";
@@ -223,11 +222,6 @@ const App = () => {
           }}
         >
           <Route path="/products" component={AllProductsPage} />
-          <Route
-            exact
-            path="/product/filter/:gender"
-            component={FilterProductPage}
-          />
 
           {authenticated && <Route path="/cart" exact component={CartPage} />}
           <Route exact path="/" component={HomePage} />

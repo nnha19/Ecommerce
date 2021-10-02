@@ -2,7 +2,6 @@
   cursor: pointer;
   position: relative;
   z-index: 1;
-  margin: 0 2rem;
 }
 .customer__username {
   display: flex;

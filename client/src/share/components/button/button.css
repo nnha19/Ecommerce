@@ -6,7 +6,5 @@
   outline: none;
   transition: all 0.2s;
   background-color: GREEN;
-}
-.btn:hover {
-  border: 3px solid;
+  border: none;
 }

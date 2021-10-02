@@ -5,8 +5,6 @@ import Logo from "../../../../images/logo.png";
 import Context from "../../../../contexts/context";
 import Login from "./Auth/Login";
 import Customer from "./Customer/Customer";
-import Category from "./Category/Category";
-import NavItemSearch from "./NavItemSearch/NavItemSearch";
 
 import "./NavItems.css";
 
@@ -24,37 +22,32 @@ const NavItems = (props) => {
 
   return (
     <>
-      <NavLink className="nav__link" to="/">
+      <NavLink to="/">
         <li className="logo">
           <img className="nav__logo" src={Logo} alt="Logo" />
           <h1 className="nav__name">May Myo Vision</h1>
         </li>
       </NavLink>
       <div className="nav__side">
-        <NavItemSearch showSearch={context.showSearch} />
-        <div
-          className={`nav__items ${
-            context.showSearch ? "nav__items-hide" : ""
-          }`}
+        <NavLink className="nav__link" to="/">
+          <li>Home</li>
+        </NavLink>
+        <NavLink className="nav__link" to="/products">
+          <li>Shop</li>
+        </NavLink>
+        {!context.authenticated ? <Login /> : null}
+
+        <i
+          onClick={goToCartHandler}
+          className="shopping-cart fas fa-shopping-cart"
         >
-          <i
-            onClick={context.showSearchHandler}
-            className="fas fa-search search-icon"
-          ></i>
-          {!context.authenticated ? <Login /> : null}
-          <Category />
-          <i
-            onClick={goToCartHandler}
-            className="shopping-cart fas fa-shopping-cart"
-          >
-            {context.cartItemAmount ? (
-              <span className="shopping-cart__item-qty">
-                {context.cartItemAmount}
-              </span>
-            ) : null}
-          </i>
-          {context.authenticated && <Customer curUser={context.curUser} />}
-        </div>
+          {context.cartItemAmount ? (
+            <span className="shopping-cart__item-qty">
+              {context.cartItemAmount}
+            </span>
+          ) : null}
+        </i>
+        {context.authenticated && <Customer curUser={context.curUser} />}
       </div>
     </>
   );

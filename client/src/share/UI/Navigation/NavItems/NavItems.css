@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .nav__logo {
   width: 4rem;
 }
@@ -11,35 +12,7 @@
   margin: 0 1rem;
   color: black;
 }
-.nav__search {
-  flex-basis: 80%;
-  display: flex;
-  justify-content: center;
-  margin-left: auto;
-}
-.nav__search-input {
-  border: 1px solid rgba(0, 128, 0, 0.356);
-  outline: none;
-  padding: 0.4rem 1rem;
-  width: 80%;
-  transition: all 0.2s;
-  margin-right: -1.8rem;
-  align-items: center;
-}
 
-.nav__search-input:focus {
-  width: 100%;
-  border: 1px solid green;
-  box-shadow: 0 4px 4px rgba(128, 128, 128, 0.424);
-}
-.nav__icon {
-  cursor: pointer;
-  background: rgba(128, 128, 128, 0.589);
-  display: flex;
-  align-items: center;
-  padding: 6px;
-  color: white;
-}
 .nav__icon:hover {
   background: grey;
 }
@@ -52,7 +25,19 @@
 }
 .nav__link {
   text-decoration: none;
+  color: black;
+  font-size: 1.1rem;
+  transition: all 0.2s;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+.nav__link:hover {
+  background: green;
+  color: white;
+}
+
 .nav__item {
   text-transform: uppercase;
   color: black;
@@ -70,7 +55,7 @@
 .shopping-cart__item-qty {
   position: absolute;
   top: -12px;
-  left: 15px;
+  right: 10px;
   background: red;
   width: 1rem;
   height: 1rem;
@@ -83,11 +68,12 @@
 }
 .nav__side {
   display: flex;
-  flex-basis: 70%;
   align-items: center;
-  justify-content: space-between;
+  align-self: stretch;
 }
-
+.nav__side > * {
+  padding: 0 1.2rem;
+}
 .search-icon {
   margin: 0 1.5rem;
   cursor: pointer;
@@ -100,42 +86,4 @@
 
 .nav__items-hide {
   display: none;
-}
-.show-search {
-  margin-top: 0.8rem;
-  display: flex !important;
-}
-
-@media (max-width: 1100px) {
-  .nav__search {
-    flex-basis: 100%;
-  }
-  .nav__search-input:focus {
-    width: 80%;
-  }
-}
-
-@media (max-width: 900px) {
-  .nav {
-    flex-direction: column;
-    padding: 1rem 2rem;
-    height: 6rem;
-  }
-  .nav__side {
-    width: 100%;
-  }
-}
-
-@media (max-width: 600px) {
-  .nav__side {
-    justify-content: center;
-  }
-  .nav__search {
-    display: none;
-  }
-}
-@media (min-width: 600px) {
-  .search-icon {
-    display: none;
-  }
 }
