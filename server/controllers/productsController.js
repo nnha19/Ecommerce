@@ -206,7 +206,6 @@ exports.getAllProducts = getAllProducts;
 exports.getRandomProducts = getRandomProducts;
 exports.getProductById = getProductById;
 exports.createProduct = createProduct;
-exports.getProductByGender = getProductByGender;
 exports.updateProduct = updateProduct;
 exports.deleteProduct = deleteProduct;
 exports.getProductsByFilterValue = getProductsByFilterValue;
