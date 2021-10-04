@@ -1,9 +1,11 @@
 import React from "react";
 import Desktop from "./Desktop/Desktop";
 
+import "./Navigation.css";
+
 const Navigation = (props) => {
   return (
-    <div>
+    <div className="navigation">
       <Desktop />
     </div>
   );

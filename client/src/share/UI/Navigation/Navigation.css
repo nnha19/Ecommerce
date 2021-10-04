@@ -1,0 +1,11 @@
+.navigation {
+  height: 4rem;
+  background: white;
+  width: 100%;
+  box-shadow: 0 2px 2px grey;
+  padding: 0 3rem;
+  margin-bottom: 0.3rem;
+}
+.navigation a {
+  text-decoration: none;
+}

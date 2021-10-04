@@ -20,13 +20,13 @@ const Customer = (props) => {
   };
 
   const goToOrderPageHandler = () => {
-    history.push(`/order/${props.curUser.userId}`);
+    history.push(`/order/${context.curUser.userId}`);
   };
 
   return (
     <li onClick={showDropDownHandler} className="customer">
       <span className="customer__username">
-        {props.curUser && props.curUser.username[0]}
+        {context.curUser && context.curUser.username[0]}
       </span>
       {context.showDropDown && (
         <div className="customer__modal">
@@ -35,14 +35,16 @@ const Customer = (props) => {
               My orders
             </li>
             <li
-              onClick={() => history.push(`/whilist/${[props.curUser.userId]}`)}
+              onClick={() =>
+                history.push(`/whilist/${[context.curUser.userId]}`)
+              }
               className="customer__list"
             >
               My Whilists
             </li>
             <Logout />
             <li className="customer__list account">
-              Sign in as <strong>{props.curUser.username}</strong>
+              Sign in as <strong>{context.curUser.username}</strong>
             </li>
           </ul>
         </div>
