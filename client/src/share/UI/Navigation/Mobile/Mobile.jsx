@@ -8,7 +8,7 @@ import Login from "../NavItems/Auth/Login";
 import BackDrop from "../../BackDrop/BackDrop";
 
 const Mobile = () => {
-  const { authenticated } = useContext(Context);
+  const { authenticated, curUser } = useContext(Context);
   const [showSideDrawer, setShowSideDrawer] = useState(false);
   const hideSideDrawerHandler = (e) => {
     setShowSideDrawer(false);
@@ -41,10 +41,16 @@ const Mobile = () => {
           </NavItemLink>
           {authenticated ? (
             <>
-              <NavItemLink className="mobile-nav__link" to="/products">
+              <NavItemLink
+                className="mobile-nav__link"
+                to={`/order/${curUser.userId}`}
+              >
                 My Orders
               </NavItemLink>
-              <NavItemLink className="mobile-nav__link" to="/products">
+              <NavItemLink
+                className="mobile-nav__link"
+                to={`/whilist/${curUser.userId}`}
+              >
                 My Whilists
               </NavItemLink>
               <div className="mobile-nav__customer-avatar-container">

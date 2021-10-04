@@ -50,7 +50,6 @@ const AllProductsPage = () => {
     <div className="all-products-wrapper">
       <ATCErrorMsg />
       <SkeletonLoading show={loading} />
-      <img src="/images/images-1633155795438-724251274.webp" />
       <FilterContextProvider
         showFilter={showFilter}
         setShowFilter={setShowFilterHandler}

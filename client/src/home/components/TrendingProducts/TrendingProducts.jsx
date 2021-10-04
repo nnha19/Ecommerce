@@ -7,7 +7,6 @@ import AllProducts from "../../../products/components/AllProducts/AllProducts";
 const TrendingProducts = ({ title, products }) => {
   const { innerWidth: wWidth } = window;
   const [currentPosition, setCurrentPosition] = useState(0);
-
   let productsPerView = 5;
   if (wWidth < 1100 && wWidth > 900) {
     productsPerView = 4;
@@ -24,7 +23,6 @@ const TrendingProducts = ({ title, products }) => {
 
   const containerWidth =
     containerRef.current && containerRef.current.getBoundingClientRect().width;
-
   useEffect(() => {
     setProductWidth(containerWidth / productsPerView);
   }, [containerWidth]);
@@ -54,7 +52,7 @@ const TrendingProducts = ({ title, products }) => {
             allProducts={products}
             sliderWrapperStyle={{
               width: productWidth - 16,
-              marginRight: "1rem",
+              marginRight: " 1rem",
             }}
           />
         </div>

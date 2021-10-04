@@ -68,11 +68,6 @@ const AllProducts = ({
     }
   });
 
-  // return (
-  //   <div style={style} className={`all-products `}>
-  //     {allProductsOutput}
-  //   </div>
-  // );
   return !sliderWrapperStyle ? (
     <div style={style} className={`all-products `}>
       {allProductsOutput}
