@@ -6,6 +6,7 @@ import SliderSkeletonLoading from "../components/SliderSkeletonLoading/SliderSke
 import TrendingProducts from "../components/TrendingProducts/TrendingProducts";
 
 const HomePage = () => {
+  document.title = "Home Page";
   const [trendingProducts, setTrendingProducts] = useState({
     products: [],
     loading: false,
