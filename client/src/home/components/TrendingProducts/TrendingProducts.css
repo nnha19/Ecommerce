@@ -12,6 +12,12 @@
   display: flex;
   width: max-content;
 }
+.trending-products .product {
+  border: 1px solid rgba(128, 128, 128, 0.4);
+}
+.trending-products .product__stock {
+  display: none !important;
+}
 .trending-product__price {
   font-size: 1.1rem;
   color: green;

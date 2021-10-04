@@ -1,7 +1,7 @@
 .product-detail-skeleton {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  height: 100vh;
+  min-height: 100vh;
   padding: 4rem;
   gap: 1rem;
   animation: skeleton-animation 3s ease infinite reverse;
