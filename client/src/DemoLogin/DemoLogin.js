@@ -12,12 +12,12 @@ const DemoLogin = (props) => {
   const loginAsAdminHandler = (type) => {
     if (type === "admin") {
       fetchData(`${process.env.REACT_APP_BACKEND_URL}/customer/login`, "post", {
-        email: "email",
+        email: "nyinyi@gmail.com",
         password: "password",
       });
     } else {
       fetchData(`${process.env.REACT_APP_BACKEND_URL}/customer/login`, "post", {
-        email: "nyinyi",
+        email: "email@gmail.com",
         password: "password",
       });
     }

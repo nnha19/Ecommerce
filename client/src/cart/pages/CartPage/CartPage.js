@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 
 import Cart from "../../components/Cart/Cart";
 import Spinner from "../../../share/UI/Spinner/Spinner";
-import ErrorMsg from "./ErrorMsg/ErrorMsg";
 import Context from "../../../contexts/context";
+import CartPageError from "../../components/CartPageError/CartPageError";
 
 const CartPage = (props) => {
   const [cartItemError, setCartItemError] = useState(false);
@@ -27,9 +27,7 @@ const CartPage = (props) => {
   if (!cartItemError) {
     content = <Cart />;
   } else {
-    content = (
-      <ErrorMsg link={"/"} errorMsg={cartItemError} action="Go shopping" />
-    );
+    content = <CartPageError title="no items in the cart" />;
   }
 
   return (

@@ -94,7 +94,7 @@ const Auth = ({ login, toggleLogin, loginUser }) => {
         title={"Error occured"}
         body={
           <>
-            <p style={{ color: "white", marginBottom: "1rem" }}>{error}</p>
+            <p style={{ marginBottom: "1rem", fontSize: "1.2rem" }}>{error}</p>
             <Button clicked={hideErrorModalHandler}>Cancel</Button>
           </>
         }

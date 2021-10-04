@@ -1,5 +1,6 @@
 .demo {
   width: max-content;
+  margin: 1rem 0;
 }
 .demo__login {
   margin: 0.5rem 4rem;
@@ -33,7 +34,6 @@
   width: max-content;
   position: absolute;
   left: 4rem;
-  top: 2.2rem;
   list-style: none;
   z-index: 10;
   visibility: hidden;
