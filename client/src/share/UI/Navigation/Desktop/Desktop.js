@@ -14,7 +14,7 @@ const Desktop = (props) => {
         <NavItemLink className="desktop-nav__link" to="/">
           Home
         </NavItemLink>
-        <NavItemLink className="desktop-nav__link" to="/">
+        <NavItemLink className="desktop-nav__link" to="/products">
           Shop
         </NavItemLink>
         {!context.authenticated ? <Login /> : <Customer />}

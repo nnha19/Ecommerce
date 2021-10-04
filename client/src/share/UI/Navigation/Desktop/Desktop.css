@@ -26,6 +26,8 @@
   background-color: green;
   color: white;
 }
-/* .fixed {
-  position: fixed;
-} */
+@media (max-width: 600px) {
+  .desktop-nav {
+    display: none;
+  }
+}

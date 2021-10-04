@@ -3,18 +3,7 @@
   position: relative;
   z-index: 1;
 }
-.customer__username {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  background: purple;
-  border-radius: 50%;
-  font-size: 1.2rem;
-  color: white;
-  text-transform: uppercase;
-}
+
 .customer__modal {
   box-shadow: 2px 2px 2px 2px black;
   margin-top: 1rem;

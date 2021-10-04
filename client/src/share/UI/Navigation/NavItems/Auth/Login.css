@@ -1,3 +1,6 @@
+.login {
+  list-style: none;
+}
 .login__btn {
   background: green;
   color: white;

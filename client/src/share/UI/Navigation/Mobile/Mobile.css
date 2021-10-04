@@ -1,0 +1,129 @@
+.mobile-nav {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.mobile-nav__right {
+  display: flex;
+}
+.mobile-nav__right > * {
+  margin-left: 1.5rem;
+}
+.hamburger-icon {
+  width: 2rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.hamburger-icon__child {
+  width: 2rem;
+  height: 2px;
+  background-color: black;
+  display: block;
+  position: relative;
+}
+.hamburger-icon__child::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  display: block;
+  position: absolute;
+  transform: translateY(0.5rem);
+}
+.hamburger-icon__child::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  display: block;
+  position: absolute;
+  transform: translateY(-0.5rem);
+}
+.mobile-nav__side-drawer {
+  height: 100vh;
+  position: fixed;
+  background: #ca6363;
+  width: 20rem;
+  right: 0;
+  top: 0;
+  flex-direction: column;
+  z-index: 100;
+  transform: translateX(20rem);
+  transition: all 0.4s;
+}
+.show-sidedrawer {
+  transform: translateX(0);
+}
+.mobile-nav__link {
+  padding: 1rem 2rem;
+  color: black;
+  list-style: none;
+  font-size: 1.6rem;
+  margin-top: 0.5rem;
+  width: 100%;
+  transition: all 0.4s;
+  display: block;
+}
+.mobile-nav__link:last-of-type {
+  margin-bottom: 2rem;
+}
+.mobile-nav__link:hover {
+  background-color: green;
+  color: white;
+}
+.mobile-nav__customer-avatar-container {
+  padding: 2rem 0 0 2rem;
+  border-top: 1px solid black;
+  width: 100%;
+}
+.mobile-nav__customer-avatar {
+  height: 4rem;
+  width: 4rem;
+  font-size: 1.4rem;
+  padding: 0 2rem;
+}
+.mobile-nav__logout {
+  list-style: none;
+  background: rgba(0, 128, 0, 0.5);
+  margin-top: 1rem;
+  padding: 0.2rem 1rem;
+  font-size: 1.2rem;
+  color: white;
+  border-radius: 4px;
+  width: max-content;
+  margin: 2rem;
+  display: block;
+}
+.mobile-nav__logout:hover,
+.mobile-nav__login:hover {
+  background: green;
+}
+.mobile-nav__login-container {
+  width: 100%;
+  border-top: 1px solid;
+  padding: 1rem 0;
+  padding: 2rem;
+}
+.mobile-nav__login {
+  padding: 0.8rem 2rem;
+  width: max-content;
+  border-radius: 4px;
+  height: max-content;
+  background: rgba(0, 128, 0, 0.5);
+}
+.close-sidedrawer {
+  font-size: 1.4rem;
+  color: white;
+  cursor: pointer;
+  align-self: flex-start;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  font-size: 2rem;
+}
+@media (min-width: 600px) {
+  .mobile-nav {
+    display: none;
+  }
+}

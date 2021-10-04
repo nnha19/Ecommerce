@@ -4,11 +4,11 @@ import "./Logout.css";
 
 import Context from "../../../../../../contexts/context";
 
-const Login = (props) => {
+const Login = ({ className }) => {
   const logout = useContext(Context).logout;
 
   return (
-    <li className="logout customer__list">
+    <li className={`logout customer__list ${className}`}>
       <button onClick={logout} className="logout__btn">
         Logout
       </button>

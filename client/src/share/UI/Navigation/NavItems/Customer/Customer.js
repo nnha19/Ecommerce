@@ -5,6 +5,7 @@ import "./Customer.css";
 
 import Logout from "../Auth/Logout/Logout";
 import Context from "../../../../../contexts/context";
+import CustomerAvatar from "../../../CustomerAvatar/CustomerAvatar";
 
 const Customer = (props) => {
   const history = useHistory();
@@ -25,9 +26,7 @@ const Customer = (props) => {
 
   return (
     <li onClick={showDropDownHandler} className="customer">
-      <span className="customer__username">
-        {context.curUser && context.curUser.username[0]}
-      </span>
+      <CustomerAvatar />
       {context.showDropDown && (
         <div className="customer__modal">
           <ul onClick={hideDropDownHandler} className="customer__lists">

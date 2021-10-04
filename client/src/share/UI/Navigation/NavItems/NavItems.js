@@ -58,7 +58,7 @@ const LogoNavItem = () => {
     <NavLink to="/">
       <li className="logo">
         <img className="nav__logo" src={Logo} alt="Logo" />
-        <h1 className="nav__name">May Myo Vision</h1>
+        <h1 className="nav__name">MMV</h1>
       </li>
     </NavLink>
   );
@@ -73,7 +73,8 @@ const NavItemLink = ({ className, style, children, to }) => {
 };
 
 const NavItemCart = () => {
-  const context =useContext(Context)
+  const history = useHistory();
+  const context = useContext(Context);
   const goToCartHandler = () => {
     if (context.authenticated) {
       context.authenticated && history.push("/cart");

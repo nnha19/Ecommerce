@@ -4,12 +4,12 @@ import "./Login.css";
 
 import Context from "../../../../../contexts/context";
 
-const Login = (props) => {
+const Login = ({ className }) => {
   const toggleLogin = useContext(Context).toggleLogin;
 
   return (
-    <li className="login">
-      <button onClick={toggleLogin} className="login__btn">
+    <li className={`login`}>
+      <button onClick={toggleLogin} className={`login__btn ${className}`}>
         Login
       </button>
     </li>
