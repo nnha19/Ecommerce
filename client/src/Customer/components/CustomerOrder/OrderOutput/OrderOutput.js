@@ -3,6 +3,7 @@ import React from "react";
 import "./Orderoutput.css";
 
 const OrderOutput = (props) => {
+  console.log(props.order);
   const orderOutput = props.order.map((order) => {
     const orderItems = order.order.item.map((order) => {
       return (

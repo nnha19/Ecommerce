@@ -112,7 +112,7 @@ const OrderSummary = (props) => {
             </span>
             <span>
               <span className="discount-price">
-                {appliedCoupon.discountPrice}KS
+                {appliedCoupon.discountPrice} USD
               </span>
               &nbsp; off
             </span>

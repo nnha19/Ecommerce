@@ -19,6 +19,7 @@
 }
 .address {
   flex-basis: 50%;
+  margin-left: 1rem;
 }
 .checkout__label {
   color: black;

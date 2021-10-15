@@ -7,7 +7,7 @@ const Footer = (props) => {
     <footer className="footer">
       <div className="footer-list-wrapper">
         <div>
-          <ul className="footer_list">
+          <ul className="footer__list">
             <li>Phone Number</li>
             <li>Another</li>
             <li>Email</li>
@@ -15,7 +15,7 @@ const Footer = (props) => {
           </ul>
         </div>
         <div>
-          <ul className="footer_list">
+          <ul className="footer__list">
             <li>Careers</li>
             <li>Blog</li>
             <li>Help And Support</li>
@@ -23,7 +23,7 @@ const Footer = (props) => {
           </ul>
         </div>
         <div>
-          <ul className="footer_list">
+          <ul className="footer__list">
             <li>Return Policy</li>
             <li>Terms Of Use</li>
             <li>Security</li>
