@@ -11,8 +11,8 @@ const CurUserRating = ({ rating }) => {
     <div style={{ marginBottom: "1rem", display: "flex", color: "green" }}>
       <p style={{ marginRight: ".5rem" }}>your rating</p>
       <div>
-        {ratings.map((star) => (
-          <i className={`rating-star ${star}`}></i>
+        {ratings.map((star, i) => (
+          <i key={i} className={`rating-star ${star}`}></i>
         ))}
       </div>
     </div>

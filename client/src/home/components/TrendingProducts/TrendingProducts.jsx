@@ -61,14 +61,14 @@ const TrendingProducts = ({ title, products }) => {
           onClick={() => slideHandler("next")}
           className="slide next-slide"
         >
-          <i class="fas fa-angle-right"></i>
+          <i className="fas fa-angle-right"></i>
         </button>
         <button
           disabled={curIndex == productsPerView}
           onClick={() => slideHandler("prev")}
           className="slide prev-slide"
         >
-          <i class="fas fa-angle-left"></i>
+          <i className="fas fa-angle-left"></i>
         </button>
       </div>
     </section>

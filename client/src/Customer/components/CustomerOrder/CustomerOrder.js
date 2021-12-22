@@ -20,7 +20,7 @@ const CustomerOrder = (props) => {
             <th>Order Date</th>
           </tr>
           {props.order.map((order, index) => (
-            <OrderOutput order={order} index={index} />
+            <OrderOutput key={order._id} order={order} index={index} />
           ))}
         </table>
       </div>

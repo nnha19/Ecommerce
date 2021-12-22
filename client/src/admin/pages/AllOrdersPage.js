@@ -7,14 +7,8 @@ import Context from "../../contexts/context";
 
 const AllOrdersPage = (props) => {
   const context = useContext(Context);
-  const [
-    allOrders,
-    loading,
-    error,
-    fetchData,
-    setAllOrders,
-    setError,
-  ] = useHttp([]);
+  const [allOrders, loading, error, fetchData, setAllOrders, setError] =
+    useHttp([]);
 
   useEffect(() => {
     context.curUser &&

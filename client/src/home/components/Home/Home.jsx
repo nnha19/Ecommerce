@@ -26,7 +26,7 @@ const Home = () => {
         <h2>Why you should choose us</h2>
         <div className="choose-us__reasons">
           <div className="choose-us__reason">
-            <i class="fab fa-product-hunt"></i>
+            <i className="fab fa-product-hunt"></i>
             <h4>Best Quality Products</h4>
             <p>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat
@@ -36,7 +36,7 @@ const Home = () => {
             </p>
           </div>
           <div className="choose-us__reason">
-            <i class="fas fa-wrench"></i>
+            <i className="fas fa-wrench"></i>
             <h4>Best Services</h4>
             <p>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat
@@ -46,7 +46,7 @@ const Home = () => {
             </p>
           </div>
           <div className="choose-us__reason">
-            <i class="fas fa-truck-moving"></i>
+            <i className="fas fa-truck-moving"></i>
             <h4>Safe and fast delivery</h4>
             <p>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat
@@ -56,7 +56,7 @@ const Home = () => {
             </p>
           </div>
           <div className="choose-us__reason">
-            <i class="fas fa-lock"></i>
+            <i className="fas fa-lock"></i>
             <h4>Secure payment</h4>
             <p>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat
@@ -66,7 +66,7 @@ const Home = () => {
             </p>
           </div>
           <div className="choose-us__reason">
-            <i class="fas fa-money-bill-wave-alt"></i>
+            <i className="fas fa-money-bill-wave-alt"></i>
             <h4>Reasonable price</h4>
             <p>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat
@@ -76,7 +76,7 @@ const Home = () => {
             </p>
           </div>
           <div className="choose-us__reason">
-            <i class="fas fa-reply-all"></i>
+            <i className="fas fa-reply-all"></i>
             <h4>7 days refund</h4>
             <p>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat
@@ -86,7 +86,7 @@ const Home = () => {
             </p>
           </div>
           <div className="choose-us__reason">
-            <i class="fas fa-money-bill-alt"></i>
+            <i className="fas fa-money-bill-alt"></i>
             <h4>cash on delivery</h4>
             <p>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat
@@ -96,7 +96,7 @@ const Home = () => {
             </p>
           </div>
           <div className="choose-us__reason">
-            <i class="fas fa-user"></i>
+            <i className="fas fa-user"></i>
             <h4>Already thousands of trusted customers</h4>
             <p>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat

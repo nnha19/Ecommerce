@@ -62,9 +62,7 @@ const FilterProducts = ({ allProducts, setAllProducts }) => {
           data: { filterField: clonedFilterField },
         });
         setAllProducts(resp.data);
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
       setFilterIsLoading(false);
     })();
   }, [filterField]);

@@ -38,7 +38,10 @@ const OrderOutput = ({ order, index }) => {
   orderDate = `${orderDate.getDate()}/${orderDate.getMonth()}/${orderDate.getFullYear()}`;
   return (
     <>
-      <tr className={(index + 1) % 2 === 0 && "special-style"} key={order._id}>
+      <tbody
+        className={(index + 1) % 2 === 0 ? "special-style" : ""}
+        key={order._id}
+      >
         <td>{order._id}</td>
         <td>Shipping</td>
         <td onClick={() => setShowItems(true)} className="ordered-items">
@@ -46,7 +49,7 @@ const OrderOutput = ({ order, index }) => {
         </td>
         <td>{totalPrice} USD</td>
         <td>{orderDate}</td>
-      </tr>
+      </tbody>
       {showItems && (
         <div className="items-list">
           <h4 className="items-list__header">Ordered Items List</h4>

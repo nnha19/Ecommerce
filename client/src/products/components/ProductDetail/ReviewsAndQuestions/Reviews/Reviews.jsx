@@ -55,13 +55,23 @@ const Reviews = (props) => {
   const reviewLists =
     reviews &&
     !!reviews.length &&
-    reviews.map((review) => {
+    reviews.map((review, index) => {
       let stars = [];
       for (let i = 0; i < review.rating; i++) {
-        stars.push(<i className="rating-star fas fa-star"></i>);
+        stars.push(
+          <i
+            key={Math.random() * 100 + index}
+            className="rating-star fas fa-star"
+          ></i>
+        );
       }
       while (stars.length !== 5) {
-        stars.push(<i className="rating-star far fa-star"></i>);
+        stars.push(
+          <i
+            key={Math.random() * 100 + index}
+            className="rating-star far fa-star"
+          ></i>
+        );
       }
       return (
         <div key={review._id} className="review">

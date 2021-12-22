@@ -37,7 +37,6 @@ const DeleteCoupon = (props) => {
       props.deleteOneCoupon(props.couponId);
       setDeleteCouponIsLoading(false);
     } catch (err) {
-      console.log(err.response);
       setDeleteCouponIsLoading(false);
     }
   };

@@ -12,7 +12,10 @@ const AllCoupons = (props) => {
   let couponOutput;
   couponOutput = props.coupons.map((coupon, i) => {
     return (
-      <tr className={(i + 1) % 2 === 0 && "special-style"} key={coupon._id}>
+      <tr
+        className={(i + 1) % 2 === 0 ? "special-style" : undefined}
+        key={coupon._id}
+      >
         <td>{coupon.code}</td>
         <td>{coupon.discountPrice} USD</td>
         <td>
