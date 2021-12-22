@@ -30,42 +30,25 @@ const Checkout = (props) => {
     }
   }, [cartItem]);
 
-  const [orderInfos, setOrderInfos] = useState({
-    name: {
-      val: "",
-      valid: false,
-      isTouched: false,
-    },
-    phNumber: {
-      val: "",
-      valid: false,
-      isTouched: false,
-    },
-    region: {
-      val: "",
-      valid: false,
-      isTouched: false,
-    },
-    city: {
-      val: "",
-      valid: false,
-      isTouched: false,
-    },
-    houseNumber: {
-      val: "",
-      valid: false,
-      isTouched: false,
-    },
-    message: {
-      val: "",
-      valid: true,
-      isTouched: false,
-    },
-  });
+  const [orderInfos, setOrderInfos] = useState([]);
+
+  const inputFields = "name phNumber region city houseNumber message".split(
+    " "
+  );
+
+  useEffect(() => {
+    const fieldsObj = {};
+    inputFields.forEach((f) => {
+      fieldsObj[f] = { val: "", error: f !== "message" };
+    });
+    setOrderInfos(fieldsObj);
+  }, []);
+
   const [allValid] = useCheckOverAllValid(orderInfos);
 
-  const changeLoginValHandler = (val, label) => {
-    const updateOrderInfos = { ...orderInfos, [label]: val };
+  const changeLoginValHandler = (e, error) => {
+    const { value, name: label } = e.target;
+    const updateOrderInfos = { ...orderInfos, [label]: { val: value, error } };
     setOrderInfos(updateOrderInfos);
   };
 
@@ -88,7 +71,6 @@ const Checkout = (props) => {
     newOrder && context.cartItemData.setCartItem();
     newOrder && setPlacedOrder(newOrder.message);
   }, [newOrder]);
-
   return (
     <>
       <CheckoutModal curUser={context.curUser} placedOrder={placedOrder} />

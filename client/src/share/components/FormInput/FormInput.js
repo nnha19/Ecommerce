@@ -19,7 +19,7 @@ const FormInput = ({
 
   const changeInputValHandler = (e) => {
     let error;
-    if (validRules.required) {
+    if (validRules && validRules.required) {
       if (e.target.value === "") {
         error = true;
         setInputError("This field is required");
