@@ -23,6 +23,7 @@
   text-transform: uppercase;
 }
 .table td {
+  text-align: center;
   background-color: white;
   color: unset;
   font-size: 1.2rem;

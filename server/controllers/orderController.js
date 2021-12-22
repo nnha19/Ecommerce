@@ -27,17 +27,15 @@ const getAllOrders = async (req, res, next) => {
 
 const getAllOrdersByUserId = async (req, res, next) => {
   try {
-    Customer.remove();
     const { uid } = req.params;
-    Order.find({ "order.personInfos.userId": uid })
-      .populate("order.item")
-      .exec((err, order) => {
-        if (err) {
-          res.status(400).json(err);
-        } else {
-          res.status(200).json(order);
-        }
-      });
+    const orders = await Order.find({
+      "order.personInfos.userId": uid,
+    }).populate({
+      path: "order.item",
+      populate: { path: "cartItem" },
+    });
+
+    res.status(200).json(orders);
   } catch (err) {
     console.log(err);
     res.status(400).json(err);
