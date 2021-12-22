@@ -10,11 +10,11 @@ import SecondaryBtn from "../../../share/components/SecondaryBtn/SecondaryBtn";
 const AllCoupons = (props) => {
   const history = useHistory();
   let couponOutput;
-  couponOutput = props.coupons.map((coupon) => {
+  couponOutput = props.coupons.map((coupon, i) => {
     return (
-      <tr key={coupon._id}>
+      <tr className={(i + 1) % 2 === 0 && "special-style"} key={coupon._id}>
         <td>{coupon.code}</td>
-        <td>{coupon.discountPrice}</td>
+        <td>{coupon.discountPrice} USD</td>
         <td>
           <SecondaryBtn
             clicked={() => history.push(`/admin/coupon/edit/${coupon._id}`)}

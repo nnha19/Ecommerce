@@ -10,19 +10,20 @@ const CustomerOrder = (props) => {
     output = <div className="orders__error">{props.error}</div>;
   } else {
     output = (
-      <table className="table">
-        <tr>
-          <th>Order Id</th>
-          <th>Status</th>
-          <th>Address</th>
-          <th>Items</th>
-          <th>Total Price</th>
-          <th>Order Date</th>
-        </tr>
-        {props.order.map((order) => (
-          <OrderOutput order={order} />
-        ))}
-      </table>
+      <div className="table-container">
+        <table className="table">
+          <tr>
+            <th>Order Id</th>
+            <th>Status</th>
+            <th>Items</th>
+            <th>Total Price</th>
+            <th>Order Date</th>
+          </tr>
+          {props.order.map((order, index) => (
+            <OrderOutput order={order} index={index} />
+          ))}
+        </table>
+      </div>
     );
   }
   return <div className="orders">{output}</div>;

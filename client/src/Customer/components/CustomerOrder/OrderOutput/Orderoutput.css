@@ -30,7 +30,7 @@
   padding: 2rem;
   font-weight: 400;
 }
-.table tr:nth-child(2n) td {
+.special-style td {
   background-color: rgba(128, 128, 128, 0.4);
 }
 
@@ -42,7 +42,7 @@
 
 .items-list {
   width: 24rem;
-  position: absolute;
+  position: fixed;
   background-color: white;
   top: 50%;
   left: 50%;

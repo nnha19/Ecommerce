@@ -3,7 +3,7 @@ import BackDrop from "../../../../share/UI/BackDrop/BackDrop";
 
 import "./Orderoutput.css";
 
-const OrderOutput = ({ order }) => {
+const OrderOutput = ({ order, index }) => {
   const [showItems, setShowItems] = useState(false);
 
   const orderedItemsList = order.order.item.map((item) => {
@@ -38,12 +38,9 @@ const OrderOutput = ({ order }) => {
   orderDate = `${orderDate.getDate()}/${orderDate.getMonth()}/${orderDate.getFullYear()}`;
   return (
     <>
-      <tr key={order._id}>
+      <tr className={(index + 1) % 2 === 0 && "special-style"} key={order._id}>
         <td>{order._id}</td>
         <td>Shipping</td>
-        <td>
-          <button className="table-btn">View</button>
-        </td>
         <td onClick={() => setShowItems(true)} className="ordered-items">
           {totalItemsCount} items
         </td>
