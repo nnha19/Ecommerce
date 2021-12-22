@@ -1,6 +1,6 @@
 .orders {
   min-height: 100vh;
-  background: rgba(128, 128, 128, 0.459);
+  padding: 2rem;
 }
 .orders__error {
   height: 100vh;

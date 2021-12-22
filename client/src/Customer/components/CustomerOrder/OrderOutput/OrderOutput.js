@@ -2,49 +2,67 @@ import React from "react";
 
 import "./Orderoutput.css";
 
-const OrderOutput = (props) => {
-  console.log(props.order);
-  const orderOutput = props.order.map((order) => {
-    const orderItems = order.order.item.map((order) => {
-      return (
-        <div key={order._id} className="order__list">
-          <img className="cart__item-img" src={order.image} />
-          <div className="order__body">
-            <h4>{order.brand}</h4>
-            <p className="cart__item-price order__item-price">
-              {order.price} KS
-            </p>
-            <span>Qty :{order.pickedQty}</span>
-          </div>
-        </div>
-      );
-    });
-    const objKeys = Object.keys(order.order.personInfos);
-    const list = objKeys.map((objKey, i) => {
-      return (
-        <li key={i} className="order__list-item">
-          <span className="order__list-key">{objKey}</span>
-          <span className="order__list-value">
-            {order.order.personInfos[objKey]}
-          </span>
-        </li>
-      );
-    });
-    return (
-      <div key={order._id} className="order">
-        <div className="order__item">
-          <h3 className="order__title">Order Items</h3>
-          {orderItems}
-        </div>
-        <ul className="order__lists">
-          <h4 className="order__date">2/23/2021</h4>
-          <h4 className="order__title">Delivery Address</h4>
-          {list}
-        </ul>
+const OrderOutput = ({ order }) => {
+  console.log(order);
+  return (
+    <div className="order">
+      <h1 className="orders__header">Your Orders</h1>
+      <div className="container">
+        <table className="table">
+          <tr>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Address</th>
+            <th>Items</th>
+            <th>Total Price</th>
+            <th>Order Date</th>
+          </tr>
+          <tbody>
+            <tr>
+              <td>Myemail@gmail.com</td>
+              <td>Shipping</td>
+              <td>Address</td>
+              <td>Items</td>
+              <td>2900 USD</td>
+              <td>12/3/2001</td>
+            </tr>
+            <tr>
+              <td>Myemail@gmail.com</td>
+              <td>Shipping</td>
+              <td>Address</td>
+              <td>Items</td>
+              <td>2900 USD</td>
+              <td>12/3/2001</td>
+            </tr>
+            <tr>
+              <td>Myemail@gmail.com</td>
+              <td>Shipping</td>
+              <td>Address</td>
+              <td>Items</td>
+              <td>2900 USD</td>
+              <td>12/3/2001</td>
+            </tr>
+            <tr>
+              <td>Myemail@gmail.com</td>
+              <td>Shipping</td>
+              <td>Address</td>
+              <td>Items</td>
+              <td>2900 USD</td>
+              <td>12/3/2001</td>
+            </tr>
+            <tr>
+              <td>Myemail@gmail.com</td>
+              <td>Shipping</td>
+              <td>Address</td>
+              <td>Items</td>
+              <td>2900 USD</td>
+              <td>12/3/2001</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    );
-  });
-  return orderOutput;
+    </div>
+  );
 };
 
 export default OrderOutput;
