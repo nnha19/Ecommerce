@@ -4,17 +4,12 @@ import CustomerOrder from "../components/CustomerOrder/CustomerOrder";
 import { useHttp } from "../../customHooks/useHttp";
 import Context from "../../contexts/context";
 import Spinner from "../../share/UI/Spinner/Spinner";
+import OrderOutput from "../components/CustomerOrder/OrderOutput/OrderOutput";
 
 const CustomerOrderPage = (props) => {
   const context = useContext(Context);
-  const [
-    customerOrder,
-    loading,
-    error,
-    fetchData,
-    setCustomerOrder,
-    setError,
-  ] = useHttp([]);
+  const [customerOrder, loading, error, fetchData, setCustomerOrder, setError] =
+    useHttp([]);
 
   useEffect(() => {
     context.curUser &&
@@ -34,6 +29,7 @@ const CustomerOrderPage = (props) => {
   return (
     <>
       <Spinner show={loading} />
+
       <CustomerOrder order={customerOrder} error={error} />
     </>
   );

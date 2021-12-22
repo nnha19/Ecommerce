@@ -52,6 +52,7 @@ const placeOrder = async (req, res, next) => {
     const newOrder = await Order.create({
       order: {
         personInfos: customerInfos,
+        orderDate: new Date(),
       },
     });
     newOrder.order.item = customerCart;

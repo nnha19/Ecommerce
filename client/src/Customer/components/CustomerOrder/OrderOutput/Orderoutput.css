@@ -33,3 +33,42 @@
 .table tr:nth-child(2n) td {
   background-color: rgba(128, 128, 128, 0.4);
 }
+
+.ordered-items:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  width: max-content;
+}
+
+.items-list {
+  width: 24rem;
+  position: absolute;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  border-radius: 8px;
+  height: 24rem;
+  overflow-y: auto;
+}
+.items-list__header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+}
+.item {
+  padding: 1rem;
+  margin: 0.6rem 0;
+}
+.item__img {
+  width: 4rem;
+  height: 4rem;
+  margin-right: 1rem;
+}
+.item__detail {
+  display: flex;
+}
+.table-btn {
+  width: 4rem;
+  height: 2rem;
+}

@@ -1,37 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
+import BackDrop from "../../../../share/UI/BackDrop/BackDrop";
 
 import "./Orderoutput.css";
 
 const OrderOutput = ({ order }) => {
-  const oderList = order.map((o) => {
+  const [showItems, setShowItems] = useState(false);
+
+  const orderedItemsList = order.order.item.map((item) => {
     return (
-      <tr key={o._id}>
-        <td>{o._id}</td>
-        <td>Shipping</td>
-        <td>Address</td>
-        <td>Items</td>
-        <td>2900 USD</td>
-        <td>12/3/2001</td>
-      </tr>
+      <div className="item">
+        <div className="item__detail">
+          <img
+            className="item__img"
+            src={`${process.env.REACT_APP_BACKEND_URL}/${item.cartItem.imgs[0]}`}
+          />
+          <div>
+            <h4>
+              {item.cartItem.brand} ({item.pickedQty})
+            </h4>
+            <p>{item.cartItem.features.gender}</p>
+            <p>{item.cartItem.price} USD</p>
+          </div>
+        </div>
+      </div>
     );
   });
+
+  let totalItemsCount = 0;
+  order.order.item.forEach((i) => {
+    totalItemsCount += i.pickedQty;
+  });
+  let totalPrice = order.order.item.reduce((acc, cur) => {
+    return acc + cur.cartItem.price;
+  }, 0);
+
+  let orderDate = new Date(order.order.orderDate);
+  orderDate = `${orderDate.getDate()}/${orderDate.getMonth()}/${orderDate.getFullYear()}`;
   return (
-    <div className="order">
-      <h1 className="orders__header">Your Orders</h1>
-      <div className="container">
-        <table className="table">
-          <tr>
-            <th>Order Id</th>
-            <th>Status</th>
-            <th>Address</th>
-            <th>Items</th>
-            <th>Total Price</th>
-            <th>Order Date</th>
-          </tr>
-          <tbody>{oderList}</tbody>
-        </table>
-      </div>
-    </div>
+    <>
+      <tr key={order._id}>
+        <td>{order._id}</td>
+        <td>Shipping</td>
+        <td>
+          <button className="table-btn">View</button>
+        </td>
+        <td onClick={() => setShowItems(true)} className="ordered-items">
+          {totalItemsCount} items
+        </td>
+        <td>{totalPrice} USD</td>
+        <td>{orderDate}</td>
+      </tr>
+      {showItems && (
+        <div className="items-list">
+          <h4 className="items-list__header">Ordered Items List</h4>
+          {orderedItemsList}
+        </div>
+      )}
+      <BackDrop clicked={() => setShowItems(false)} backDropShow={showItems} />
+    </>
   );
 };
 

@@ -11,6 +11,7 @@ const orderSchema = new mongoose.Schema({
       userId: String,
     },
     item: [{ type: mongoose.Schema.Types.ObjectId, ref: "Cart" }],
+    orderDate: { type: String, required: true },
   },
 });
 
