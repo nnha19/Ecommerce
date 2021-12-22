@@ -9,16 +9,12 @@ const getAllOrders = async (req, res, next) => {
     res.status(400).json("You don't have access to that route");
   } else {
     if (req.admin) {
-      Order.find({})
-        .populate("order.item")
-        .exec((err, order) => {
-          if (err) {
-            res.status(400).json(err);
-          } else {
-            console.log(order);
-            res.status(200).json(order);
-          }
-        });
+      const orders = await Order.find({}).populate({
+        path: "order.item",
+        populate: { path: "cartItem" },
+      });
+
+      res.status(200).json(orders);
     } else {
       res.status(400).json("You are not authorized.");
     }

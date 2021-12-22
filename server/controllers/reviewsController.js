@@ -43,7 +43,6 @@ const createReviews = async (req, res) => {
         });
         res.status(200).json(returnReview);
       } else {
-        console.log("Something went wrong.");
       }
     }
   } catch (err) {
